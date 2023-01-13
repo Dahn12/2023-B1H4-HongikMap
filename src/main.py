@@ -1,2 +1,5 @@
+import Graph
+
 if __name__ == "__main__":
-    print("hello world")
+    graph = Graph.Graph()
+    print(graph.rooms)
