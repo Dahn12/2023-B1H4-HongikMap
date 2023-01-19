@@ -1,10 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Welcome Page</title>
-</head>
-<body>
-<input type="button" value="따라가기" onclick="location.href='main'">
-</body>
+<html>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script type="text/javascript" src="static/welcome.js"></script>
+    <head>
+        <title>FirstPage</title>
+        <meta charset="utf-8">
+        <style>
+            @font-face{
+                font-family: 'BMfont';
+                src: url(BMHANNAPro.ttf);
+            }
+            div{
+                color:black;
+                font-size: 30px;
+                text-align: center;
+                text-decoration: none;
+            }
+            a{
+                color:rgb(107, 109, 208);
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    
+    <body onload="setup()">
+        <h1>
+            <div style="text-align: center;">
+            <img
+            src='/static/logo/hongikLogo.jpg'
+            style="width:300px;height:300px;"
+            />
+            </div>
+        </h1>
+        
+        <p>
+            <div id="watchme" style="font-family: BMfont;">
+            너 <font color="pink">홍대</font> 모르지?<br>
+            나만 따라와~!<br><br><br>
+            <a href="main">따라가기</a>
+            </div>
+        </p>
+    </body>
 </html>
