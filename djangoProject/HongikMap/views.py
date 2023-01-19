@@ -7,5 +7,5 @@ def welcome(request):
     return render(request, 'HongikMap/welcome.html', {})
 
 
-def map(request):
-    return render(request, 'HongikMap/map.html', {})
+def main(request):
+    return render(request, 'HongikMap/main.html', {})
