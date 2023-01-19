@@ -1,0 +1,67 @@
+# If using '#' or the data(line) cannot be divided into 3, it wouldn't be included
+# The valid data must consist of string divided into 3 without '#'
+
+# Data : [start node] [end node] [weight(int, sec)] [(optional) two-way]
+# Node : Building-Floor-Entity
+# Entity : {room(only decimal), elevator(E prefixed),
+            stair(S), exit(X), hall way(H)}
+
+
+# Building I
+# Floor 6
+
+I-6-H2 I-6-S1 5
+I-6-S1 I-6-H2 5
+
+I-6-H2 I-6-H1 5
+I-6-H1 I-6-H2 5
+
+I-6-H2 I-6-H3 10
+I-6-H3 I-6-H2 10
+
+I-6-H3 I-6-H4 2
+I-6-H4 I-6-H3 2
+
+I-6-H4 I-6-X1 2
+I-6-X1 I-6-H4 2
+
+I-6-5 I-6-H1 1
+I-6-H1 I-6-5 1
+
+I-6-3 I-6-H1 1
+I-6-H1 I-6-3 1
+
+I-6-2 I-6-H1 1
+I-6-H1 I-6-2 1
+
+I-6-1 I-6-H1 1
+I-6-H1 I-6-1 1
+
+I-6-6 I-6-H2 1
+I-6-H2 I-6-6 1
+
+I-6-7 I-6-H2 1
+I-6-H2 I-6-7 1
+
+I-6-14 I-6-H2 1
+I-6-H2 I-6-14 1
+
+I-6-8 I-6-H3 1
+I-6-H3 I-6-8 1
+
+I-6-15 I-6-H4 1
+I-6-H4 I-6-15 1
+
+I-6-9 I-6-H3 1
+I-6-H3 I-6-9 1
+
+I-6-10 I-6-H3 1
+I-6-H3 I-6-10 1
+
+I-6-12 I-6-H4 1
+I-6-H4 I-6-12 1
+
+# Floor 5
+
+I-6-S1 I-5-S1 10
+I-5-S1 I-6-S1 10

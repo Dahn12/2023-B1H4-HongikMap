@@ -5,7 +5,7 @@ class Graph:
         self.weights = []
         self.useless = []
 
-        with open("../data.txt", "r") as f:
+        with open("../djangoProject/HongikMap/static/data/data.txt", "r") as f:
             for line in f.readlines():
                 if "#" in line:
                     self.useless.append(line)
