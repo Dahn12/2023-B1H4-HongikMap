@@ -3,25 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <title>Main Page</title>
+    <style>
+		*{
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		label{
+			display: flex;
+			align-items: center;
+			position: relative;
+			top: 30px;
+			left: 30px;
+			transition: .5s;
+			float: left;
+		}
+		.matrial-icons{
+			font-size: 3rem;
+			margin-right: 10px;
+		}
+		.bookmark-btt{
+			border: : none;
+			outline: none;
+			background-color: transparent;
+			font-size: 3rem;
+		}
+		section{
+			background-color: #34495e;
+			color: #fff;
+			width:200px;
+			padding-top: 30px;
+			padding-left: 30px;
+			position: absolute;
+			top: 0;
+			left: -200px;
+			bottom: 0;
+			transition: ls ease;
+		}
+		.bookmark-lists{
+			padding-left: 45px;
+		}
+		.bookmark{
+			margin:30px 0;
+		}
+		.bookmark:nth-child(1){
+			margin-top: 50px;
+		}
+		.bookmark a{
+			color: #fff;
+			text-decoration: none;
+		}
+	</style>
 </head>
 <body>
 
-<div id="start">
-    <input id="startKeyword" placeholder="출발지 입력" autocomplete="off" />
-    <div id="startRecommends">
-
-    </div>
-</div>
-
-<div id="end">
-    <input id="endKeyword" placeholder="도착지 입력" autocomplete="off" />
-    <div id="endRecommends">
-
-    </div>
-</div>
-
-<input type="button" value="검색">
-<script type="text/javascript" src="/static/js/main.js"></script>
+<img 
+	src="schoolMap.jpg" 
+	class="img-fluid" 
+	alt="이미지를 불러올 수 없습니다." 
+	style="float: right"
+	>
+	<main>
+		<label> 	
+			<input type="button" value="button" class="bookmark-btt">
+		</label>
+		<section>
+			<h1>북마크</h1>
+			<ul class="bookmark-lists">
+				<li class="bookmark">북마크1</li>
+				<li class="bookmark">북마크2</li>
+				
+			</ul>
+		</section>
+	</main>
+	<script src="sidebar3.js"></script>
 
 </body>
 </html>
