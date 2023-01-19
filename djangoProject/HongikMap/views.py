@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from . import features
 
 
 # Create your views here.
