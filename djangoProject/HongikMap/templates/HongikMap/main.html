@@ -4,25 +4,17 @@
     <meta charset="UTF-8">
     <title>Main Page</title>
     <style>
-		*{
+	    *{
 			margin: 0;
 			padding: 0;
 			box-sizing: border-box;
 		}
-		label{
-			display: flex;
-			align-items: center;
-			position: relative;
-			top: 30px;
-			left: 30px;
-			transition: .5s;
-			float: left;
+		#webName{
+			padding: 10px;
 		}
-		.matrial-icons{
-			font-size: 3rem;
-			margin-right: 10px;
-		}
-		.bookmark-btt{
+
+		.sideBar-btt{
+
 			border: : none;
 			outline: none;
 			background-color: transparent;
@@ -31,28 +23,25 @@
 		section{
 			background-color: #34495e;
 			color: #fff;
-			width:200px;
-			padding-top: 30px;
-			padding-left: 30px;
+			width:350px;
+			/*padding-top: 30px;
+			padding-left: 30px;*/
 			position: absolute;
 			top: 0;
-			left: -200px;
+/*			left: -350px;*/
 			bottom: 0;
 			transition: ls ease;
 		}
-		.bookmark-lists{
-			padding-left: 45px;
+		
+
+		.logo{height: 30px; width: 30px;}
+
+/*		엘리베이터 사용 미사용 표*/
+		#elevatorCheck{ 
+			display: grid;
+			grid-template-columns:50% 50%;
 		}
-		.bookmark{
-			margin:30px 0;
-		}
-		.bookmark:nth-child(1){
-			margin-top: 50px;
-		}
-		.bookmark a{
-			color: #fff;
-			text-decoration: none;
-		}
+		
 	</style>
 </head>
 <body>
@@ -63,20 +52,48 @@
 	alt="이미지를 불러올 수 없습니다." 
 	style="float: right"
 	>
+
 	<main>
 		<label> 	
-			<input type="button" value="button" class="bookmark-btt">
+			<input type="button" value="button" class="sideBar-btt">
 		</label>
+
+		<!-- 사이드바 -->
 		<section>
-			<h1>북마크</h1>
-			<ul class="bookmark-lists">
-				<li class="bookmark">북마크1</li>
-				<li class="bookmark">북마크2</li>
-				
-			</ul>
+			<h1 id="webName">HONGIK MAP</h1>
+			<div class="bookmark-lists">
+				<form action="/action_page.php">
+					<label for="fname">출발지</label>
+					<input type="text" id="fname" name="fname" placeholder="출발지를 입력하세요."><br>
+					<label for="lname">도착지</label>
+					<input type="text" id="lname" name="lname" placeholder="도착지를 입력하세요."><br>
+					<input type="submit" value="길찾기">
+				</form>	
+			</div>
+
+			<div id="elevatorCheck">
+					<div>엘리베이터 사용</div>
+					<div>엘리베이터 미사용</div>
+				</div>
+
+				  <div>편의시설
+			        <br>
+			        <button type="button"><img src="cafe.jpg" class="logo" alt="이미지를 불러 올 수 없습니다"></button>
+			        <button type="button"><img src="convi.jpg" class="logo" alt="이미지를 불러 올 수 없습니다"></button>
+			        <button type="button"> <img src="food.jpg" class="logo" alt="이미지를 불러 올 수 없습니다"></button>
+			        <button type="button"><img src="hosp.jpg" class="logo" alt="이미지를 불러 올 수 없습니다"></button>
+			        <button type="button"><img src="rest.jpg" class="logo" alt="이미지를 불러 올 수 없습니다"></button>
+				        
+				        
+				       
+				        
+				        
+				    </br>
+				<div/>
+
 		</section>
 	</main>
-	<script src="sidebar3.js"></script>
-
+	<script src="sidebar.js"></script>
+	
 </body>
 </html>
