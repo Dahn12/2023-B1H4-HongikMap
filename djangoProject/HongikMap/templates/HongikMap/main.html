@@ -65,10 +65,13 @@
         <h1 id="webName">HONGIK MAP</h1>
         <div class="bookmark-lists">
             <form action="/action_page.php">
-                <label for="fname">출발지</label>
-                <input type="text" id="fname" name="fname" placeholder="출발지를 입력하세요."><br>
+        		<div class="srch_form autocomplete">
+	                <label for="fname">출발지</label>
+	                <input type="text" id="autoInput" name="fname" placeholder="출발지를 입력하세요." onkeyup="sendingData(this.value);"><br>
+                </div>
+
                 <label for="lname">도착지</label>
-                <input type="text" id="lname" name="lname" placeholder="도착지를 입력하세요."><br>
+                <input type="text"  name="lname" placeholder="도착지를 입력하세요."><br>
                 <input type="submit" value="길찾기">
             </form>
         </div>
@@ -92,7 +95,7 @@
 
     </section>
 </main>
-<script src="sidebar.js"></script>
+<script src="../../static/js/main.js"></script>
 
 </body>
 </html>
