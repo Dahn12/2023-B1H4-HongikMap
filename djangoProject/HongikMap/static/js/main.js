@@ -1,19 +1,3 @@
-//사이드바
-const sideBar = document.querySelector('.sideBar-btt');
-const section = document.querySelector('section');
-const label = document.querySelector('label');
-
-sideBar.addEventListener('click', function(){
-	section.style.left = 0;
-	label.style.opacity = 0;
-})
-
-
-sideBar.addEventListener('blur',function(){
-	section.style.left = '-200px';
-	label.style.opacity = 1;
-})
-
 //데이터 보내기, setautocomplete함수밑에서 보내는 동작 구현
 function sendingData(inp){
 }
