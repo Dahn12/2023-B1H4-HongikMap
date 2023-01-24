@@ -330,3 +330,52 @@ let autocomplete1 = (function () {
 
 autocomplete.setAutocomplete(document.getElementById("autoInput"), receivedList.recommend);
 autocomplete1.setAutocomplete(document.getElementById("autoInput1"), receivedList.recommend);
+
+
+
+
+// 경로표시
+//테스트리스트
+let keywords = {
+  "I-1-4":['I동104','I104'],
+  "I-1-5":['I동105','I105'],
+  "I-1-6":['I동106','I106'],
+  'I-1-7':['I동107','I107'],
+  'I-1-8':['I동108','I108'],
+  'I-1-9':['I동109','I109'],
+  'I-2-1':['I동201','I201'],
+  'I-2-2':['I동202','I202'],
+  'I-2-3':['I동203','I203'],
+  'I-2-4':['I동204','I204'],
+  'I-2-5':['I동205','I205'],
+
+  'R-B1-1':['R-B1-1','R동 카페 나무']
+
+}
+
+
+//위 리스트를 돌려보면서 input이 있는지 체크
+function find(inp){
+  for (const key in keywords){
+
+    if (keywords[key].includes(inp)){
+      return true;
+    }
+  }
+  return false;
+}
+//리스트에 둘 다 있으면 true
+function submitCheck(event) {
+  event.preventDefault(); //submit될 때 페이지 리로드 방지
+  var departure = document.getElementById("autoInput").value;
+  var destination = document.getElementById("autoInput1").value;
+  departure = departure.toUpperCase();//소문자 대문자 변환
+  destination = destination.toUpperCase();
+  if (find(departure) && find(destination)) {
+    document.getElementById("showRoute").style.visibility="visible";
+    return true; 
+   
+  } else{
+      return false;
+  }
+}

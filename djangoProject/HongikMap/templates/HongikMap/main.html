@@ -2,6 +2,16 @@
 <html lang="en">
 <head>
     <style>
+/*홍익맵로고*/
+        #webName {
+            margin-bottom: 10px ;
+        }
+        /*밑줄없애고, 색상 보라색되지 않도록*/
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
 /*사이드바 메뉴 로고 만들기 (햄버거 바)*/
        input[id= "sidebar-btt"]{
             display: none;
@@ -101,7 +111,7 @@
             border: 1px solid #d4d4d4;
             border-bottom: none;
             border-top: none;   
-            z-index: 99;
+            z-index: 101;
              top: 100%;
             left: 0;
             right: 0;
@@ -126,6 +136,10 @@
         #AmenityButton button{
             width:18%;
         }
+    /*경로표시*/
+        #showRoute {
+            visibility: hidden;
+        }    
 
     </style>
 </head>
@@ -141,17 +155,18 @@
     <!--사이드바-->
         <div class="sidebar">
             <!--사이트 로고-->
-            <h1 id="webName">HONGIK MAP</h1>
+            <h1 id="webName"><a href="main.html">HONGIK MAP</a></h1>
+
             <!--검색창-->
             <div id="textBar">
-                <form>
+                <form method="POST" onsubmit="return submitCheck(event);">
                     <label for="fname">출발지</label>
                     <div class="autocomplete">
-                        <input type="text" id="autoInput" name="fname" placeholder="출발지를 입력하세요." onkeyup="sendingData(this.value);">
+                        <input type="text" id="autoInput" name="fname" placeholder="출발지를 입력하세요." onkeyup="sendingData(this.value);" autocomplete="off">
                     </div><br>
                     <label for="lname">도착지</label>
                     <div class="autocomplete">
-                        <input type="text" id="autoInput1" name="lname" placeholder="도착지를 입력하세요." onkeyup="sendingData(this.value);">
+                        <input type="text" id="autoInput1" name="lname" placeholder="도착지를 입력하세요." onkeyup="sendingData(this.value);" autocomplete="off">
                     </div><br>
                     <input id="submit" type="submit" value="길찾기" >          
                 </form>
@@ -169,9 +184,18 @@
                 </br>
             </div>
             <!--엘레베이터 여부 _ 추후에 버튼 형식으로 수정-->
-            <div id="elevatorCheck">
-                <div>엘리베이터 사용</div>
-                <div>엘리베이터 미사용</div>
+            <div id="showRoute">
+                <div id="elevatorCheck">
+                    <div>엘리베이터 사용</div>
+                    <div>엘리베이터 미사용</div>
+                </div>
+            
+                <ul>
+                    <li>r동</li>
+                    <li>k동</li>
+                    <li>z동</li>
+                    <li>g동</li>
+                </ul>
             </div>
         </div>
     </div>
