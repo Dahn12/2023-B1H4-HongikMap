@@ -50,13 +50,14 @@
        }
 /*sidebar*/
        div[class="sidebar"]{
-        width: 350px;
+        padding: 10px;
+        width: 270px;
         height:100%;
         background-color: #34495e;
-		color: #fff;
+        color: #fff;
         position: fixed;
         top:0;
-        left: -350px;
+        left: -290px;
         z-index: 1;
         transition: all .35s;
        }
@@ -64,18 +65,67 @@
        input[id="sidebar-btt"]:checked + label + div{
         left:0;
        }
+       
 
 /*사이드 바 컨텐츠*/
-        #webName{
-			padding: 10px;
-		}
+    /*검색창*/
+        input[id="autoInput"]{
+        width:208px;
+       }
+       input[id="autoInput1"]{
+        width:208px;
+       }
+       input[id="submit"]{
+        float: right;
+        margin-top:2px;
+       }
+       #textBar{
+        padding-bottom: 30px;
+       }
 
         .logo{height: 30px; width: 30px;}
 
-		#elevatorCheck{ 
-			display: grid;
-			grid-template-columns:50% 50%;
-		}
+        #elevatorCheck{ 
+            display: grid;
+            grid-template-columns:50% 50%;
+        }
+
+        .autocomplete {
+            position: relative;
+            display: inline-block;
+            color:black ;
+        }
+
+        .autocomplete-items {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            border-bottom: none;
+            border-top: none;   
+            z-index: 99;
+             top: 100%;
+            left: 0;
+            right: 0;
+        }
+
+        .autocomplete-items div {
+            padding: 2px;
+            cursor: pointer;
+            background-color: #fff;
+            border-bottom: 1px solid #d4d4d4;
+        }
+
+        .autocomplete-items div:hover {
+            background-color: #e9e9e9;
+        }
+
+        .autocomplete-active {
+           background-color: DodgerBlue !important;
+            color: #ffffff;
+        }
+    /*편의시설*/
+        #AmenityButton button{
+            width:18%;
+        }
 
     </style>
 </head>
@@ -99,25 +149,23 @@
             <!--사이트 로고-->
             <h1 id="webName">HONGIK MAP</h1>
             <!--검색창-->
-            <div class="bookmark-lists">
-                <form action="/action_page.php">
-        		    <div class="srch_form autocomplete">
-	                    <label for="fname">출발지</label>
-	                    <input type="text" id="autoInput" name="fname" placeholder="출발지를 입력하세요." onkeyup="sendingData(this.value);"><br>
-                    </div>
-
+            <div id="textBar">
+                <form>
+                    <label for="fname">출발지</label>
+                    <div class="autocomplete">
+                        <input type="text" id="autoInput" name="fname" placeholder="출발지를 입력하세요." onkeyup="sendingData(this.value);">
+                    </div><br>
                     <label for="lname">도착지</label>
-                    <input type="text"  name="lname" placeholder="도착지를 입력하세요."><br>
-                    <input type="submit" value="길찾기">
+                    <div class="autocomplete">
+                        <input type="text" id="autoInput1" name="lname" placeholder="도착지를 입력하세요." onkeyup="sendingData(this.value);">
+                    </div><br>
+                    <input id="submit" type="submit" value="길찾기" >          
                 </form>
             </div>
-        <!--엘레베이터 여부 _ 추후에 버튼 형식으로 수정-->
-            <div id="elevatorCheck">
-                <div>엘리베이터 사용</div>
-                <div>엘리베이터 미사용</div>
-            </div>
+        
         <!--편의시설 버튼-->
-            <div>편의시설
+            편의시설
+            <div id="AmenityButton">
                 <br>
                 <button type="button"><img src="../../static/logo/cafe.jpg" class="logo" alt="이미지를 불러 올 수 없습니다"></button>
                 <button type="button"><img src="../../static/logo/convi.jpg" class="logo" alt="이미지를 불러 올 수 없습니다"></button>
@@ -126,7 +174,11 @@
                 <button type="button"><img src="../../static/logo/rest.jpg" class="logo" alt="이미지를 불러 올 수 없습니다"></button>
                 </br>
             </div>
-
+            <!--엘레베이터 여부 _ 추후에 버튼 형식으로 수정-->
+            <div id="elevatorCheck">
+                <div>엘리베이터 사용</div>
+                <div>엘리베이터 미사용</div>
+            </div>
         </div>
     </div>
 
