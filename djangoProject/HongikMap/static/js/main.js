@@ -1,47 +1,43 @@
-// csrf token
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
+// // csrf token
+// function getCookie(name) {
+//     var cookieValue = null;
+//     if (document.cookie && document.cookie !== '') {
+//         var cookies = document.cookie.split(';');
+//         for (var i = 0; i < cookies.length; i++) {
+//             var cookie = cookies[i].trim();
+//             // Does this cookie string begin with the name we want?
+//             if (cookie.substring(0, name.length + 1) === (name + '=')) {
+//                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+//                 break;
+//             }
+//         }
+//     }
+//     return cookieValue;
+// }
 
-var csrftoken = getCookie('csrftoken');
+// var csrftoken = getCookie('csrftoken');
 
 
 //데이터 보내기, setautocomplete함수밑에서 보내는 동작 구현
 function sendingData(inp){
 
-    $.ajax({
-        url: 'recommend',
-        type: 'POST',
-        data: {'input_val':inp,
-        'csrfmiddlewaretoken':csrftoken,
-        },
-        datatype: 'json',
-        success: function(data){
-            console.log(data);
+    // $.ajax({
+    //     url: 'recommend',
+    //     type: 'POST',
+    //     data: {'input_val':inp,
+    //     'csrfmiddlewaretoken':csrftoken,
+    //     },
+    //     datatype: 'json',
+    //     success: function(data){
+    //         receivedList = data[inp];
 
-        }
-    });
+    //     }
+    // });
 }
 
 //임시데이터
-let receivedList = {'recommend':[['I-1-4','I104'],['I-1-5','I105'],['I-1-6','I106'],['I-1-7','I107'],['R-B1-1','R동 카페 나무']]};
+let receivedList = ['I101','I102','I103','I104','I105','I106','I107']
 
-// //받은 데이터를 가공해서 리스트로 만들기
-// function dictToList(){
-//     dict = 
-// }
 
 
 // 출발지 자동완성
@@ -99,12 +95,12 @@ let autocomplete = (function () {
         // autocomplet할 요소 찾기
         for (i = 0; i < _arr.length; i++) {
             // 배열의 요소를 현재 input의 value의 값만큼 자른 후, 같으면 추가한다.
-            if (_arr[i][1].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+            if (_arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
                 b = document.createElement("DIV");
                 // value의 값 만큼 굵게 표시 
-                b.innerHTML = "<strong>" + _arr[i][1].substr(0, val.length) + "</strong>";
-                b.innerHTML += _arr[i][1].substr(val.length);
-                b.innerHTML += "<input type='hidden' value='" + _arr[i][1] + "'>";
+                b.innerHTML = "<strong>" + _arr[i].substr(0, val.length) + "</strong>";
+                b.innerHTML += _arr[i].substr(val.length);
+                b.innerHTML += "<input type='hidden' value='" + _arr[i] + "'>";
 
                 // console.log(b); 
                 // <div class="autocomplete-active"><strong>B</strong>adger<input type="hidden" value="Badger"></div>
@@ -258,12 +254,12 @@ let autocomplete1 = (function () {
         // autocomplet할 요소 찾기
         for (i = 0; i < _arr.length; i++) {
             // 배열의 요소를 현재 input의 value의 값만큼 자른 후, 같으면 추가한다.
-            if (_arr[i][1].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+            if (_arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
                 b = document.createElement("DIV");
                 // value의 값 만큼 굵게 표시 
-                b.innerHTML = "<strong>" + _arr[i][1].substr(0, val.length) + "</strong>";
-                b.innerHTML += _arr[i][1].substr(val.length);
-                b.innerHTML += "<input type='hidden' value='" + _arr[i][1] + "'>";
+                b.innerHTML = "<strong>" + _arr[i].substr(0, val.length) + "</strong>";
+                b.innerHTML += _arr[i].substr(val.length);
+                b.innerHTML += "<input type='hidden' value='" + _arr[i] + "'>";
 
                 // console.log(b); 
                 // <div class="autocomplete-active"><strong>B</strong>adger<input type="hidden" value="Badger"></div>
@@ -361,37 +357,58 @@ let autocomplete1 = (function () {
 
 })();
 
-autocomplete.setAutocomplete(document.getElementById("autoInput"), receivedList.recommend);
-autocomplete1.setAutocomplete(document.getElementById("autoInput1"), receivedList.recommend);
+autocomplete.setAutocomplete(document.getElementById("autoInput"), receivedList);
+autocomplete1.setAutocomplete(document.getElementById("autoInput1"), receivedList);
+
+
+
+
+//결과경로표시
+
+//테스트케이스
+var textList = [[10, ['I101','I102','I103','I104']],[13,['I105','I106','I107','I108']]];
+
+
+let ElevUsePageDiv = document.getElementById("ElevUsePage");
+let ElevNoUsePageDiv = document.getElementById("ElevNoUsePage");
+function ElevUsePage(){
+    //Elev체크했을때 div표시
+    ElevUsePageDiv.style.display="block";
+    ElevNoUsePageDiv.style.display="none"; 
+
+    //자식모두지우고 받은리스트 추가
+    ElevUsePageDiv.replaceChildren();
+    for (var i=0; i<textList[0][1].length;i++){
+        let newDiv = document.createElement('div');
+        newDiv.innerHTML=textList[0][1][i];
+        ElevUsePageDiv.appendChild(newDiv);
+    }
+    
+
+}
+
+function ElevNoUsePage(){
+    ElevUsePageDiv.style.display="none";
+    ElevNoUsePageDiv.style.display="block";
+
+    ElevNoUsePageDiv.replaceChildren();
+    for (var i=0; i<textList[1][1].length;i++){
+        let newDiv = document.createElement('div');
+        newDiv.innerHTML=textList[1][1][i];
+        ElevNoUsePageDiv.appendChild(newDiv);
+    }
+}
 
 
 
 
 // 경로표시
-//테스트리스트
-let keywords = {
-  "I-1-4":['I동104','I104'],
-  "I-1-5":['I동105','I105'],
-  "I-1-6":['I동106','I106'],
-  'I-1-7':['I동107','I107'],
-  'I-1-8':['I동108','I108'],
-  'I-1-9':['I동109','I109'],
-  'I-2-1':['I동201','I201'],
-  'I-2-2':['I동202','I202'],
-  'I-2-3':['I동203','I203'],
-  'I-2-4':['I동204','I204'],
-  'I-2-5':['I동205','I205'],
-
-  'R-B1-1':['R-B1-1','R동 카페 나무']
-
-}
-
 
 //위 리스트를 돌려보면서 input이 있는지 체크
 function find(inp){
-  for (const key in keywords){
+  for (const key in receivedList){  
 
-    if (keywords[key].includes(inp)){
+    if (inp==receivedList[key]){
       return true;
     }
   }
@@ -400,10 +417,12 @@ function find(inp){
 //리스트에 둘 다 있으면 true
 function submitCheck(event) {
   event.preventDefault(); //submit될 때 페이지 리로드 방지
+
   var departure = document.getElementById("autoInput").value;
   var destination = document.getElementById("autoInput1").value;
   departure = departure.toUpperCase();//소문자 대문자 변환
   destination = destination.toUpperCase();
+
   if (find(departure) && find(destination)) {
     document.getElementById("showRoute").style.visibility="visible";
     return true; 
