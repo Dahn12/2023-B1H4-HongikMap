@@ -17,10 +17,20 @@ class HongikmapConfig(AppConfig):
 
     with open("HongikMap/static/data/result_with_elevator.txt", "w") as f:
         for key, value in path_with_elevator.result.items():
-            f.write(f'{key} {value}')
+            f.write(f'{key[0]} {key[1]}:{value["distance"]} {" ".join(value["route"])}\n')
 
     for start in graph_without_elevator.rooms:
         path_without_elevator.dijkstra(start)
     with open("HongikMap/static/data/result_without_elevator.txt", "w") as f:
         for key, value in path_without_elevator.result.items():
-            f.write(f'{key} {value}')
+            f.write(f'{key[0]} {key[1]}:{value["distance"]} {" ".join(value["route"])}\n')
+
+    with open("HongikMap/static/data/recommends_with_elevator.txt", "w", encoding="UTF8") as f:
+        for room in path_with_elevator.rooms:
+            building, floor, entity = room.split("-")
+            f.write(f'{room}:{building + floor}{room:0>2},{building}동 {floor}층 {entity}호\n')
+
+    with open("HongikMap/static/data/recommends_without_elevator.txt", "w", encoding="UTF8") as f:
+        for room in path_without_elevator.rooms:
+            building, floor, entity = room.split("-")
+            f.write(f'{room}:{building + floor}{room:0>2},{building}동 {floor}층 {entity}호\n')
