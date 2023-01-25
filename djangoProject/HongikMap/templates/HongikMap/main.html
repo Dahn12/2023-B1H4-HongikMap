@@ -7,16 +7,7 @@
                 font-family: 'BMfont';
                 src: url(BMHANNAPro.ttf);
         }
-/*홍익맵로고*/
-        #webName {
-            margin-bottom: 10px ;
-            
-        }
-        /*밑줄없애고, 색상 보라색되지 않도록*/
-        a {
-            text-decoration: none;
-            color: white;
-        }
+
 
 /*사이드바 메뉴 로고 만들기 (햄버거 바)*/
        input[id= "sidebar-btt"]{
@@ -25,9 +16,11 @@
         }
        input[id= "sidebar-btt"] + label{
             display: block;
-            width: 30px;
-            height: 20px;
-            position:relative;
+            width: 21px;
+            height: 14px;
+            position:fixed;
+            top: 15px;
+            left: 15px;
             cursor: pointer;
             z-index: 2;
        }
@@ -57,26 +50,32 @@
        input[id="sidebar-btt"]:checked + label span:nth-child(1){
             top:50%;
             transform: translateY(-50%) rotate(45deg);
+            left: 240px;
        }
        input[id="sidebar-btt"]:checked + label span:nth-child(2){
            opacity:0;
+           left: 240px;
        }
        input[id="sidebar-btt"]:checked + label span:nth-child(3){
             bottom:50%;
             transform: translateY(50%) rotate(-45deg);
-       }
+            left: 240px;
+        }
 /*sidebar*/
        div[class="sidebar"]{
         padding: 10px;
         width: 270px;
         height:100%;
-        background-color: #34495e;
-        color: #fff;
+        background-color: #fff;
+        color: #000;
         position: fixed;
         top:0;
         left: -290px;
         z-index: 1;
         transition: all .35s;
+        border-right: solid;
+        border-width: 1.5px;
+        border-color: gray;
        }
 
        input[id="sidebar-btt"]:checked + label + div{
@@ -85,27 +84,42 @@
        
 
 /*사이드 바 컨텐츠*/
+    /*홍익맵로고*/
+        #webName {
+            position:static;
+            text-align: center;
+            margin-bottom: 30px ;
+            margin-top: 30px;
+        }
+        /*밑줄없애고, 색상 보라색되지 않도록*/
+        a {
+            text-decoration: none;
+            color: #34495e;
+        }
     /*검색창*/
         input[id="autoInput"]{
-        width:208px;
+        width:250px;
+        height: 20px;
+        margin-bottom: 3.5px;
+        text-align: center;
        }
        input[id="autoInput1"]{
-        width:208px;
+        width:250px;
+        height: 20px;
+        text-align: center;
        }
        input[id="submit"]{
-        float: right;
-        margin-top:2px;
+        position: absolute;
+        right: 21.5px;
+        margin-top:4px;
+        margin-bottom: 30px;
        }
        #textBar{
-        padding-bottom: 30px;
+        
+        margin-bottom: 30px;
+        position: static;
        }
 
-        .logo{height: 30px; width: 30px;}
-
-        #elevatorCheck{ 
-            display: grid;
-            grid-template-columns:50% 50%;
-        }
 
         .autocomplete {
             position: relative;
@@ -139,19 +153,38 @@
            background-color: DodgerBlue !important;
             color: #ffffff;
         }
+
+
+
+
+
     /*편의시설*/
+        .logo{height: 30px; width: 30px;}
+
         #AmenityButton button{
             width:18%;
         }
+
+        
+
     /*경로표시*/
         #showRoute {    
             visibility: hidden; 
             background-color: white;
             color: #34495e;     
         }
+
+
+
+
+
     /*엘리베이터*/
-        
-        #elevatorCheck label{
+        #elevatorCheck{ 
+            display: grid;
+            grid-template-columns:50% 50%;
+        }
+
+         #elevatorCheck label{
             font-weight: 15px;
             color: #34495e;
 
@@ -192,15 +225,15 @@
             <!--검색창-->
             <div id="textBar">
                 <form method="POST" onsubmit="return submitCheck(event);">
-                    <label for="fname">출발지</label>
+                    
                     <div class="autocomplete">
-                        <input type="text" id="autoInput" name="fname" placeholder="출발지를 입력하세요." oninput="sendingData(this.value);" autocomplete="off">
+                        <input type="text" id="autoInput" style="font-family: BMfont;" placeholder="출발지를 입력하세요." oninput="sendingData(this.value);" autocomplete="off">
                     </div><br>
-                    <label for="lname">도착지</label>
+                    
                     <div class="autocomplete">
-                        <input type="text" id="autoInput1" name="lname" placeholder="도착지를 입력하세요." oninput="sendingData(this.value);" autocomplete="off">
+                        <input type="text" id="autoInput1" style="font-family: BMfont;" placeholder="도착지를 입력하세요." oninput="sendingData(this.value);" autocomplete="off">
                     </div><br>
-                    <input id="submit" type="submit" value="길찾기" >          
+                    <input id="submit" type="submit" style="font-family: BMfont;" value="길찾기" >          
                 </form>
             </div>
         
@@ -214,6 +247,7 @@
                 <button type="button"><img src="../../static/logo/hosp.jpg" class="logo" alt="이미지를 불러 올 수 없습니다"></button>
                 <button type="button"><img src="../../static/logo/rest.jpg" class="logo" alt="이미지를 불러 올 수 없습니다"></button>
                 </br>
+                <br>
             </div>
             <!--엘레베이터 여부 _ 추후에 버튼 형식으로 수정-->
             <div id="showRoute">
