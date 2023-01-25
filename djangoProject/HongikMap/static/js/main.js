@@ -1,43 +1,44 @@
-// // csrf token
-// function getCookie(name) {
-//     var cookieValue = null;
-//     if (document.cookie && document.cookie !== '') {
-//         var cookies = document.cookie.split(';');
-//         for (var i = 0; i < cookies.length; i++) {
-//             var cookie = cookies[i].trim();
-//             // Does this cookie string begin with the name we want?
-//             if (cookie.substring(0, name.length + 1) === (name + '=')) {
-//                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-//                 break;
-//             }
-//         }
-//     }
-//     return cookieValue;
-// }
+//임시데이터
+//let receivedList = ['I101','I102','I103','I104','I105','I106','I107'];
+let receivedList = [];
 
-// var csrftoken = getCookie('csrftoken');
+
+// csrf token
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+var csrftoken = getCookie('csrftoken');
 
 
 //데이터 보내기, setautocomplete함수밑에서 보내는 동작 구현
 function sendingData(inp){
 
-    // $.ajax({
-    //     url: 'recommend',
-    //     type: 'POST',
-    //     data: {'input_val':inp,
-    //     'csrfmiddlewaretoken':csrftoken,
-    //     },
-    //     datatype: 'json',
-    //     success: function(data){
-    //         receivedList = data[inp];
+    $.ajax({
+        url: 'recommend',
+        type: 'POST',
+        data: {'input_val':inp,
+        'csrfmiddlewaretoken':csrftoken,
+        },
+        datatype: 'json',
+        success: function(data){
+            receivedList = data[inp];
 
-    //     }
-    // });
+        }
+    });
 }
-
-//임시데이터
-let receivedList = ['I101','I102','I103','I104','I105','I106','I107']
-
 
 
 // 출발지 자동완성
@@ -254,25 +255,25 @@ let autocomplete1 = (function () {
         // autocomplet할 요소 찾기
         for (i = 0; i < _arr.length; i++) {
             // 배열의 요소를 현재 input의 value의 값만큼 자른 후, 같으면 추가한다.
-            if (_arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-                b = document.createElement("DIV");
-                // value의 값 만큼 굵게 표시 
-                b.innerHTML = "<strong>" + _arr[i].substr(0, val.length) + "</strong>";
-                b.innerHTML += _arr[i].substr(val.length);
-                b.innerHTML += "<input type='hidden' value='" + _arr[i] + "'>";
+            
+            b = document.createElement("DIV");
+            // value의 값 만큼 굵게 표시 
+            b.innerHTML = "<strong>" + _arr[i].substr(0, val.length) + "</strong>";
+            b.innerHTML += _arr[i].substr(val.length);
+            b.innerHTML += "<input type='hidden' value='" + _arr[i] + "'>";
 
-                // console.log(b); 
-                // <div class="autocomplete-active"><strong>B</strong>adger<input type="hidden" value="Badger"></div>
+            // console.log(b); 
+            // <div class="autocomplete-active"><strong>B</strong>adger<input type="hidden" value="Badger"></div>
 
-                // 생성된 div에서 이벤트 발생시 hidden으로 생성된 input안의 value의 값을 autocomplete할 요소에 넣기
-                b.addEventListener("click", function (e) {
-                    _inp.value = this.getElementsByTagName("input")[0].value;
-                    closeAllLists();
-                });
+            // 생성된 div에서 이벤트 발생시 hidden으로 생성된 input안의 value의 값을 autocomplete할 요소에 넣기
+            b.addEventListener("click", function (e) {
+                _inp.value = this.getElementsByTagName("input")[0].value;
+                closeAllLists();
+            });
 
-                // autocomplete 리스트를 붙이기.
-                a.appendChild(b);
-            }
+            // autocomplete 리스트를 붙이기.
+            a.appendChild(b);
+            
         }
     }
 
@@ -366,7 +367,10 @@ autocomplete1.setAutocomplete(document.getElementById("autoInput1"), receivedLis
 //결과경로표시
 
 //테스트케이스
-var textList = [[10, ['I101','I102','I103','I104']],[13,['I105','I106','I107','I108']]];
+var textList = {
+    "elevatorUse":[10, ['I101','I102','I103','I104']],
+    "elevatorNoUse":[13,['I105','I106','I107','I108']]
+};
 
 
 let ElevUsePageDiv = document.getElementById("ElevUsePage");
@@ -378,9 +382,9 @@ function ElevUsePage(){
 
     //자식모두지우고 받은리스트 추가
     ElevUsePageDiv.replaceChildren();
-    for (var i=0; i<textList[0][1].length;i++){
+    for (var i=0; i<textList["elevatorUse"][1].length;i++){
         let newDiv = document.createElement('div');
-        newDiv.innerHTML=textList[0][1][i];
+        newDiv.innerHTML=textList["elevatorUse"][1][i];
         ElevUsePageDiv.appendChild(newDiv);
     }
     
@@ -392,9 +396,9 @@ function ElevNoUsePage(){
     ElevNoUsePageDiv.style.display="block";
 
     ElevNoUsePageDiv.replaceChildren();
-    for (var i=0; i<textList[1][1].length;i++){
+    for (var i=0; i<textList["elevatorNoUse"][1].length;i++){
         let newDiv = document.createElement('div');
-        newDiv.innerHTML=textList[1][1][i];
+        newDiv.innerHTML=textList["elevatorNoUse"][1][i];
         ElevNoUsePageDiv.appendChild(newDiv);
     }
 }

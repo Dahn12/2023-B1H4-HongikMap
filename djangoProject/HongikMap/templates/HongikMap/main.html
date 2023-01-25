@@ -3,10 +3,6 @@
 <head>
     <style>
 /*배민 폰트*/
-        @font-face{
-                font-family: 'BMfont';
-                src: url(BMHANNAPro.ttf);
-        }
 
 
 /*사이드바 메뉴 로고 만들기 (햄버거 바)*/
@@ -226,14 +222,16 @@
 
             <!--검색창-->
             <div id="textBar">
-                <form method="POST" onsubmit="return submitCheck(event);">
-                    
+                <!-- place_submit이란 url로 데이터전송 -->
+                <form action="place_submit/" method="POST" onsubmit="return submitCheck(event);">
+                    <!-- 밑의 토큰은 django에서 form사용하기위해 필요 -->
+                    {% csrf_token %}
                     <div class="autocomplete">
-                        <input type="text" id="autoInput" style="font-family: BMfont;" placeholder="출발지를 입력하세요." oninput="sendingData(this.value);" autocomplete="off">
+                        <input type="text" name="departure" id="autoInput" style="font-family: BMfont;" placeholder="출발지를 입력하세요." oninput="sendingData(this.value);" autocomplete="off">
                     </div><br>
                     
                     <div class="autocomplete">
-                        <input type="text" id="autoInput1" style="font-family: BMfont;" placeholder="도착지를 입력하세요." oninput="sendingData(this.value);" autocomplete="off">
+                        <input type="text" name="destination" id="autoInput1" style="font-family: BMfont;" placeholder="도착지를 입력하세요." oninput="sendingData(this.value);" autocomplete="off">
                     </div><br>
                     <input id="submit" type="submit" style="font-family: BMfont;" value="길찾기" >          
                 </form>
