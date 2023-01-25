@@ -2,15 +2,6 @@
 <html lang="en">
 <head>
     <style>
-/*홍익맵로고*/
-        #webName {
-            margin-bottom: 10px ;
-        }
-        /*밑줄없애고, 색상 보라색되지 않도록*/
-        a {
-            text-decoration: none;
-            color: white;
-        }
 
 /*사이드바 메뉴 로고 만들기 (햄버거 바)*/
        input[id= "sidebar-btt"]{
@@ -19,9 +10,9 @@
         }
        input[id= "sidebar-btt"] + label{
             display: block;
-            width: 30px;
-            height: 20px;
-            position:relative;
+            width: 21px;
+            height: 14px;
+            position: fixed;
             cursor: pointer;
             z-index: 2;
        }
@@ -59,6 +50,11 @@
             bottom:50%;
             transform: translateY(50%) rotate(-45deg);
        }
+
+
+
+
+
 /*sidebar*/
        div[class="sidebar"]{
         padding: 10px;
@@ -79,6 +75,19 @@
        
 
 /*사이드 바 컨텐츠*/
+    /*홍익맵로고*/
+        #webName {
+            margin-bottom: 10px ;
+        }
+        
+        /*밑줄없애고, 색상 보라색되지 않도록*/
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+
+
     /*검색창*/
         input[id="autoInput"]{
         width:208px;
@@ -94,13 +103,9 @@
         padding-bottom: 30px;
        }
 
-        .logo{height: 30px; width: 30px;}
+       
 
-        #elevatorCheck{ 
-            display: grid;
-            grid-template-columns:50% 50%;
-        }
-
+    /*자동 완성*/
         .autocomplete {
             position: relative;
             display: inline-block;
@@ -133,16 +138,38 @@
            background-color: DodgerBlue !important;
             color: #ffffff;
         }
+
+
+
+
+
     /*편의시설*/
+        .logo{height: 30px; width: 30px;}
+        
         #AmenityButton button{
             width:18%;
         }
+
+
+
+
+
     /*경로표시*/
         #showRoute {    
-/*            visibility: hidden;*/ 
+        /*  visibility: hidden;*/ 
             background-color: white;     
         }
+
+
+
+
+
     /*엘리베이터*/
+        #elevatorCheck{ 
+            display: grid;
+            grid-template-columns:50% 50%;
+        }
+
         
         #elevatorCheck label{
             font-weight: 15px;
