@@ -6,4 +6,5 @@ urlpatterns = [
     path('main', views.main, name='main'),
     path('main2', views.main2, name='main2'),
     path('recommend', views.recommend, name='recommend'),
+    path('place_submit', views.submit, name='submit'),
 ]
