@@ -16,14 +16,12 @@ class Recommend:
                 entity, value = line.split(":")
                 self.keywords[entity] = value
 
-        # print(self.recommends, self.keywords)
-
     def find(self, keyword: str):
 
         ret = []
         kw_length = len(keyword)
         if kw_length <= 0:
-            return []
+            return ret
 
         if keyword[0].encode().isalpha():  # 첫 글자가 영어: I101
             ret = self.find_by_parsing(keyword)
@@ -34,8 +32,14 @@ class Recommend:
         return ret
 
     def find_by_parsing(self, keyword):
-
-        return []
+        ret = []
+        with open("HongikMap/static/data/recommends_by_parsing.txt", "r", encoding="UTF8") as rec:
+            for line in rec.readlines():
+                key, recommends = line.split(":")
+                recommends = recommends.split(",")
+                if any([keyword in x for x in recommends]):
+                    ret.append(recommends[0])
+        return ret
 
     def find_in_recommend(self, keyword):
         ret = []
