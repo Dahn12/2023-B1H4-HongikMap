@@ -1,5 +1,38 @@
+// csrf token
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+var csrftoken = getCookie('csrftoken');
+
+
 //데이터 보내기, setautocomplete함수밑에서 보내는 동작 구현
 function sendingData(inp){
+
+    $.ajax({
+        url: 'recommend',
+        type: 'POST',
+        data: {'input_val':inp,
+        'csrfmiddlewaretoken':csrftoken,
+        },
+        datatype: 'json',
+        success: function(data){
+            console.log(data);
+
+        }
+    });
 }
 
 //임시데이터

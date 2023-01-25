@@ -18,6 +18,7 @@ def main2(request):
 
 
 def recommend(request):
-    start_input = request.POST.get('start_input')
-    end_input = request.POST.get()
-    return JsonResponse({})
+
+    response = request.POST.get('input_val')
+    print(response)
+    return JsonResponse({response: ['I101', 'I102']})
