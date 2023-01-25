@@ -4,7 +4,7 @@
 # Data : [start node] [end node] [weight(int, sec)] [(optional) two-way]
 # Node : Building-Floor-Entity
 # Entity : {room(only decimal), elevator(E prefixed),
-            stair(S), exit(X), hall way(H)}
+#           stair(S), exit(X), hall way(H)}
 
 
 # Building I
