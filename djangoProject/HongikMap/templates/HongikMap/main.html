@@ -184,11 +184,11 @@
                 <form method="POST" onsubmit="return submitCheck(event);">
                     <label for="fname">출발지</label>
                     <div class="autocomplete">
-                        <input type="text" id="autoInput" name="fname" placeholder="출발지를 입력하세요." onkeyup="sendingData(this.value);" autocomplete="off">
+                        <input type="text" id="autoInput" name="fname" placeholder="출발지를 입력하세요." oninput="sendingData(this.value);" autocomplete="off">
                     </div><br>
                     <label for="lname">도착지</label>
                     <div class="autocomplete">
-                        <input type="text" id="autoInput1" name="lname" placeholder="도착지를 입력하세요." onkeyup="sendingData(this.value);" autocomplete="off">
+                        <input type="text" id="autoInput1" name="lname" placeholder="도착지를 입력하세요." oninput="sendingData(this.value);" autocomplete="off">
                     </div><br>
                     <input id="submit" type="submit" value="길찾기" >          
                 </form>
