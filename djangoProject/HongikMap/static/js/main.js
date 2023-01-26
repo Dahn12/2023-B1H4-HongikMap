@@ -1,6 +1,6 @@
 //임시데이터
-//let receivedList = ['I101','I102','I103','I104','I105','I106','I107'];
-let receivedList = [];
+//receivedList = ['I101','I102','I103','I104','I105','I106','I107'];
+var receivedList = [];
 
 
 // csrf token
@@ -34,8 +34,8 @@ function sendingData(inp){
         },
         datatype: 'json',
         success: function(data){
-            receivedList = data[inp];
-
+            receivedList = data['recommendations'];
+            console.log(receivedList);
         }
     });
 }
