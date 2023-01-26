@@ -1,6 +1,5 @@
-//임시데이터
-//receivedList = ['I101','I102','I103','I104','I105','I106','I107'];
-var receivedList = [];
+
+let receivedList = [];
 
 
 // csrf token
@@ -29,12 +28,13 @@ function sendingData(inp){
     $.ajax({
         url: 'recommend',
         type: 'POST',
-        data: {'input_val':inp,
+        data: {'input_val':inp.value,
         'csrfmiddlewaretoken':csrftoken,
         },
         datatype: 'json',
         success: function(data){
             receivedList = data['recommendations'];
+            autocomplete.setAutocomplete(inp, receivedList);
             console.log(receivedList);
         }
     });
