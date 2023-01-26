@@ -25,12 +25,8 @@ class HongikmapConfig(AppConfig):
         for key, value in path_without_elevator.result.items():
             f.write(f'{key[0]} {key[1]}:{value["distance"]} {" ".join(value["route"])}\n')
 
-    with open("HongikMap/static/data/recommends_with_elevator.txt", "w", encoding="UTF8") as f:
+    with open("HongikMap/static/data/recommends_by_parsing.txt", "w", encoding="UTF8") as f:
         for room in path_with_elevator.rooms:
             building, floor, entity = room.split("-")
             f.write(f'{room}:{building + floor}{entity:0>2},{building}동 {floor}층 {entity}호\n')
 
-    with open("HongikMap/static/data/recommends_without_elevator.txt", "w", encoding="UTF8") as f:
-        for room in path_without_elevator.rooms:
-            building, floor, entity = room.split("-")
-            f.write(f'{room}:{building + floor}{entity:0>2},{building}동 {floor}층 {entity}호\n')
