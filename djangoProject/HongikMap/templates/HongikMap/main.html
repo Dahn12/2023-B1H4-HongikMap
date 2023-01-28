@@ -2,18 +2,57 @@
 <html lang="en">
 <head>
     <style>
-/*학교이미지 및 선긋기캔버스*/
+/*학교이미지*/
         .img-fluid{
             position: absolute;
             width: 1300px;
             height: 700px;
             right: 0;
             overflow: auto;
+            z-index: 0;
         }
+/*캔버스*/
         #myCanvas{
             position: absolute;
             right: 0;
             overflow: auto;
+            z-index: 1;
+        }
+/*편의시설아이콘 및 텍스트*/
+        #MapConviText{
+            position: absolute;
+            width: 1300px;
+            height: 700px;
+            right: 0;
+            overflow: auto;
+            z-index: 2;
+
+        }
+        #MapConviText div{
+            position: absolute;
+            width: 1300px;
+            height: 700px;
+            right: 0;
+            overflow: auto;
+            display: none;
+        }
+
+        #cafe img, #convi img, #study img{
+            width: 44px;
+            height: 44px;
+            position: absolute; 
+
+        }
+        #food img{
+            width: 40px;
+            height: 40px;
+            position: absolute;
+        }
+        #hosp img{
+            width: 34px;
+            height: 34px;
+            position: absolute;
+
         }
 
 
@@ -30,7 +69,7 @@
             top: 15px;
             left: 15px;
             cursor: pointer;
-            z-index: 2;
+            z-index: 4;
        }
        input[id="sidebar-btt"] + label span{
             display: block;
@@ -40,7 +79,7 @@
             border-radius: 30px;
             background: #000;
             transition: all .35s;
-            z-index: 2;
+            z-index: 4;
        }
 
 /*check box 체크 전 햄버거모양*/
@@ -79,7 +118,7 @@
         position: fixed;
         top:0;
         left: -290px;
-        z-index: 1;
+        z-index: 3;
         transition: all .35s;
         border-right: solid;
         border-width: 1.5px;
@@ -252,10 +291,46 @@
 <body style="font-family: BMfont;">
 <!-- 학교이미지 -->
     <img 
-        src="../../static/logo/schoolMap.jpg"
-        class="img-fluid" 
-        alt="이미지를 불러올 수 없습니다." 
+    src="../../static/logo/schoolMap.jpg"
+    class="img-fluid" 
+    alt="이미지를 불러올 수 없습니다." 
     >
+
+<!-- 편의시설텍스트 -->
+    <div id="MapConviText">
+        <div id='cafe'>
+            <img src="../../static/logo/cafe.png" title="R동 카페나무" style="left: 187px; top: 430px;" >
+            <img src="../../static/logo/cafe.png" title="와우관 카페나무" style="left: 437px; top: 92px;" >
+            <img src="../../static/logo/cafe.png" title="카페 그라찌에" style="left: 265px; top: 417px;" >
+            <img src="../../static/logo/cafe.png" title="다과점 파프라카" style="left: 204px; top: 486px;" >
+            <img src="../../static/logo/cafe.png" title="카페 캠퍼" style="left: 870px; top: 477px;" >
+            <img src="../../static/logo/cafe.png" title="카페드림" style="left: 898px; top: 274px;" >
+            <img src="../../static/logo/cafe.png" title="C동 8층 간이카페" style="left: 999px; top: 198px;" >
+            <img src="../../static/logo/cafe.png" title="중앙도서관 북카페" style="left: 535px; top: 116px;" >            
+        </div>
+        <div id='convi'>
+            <img src="../../static/logo/convi.png" title="홍익대학서적" style="left: 228px; top: 451px;" >
+            <img src="../../static/logo/convi.png" title="와우관 편의점" style="left: 437px; top: 92px;" >
+            <img src="../../static/logo/convi.png" title="R동 편의점" style="left: 226px; top: 432px;" >
+            <img src="../../static/logo/convi.png" title="한가람 문구센터" style="left: 186px; top: 383px;" >            
+        </div>
+        <div id='food'>
+            <img src="../../static/logo/food.png" title="제2기숙사 학생식당" style="left: 938px; top: 470px;" >
+            <img src="../../static/logo/food.png" title="향차이" style="left: 878px; top: 527px;" >
+            <img src="../../static/logo/food.png" title="메리킹" style="left: 167px; top: 454px;" >            
+        </div>
+        <div id='hosp'>
+            <img src="../../static/logo/hosp.png" title="약국(원이 약국)" style="left: 884px; top: 557px;" >
+            <img src="../../static/logo/hosp.png" title="건강진료센터" style="left: 575px; top: 249px;" >   
+        </div>
+        <div id='study'>
+            <img src="../../static/logo/study.png" title="T동 열람실" style="left: 821px; top: 499px;" >
+            <img src="../../static/logo/study.png" title="A동 열람실" style="left: 823px; top: 227px;" >
+            <img src="../../static/logo/study.png" title="R동 열람실" style="left: 257px; top: 531px;" >
+            <img src="../../static/logo/study.png" title="중앙도서관 열람실" style="left: 521px; top: 219px;" >     
+        </div>
+        
+    </div>
 <!-- 선긋기캔버스 -->
     <canvas id="myCanvas" width="1300" height="700"></canvas>
 <!--순서 유지-->

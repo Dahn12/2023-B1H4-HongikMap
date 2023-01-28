@@ -1,7 +1,7 @@
-//선그리기
+    //선그리기
 
 //리스트, 길찾기 버튼 눌러지면 받아져야함
-let pathResult = [[207,538],[240,490],[294,436],[445,225],[401,210],[461,79],]
+let pathResult = [[207,538],[240,490],[294,436],[445,225],[401,210],[461,79],];
 
 
 // 1. canvas 엘리먼트를 취득한다.
@@ -42,60 +42,21 @@ canvas.onclick = function(event){
 
 //편의시설 아이콘띄우기
 function convenienceIcon(name){
-    
-    ctx.clearRect(0, 0, 1300, 700);//선 초기화
-    ctx.beginPath(); //새 선 그리기
-
-    const img = new Image();
-    
-    if(name == 'cafe'){
-        img.src = '../../static/logo/cafe.png'; //이미지 소스 설정
-        img.onload = function(){
-            ctx.drawImage(img, 187,430,44,44);// R동 카페나무
-            ctx.drawImage(img, 437, 92,44,44);// 와우관 카페나무
-            ctx.drawImage(img, 265,407,44,44);// 카페 그라찌에
-            ctx.drawImage(img, 204,486,44,44);// 다과점 파프리카
-            ctx.drawImage(img, 870,477,44,44);// 카페 캠퍼
-            ctx.drawImage(img, 898,274,44,44);// 카페드림
-            ctx.drawImage(img, 999, 198,44,44);// c동 간이카페 8층
-            ctx.drawImage(img, 535, 116,44,44);// 중앙도서관 북카페
-        }   
+    document.getElementById('cafe').style.display="none";
+    document.getElementById('convi').style.display="none";
+    document.getElementById('food').style.display="none";
+    document.getElementById('hosp').style.display="none";
+    document.getElementById('study').style.display="none";
+    if(name == 'cafe'){ 
+        document.getElementById("cafe").style.display="block";
     } else if(name == 'convi'){
-        img.src = '../../static/logo/convi.png';
-        img.onload = function(){
-            ctx.drawImage(img, 228, 451,44,44);// 홍익대학서적
-            ctx.drawImage(img, 437, 92,44,44);// 와우관 편의점
-            ctx.drawImage(img, 226, 432,44,44);// R동 무인편의점
-            ctx.drawImage(img, 186, 383,44,44);// 한가람문구센터
-            ctx.drawImage(img, 932, 441,44,44);// 한가람문구센터
-        }  
-
+        document.getElementById("convi").style.display="block";
     } else if(name == 'food'){
-        img.src = '../../static/logo/food.png';
-        img.onload = function(){
-            ctx.drawImage(img, 938, 470,40,40);// 제2기숙사 학생식당
-            ctx.drawImage(img, 878, 527,40,40);// 향차이
-            ctx.drawImage(img, 167, 454,40,40);// 메리킹
-
-        }  
-        
+        document.getElementById("food").style.display="block";
     } else if(name == 'hosp'){
-        img.src = '../../static/logo/hosp.png';
-        img.onload = function(){
-            ctx.drawImage(img, 884, 557,34,34);// 약국(원이 약국)
-            ctx.drawImage(img, 575, 249,34,34);// 건강진료센터
-        }  
-        
+        document.getElementById("hosp").style.display="block";
     } else if(name == 'study'){
-        img.src = '../../static/logo/study.png';
-        img.onload = function(){
-            ctx.drawImage(img, 821,499,44,44);// T동
-            ctx.drawImage(img, 823,227,44,44);// A동
-            ctx.drawImage(img, 257, 531,44,44);// R동
-            ctx.drawImage(img, 521, 219,44,44);// 학생회관
-
-        }  
-        
+        document.getElementById("study").style.display="block";
     }
     
 }
