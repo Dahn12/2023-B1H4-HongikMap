@@ -158,8 +158,9 @@
 
 
     /*편의시설*/
-        .Amenitytotal{
-
+    .Amenitytotal{
+            margin-top: 30px;
+            margin-bottom: 30px;
         }
         #Amenityname{
             position: absolute;
@@ -170,11 +171,29 @@
         }
 
         #AmenityButton button{
-            width:18%;
+            text-align: center;
+            width: 18%;
             background-color: transparent;
             border-color: transparent;
+            border-radius: 8px;
+
+
+            box-shadow: 1.5px 1.5px 1.5px gray;
+            transition-duration: 0.3s;
+        }
+        
+        #AmenityButton button:active{
+            box-shadow: none;
         }
 
+        
+
+    /*경로표시*/
+        #showRoute {    
+           /* visibility: hidden;*/ 
+            background-color: white;
+            color: #34495e;     
+        }
         
 
     /*경로표시*/
