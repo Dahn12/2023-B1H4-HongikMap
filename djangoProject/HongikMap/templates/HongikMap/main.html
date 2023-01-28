@@ -106,7 +106,7 @@
        }
        input[id="submit"]{
         position: absolute;
-        right: 21.5px;
+        right: 17px;
         margin-top:4px;
         margin-bottom: 30px;
        }
@@ -114,6 +114,7 @@
         
         margin-bottom: 30px;
         position: static;
+        text-align: center;
        }
 
 
@@ -157,7 +158,16 @@
 
 
     /*편의시설*/
-        .logo{height: 30px; width: 30px;}
+        .Amenitytotal{
+
+        }
+        #Amenityname{
+            position: absolute;
+            left: 17px;
+        }
+        .logo{
+            height: 30px; width: 30px;
+        }
 
         #AmenityButton button{
             width:18%;
@@ -169,7 +179,7 @@
 
     /*경로표시*/
         #showRoute {    
-            visibility: hidden; 
+           /* visibility: hidden;*/ 
             background-color: white;
             color: #34495e;     
         }
@@ -240,16 +250,18 @@
             </div>
         
         <!--편의시설 버튼-->
-            <div id="Amenityname">편의시설</div>
-            <div id="AmenityButton">
-                <br>
-                <button type="button"><img src="../../static/logo/cafe.jpg" class="logo" alt="이미지를 불러 올 수 없습니다"></button>
-                <button type="button"><img src="../../static/logo/convi.jpg" class="logo" alt="이미지를 불러 올 수 없습니다"></button>
-                <button type="button"><img src="../../static/logo/food.jpg" class="logo" alt="이미지를 불러 올 수 없습니다"></button>
-                <button type="button"><img src="../../static/logo/hosp.jpg" class="logo" alt="이미지를 불러 올 수 없습니다"></button>
-                <button type="button"><img src="../../static/logo/rest.jpg" class="logo" alt="이미지를 불러 올 수 없습니다"></button>
-                </br>
-                <br>
+            <div class="Ammenitytotal">
+                <div id="Amenityname">편의시설</div>
+                <div id="AmenityButton">
+                    <br>
+                    <button type="button"><img src="../../static/logo/cafe.jpg" class="logo" alt="이미지를 불러 올 수 없습니다"></button>
+                    <button type="button"><img src="../../static/logo/convi.jpg" class="logo" alt="이미지를 불러 올 수 없습니다"></button>
+                    <button type="button"><img src="../../static/logo/food.jpg" class="logo" alt="이미지를 불러 올 수 없습니다"></button>
+                    <button type="button"><img src="../../static/logo/hosp.jpg" class="logo" alt="이미지를 불러 올 수 없습니다"></button>
+                    <button type="button"><img src="../../static/logo/rest.jpg" class="logo" alt="이미지를 불러 올 수 없습니다"></button>
+                    </br>
+                    <br>
+                </div>
             </div>
             <!--엘레베이터 여부 _ 추후에 버튼 형식으로 수정-->
             <div id="showRoute">
