@@ -378,16 +378,28 @@ let ElevNoUsePageDiv = document.getElementById("ElevNoUsePage");
 function ElevUsePage(){
     //Elev체크했을때 div표시
     ElevUsePageDiv.style.display="block";
-    ElevNoUsePageDiv.style.display="none"; 
+    ElevNoUsePageDiv.style.display="none";
 
-    //자식모두지우고 받은리스트 추가
+
     ElevUsePageDiv.replaceChildren();
+    //최소 주기
+    let timeText = document.createElement('div');
+    timeText.setAttribute("id", "timeText");//속성주기
+    timeText.innerHTML="최소";
+    ElevUsePageDiv.appendChild(timeText);
+
+    //시간주기
+    let newDivTime = document.createElement('div');
+    newDivTime.setAttribute("id", "time");//속성주기
+    newDivTime.innerHTML=textList["elevatorUse"][0]+"분";
+    ElevUsePageDiv.appendChild(newDivTime);
+
     for (var i=0; i<textList["elevatorUse"][1].length;i++){
         let newDiv = document.createElement('div');
         newDiv.innerHTML=textList["elevatorUse"][1][i];
         ElevUsePageDiv.appendChild(newDiv);
     }
-    
+
 
 }
 
@@ -395,7 +407,21 @@ function ElevNoUsePage(){
     ElevUsePageDiv.style.display="none";
     ElevNoUsePageDiv.style.display="block";
 
+    //자식모두지우고 받은리스트 추가
     ElevNoUsePageDiv.replaceChildren();
+
+     //최소 주기
+    let timeText = document.createElement('div');
+    timeText.setAttribute("id", "timeText");//속성주기
+    timeText.innerHTML="최소";
+    ElevNoUsePageDiv.appendChild(timeText);
+
+    //시간주기
+    let newDivTime = document.createElement('div');
+    newDivTime.setAttribute("id", "time");//속성주기
+    newDivTime.innerHTML=textList["elevatorNoUse"][0]+"분";
+    ElevNoUsePageDiv.appendChild(newDivTime);
+
     for (var i=0; i<textList["elevatorNoUse"][1].length;i++){
         let newDiv = document.createElement('div');
         newDiv.innerHTML=textList["elevatorNoUse"][1][i];
