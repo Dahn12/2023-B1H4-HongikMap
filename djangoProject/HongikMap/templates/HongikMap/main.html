@@ -2,7 +2,19 @@
 <html lang="en">
 <head>
     <style>
-/*배민 폰트*/
+/*학교이미지 및 선긋기캔버스*/
+        .img-fluid{
+            position: absolute;
+            width: 1300px;
+            height: 700px;
+            right: 0;
+            overflow: auto;
+        }
+        #myCanvas{
+            position: absolute;
+            right: 0;
+            overflow: auto;
+        }
 
 
 /*사이드바 메뉴 로고 만들기 (햄버거 바)*/
@@ -238,6 +250,14 @@
     <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body style="font-family: BMfont;">
+<!-- 학교이미지 -->
+    <img 
+        src="../../static/logo/schoolMap.jpg"
+        class="img-fluid" 
+        alt="이미지를 불러올 수 없습니다." 
+    >
+<!-- 선긋기캔버스 -->
+    <canvas id="myCanvas" width="1300" height="700"></canvas>
 <!--순서 유지-->
     <div>
         <input type="checkbox" id="sidebar-btt">
@@ -273,11 +293,11 @@
                 <div id="Amenityname">편의시설</div>
                 <div id="AmenityButton">
                     <br>
-                    <button type="button"><img src="../../static/logo/cafe.jpg" class="logo" alt="이미지를 불러 올 수 없습니다"></button>
-                    <button type="button"><img src="../../static/logo/convi.jpg" class="logo" alt="이미지를 불러 올 수 없습니다"></button>
-                    <button type="button"><img src="../../static/logo/food.jpg" class="logo" alt="이미지를 불러 올 수 없습니다"></button>
-                    <button type="button"><img src="../../static/logo/hosp.jpg" class="logo" alt="이미지를 불러 올 수 없습니다"></button>
-                    <button type="button"><img src="../../static/logo/rest.jpg" class="logo" alt="이미지를 불러 올 수 없습니다"></button>
+                    <button type="button"><img src="../../static/logo/cafe.png" class="logo" alt="이미지를 불러 올 수 없습니다" onclick="convenienceIcon('cafe');"></button>
+                    <button type="button"><img src="../../static/logo/convi.png" class="logo" alt="이미지를 불러 올 수 없습니다" onclick="convenienceIcon('convi');"></button>
+                    <button type="button"><img src="../../static/logo/food.png" class="logo" alt="이미지를 불러 올 수 없습니다" onclick="convenienceIcon('food');"></button>
+                    <button type="button"><img src="../../static/logo/hosp.png" class="logo" alt="이미지를 불러 올 수 없습니다" onclick="convenienceIcon('hosp');"></button>
+                    <button type="button"><img src="../../static/logo/study.png" class="logo" alt="이미지를 불러 올 수 없습니다" onclick="convenienceIcon('study');"></button>
                     </br>
                     <br>
                 </div>
@@ -299,38 +319,5 @@
 <script src="../../static/js/main.js"></script>     
 
 </body>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    <script id="navermap" type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=m396icw891"></script>
-    <script src="../../static/js/main.js"></script>
-    <div id="map" style="width:100% ;height:800px;"></div>
-    <script>
-        var hongik = new naver.maps.LatLngBounds(
-        new naver.maps.LatLng(37.552963299999924, 126.92327829999972),
-        new naver.maps.LatLng(37.54767769999993, 126.92768509999969));
 
-        var map = new naver.maps.Map('map',
-            {minZoom: 17, maxZoom: 50,
-            maxBounds: hongik});
-
-        var sw = new naver.maps.Marker({
-            map: map,
-            position: hongik.getSW()
-        });
-
-        var ne = new naver.maps.Marker({
-            map: map,
-            position: hongik.getNE()
-        });
-
-        var rect = new naver.maps.Rectangle({
-            strokeOpacity: 0,
-            strokeWeight: 0,
-            fillOpacity: 0.2,
-            fillColor: "#f00",
-            bounds: hongik,
-            map: map
-        });
-    </script>
 </html>
