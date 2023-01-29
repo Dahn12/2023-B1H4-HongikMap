@@ -335,16 +335,15 @@ function ElevNoUsePage(){
     }
 }
 
+//테스트케이스
+let totalReceivedList = ['I101','I102','I103','I104','I105','I106'];
 
-
-
-// 경로표시
-
+//##경로표시
 //위 리스트를 돌려보면서 input이 있는지 체크
 function find(inp){
-  for (const key in receivedList){  
+  for (const key in totalReceivedList){
 
-    if (inp==receivedList[key]){
+    if (inp==totalReceivedList[key]){
       return true;
     }
   }
