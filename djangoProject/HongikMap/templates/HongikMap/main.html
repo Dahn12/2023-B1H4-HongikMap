@@ -355,10 +355,12 @@
                     {% csrf_token %}
                     <div class="autocomplete">
                         <input type="text" name="departure" id="autoInput" style="font-family: BMfont;" placeholder="출발지를 입력하세요." oninput="sendingData(this);" autocomplete="off">
+                        <div class="autocomplete-items" display="none"></div>
                     </div><br>
                     
                     <div class="autocomplete">
                         <input type="text" name="destination" id="autoInput1" style="font-family: BMfont;" placeholder="도착지를 입력하세요." oninput="sendingData(this);" autocomplete="off">
+                        <div class="autocomplete-items" display="none"></div>
                     </div><br>
                     <input id="submit" type="submit" style="font-family: BMfont;" value="길찾기" >          
                 </form>

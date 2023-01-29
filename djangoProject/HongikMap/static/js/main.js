@@ -65,7 +65,7 @@ function convenienceIcon(name){
 
 
 //자동완성에서 받는 리스트
-let receivedList = [];
+
 
 
 // csrf token
@@ -99,13 +99,32 @@ function sendingData(inp){
         },
         datatype: 'json',
         success: function(data){
-            receivedList = data['recommendations'];
-            autocomplete.setAutocomplete(inp, receivedList);
+            let receivedList = data['recommendations'];
+            //autocomplete.setAutocomplete(inp, receivedList);
+            auto_complete(inp, receivedList);
             console.log(receivedList);
         }
     });
 }
+function auto_complete(inp,receivedList){
+    var x = inp.parentNode.getElementsByClassName("autocomplete-items");
 
+    console.log(x);
+
+/*
+    // autocomplet에서 항목을 보여줄 div 생성하고 이를 a에 준다.
+    a = document.createElement("DIV");
+    //
+    a.setAttribute("id","autocomplete-list");//속성주기
+    // css 적용
+    a.setAttribute("class", "autocomplete-items");
+
+    // input 아래의 div 붙이기.
+    inp.parentNode.appendChild(a);
+*/
+
+
+}
 
 // 출발지 자동완성
 // autocomplete 부분을 생성
@@ -134,6 +153,10 @@ let autocomplete = (function () {
         _inp = inp;
         _inp.addEventListener("input", inputEvent);
         _inp.addEventListener("keydown", keydownEvent);
+
+        for(const rec in receivedList){
+
+        }
     }
 
     let inputEvent = function (e) {
@@ -424,8 +447,8 @@ let autocomplete1 = (function () {
 
 })();
 
-autocomplete.setAutocomplete(document.getElementById("autoInput"), receivedList);
-autocomplete1.setAutocomplete(document.getElementById("autoInput1"), receivedList);
+//autocomplete.setAutocomplete(document.getElementById("autoInput"), receivedList);
+//autocomplete1.setAutocomplete(document.getElementById("autoInput1"), receivedList);
 
 
 
