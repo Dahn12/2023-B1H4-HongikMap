@@ -1,33 +1,36 @@
-    //선그리기
+//##선그리기
 
-//리스트, 길찾기 버튼 눌러지면 받아져야함
+//테스트케이스
 let pathResult = [[207,538],[240,490],[294,436],[445,225],[401,210],[461,79],];
-
-
-// 1. canvas 엘리먼트를 취득한다.
+//canvas 엘리먼트를 취득한다.
 const canvas = document.getElementById('myCanvas');
-// 2. 2d모드의 그리기 객체를 취득한다. => 이 객체를 통해 canvas에 그림을 그릴 수 있다.
+// 2d모드의 그리기 객체를 취득한다. => 이 객체를 통해 canvas에 그림을 그릴 수 있다.
 const ctx = canvas.getContext("2d");
-ctx.strokeStyle = '#FF5A5A'; //색깔
-ctx.lineWidth = 6; //굵기
+//색깔
+ctx.strokeStyle = '#FF5A5A';
+//굵기
+ctx.lineWidth = 6;
 
-function drawLine(pathResult){ //선긋는 함수 pathResult에 경로좌표리스트
-    
-    ctx.clearRect(0, 0, 1300, 700);//선 초기화
-    ctx.beginPath(); //새 선 그리기
-
-    ctx.moveTo(pathResult[0][0], pathResult[0][1]);// 출발점 지정
+//선긋는 함수 pathResult에 경로좌표리스트
+function drawLine(pathResult){
+    //선 초기화
+    ctx.clearRect(0, 0, 1300, 700);
+    //새 선 그리기
+    ctx.beginPath();
+    // 출발점 지정
+    ctx.moveTo(pathResult[0][0], pathResult[0][1]);
 
     for(var i=0; i<pathResult.length-1; i++){
-        ctx.lineTo(pathResult[i+1][0], pathResult[i+1][1]);//도착점 지정
-        ctx.stroke(); //실선 그리기    
+        //도착점 지정
+        ctx.lineTo(pathResult[i+1][0], pathResult[i+1][1]);
+        //실선 그리기
+        ctx.stroke();
     }
     
 }
 
 //임시 함수 실행. 리스트 받으면 호출되어야함
 drawLine(pathResult);
-
 
 //클릭하면 콘솔에 좌표 출력
 canvas.onclick = function(event){
@@ -40,7 +43,7 @@ canvas.onclick = function(event){
 
 
 
-//편의시설 아이콘띄우기
+//##편의시설 아이콘띄우기
 function convenienceIcon(name){
     document.getElementById('cafe').style.display="none";
     document.getElementById('convi').style.display="none";
@@ -64,10 +67,7 @@ function convenienceIcon(name){
 
 
 
-//자동완성에서 받는 리스트
-
-
-
+//##입력데이터 백으로 보내기 및 처리된 데이터 받기
 // csrf token
 function getCookie(name) {
     var cookieValue = null;
@@ -87,28 +87,28 @@ function getCookie(name) {
 
 var csrftoken = getCookie('csrftoken');
 
-
+//변수 선언
 let receivedList =[];
 
 //데이터 보내기, setautocomplete함수밑에서 보내는 동작 구현
-function sendingData(inp){
+function sendingData(inp){ //inp는 input객체
 
     $.ajax({
         url: 'recommend',
         type: 'POST',
-        data: {'input_val':inp.value.toUpperCase(),
+        data: {'input_val':inp.value.toUpperCase(), //대문자 변환해서 소문자도 검색가능
         'csrfmiddlewaretoken':csrftoken,
         },
         datatype: 'json',
         success: function(data){
             receivedList = data['recommendations'];
-            autocomplete.setAutocomplete(inp, receivedList);
+            autocomplete.setAutocomplete(inp, receivedList); //autocomplete함수를 input객체를 받아 실행
             console.log(receivedList);
         }
     });
 }
 
-// 출발지 자동완성
+//##자동완성
 // autocomplete 부분을 생성
 let autocomplete = (function () {
 
@@ -136,12 +136,10 @@ let autocomplete = (function () {
         _inp.addEventListener("keyup", inputEvent);
         _inp.addEventListener("keydown", keydownEvent);
 
-        for(const rec in receivedList){
-
-        }
     }
 
     let inputEvent = function (e) {
+        //화살표 및 엔터면 출력된 자동완성 초기화 안한다
         if (e.keyCode == 40 || e.keyCode == 38 || e.keyCode == 13) {
             return false;
         }
@@ -177,9 +175,6 @@ let autocomplete = (function () {
                 b.innerHTML += _arr[i].substr(val.length);
                 b.innerHTML += "<input type='hidden' value='" + _arr[i] + "'>";
 
-                // console.log(b); 
-                // <div class="autocomplete-active"><strong>B</strong>adger<input type="hidden" value="Badger"></div>
-
                 // 생성된 div에서 이벤트 발생시 hidden으로 생성된 input안의 value의 값을 autocomplete할 요소에 넣기
                 b.addEventListener("click", function (e) {
                     _inp.value = this.getElementsByTagName("input")[0].value;
@@ -193,10 +188,8 @@ let autocomplete = (function () {
     }
 
     let keydownEvent = function (e) {
-        // 
         var x = document.getElementById(this.id + "autocomplete-list");
         // 선택할 요소 없으면 null ,
-        // <div id="autoInputautocomplete-list" class="autocomplete-items"><div class="autocomplete-active"><strong>A</strong>ardvark<input type="hidden" value="Aardvark"></div><div><strong>A</strong>lbatross<input type="hidden" value="Albatross"></div><div><strong>A</strong>lligator<input type="hidden" value="Alligator"></div><div><strong>A</strong>lpaca<input type="hidden" value="Alpaca"></div><div><strong>A</strong>nt<input type="hidden" value="Ant"></div><div><strong>A</strong>nteater<input type="hidden" value="Anteater"></div><div><strong>A</strong>ntelope<input type="hidden" value="Antelope"></div><div><strong>A</strong>pe<input type="hidden" value="Ape"></div><div><strong>A</strong>rmadillo<input type="hidden" value="Armadillo"></div></div>
         if (x) {
             // 태그 네임을 가지는 엘리먼트의 유요한 html 컬렉션을 반환.
             // div의 값을 htmlCollection의 값으로 받아옴.
@@ -225,10 +218,10 @@ let autocomplete = (function () {
             }
         }
     }
-
-    // document.addEventListener("click", function (e) {
-    //     closeAllLists(e.target);
-    // });
+    //바깥 클릭하면 자동완성 사라짐
+    document.addEventListener("click", function (e) {
+        closeAllLists(e.target);
+    });
 
 
     let addActive = function (x) {
@@ -273,14 +266,12 @@ let autocomplete = (function () {
 
 })();
 
-autocomplete.setAutocomplete(document.getElementById("autoInput"), receivedList);
 
 
 
 
 
-//결과경로표시
-
+//##결과경로표시
 //테스트케이스
 var textList = {
     "elevatorUse":[10, ['I101','I102','I103','I104']],
@@ -361,18 +352,19 @@ function find(inp){
 }
 //리스트에 둘 다 있으면 true
 function submitCheck(event) {
-  event.preventDefault(); //submit될 때 페이지 리로드 방지
+    //submit될 때 페이지 리로드 방지
+    event.preventDefault();
 
-  var departure = document.getElementById("autoInput").value;
-  var destination = document.getElementById("autoInput1").value;
-  departure = departure.toUpperCase();//소문자 대문자 변환
-  destination = destination.toUpperCase();
+    var departure = document.getElementById("autoInput").value;
+    var destination = document.getElementById("autoInput1").value;
+    departure = departure.toUpperCase();//소문자 대문자 변환
+    destination = destination.toUpperCase();
 
-  if (find(departure) && find(destination)) {
+    if (find(departure) && find(destination)) {
     document.getElementById("showRoute").style.visibility="visible";
-    return true; 
-   
-  } else{
+    return true;
+
+    } else{
       return false;
-  }
+    }
 }
