@@ -96,7 +96,7 @@ function sendingData(inp){
     $.ajax({
         url: 'recommend',
         type: 'POST',
-        data: {'input_val':inp.value,
+        data: {'input_val':inp.value.toUpperCase(),
         'csrfmiddlewaretoken':csrftoken,
         },
         datatype: 'json',
