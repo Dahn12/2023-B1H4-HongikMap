@@ -11,14 +11,23 @@
             overflow: auto;
             z-index: 0;
         }
+
+        #divBodyScroll{
+            width: 1300px;
+            height: 700px;
+            overflow-x: scroll;
+            overflow-y: scroll;
+        }
+
+
 /*캔버스*/
         #myCanvas{
             position: absolute;
             right: 0;
             overflow: auto;
             z-index: 1;
-            {#원래 z index#}
-            {#z-index: 10;#}
+            /*원래 z index
+            z-index: 10;*/
         }
 /*편의시설아이콘 및 텍스트*/
         #MapConviText{
@@ -239,7 +248,7 @@
 
     /*경로표시*/
         #showRoute {
-            visibility: hidden;
+            /*visibility: hidden;*/
             background-color: white;
             color: #34495e;
         }
@@ -274,8 +283,8 @@
     </style>
     <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<body style="font-family: BMfont;">
-<!-- 학교이미지 -->
+<body id = "divBodyScroll">
+    <!-- 학교이미지 -->
     <img
     src="../../static/logo/lightmap.png"
     class="img-fluid"
