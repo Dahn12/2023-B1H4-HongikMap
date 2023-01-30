@@ -309,9 +309,18 @@ function ElevUsePage(){
     ElevUsePageDiv.appendChild(timeText);
 
     //시간주기
+
+    const seconds = parseInt(textList["elevatorUse"]["distance"]);
+    var min = parseInt((seconds%3600)/60);
+    var sec = seconds%60;
+
     let newDivTime = document.createElement('div');
     newDivTime.setAttribute("id", "time");//속성주기
-    newDivTime.innerHTML=textList["elevatorUse"]["distance"]+"분";
+    if(min == 0){
+        newDivTime.innerHTML=sec+"초";
+    } else{
+        newDivTime.innerHTML=min+"분 "+sec+"초";
+    }
     ElevUsePageDiv.appendChild(newDivTime);
 
     for (var i=0; i<textList["elevatorUse"]['route'].length;i++){
@@ -337,10 +346,19 @@ function ElevNoUsePage(){
     ElevNoUsePageDiv.appendChild(timeText);
 
     //시간주기
+    const seconds = parseInt(textList["elevatorUse"]["distance"]);
+    var min = parseInt((seconds%3600)/60);
+    var sec = seconds%60;
+
     let newDivTime = document.createElement('div');
     newDivTime.setAttribute("id", "time");//속성주기
-    newDivTime.innerHTML=textList["elevatorNoUse"]['distance']+"분";
-    ElevNoUsePageDiv.appendChild(newDivTime);
+    //분이 0인지 구분
+    if(min == 0){
+        newDivTime.innerHTML=sec+"초";
+    } else {
+        newDivTime.innerHTML = min + "분 " + sec + "초";
+    }
+    ElevUsePageDiv.appendChild(newDivTime);
 
     for (var i=0; i<textList["elevatorNoUse"]['route'].length;i++){
         let newDiv = document.createElement('div');
