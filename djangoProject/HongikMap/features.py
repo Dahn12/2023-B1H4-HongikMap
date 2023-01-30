@@ -1,6 +1,7 @@
 import heapq
 from collections import OrderedDict
 
+
 class Recommend:
     def __init__(self):
         self.recommends = dict()
@@ -176,31 +177,91 @@ def recommend2node(user_input: str):
 
 
 def node2recommend(nodes: list):
-    print(nodes)
+    nodes = compress_nodes(nodes)
+
     result = OrderedDict()
     for node in nodes:
         result[node] = ""
-    with open("HongikMap/static/data/keywords.txt", "r") as f:
-        for line in f.readlines():
-            node, value = line.split(":")
-            if node in nodes:
-                result[node] = value.split(",")[0]
-                nodes.remove(node)
-                if not nodes:
-                    print(result)
-                    return result
 
-    with open("HongikMap/static/data/recommends_by_parsing.txt", "r") as f:
+    with open("HongikMap/static/data/keywords.txt", "r", encoding="UTF8") as f:
         for line in f.readlines():
             node, value = line.split(":")
             if node in nodes:
                 result[node] = value.split(",")[0]
                 nodes.remove(node)
                 if not nodes:
-                    print(result)
-                    return result
+                    break
+
+    for node in result.keys():
+        if result[node] == "":
+            result[node] = convert_into_keyword(node)
+    # with open("HongikMap/static/data/recommends_by_parsing.txt", "r", encoding="UTF8") as f:
+    #     for line in f.readlines():
+    #         node, value = line.split(":")
+    #         if node in nodes:
+    #             result[node] = value.split(",")[0]
+    #             nodes.remove(node)
+    #             if not nodes:
+    #                 break
+    for key, value in result.items():
+        print(key, value)
+    return list(result.values())
+
+
+def compress_nodes(nodes: list):
+    nodes = compress_hallway(nodes)
+    nodes = compress_elevator_and_stair(nodes)
+    return nodes
+
+
+def compress_hallway(nodes: list):
+    result = [nodes[0]]
+    for node in nodes[1:]:
+        if is_hallway(node) and same_kind(result[-1], node):
+            pass
+        else:
+            result.append(node)
     return result
 
+
+def is_hallway(node: str):
+    return node.split("-")[2][0] == "H"
+
+
+def same_kind(prev, cur):
+    prev_entity, cur_entity = prev.split("-")[2], cur.split("-")[2]
+    return prev_entity[0] == cur_entity[0]
+
+
+def compress_elevator_and_stair(nodes: list):
+    result = [nodes[0]]
+    prev = ""
+    for node in nodes[1:]:
+        if not same_kind(result[-1], node):
+            if prev != "":
+                result.append(prev)
+                prev = ""
+            result.append(node)
+        elif node.split("-")[2][0] in ["S", "E"]:
+            prev = node
+
+    return result
+
+
+def convert_into_keyword(node: str):
+    building, floor, entity = node.split("-")
+    if entity[0] == "E":
+        return "{}동 {}층 {}".format(building, floor, "엘리베이터")
+    elif entity[0] == "H":
+        return "{}동 {}층 {}".format(building, floor, "복도")
+    elif entity[0] == "S":
+        return "{}동 {}층 {}".format(building, floor, "계단")
+    elif entity[0] == "X":
+        return "{}동 {}층 {}".format(building, floor, "출입문")
+    elif entity.isdecimal():
+        return f'{building + floor}{entity:0>2}'
+    else:
+        return node
 
 def find_route_in_result(departure, destination, elevator):
     result_path = ""
@@ -214,5 +275,6 @@ def find_route_in_result(departure, destination, elevator):
             pair = tuple(pair.split())
             value = value.split()
             if (departure, destination) == pair:
-                distance, route = value[0], value[1:]
+                distance, route = value[0], node2recommend(value[1:])
+                print(route)
                 return {"distance": distance, "route": route}
