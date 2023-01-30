@@ -92,7 +92,11 @@ let receivedList =[];
 
 //데이터 보내기, setautocomplete함수밑에서 보내는 동작 구현
 function sendingData(inp){ //inp는 input객체
-
+    if(inp == document.getElementById('autoInput')){
+        boolDepartureCheck = false;
+    } else{
+        boolDestinationCheck = false;
+    }
     $.ajax({
         url: 'recommend',
         type: 'POST',
@@ -144,7 +148,7 @@ let autocomplete = (function () {
             return false;
         }
         var a, b, i, val = this.value;//a,b,i는 지정되지않고 val만 입력값으로 저장
-        // 이전 생성된 div 제거 
+        // 이전 생성된 div 제거
         closeAllLists();
 
         // 요소 확인
@@ -157,9 +161,9 @@ let autocomplete = (function () {
 
         // autocomplet에서 항목을 보여줄 div 생성하고 이를 a에 준다.
         a = document.createElement("DIV");
-        // 
+        //
         a.setAttribute("id", this.id + "autocomplete-list");//속성주기
-        // css 적용 
+        // css 적용
         a.setAttribute("class", "autocomplete-items");
 
         // input 아래의 div 붙이기.
@@ -170,13 +174,18 @@ let autocomplete = (function () {
             // 배열의 요소를 현재 input의 value의 값만큼 자른 후, 같으면 추가한다.
             if (_arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
                 b = document.createElement("DIV");
-                // value의 값 만큼 굵게 표시 
+                // value의 값 만큼 굵게 표시
                 b.innerHTML = "<strong>" + _arr[i].substr(0, val.length) + "</strong>";
                 b.innerHTML += _arr[i].substr(val.length);
                 b.innerHTML += "<input type='hidden' value='" + _arr[i] + "'>";
 
                 // 생성된 div에서 이벤트 발생시 hidden으로 생성된 input안의 value의 값을 autocomplete할 요소에 넣기
                 b.addEventListener("click", function (e) {
+                    if(_inp == document.getElementById('autoInput')){
+                        boolDepartureCheck = true;
+                    } else{
+                        boolDestinationCheck = true;
+                    }
                     _inp.value = this.getElementsByTagName("input")[0].value;
                     closeAllLists();
                 });
@@ -210,6 +219,11 @@ let autocomplete = (function () {
             addActive(x);
         } else if (e.keyCode == 13) {
             // enter
+            if(this == document.getElementById('autoInput')){
+                boolDepartureCheck = true;
+            } else{
+                boolDestinationCheck = true;
+            }
             e.preventDefault();
             // 현재위치가 아이템 선택창내에 있는 경우
             if (_currentFocus > -1) {
@@ -218,10 +232,10 @@ let autocomplete = (function () {
             }
         }
     }
-    //바깥 클릭하면 자동완성 사라짐
-    document.addEventListener("click", function (e) {
-        closeAllLists(e.target);
-    });
+    // //바깥 클릭하면 자동완성 사라짐
+    // document.addEventListener("click", function (e) {
+    //     closeAllLists(e.target);
+    // });
 
 
     let addActive = function (x) {
@@ -274,8 +288,8 @@ let autocomplete = (function () {
 //##결과경로표시
 //테스트케이스
 var textList = {
-    "elevatorUse":[10, ['I101','I102','I103','I104']],
-    "elevatorNoUse":[13,['I105','I106','I107','I108']]
+    "elevatorUse":{'distance': 10, 'route': []},
+    "elevatorNoUse":{'distance': 10, 'route': []}
 };
 
 
@@ -297,12 +311,12 @@ function ElevUsePage(){
     //시간주기
     let newDivTime = document.createElement('div');
     newDivTime.setAttribute("id", "time");//속성주기
-    newDivTime.innerHTML=textList["elevatorUse"][0]+"분";
+    newDivTime.innerHTML=textList["elevatorUse"]["distance"]+"분";
     ElevUsePageDiv.appendChild(newDivTime);
 
-    for (var i=0; i<textList["elevatorUse"][1].length;i++){
+    for (var i=0; i<textList["elevatorUse"]['route'].length;i++){
         let newDiv = document.createElement('div');
-        newDiv.innerHTML=textList["elevatorUse"][1][i];
+        newDiv.innerHTML=textList["elevatorUse"]['route'][i];
         ElevUsePageDiv.appendChild(newDiv);
     }
 
@@ -325,31 +339,36 @@ function ElevNoUsePage(){
     //시간주기
     let newDivTime = document.createElement('div');
     newDivTime.setAttribute("id", "time");//속성주기
-    newDivTime.innerHTML=textList["elevatorNoUse"][0]+"분";
+    newDivTime.innerHTML=textList["elevatorNoUse"]['distance']+"분";
     ElevNoUsePageDiv.appendChild(newDivTime);
 
-    for (var i=0; i<textList["elevatorNoUse"][1].length;i++){
+    for (var i=0; i<textList["elevatorNoUse"]['route'].length;i++){
         let newDiv = document.createElement('div');
-        newDiv.innerHTML=textList["elevatorNoUse"][1][i];
+        newDiv.innerHTML=textList["elevatorNoUse"]['route'][i];
         ElevNoUsePageDiv.appendChild(newDiv);
     }
 }
 
-//테스트케이스
-let totalReceivedList = ['I101','I102','I103','I104','I105','I106'];
-
 //##경로표시
-//위 리스트를 돌려보면서 input이 있는지 체크
-function find(inp){
-  for (const key in totalReceivedList){
+let boolDepartureCheck = false;
+let boolDestinationCheck = false;
 
-    if (inp==totalReceivedList[key]){
-      return true;
-    }
+//출발지, 도착지가 옳은 형식인지 체크
+function getDirectionCheck(){
+  if(boolDepartureCheck && boolDestinationCheck){
+    return true;
+  } else if(!boolDepartureCheck && boolDestinationCheck){
+    alert('출발지를 입력하세요.');
+    return false;
+  } else if(boolDepartureCheck && !boolDestinationCheck){
+    alert('도착지를 입력하세요.');
+    return false;
+  } else {
+    alert('출발지, 도착지를 입력하세요.');
+    return false;
   }
-  return false;
 }
-//리스트에 둘 다 있으면 true
+
 function submitCheck(event) {
     //submit될 때 페이지 리로드 방지
     //event.preventDefault();
@@ -359,7 +378,10 @@ function submitCheck(event) {
     departure = departure.toUpperCase();//소문자 대문자 변환
     destination = destination.toUpperCase();
 
-    if (find(departure) && find(destination)) {
+
+    //출발지 도착지형식이 참이면 백으로 출발지 도착지 보내기
+    if(getDirectionCheck()){
+        //결과경로창 보이게끔
         document.getElementById("showRoute").style.visibility="visible";
         $.ajax({
             url: 'place_submit',
@@ -372,15 +394,7 @@ function submitCheck(event) {
                 textList = data;
                 ElevUsePage();
             }
-    });
 
-    } else{
-        if (!find(departure) && find(destination)){
-            alert("출발지를 입력해 주세요.");
-        } else if(find(departure) && !find(destination)){
-            alert("도착지를 입력해 주세요.");
-        } else {
-            alert("출발, 도착지를 입력해 주세요.");
-        }
+        });
     }
 }
