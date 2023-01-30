@@ -7,16 +7,6 @@ class Recommend:
         self.recommends = dict()
         self.keywords = dict()
 
-        # with open("HongikMap/static/data/keywords.txt", "r", encoding='UTF8') as kw:
-        #     for line in kw.readlines():
-        #         entity, value = line.split(":")
-        #         self.recommends[entity] = [x.rstrip() for x in value.split(",")]
-        #
-        # with open('HongikMap/static/data/recommends.txt', "r", encoding='UTF8') as rec:
-        #     for line in rec.readlines():
-        #         entity, value = line.split(":")
-        #         self.keywords[entity] = value.rstrip()
-
     def find(self, keyword: str):
 
         ret = []
@@ -29,10 +19,10 @@ class Recommend:
             ret = self.find_by_parsing(keyword)
         elif keyword.isdecimal():  # 전체가 숫자: 101
 
-            ret = self.find_in_recommend(keyword)
+            ret = self.find_in_keywords(keyword)
         else:  # 한글 입력: 카나
 
-            ret = self.find_in_recommend(keyword)
+            ret = self.find_in_keywords(keyword)
         return ret
 
     def find_by_parsing(self, keyword):
@@ -46,7 +36,7 @@ class Recommend:
                     ret.append(recommends[0])
         return ret
 
-    def find_in_recommend(self, keyword):
+    def find_in_keywords(self, keyword):
         ret = []
         # keywords 만 찾음
         with open("HongikMap/static/data/keywords.txt", "r", encoding="UTF8") as rec:
@@ -55,11 +45,6 @@ class Recommend:
                 recommends = recommends.split(",")
                 if any([keyword in x for x in recommends]):
                     ret.append(recommends[0])
-
-        # if not ret:
-        #     if keyword[0].isalpha() and keyword[0] != "Z":
-        #         pass
-
         return ret
 
 
