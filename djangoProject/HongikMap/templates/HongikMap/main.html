@@ -16,8 +16,9 @@
             position: absolute;
             right: 0;
             overflow: auto;
-            {#z-index: 1; 원래 z index#}
-            z-index: 10;
+            z-index: 1;
+            {#원래 z index#}
+            {#z-index: 10;#}
         }
 /*편의시설아이콘 및 텍스트*/
         #MapConviText{
@@ -41,7 +42,7 @@
         #cafe img, #convi img, #study img{
             width: 44px;
             height: 44px;
-            position: absolute; 
+            position: absolute;
 
         }
         #food img{
@@ -126,7 +127,7 @@
        input[id="sidebar-btt"]:checked + label + div{
         left:0;
        }
-       
+
 
 /*사이드 바 컨텐츠*/
     /*홍익맵로고*/
@@ -160,7 +161,7 @@
         margin-bottom: 30px;
        }
        #textBar{
-        
+
         margin-bottom: 30px;
         position: static;
         text-align: center;
@@ -177,7 +178,7 @@
             position: absolute;
             border: 1px solid #d4d4d4;
             border-bottom: none;
-            border-top: none;   
+            border-top: none;
             z-index: 101;
              top: 100%;
             left: 0;
@@ -230,22 +231,22 @@
             box-shadow: 1.5px 1.5px 1.5px gray;
             transition-duration: 0.3s;
         }
-        
+
         #AmenityButton button:active{
             box-shadow: none;
         }
 
 
     /*경로표시*/
-        #showRoute {    
-           /* visibility: hidden;*/
+        #showRoute {
+            visibility: hidden;
             background-color: white;
-            color: #34495e;     
+            color: #34495e;
         }
 
 
     /*엘리베이터*/
-        #elevatorCheck{ 
+        #elevatorCheck{
             display: grid;
             grid-template-columns:50% 50%;
         }
@@ -260,25 +261,25 @@
 
         }
         input[type=radio]{
-            display: none;  
+            display: none;
         }
         input[type=radio]:checked + label{
             background-color: lightgray;
             background-image: none;
-        }  
+        }
         #ElevNoUsePage{
             display: none;
-        }  
+        }
 
     </style>
     <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body style="font-family: BMfont;">
 <!-- 학교이미지 -->
-    <img 
+    <img
     src="../../static/logo/schoolMap.jpg"
-    class="img-fluid" 
-    alt="이미지를 불러올 수 없습니다." 
+    class="img-fluid"
+    alt="이미지를 불러올 수 없습니다."
     >
 
 <!-- 편의시설텍스트 -->
@@ -291,30 +292,30 @@
             <img src="../../static/logo/cafe.png" title="카페 캠퍼" style="left: 870px; top: 477px;" >
             <img src="../../static/logo/cafe.png" title="카페드림" style="left: 898px; top: 274px;" >
             <img src="../../static/logo/cafe.png" title="C동 8층 간이카페" style="left: 999px; top: 198px;" >
-            <img src="../../static/logo/cafe.png" title="중앙도서관 북카페" style="left: 535px; top: 116px;" >            
+            <img src="../../static/logo/cafe.png" title="중앙도서관 북카페" style="left: 535px; top: 116px;" >
         </div>
         <div id='convi'>
             <img src="../../static/logo/convi.png" title="홍익대학서적" style="left: 228px; top: 451px;" >
             <img src="../../static/logo/convi.png" title="와우관 편의점" style="left: 437px; top: 92px;" >
             <img src="../../static/logo/convi.png" title="R동 편의점" style="left: 226px; top: 432px;" >
-            <img src="../../static/logo/convi.png" title="한가람 문구센터" style="left: 186px; top: 383px;" >            
+            <img src="../../static/logo/convi.png" title="한가람 문구센터" style="left: 186px; top: 383px;" >
         </div>
         <div id='food'>
             <img src="../../static/logo/food.png" title="제2기숙사 학생식당" style="left: 938px; top: 470px;" >
             <img src="../../static/logo/food.png" title="향차이" style="left: 878px; top: 527px;" >
-            <img src="../../static/logo/food.png" title="메리킹" style="left: 167px; top: 454px;" >            
+            <img src="../../static/logo/food.png" title="메리킹" style="left: 167px; top: 454px;" >
         </div>
         <div id='hosp'>
             <img src="../../static/logo/hosp.png" title="약국(원이 약국)" style="left: 884px; top: 557px;" >
-            <img src="../../static/logo/hosp.png" title="건강진료센터" style="left: 575px; top: 249px;" >   
+            <img src="../../static/logo/hosp.png" title="건강진료센터" style="left: 575px; top: 249px;" >
         </div>
         <div id='study'>
             <img src="../../static/logo/study.png" title="T동 열람실" style="left: 821px; top: 499px;" >
             <img src="../../static/logo/study.png" title="A동 열람실" style="left: 823px; top: 227px;" >
             <img src="../../static/logo/study.png" title="R동 열람실" style="left: 257px; top: 531px;" >
-            <img src="../../static/logo/study.png" title="중앙도서관 열람실" style="left: 521px; top: 219px;" >     
+            <img src="../../static/logo/study.png" title="중앙도서관 열람실" style="left: 521px; top: 219px;" >
         </div>
-        
+
     </div>
 <!-- 선긋기캔버스 -->
     <canvas id="myCanvas" width="1300" height="700"></canvas>
@@ -334,20 +335,18 @@
             <!--검색창-->
             <div id="textBar">
                 <!-- place_submit이란 url로 데이터전송 -->
-                <form action="place_submit/" method="POST" onsubmit="return submitCheck(event);">
                     <!-- 밑의 토큰은 django에서 form사용하기위해 필요 -->
                     {% csrf_token %}
                     <div class="autocomplete">
                         <input type="text" name="departure" id="autoInput" style="font-family: BMfont;" placeholder="출발지를 입력하세요." oninput="sendingData(this);" autocomplete="off">
                         <div class="autocomplete-items" display="none"></div>
                     </div><br>
-                    
+
                     <div class="autocomplete">
                         <input type="text" name="destination" id="autoInput1" style="font-family: BMfont;" placeholder="도착지를 입력하세요." oninput="sendingData(this);" autocomplete="off">
                         <div class="autocomplete-items" display="none"></div>
                     </div><br>
-                    <input id="submit" type="submit" style="font-family: BMfont;" value="길찾기" >          
-                </form>
+                    <input id="submit" type="submit" style="font-family: BMfont;" value="길찾기" onclick="submitCheck()">
             </div>
         
         <!--편의시설 버튼-->

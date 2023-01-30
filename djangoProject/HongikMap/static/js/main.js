@@ -352,7 +352,7 @@ function find(inp){
 //리스트에 둘 다 있으면 true
 function submitCheck(event) {
     //submit될 때 페이지 리로드 방지
-    event.preventDefault();
+    //event.preventDefault();
 
     var departure = document.getElementById("autoInput").value;
     var destination = document.getElementById("autoInput1").value;
@@ -360,10 +360,27 @@ function submitCheck(event) {
     destination = destination.toUpperCase();
 
     if (find(departure) && find(destination)) {
-    document.getElementById("showRoute").style.visibility="visible";
-    return true;
+        document.getElementById("showRoute").style.visibility="visible";
+        $.ajax({
+            url: 'place_submit',
+            type: 'POST',
+            data: {'departure': departure, 'destination': destination,
+            'csrfmiddlewaretoken':csrftoken,
+            },
+            datatype: 'json',
+            success: function(data){
+                textList = data;
+                ElevUsePage();
+            }
+    });
 
     } else{
-      return false;
+        if (!find(departure) && find(destination)){
+            alert("출발지를 입력해 주세요.");
+        } else if(find(departure) && !find(destination)){
+            alert("도착지를 입력해 주세요.");
+        } else {
+            alert("출발, 도착지를 입력해 주세요.");
+        }
     }
 }
