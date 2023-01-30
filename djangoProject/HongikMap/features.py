@@ -1,20 +1,20 @@
 import heapq
-
+from collections import OrderedDict
 
 class Recommend:
     def __init__(self):
         self.recommends = dict()
         self.keywords = dict()
 
-        with open("HongikMap/static/data/keywords.txt", "r", encoding='UTF8') as kw:
-            for line in kw.readlines():
-                entity, value = line.split(":")
-                self.recommends[entity] = [x.rstrip() for x in value.split(",")]
-
-        with open('HongikMap/static/data/recommends.txt', "r", encoding='UTF8') as rec:
-            for line in rec.readlines():
-                entity, value = line.split(":")
-                self.keywords[entity] = value.rstrip()
+        # with open("HongikMap/static/data/keywords.txt", "r", encoding='UTF8') as kw:
+        #     for line in kw.readlines():
+        #         entity, value = line.split(":")
+        #         self.recommends[entity] = [x.rstrip() for x in value.split(",")]
+        #
+        # with open('HongikMap/static/data/recommends.txt', "r", encoding='UTF8') as rec:
+        #     for line in rec.readlines():
+        #         entity, value = line.split(":")
+        #         self.keywords[entity] = value.rstrip()
 
     def find(self, keyword: str):
 
@@ -24,13 +24,13 @@ class Recommend:
             return ret
 
         if keyword[0].encode().isalpha():  # 첫 글자가 영어: I101
-            print("input is alpha")
+
             ret = self.find_by_parsing(keyword)
         elif keyword.isdecimal():  # 전체가 숫자: 101
-            print("전체숫자")
+
             ret = self.find_in_recommend(keyword)
         else:  # 한글 입력: 카나
-            print("복합 입력")
+
             ret = self.find_in_recommend(keyword)
         return ret
 
@@ -47,7 +47,7 @@ class Recommend:
 
     def find_in_recommend(self, keyword):
         ret = []
-
+        # keywords 만 찾음
         with open("HongikMap/static/data/keywords.txt", "r", encoding="UTF8") as rec:
             for line in rec.readlines():
                 key, recommends = line.split(":")
@@ -157,3 +157,62 @@ class Path:
 
     def find(self, start, end):
         return self.result[(start, end)]
+
+
+def recommend2node(user_input: str):
+    with open("HongikMap/static/data/keywords.txt", "r", encoding="UTF8") as f:
+        for line in f.readlines():
+            node, recommend = line.split(":")
+            if user_input == recommend.split(",")[0]:
+                return node
+
+    with open("HongikMap/static/data/recommends_by_parsing.txt", "r", encoding="UTF8") as f:
+        for line in f.readlines():
+            node, recommend = line.split(":")
+            if user_input == recommend.split(",")[0]:
+                return node
+
+    return ""
+
+
+def node2recommend(nodes: list):
+    print(nodes)
+    result = OrderedDict()
+    for node in nodes:
+        result[node] = ""
+    with open("HongikMap/static/data/keywords.txt", "r") as f:
+        for line in f.readlines():
+            node, value = line.split(":")
+            if node in nodes:
+                result[node] = value.split(",")[0]
+                nodes.remove(node)
+                if not nodes:
+                    print(result)
+                    return result
+
+    with open("HongikMap/static/data/recommends_by_parsing.txt", "r") as f:
+        for line in f.readlines():
+            node, value = line.split(":")
+            if node in nodes:
+                result[node] = value.split(",")[0]
+                nodes.remove(node)
+                if not nodes:
+                    print(result)
+                    return result
+    return result
+
+
+def find_route_in_result(departure, destination, elevator):
+    result_path = ""
+    if elevator:
+        result_path = "HongikMap/static/data/result_with_elevator.txt"
+    else:
+        result_path = "HongikMap/static/data/result_without_elevator.txt"
+    with open(result_path, "r") as f:
+        for line in f.readlines():
+            pair, value = line.split(":")
+            pair = tuple(pair.split())
+            value = value.split()
+            if (departure, destination) == pair:
+                distance, route = value[0], value[1:]
+                return {"distance": distance, "route": route}
