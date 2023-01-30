@@ -327,6 +327,16 @@ function ElevUsePage(){
         let newDiv = document.createElement('div');
         newDiv.innerHTML=textList["elevatorUse"]['route'][i];
         ElevUsePageDiv.appendChild(newDiv);
+
+        let newpoint = document.createElement('div');
+        newpoint.style.textAlign="center";
+        newpoint.innerHTML="*";
+        ElevUsePageDiv.appendChild(newpoint);
+
+        let arrow_image=document.createElement('img');
+        arrow_image.setAttribute('src', '../logo/arrow.png');
+        arrow_image.setAttribute("alt", "loading..");
+        ElevUsePageDiv.appendChild(arrow_image);
     }
 
 
@@ -364,6 +374,17 @@ function ElevNoUsePage(){
         let newDiv = document.createElement('div');
         newDiv.innerHTML=textList["elevatorNoUse"]['route'][i];
         ElevNoUsePageDiv.appendChild(newDiv);
+
+        let newpoint = document.createElement('div');
+        newpoint.style.textAlign="center";
+        newpoint.innerHTML="*";
+        ElevUsePageDiv.appendChild(newpoint);
+
+        let arrow_image=document.createElement('img');
+        arrow_image.setAttribute('src', '../logo/arrow.png');
+        arrow_image.setAttribute("alt", "loading..");
+        ElevUsePageDiv.appendChild(arrow_image);
+
     }
 }
 
