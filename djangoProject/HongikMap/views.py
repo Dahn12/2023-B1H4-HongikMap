@@ -20,6 +20,7 @@ def main2(request):
 def recommend(request):
     response_name = request.POST.get('input_val')
     response_list = features.Recommend().find(response_name)
+    response_list.sort()
     print(response_name, response_list)
     return JsonResponse({"recommendations": response_list})
 
