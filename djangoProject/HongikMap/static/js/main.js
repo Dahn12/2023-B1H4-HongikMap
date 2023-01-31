@@ -337,7 +337,7 @@ function ElevUsePage(){
         ElevUsePageDiv.appendChild(newpoint);
 
         let arrow_image=document.createElement('img');
-        arrow_image.setAttribute('src', '../logo/arrow.png');
+        arrow_image.setAttribute('src', '../../static/logo/arrow.png');
         arrow_image.setAttribute("alt", "loading..");
         ElevUsePageDiv.appendChild(arrow_image);
     }
@@ -384,8 +384,8 @@ function ElevNoUsePage(){
         ElevUsePageDiv.appendChild(newpoint);
 
         let arrow_image=document.createElement('img');
-        arrow_image.setAttribute('src', '../logo/arrow.png');
-        arrow_image.setAttribute("alt", "loading..");
+        arrow_image.setAttribute('src', '../../static/logo/arrow.png');
+        arrow_image.setAttribute('alt', "loading..");
         ElevUsePageDiv.appendChild(arrow_image);
 
     }
