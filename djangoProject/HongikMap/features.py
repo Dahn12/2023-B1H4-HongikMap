@@ -108,6 +108,7 @@ class Graph:
         building, floor, entity = node.split("-")
         return entity[0] == "E"
 
+
 class Path:
     def __init__(self, graph: Graph):
         self.nodes = graph.nodes
@@ -201,8 +202,8 @@ def node2recommend(nodes: list):
     #             nodes.remove(node)
     #             if not nodes:
     #                 break
-    for key, value in result.items():
-        print(key, value)
+    # for key, value in result.items():
+    #    print(key, value)
     return list(result.values())
 
 
@@ -274,10 +275,31 @@ def find_route_in_result(departure, destination, elevator):
             pair = tuple(pair.split())
             value = value.split()
             if (departure, destination) == pair:
+                coordinates = get_coordinates(value[1:])
                 distance, route = value[0], node2recommend(value[1:])
-                print(route)
-                return {"distance": distance, "route": route}
+                # print(route)
+                return {"distance": distance, "route": route, "coordinates": coordinates}
 
 
-def get_coordinate():
-    pass
+def get_coordinates(nodes: list):
+    result = OrderedDict()
+    for node in nodes:
+        if valid_external_node(node):
+            result[node] = []
+
+    with open("HongikMap/static/data/coordinate.txt", "r") as f:
+        for line in f.readlines():
+            if "#" in line:
+                continue
+
+            name, x, y = line.split()
+            if name in result.keys():
+                result[name] = [x, y]
+
+    return list(result.values())
+
+
+def valid_external_node(node: str):
+    building, floor, entity = node.split("-")
+
+    return entity[0] in ["X", "E", "S"]
