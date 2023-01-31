@@ -1,6 +1,11 @@
 //##선그리기
 
 //테스트케이스
+var textList = {
+    "elevatorUse":{'distance': 10, 'route': [], 'coordinates':[]},
+    "elevatorNoUse":{'distance': 10, 'route': [], 'coordinates':[]}
+};
+
 let pathResult = [[207,538],[240,490],[294,436],[445,225],[401,210],[461,79],];
 //canvas 엘리먼트를 취득한다.
 const canvas = document.getElementById('myCanvas');
@@ -26,18 +31,16 @@ function drawLine(pathResult){
         //실선 그리기
         ctx.stroke();
     }
-    
+
 }
 
-//임시 함수 실행. 리스트 받으면 호출되어야함
-drawLine(pathResult);
 
 //클릭하면 콘솔에 좌표 출력
 canvas.onclick = function(event){
 
-    const x = event.clientX - ctx.canvas.offsetLeft; 
+    const x = event.clientX - ctx.canvas.offsetLeft;
 
-    const y = event.clientY - ctx.canvas.offsetTop; 
+    const y = event.clientY - ctx.canvas.offsetTop;
     console.log(x, y);
 }
 
@@ -50,7 +53,7 @@ function convenienceIcon(name){
     document.getElementById('food').style.display="none";
     document.getElementById('hosp').style.display="none";
     document.getElementById('study').style.display="none";
-    if(name == 'cafe'){ 
+    if(name == 'cafe'){
         document.getElementById("cafe").style.display="block";
     } else if(name == 'convi'){
         document.getElementById("convi").style.display="block";
@@ -61,7 +64,7 @@ function convenienceIcon(name){
     } else if(name == 'study'){
         document.getElementById("study").style.display="block";
     }
-    
+
 }
 
 
@@ -288,8 +291,8 @@ let autocomplete = (function () {
 //##결과경로표시
 //테스트케이스
 var textList = {
-    "elevatorUse":{'distance': 10, 'route': []},
-    "elevatorNoUse":{'distance': 10, 'route': []}
+    "elevatorUse":{'distance': 10, 'route': [], 'coordinates':[]},
+    "elevatorNoUse":{'distance': 10, 'route': [], 'coordinates':[]}
 };
 
 
@@ -339,7 +342,7 @@ function ElevUsePage(){
         ElevUsePageDiv.appendChild(arrow_image);
     }
 
-
+    drawLine(textList["elevatorUse"]["coordinates"]);
 }
 
 function ElevNoUsePage(){
@@ -386,6 +389,8 @@ function ElevNoUsePage(){
         ElevUsePageDiv.appendChild(arrow_image);
 
     }
+
+    drawLine(textList["elevatorNoUse"]["coordinates"]); //경로그리기
 }
 
 //##경로표시
@@ -432,6 +437,7 @@ function submitCheck(event) {
             success: function(data){
                 textList = data;
                 ElevUsePage();
+                drawLine(textList["elevatorUse"]["coordinates"]);
             }
 
         });
