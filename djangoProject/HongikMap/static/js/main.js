@@ -328,13 +328,9 @@ function ElevUsePage(){
 
     for (var i=0; i<textList["elevatorUse"]['route'].length;i++){
         let newDiv = document.createElement('div');
+        newDiv.style.textAlign="center";
         newDiv.innerHTML=textList["elevatorUse"]['route'][i];
         ElevUsePageDiv.appendChild(newDiv);
-
-        let newpoint = document.createElement('div');
-        newpoint.style.textAlign="center";
-        newpoint.innerHTML="*";
-        ElevUsePageDiv.appendChild(newpoint);
 
         let arrow_image=document.createElement('img');
         arrow_image.setAttribute('src', '../../static/logo/arrow.png');
@@ -371,10 +367,11 @@ function ElevNoUsePage(){
     } else {
         newDivTime.innerHTML = min + "분 " + sec + "초";
     }
-    ElevUsePageDiv.appendChild(newDivTime);
+    ElevNoUsePageDiv.appendChild(newDivTime);
 
     for (var i=0; i<textList["elevatorNoUse"]['route'].length;i++){
         let newDiv = document.createElement('div');
+        newDiv.style.textAlign="center";
         newDiv.innerHTML=textList["elevatorNoUse"]['route'][i];
         ElevNoUsePageDiv.appendChild(newDiv);
 
