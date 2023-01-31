@@ -72,6 +72,10 @@ class Graph:
                 if self.check_invalidity(start, line) or self.check_invalidity(end, line):
                     continue
 
+                if not elevator:
+                    if self.contains_elevator(start) or self.contains_elevator(end):
+                        continue
+
                 self.verify_and_insert(start)
                 self.verify_and_insert(end)
 
@@ -100,6 +104,9 @@ class Graph:
         if node not in self.rooms and entity.isdecimal():
             self.rooms.append(node)
 
+    def contains_elevator(self, node: str):
+        building, floor, entity = node.split("-")
+        return entity[0] == "E"
 
 class Path:
     def __init__(self, graph: Graph):
