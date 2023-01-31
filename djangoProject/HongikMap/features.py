@@ -9,20 +9,22 @@ class Recommend:
 
     def find(self, keyword: str):
 
-        ret = []
+        ret = self.find_in_keywords(keyword)
         kw_length = len(keyword)
         if kw_length <= 0:
             return ret
-
-        if keyword[0].encode().isalpha():  # 첫 글자가 영어: I101
-
+        if not ret:
             ret = self.find_by_parsing(keyword)
-        elif keyword.isdecimal():  # 전체가 숫자: 101
 
-            ret = self.find_in_keywords(keyword)
-        else:  # 한글 입력: 카나
-
-            ret = self.find_in_keywords(keyword)
+        # if keyword[0].encode().isalpha():  # 첫 글자가 영어: I101
+        #
+        #     ret = self.find_by_parsing(keyword)
+        # elif keyword.isdecimal():  # 전체가 숫자: 101
+        #
+        #     ret = self.find_in_keywords(keyword)
+        # else:  # 한글 입력: 카나
+        #
+        #     ret = self.find_in_keywords(keyword)
         return ret
 
     def find_by_parsing(self, keyword):
@@ -75,9 +77,13 @@ class Graph:
 
                 if (start, end, weight) not in self.weights:
                     self.weights.append((start, end, weight))
+                else:
+                    self.useless.append("duplicated: " + line)
                 if equality:
                     if (end, start, weight) not in self.weights:
                         self.weights.append((end, start, weight))
+                else:
+                    self.useless.append("duplicated" + line)
 
     def check_invalidity(self, node: str, line):
         if len(node.split("-")) != 3:
@@ -248,6 +254,7 @@ def convert_into_keyword(node: str):
     else:
         return node
 
+
 def find_route_in_result(departure, destination, elevator):
     result_path = ""
     if elevator:
@@ -263,3 +270,7 @@ def find_route_in_result(departure, destination, elevator):
                 distance, route = value[0], node2recommend(value[1:])
                 print(route)
                 return {"distance": distance, "route": route}
+
+
+def get_coordinate():
+    pass
