@@ -378,15 +378,10 @@ function ElevNoUsePage(){
         newDiv.innerHTML=textList["elevatorNoUse"]['route'][i];
         ElevNoUsePageDiv.appendChild(newDiv);
 
-        let newpoint = document.createElement('div');
-        newpoint.style.textAlign="center";
-        newpoint.innerHTML="*";
-        ElevUsePageDiv.appendChild(newpoint);
-
         let arrow_image=document.createElement('img');
         arrow_image.setAttribute('src', '../../static/logo/arrow.png');
         arrow_image.setAttribute('alt', "loading..");
-        ElevUsePageDiv.appendChild(arrow_image);
+        ElevNoUsePageDiv.appendChild(arrow_image);
 
     }
 
