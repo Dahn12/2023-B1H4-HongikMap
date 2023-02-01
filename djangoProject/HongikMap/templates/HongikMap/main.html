@@ -280,12 +280,26 @@
         }
         #ElevUsePage{
             overflow: auto;
+            font-weight: 500;
             max-height:400px;
+            border: 1.25px solid lightgray;
         }
         #ElevNoUsePage{
             display: none;
             overflow: auto;
+            font-weight: 500;
             max-height: 400px;
+            border: 1.25px solid lightgray;
+        }
+        #timeText{
+            text-align: left;
+            padding-top: 10px;
+            padding-left: 10px;
+        }
+        #time{
+            text-align: left;
+            font-weight: bold;
+            padding-left: 10px;
         }
 
     </style>
@@ -368,7 +382,7 @@
         
         <!--편의시설 버튼-->
             <div class="Ammenitytotal">
-                <div id="Amenityname">편의시설</div>
+                <div id="Amenityname"></div>
                 <div id="AmenityButton">
                     <br>
                     <button type="button"><img src="../../static/logo/cafe.png" class="logo" alt="이미지를 불러 올 수 없습니다" onclick="convenienceIcon('cafe');"></button>
@@ -376,8 +390,7 @@
                     <button type="button"><img src="../../static/logo/food.png" class="logo" alt="이미지를 불러 올 수 없습니다" onclick="convenienceIcon('food');"></button>
                     <button type="button"><img src="../../static/logo/hosp.png" class="logo" alt="이미지를 불러 올 수 없습니다" onclick="convenienceIcon('hosp');"></button>
                     <button type="button"><img src="../../static/logo/study.png" class="logo" alt="이미지를 불러 올 수 없습니다" onclick="convenienceIcon('study');"></button>
-                    </br>
-                    <br>
+                    <br><br>
                 </div>
             </div>
             <!--엘레베이터 여부 _ 추후에 버튼 형식으로 수정-->

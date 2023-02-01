@@ -305,7 +305,6 @@ function ElevUsePage(){
     ElevNoUsePageDiv.style.display="none";
     ElevUsePageDiv.style.textAlign="center";
 
-
     ElevUsePageDiv.replaceChildren();
     //최소 주기
     let timeText = document.createElement('div');
@@ -346,6 +345,7 @@ function ElevUsePage(){
             ElevUsePageDiv.appendChild(arrow_image);
             j++;
         }
+
     }
 
     drawLine(textList["elevatorUse"]["coordinates"]);
