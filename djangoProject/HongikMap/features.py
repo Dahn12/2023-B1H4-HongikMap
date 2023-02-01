@@ -184,8 +184,6 @@ def recommend2node(user_input: str):
 
 
 def node2recommend(nodes: list):
-    nodes = compress_nodes(nodes)
-
     result = OrderedDict()
     for node in nodes:
         result[node] = ""
@@ -236,13 +234,13 @@ def is_hallway(node: str):
 
 
 def is_external(node: str):
-    print(node," 외부 노드")
     return node.startswith("외부")
 
 
 def same_kind(prev, cur):
-    prev_entity, cur_entity = prev.split("-")[2], cur.split("-")[2]
-    return prev_entity[0] == cur_entity[0]
+    prev_building, _, prev_entity = prev.split("-")
+    cur_building, _, cur_entity = cur.split("-")
+    return (prev_building == "외부" and cur_building == "외부") or prev_entity[0] == cur_entity[0]
 
 
 def compress_elevator_and_stair(nodes: list):
@@ -264,7 +262,6 @@ def convert_into_keyword(node: str):
     building, floor, entity = node.split("-")
     if floor[0] == "B":
         floor = "지하" + floor[1:]
-
     if entity[0] == "E":
         return "{}동 {}층 {}".format(building, floor, "엘리베이터")
     elif entity[0] == "H":
@@ -273,6 +270,8 @@ def convert_into_keyword(node: str):
         return "{}동 {}층 {}".format(building, floor, "계단")
     elif entity[0] == "X":
         return "{}동 {}층 {}".format(building, floor, "출입문")
+    elif building == "외부":
+        return "건물 외부"
     elif entity.isdecimal():
         return f'{building + floor}{entity:0>2}'
     else:
@@ -292,8 +291,11 @@ def find_route_in_result(departure, destination, elevator):
             pair = tuple(pair.split())
             value = value.split()
             if (departure, destination) == pair:
+                distance = value[0]
+
+                compressed_route = compress_nodes(value[1:])
+                route = node2recommend(compressed_route)
                 coordinates = get_coordinates(value[1:])
-                distance, route = value[0], node2recommend(value[1:])
                 # print(route)
                 return {"distance": distance, "route": route, "coordinates": coordinates}
 
@@ -316,10 +318,11 @@ def get_coordinates(nodes: list):
 
             name, x, y = line.split()
             if name in result.keys():
-                print(f'coordinate added {name} : {(x, y)}')
+                # print(f'coordinate added {name} : {(x, y)}')
                 result[name] = [x, y]
-    for x in result.items():
-        print(x[0], x[1])
+    print("찾은 경로 좌표")
+    for k, v in result.items():
+        print(k, v)
     return list(result.values())
 
 
