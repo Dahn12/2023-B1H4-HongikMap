@@ -22,16 +22,17 @@ function drawLine(pathResult){
     ctx.clearRect(0, 0, 1300, 700);
     //새 선 그리기
     ctx.beginPath();
-    // 출발점 지정
-    ctx.moveTo(pathResult[0][0], pathResult[0][1]);
 
     for(var i=0; i<pathResult.length-1; i++){
-        //도착점 지정
+        if(pathResult[i].length==0 || pathResult[i+1].length==0 ){
+            continue;
+        }
+        ctx.moveTo(pathResult[i][0], pathResult[i][1]);
         ctx.lineTo(pathResult[i+1][0], pathResult[i+1][1]);
-        //실선 그리기
+        //도착점 지정
         ctx.stroke();
+        //실선 그리기
     }
-
 }
 
 
@@ -302,6 +303,7 @@ function ElevUsePage(){
     //Elev체크했을때 div표시
     ElevUsePageDiv.style.display="block";
     ElevNoUsePageDiv.style.display="none";
+    ElevUsePageDiv.style.textAlign="center";
 
 
     ElevUsePageDiv.replaceChildren();
@@ -326,16 +328,24 @@ function ElevUsePage(){
     }
     ElevUsePageDiv.appendChild(newDivTime);
 
+    var j=1;
+
     for (var i=0; i<textList["elevatorUse"]['route'].length;i++){
         let newDiv = document.createElement('div');
         newDiv.style.textAlign="center";
         newDiv.innerHTML=textList["elevatorUse"]['route'][i];
         ElevUsePageDiv.appendChild(newDiv);
 
-        let arrow_image=document.createElement('img');
-        arrow_image.setAttribute('src', '../../static/logo/arrow.png');
-        arrow_image.setAttribute("alt", "loading..");
-        ElevUsePageDiv.appendChild(arrow_image);
+        if(j<textList["elevatorUse"]['route'].length)
+        {
+            let arrow_image=document.createElement('img');
+            arrow_image.setAttribute('src', '../../static/logo/arrow.png');
+            arrow_image.setAttribute('width', 30);
+            arrow_image.setAttribute('height', 30);
+            arrow_image.setAttribute("alt", "loading..");
+            ElevUsePageDiv.appendChild(arrow_image);
+            j++;
+        }
     }
 
     drawLine(textList["elevatorUse"]["coordinates"]);
@@ -344,6 +354,7 @@ function ElevUsePage(){
 function ElevNoUsePage(){
     ElevUsePageDiv.style.display="none";
     ElevNoUsePageDiv.style.display="block";
+    ElevNoUsePageDiv.style.textAlign="center";
 
     //자식모두지우고 받은리스트 추가
     ElevNoUsePageDiv.replaceChildren();
@@ -359,6 +370,7 @@ function ElevNoUsePage(){
     var min = parseInt((seconds%3600)/60);
     var sec = seconds%60;
 
+
     let newDivTime = document.createElement('div');
     newDivTime.setAttribute("id", "time");//속성주기
     //분이 0인지 구분
@@ -369,16 +381,24 @@ function ElevNoUsePage(){
     }
     ElevNoUsePageDiv.appendChild(newDivTime);
 
+    var k=1;
+
     for (var i=0; i<textList["elevatorNoUse"]['route'].length;i++){
         let newDiv = document.createElement('div');
         newDiv.style.textAlign="center";
         newDiv.innerHTML=textList["elevatorNoUse"]['route'][i];
         ElevNoUsePageDiv.appendChild(newDiv);
 
-        let arrow_image=document.createElement('img');
-        arrow_image.setAttribute('src', '../../static/logo/arrow.png');
-        arrow_image.setAttribute('alt', "loading..");
-        ElevNoUsePageDiv.appendChild(arrow_image);
+        if(k<textList["elevatorNoUse"]['route'].length)
+        {
+            let arrow_image=document.createElement('img');
+            arrow_image.setAttribute('src', '../../static/logo/arrow.png');
+            arrow_image.setAttribute('width', 30);
+            arrow_image.setAttribute('height', 30);
+            arrow_image.setAttribute('alt', "loading..");
+            ElevNoUsePageDiv.appendChild(arrow_image);
+            k++;
+        }
 
     }
 
