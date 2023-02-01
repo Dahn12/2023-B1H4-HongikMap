@@ -15,13 +15,13 @@ class HongikmapConfig(AppConfig):
     for start in graph_with_elevator.rooms:
         path_with_elevator.dijkstra(start)
 
-    with open("HongikMap/static/data/result_with_elevator.txt", "w") as f:
+    with open("HongikMap/static/data/result_with_elevator.txt", "w", encoding="UTF8") as f:
         for key, value in path_with_elevator.result.items():
             f.write(f'{key[0]} {key[1]}:{value["distance"]} {" ".join(value["route"])}\n')
 
     for start in graph_without_elevator.rooms:
         path_without_elevator.dijkstra(start)
-    with open("HongikMap/static/data/result_without_elevator.txt", "w") as f:
+    with open("HongikMap/static/data/result_without_elevator.txt", "w", encoding="UTF8") as f:
         for key, value in path_without_elevator.result.items():
             f.write(f'{key[0]} {key[1]}:{value["distance"]} {" ".join(value["route"])}\n')
 

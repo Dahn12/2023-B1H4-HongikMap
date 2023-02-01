@@ -20,7 +20,8 @@ def main2(request):
 def recommend(request):
     response_name = request.POST.get('input_val')
     response_list = features.Recommend().find(response_name)
-    response_list.sort(key=lambda x: (int(x[1:]), x[0]))
+    #response_list.sort(key=lambda x: (int(x[1:]) if str(x[1:]).isdecimal() else str(x[1:]), x[0]))
+    #response_list.sort()
     return JsonResponse({"recommendations": response_list})
 
 
@@ -31,4 +32,6 @@ def submit(request):
 
     elevatorUse = features.find_route_in_result(departure_node, destination_node, elevator=True)
     elevatorNoUse = features.find_route_in_result(departure_node, destination_node, elevator=False)
+
+    print(elevatorUse['coordinates'])
     return JsonResponse({'elevatorUse': elevatorUse, 'elevatorNoUse': elevatorNoUse})

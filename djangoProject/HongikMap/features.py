@@ -9,12 +9,18 @@ class Recommend:
 
     def find(self, keyword: str):
 
-        ret = self.find_in_keywords(keyword)
+        ret = []
         kw_length = len(keyword)
         if kw_length <= 0:
             return ret
-        if not ret:
-            ret = self.find_by_parsing(keyword)
+
+        keyword_list = self.find_in_keywords(keyword)
+        parsing_list = self.find_by_parsing(keyword)
+        # parsing_list.sort(key=lambda x: (int(x[1:].split("_")[0]), x[0]))
+        # ret = list(set(keyword_list) | set(parsing_list))
+        ret = keyword_list + parsing_list
+        # if not ret:
+        #    ret = self.find_by_parsing(keyword)
 
         # if keyword[0].encode().isalpha():  # 첫 글자가 영어: I101
         #
@@ -35,8 +41,8 @@ class Recommend:
                 key, recommends = line.split(":")
                 recommends = recommends.split(",")
                 if any([keyword in x for x in recommends]):
-                    ret.append(recommends[0])
-        return ret
+                    ret.append((key, recommends[0]))
+        return [x[1] for x in sorted(ret, key=lambda x: x[0])]
 
     def find_in_keywords(self, keyword):
         ret = []
@@ -56,7 +62,7 @@ class Graph:
         self.nodes = []
         self.weights = []
         self.useless = []
-        with open("HongikMap/static/data/data.txt", "r") as f:
+        with open("HongikMap/static/data/data.txt", "r", encoding="UTF8") as f:
             for line in f.readlines():
                 equality = False
                 line_length = len(line.split())
@@ -67,6 +73,7 @@ class Graph:
                 if line_length == 4 and line.split()[3] == "t":
                     equality = True
                 start, end, weight = line.split()[:3]
+                print("###############" + line)
                 weight = int(weight)
 
                 if self.check_invalidity(start, line) or self.check_invalidity(end, line):
@@ -249,6 +256,9 @@ def compress_elevator_and_stair(nodes: list):
 
 def convert_into_keyword(node: str):
     building, floor, entity = node.split("-")
+    if floor[0] == "B":
+        floor = "지하" + floor[1:]
+
     if entity[0] == "E":
         return "{}동 {}층 {}".format(building, floor, "엘리베이터")
     elif entity[0] == "H":
@@ -269,7 +279,8 @@ def find_route_in_result(departure, destination, elevator):
         result_path = "HongikMap/static/data/result_with_elevator.txt"
     else:
         result_path = "HongikMap/static/data/result_without_elevator.txt"
-    with open(result_path, "r") as f:
+
+    with open(result_path, "r", encoding="UTF8") as f:
         for line in f.readlines():
             pair, value = line.split(":")
             pair = tuple(pair.split())
@@ -285,15 +296,21 @@ def get_coordinates(nodes: list):
     result = OrderedDict()
     for node in nodes:
         if valid_external_node(node):
+            if node.startswith("외부"):
+                node = node.split("-")[2]
             result[node] = []
 
-    with open("HongikMap/static/data/coordinate.txt", "r") as f:
+    for x in result.items():
+        print(x)
+
+    with open("HongikMap/static/data/coordinate.txt", "r", encoding='UTF8') as f:
         for line in f.readlines():
-            if "#" in line:
+            if "#" in line or len(line.split()) != 3:
                 continue
 
             name, x, y = line.split()
             if name in result.keys():
+                print(f'coordinate added {name} : {(x, y)}')
                 result[name] = [x, y]
 
     return list(result.values())
@@ -302,4 +319,6 @@ def get_coordinates(nodes: list):
 def valid_external_node(node: str):
     building, floor, entity = node.split("-")
 
-    return entity[0] in ["X", "E", "S"]
+    if building == "외부" or entity[0] in ["S", "E", "X"]:
+        return True
+    return False
