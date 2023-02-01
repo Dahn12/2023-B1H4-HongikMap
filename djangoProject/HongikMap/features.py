@@ -73,7 +73,7 @@ class Graph:
                 if line_length == 4 and line.split()[3] == "t":
                     equality = True
                 start, end, weight = line.split()[:3]
-                print("###############" + line)
+                print("Read | " + line)
                 weight = int(weight)
 
                 if self.check_invalidity(start, line) or self.check_invalidity(end, line):
@@ -94,7 +94,7 @@ class Graph:
                     if (end, start, weight) not in self.weights:
                         self.weights.append((end, start, weight))
                 else:
-                    self.useless.append("duplicated" + line)
+                    self.useless.append("duplicated: " + line)
 
     def check_invalidity(self, node: str, line):
         if len(node.split("-")) != 3:
@@ -158,6 +158,7 @@ class Path:
     def store(self, start: str, path: dict):
         for end in self.rooms:
             route = [end]
+            print(start, end)
             while route[-1] != start:
                 route.append(path[route[-1]]['parent'])
             self.result[(start, end)] = {'distance': path[end]['distance'], 'route': route[::-1]}
