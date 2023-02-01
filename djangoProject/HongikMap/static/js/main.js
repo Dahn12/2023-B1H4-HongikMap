@@ -302,6 +302,7 @@ function ElevUsePage(){
     //Elev체크했을때 div표시
     ElevUsePageDiv.style.display="block";
     ElevNoUsePageDiv.style.display="none";
+    ElevUsePageDiv.style.textAlign="center";
 
 
     ElevUsePageDiv.replaceChildren();
@@ -334,6 +335,8 @@ function ElevUsePage(){
 
         let arrow_image=document.createElement('img');
         arrow_image.setAttribute('src', '../../static/logo/arrow.png');
+        arrow_image.setAttribute('width', 30);
+        arrow_image.setAttribute('height', 30);
         arrow_image.setAttribute("alt", "loading..");
         ElevUsePageDiv.appendChild(arrow_image);
     }
@@ -344,6 +347,7 @@ function ElevUsePage(){
 function ElevNoUsePage(){
     ElevUsePageDiv.style.display="none";
     ElevNoUsePageDiv.style.display="block";
+    ElevNoUsePageDiv.style.textAlign="center";
 
     //자식모두지우고 받은리스트 추가
     ElevNoUsePageDiv.replaceChildren();
@@ -377,6 +381,8 @@ function ElevNoUsePage(){
 
         let arrow_image=document.createElement('img');
         arrow_image.setAttribute('src', '../../static/logo/arrow.png');
+        arrow_image.setAttribute('width', 30);
+        arrow_image.setAttribute('height', 30);
         arrow_image.setAttribute('alt', "loading..");
         ElevNoUsePageDiv.appendChild(arrow_image);
 
