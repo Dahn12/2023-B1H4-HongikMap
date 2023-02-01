@@ -366,7 +366,7 @@ function ElevNoUsePage(){
     ElevNoUsePageDiv.appendChild(timeText);
 
     //시간주기
-    const seconds = parseInt(textList["elevatorUse"]["distance"]);
+    const seconds = textList["elevatorNoUse"]["distance"];
     var min = parseInt((seconds%3600)/60);
     var sec = seconds%60;
 
@@ -453,10 +453,24 @@ function submitCheck(event) {
                 document.getElementById('food').style.display="none";
                 document.getElementById('hosp').style.display="none";
                 document.getElementById('study').style.display="none";
+                //엘리베이터 시간주기
+                elevTimePlus(textList);
                 ElevUsePage();
                 drawLine(textList["elevatorUse"]["coordinates"]);
             }
 
         });
     }
+}
+
+
+// 엘리베이터 실제시간주기
+function elevTimePlus(textList) {
+    let seconds = parseInt(textList["elevatorUse"]["distance"]);
+    for(let i = 0; i<textList["elevatorUse"]["route"].length; i++){
+            if(textList["elevatorUse"]["route"][i].includes("엘리베이터")){
+                 seconds += 60;//한번탈때 엘리베이터 두번주므로 120초를 두번에 나눠서 준다
+            }
+    }
+    textList["elevatorUse"]["distance"] = seconds;
 }
