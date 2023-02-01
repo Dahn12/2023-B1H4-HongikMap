@@ -108,7 +108,7 @@ class Graph:
         if node not in self.nodes:
             self.nodes.append(node)
 
-        if node not in self.rooms and entity.isdecimal():
+        if node not in self.rooms and entity.isdecimal() and building != "외부":
             self.rooms.append(node)
 
     def is_elevator(self, node: str):
@@ -215,15 +215,15 @@ def node2recommend(nodes: list):
 
 
 def compress_nodes(nodes: list):
-    nodes = compress_hallway(nodes)
+    nodes = compress_hallway_and_external(nodes)
     nodes = compress_elevator_and_stair(nodes)
     return nodes
 
 
-def compress_hallway(nodes: list):
+def compress_hallway_and_external(nodes: list):
     result = [nodes[0]]
     for node in nodes[1:]:
-        if is_hallway(node) and same_kind(result[-1], node):
+        if (is_hallway(node) or is_external(node)) and same_kind(result[-1], node):
             pass
         else:
             result.append(node)
@@ -232,6 +232,11 @@ def compress_hallway(nodes: list):
 
 def is_hallway(node: str):
     return node.split("-")[2][0] == "H"
+
+
+def is_external(node: str):
+    print(node," 외부 노드")
+    return node.startswith("외부")
 
 
 def same_kind(prev, cur):
@@ -300,8 +305,8 @@ def get_coordinates(nodes: list):
                 node = node.split("-")[2]
             result[node] = []
 
-    for x in result.items():
-        print(x)
+    # for x in result.items():
+    #     print(x)
 
     with open("HongikMap/static/data/coordinate.txt", "r", encoding='UTF8') as f:
         for line in f.readlines():
@@ -312,7 +317,8 @@ def get_coordinates(nodes: list):
             if name in result.keys():
                 print(f'coordinate added {name} : {(x, y)}')
                 result[name] = [x, y]
-
+    for x in result.items():
+        print(x[0], x[1])
     return list(result.values())
 
 

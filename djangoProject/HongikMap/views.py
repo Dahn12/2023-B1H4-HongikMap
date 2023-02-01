@@ -33,7 +33,7 @@ def submit(request):
     elevatorUse = features.find_route_in_result(departure_node, destination_node, elevator=True)
     elevatorNoUse = features.find_route_in_result(departure_node, destination_node, elevator=False)
 
-    print(elevatorUse['coordinates'])
+    # print(elevatorUse['coordinates'])
     return JsonResponse({'elevatorUse': elevatorUse, 'elevatorNoUse': elevatorNoUse})
 
 
