@@ -1,0 +1,5 @@
+djangoProject/HongikMap/static/data/result_with_elevator.txt filter=lfs diff=lfs merge=lfs -text
+djangoProject/HongikMap/static/data/result_without_elevator.txt filter=lfs diff=lfs merge=lfs -text
+djangoProject/HongikMap/static/data/result_with_elevator.txt filter=lfs diff=lfs merge=lfs -text
+djangoProject/HongikMap/static/data/result_with_elevator.txt filter=lfs diff=lfs merge=lfs -text
+djangoProject/HongikMap/static/data/result_without_elevator.txt filter=lfs diff=lfs merge=lfs -text
