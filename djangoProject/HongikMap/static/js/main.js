@@ -448,6 +448,11 @@ function submitCheck(event) {
             datatype: 'json',
             success: function(data){
                 textList = data;
+                document.getElementById('cafe').style.display="none";
+                document.getElementById('convi').style.display="none";  
+                document.getElementById('food').style.display="none";
+                document.getElementById('hosp').style.display="none";
+                document.getElementById('study').style.display="none";
                 ElevUsePage();
                 drawLine(textList["elevatorUse"]["coordinates"]);
             }
