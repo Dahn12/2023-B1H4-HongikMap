@@ -175,7 +175,7 @@ let autocomplete = (function () {
         // autocomplet할 요소 찾기
         for (i = 0; i < _arr.length; i++) {
             // 배열의 요소를 현재 input의 value의 값만큼 자른 후, 같으면 추가한다.
-            if (_arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+
                 b = document.createElement("DIV");
                 // value의 값 만큼 굵게 표시
                 b.innerHTML = "<strong>" + _arr[i].substr(0, val.length) + "</strong>";
@@ -195,7 +195,7 @@ let autocomplete = (function () {
 
                 // autocomplete 리스트를 붙이기.
                 a.appendChild(b);
-            }
+
         }
     }
 
