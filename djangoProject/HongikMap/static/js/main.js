@@ -328,18 +328,24 @@ function ElevUsePage(){
     }
     ElevUsePageDiv.appendChild(newDivTime);
 
+    var j=1;
+
     for (var i=0; i<textList["elevatorUse"]['route'].length;i++){
         let newDiv = document.createElement('div');
         newDiv.style.textAlign="center";
         newDiv.innerHTML=textList["elevatorUse"]['route'][i];
         ElevUsePageDiv.appendChild(newDiv);
 
-        let arrow_image=document.createElement('img');
-        arrow_image.setAttribute('src', '../../static/logo/arrow.png');
-        arrow_image.setAttribute('width', 30);
-        arrow_image.setAttribute('height', 30);
-        arrow_image.setAttribute("alt", "loading..");
-        ElevUsePageDiv.appendChild(arrow_image);
+        if(j<textList["elevatorUse"]['route'].length)
+        {
+            let arrow_image=document.createElement('img');
+            arrow_image.setAttribute('src', '../../static/logo/arrow.png');
+            arrow_image.setAttribute('width', 30);
+            arrow_image.setAttribute('height', 30);
+            arrow_image.setAttribute("alt", "loading..");
+            ElevUsePageDiv.appendChild(arrow_image);
+            j++;
+        }
     }
 
     drawLine(textList["elevatorUse"]["coordinates"]);
@@ -364,6 +370,7 @@ function ElevNoUsePage(){
     var min = parseInt((seconds%3600)/60);
     var sec = seconds%60;
 
+
     let newDivTime = document.createElement('div');
     newDivTime.setAttribute("id", "time");//속성주기
     //분이 0인지 구분
@@ -374,18 +381,24 @@ function ElevNoUsePage(){
     }
     ElevNoUsePageDiv.appendChild(newDivTime);
 
+    var k=1;
+
     for (var i=0; i<textList["elevatorNoUse"]['route'].length;i++){
         let newDiv = document.createElement('div');
         newDiv.style.textAlign="center";
         newDiv.innerHTML=textList["elevatorNoUse"]['route'][i];
         ElevNoUsePageDiv.appendChild(newDiv);
 
-        let arrow_image=document.createElement('img');
-        arrow_image.setAttribute('src', '../../static/logo/arrow.png');
-        arrow_image.setAttribute('width', 30);
-        arrow_image.setAttribute('height', 30);
-        arrow_image.setAttribute('alt', "loading..");
-        ElevNoUsePageDiv.appendChild(arrow_image);
+        if(k<textList["elevatorNoUse"]['route'].length)
+        {
+            let arrow_image=document.createElement('img');
+            arrow_image.setAttribute('src', '../../static/logo/arrow.png');
+            arrow_image.setAttribute('width', 30);
+            arrow_image.setAttribute('height', 30);
+            arrow_image.setAttribute('alt', "loading..");
+            ElevNoUsePageDiv.appendChild(arrow_image);
+            k++;
+        }
 
     }
 
