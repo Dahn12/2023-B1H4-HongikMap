@@ -22,16 +22,17 @@ function drawLine(pathResult){
     ctx.clearRect(0, 0, 1300, 700);
     //새 선 그리기
     ctx.beginPath();
-    // 출발점 지정
-    ctx.moveTo(pathResult[0][0], pathResult[0][1]);
 
     for(var i=0; i<pathResult.length-1; i++){
-        //도착점 지정
+        if(pathResult[i].length==0 || pathResult[i+1].length==0 ){
+            continue;
+        }
+        ctx.moveTo(pathResult[i][0], pathResult[i][1]);
         ctx.lineTo(pathResult[i+1][0], pathResult[i+1][1]);
-        //실선 그리기
+        //도착점 지정
         ctx.stroke();
+        //실선 그리기
     }
-
 }
 
 
