@@ -1349,6 +1349,36 @@ K-6-3 K-6-H4 4 t
 K-6-2 K-6-H4 5 t
 K-6-1 K-6-H4 6 t
 
+#L동 8층까지 하기로, 1층에는 출입문 1개 4층에 출입문 2개 7층에 출입문 1개
+#수직적 엘리베이터 연결
+L-1-E1 L-2-E1 1 t
+L-2-E1 L-3-E1 1 t
+L-3-E1 L-4-E1 1 t
+L-4-E1 L-5-E1 1 t
+L-5-E1 L-6-E1 1 t
+L-6-E1 L-7-E1 1 t
+L-7-E1 L-8-E1 1 t
+
+#Floor 1
+L-1-X1 L-1-H1 4 t
+L-1-H1 L-1-E1 4 t
+#Floor 2
+L-2-E1 L-2-H1 4 t
+#Floor 3
+L-3-E1 L-3-H1 4 t
+#Floor 4
+L-4-E1 L-4-H1 4 t
+L-4-X1 L-4-H1 4 t
+L-4-H1 L-4-X2 4 t
+#Floor 5
+L-5-E1 L-5-H1 4 t
+#Floor 6
+L-6-E1 L-6-H1 4 t
+#Floor 7
+L-7-E1 L-7-H1 4 t
+L-7-H1 L-7-X1 8 t
+#Floor 8
+L-8-E1 L-8-H1 4 t
 
 # Building P
 
