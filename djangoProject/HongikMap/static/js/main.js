@@ -347,7 +347,7 @@ function ElevUsePage(){
         }
 
     }
-
+    ElevUsePageDiv.appendChild(document.createElement('br'));
     drawLine(textList["elevatorUse"]["coordinates"]);
 }
 
@@ -401,7 +401,7 @@ function ElevNoUsePage(){
         }
 
     }
-
+    ElevNoUsePageDiv.appendChild(document.createElement('br')); //띄어쓰기
     drawLine(textList["elevatorNoUse"]["coordinates"]); //경로그리기
 }
 
