@@ -200,9 +200,7 @@ def node2recommend(nodes: list):
                 if not nodes:
                     break
 
-    for node in result.keys():
-        if result[node] == "":
-            result[node] = convert_into_keyword(node)
+
     # with open("HongikMap/static/data/recommends_by_parsing.txt", "r", encoding="UTF8") as f:
     #     for line in f.readlines():
     #         node, value = line.split(":")
@@ -211,8 +209,11 @@ def node2recommend(nodes: list):
     #             nodes.remove(node)
     #             if not nodes:
     #                 break
-    # for key, value in result.items():
-    #    print(key, value)
+
+    for node in result.keys():
+        if result[node] == "":
+            result[node] = convert_into_keyword(node)
+
     return list(result.values())
 
 
