@@ -1,10 +1,7 @@
 //##선그리기
 
 //테스트케이스
-var textList = {
-    "elevatorUse":{'distance': 10, 'route': [], 'coordinates':[]},
-    "elevatorNoUse":{'distance': 10, 'route': [], 'coordinates':[]}
-};
+
 
 let pathResult = [[207,538],[240,490],[294,436],[445,225],[401,210],[461,79],];
 //canvas 엘리먼트를 취득한다.
@@ -15,7 +12,8 @@ const ctx = canvas.getContext("2d");
 ctx.strokeStyle = '#FF5A5A';
 //굵기
 ctx.lineWidth = 6;
-
+//꺽인부분처리
+ ctx.lineCap = 'round';
 //선긋는 함수 pathResult에 경로좌표리스트
 function drawLine(pathResult){
     //선 초기화
@@ -292,8 +290,8 @@ let autocomplete = (function () {
 //##결과경로표시
 //테스트케이스
 var textList = {
-    "elevatorUse":{'distance': 10, 'route': [], 'coordinates':[]},
-    "elevatorNoUse":{'distance': 10, 'route': [], 'coordinates':[]}
+    "elevatorUse":{'distance': 0, 'route': [], 'coordinates':[]},
+    "elevatorNoUse":{'distance': 0, 'route': [], 'coordinates':[]}
 };
 
 
@@ -347,7 +345,7 @@ function ElevUsePage(){
         }
 
     }
-
+    ElevUsePageDiv.appendChild(document.createElement('br'));
     drawLine(textList["elevatorUse"]["coordinates"]);
 }
 
@@ -401,7 +399,7 @@ function ElevNoUsePage(){
         }
 
     }
-
+    ElevNoUsePageDiv.appendChild(document.createElement('br')); //띄어쓰기
     drawLine(textList["elevatorNoUse"]["coordinates"]); //경로그리기
 }
 
