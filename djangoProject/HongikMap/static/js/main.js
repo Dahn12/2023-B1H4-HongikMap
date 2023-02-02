@@ -43,25 +43,37 @@ canvas.onclick = function(event){
     console.log(x, y);
 }
 
-
+let number=0;
 
 //##편의시설 아이콘띄우기
 function convenienceIcon(name){
-    document.getElementById('cafe').style.display="none";
-    document.getElementById('convi').style.display="none";
-    document.getElementById('food').style.display="none";
-    document.getElementById('hosp').style.display="none";
-    document.getElementById('study').style.display="none";
-    if(name == 'cafe'){
-        document.getElementById("cafe").style.display="block";
-    } else if(name == 'convi'){
-        document.getElementById("convi").style.display="block";
-    } else if(name == 'food'){
-        document.getElementById("food").style.display="block";
-    } else if(name == 'hosp'){
-        document.getElementById("hosp").style.display="block";
-    } else if(name == 'study'){
-        document.getElementById("study").style.display="block";
+    number++;
+    if((number%2)!=0)
+    {
+        document.getElementById('cafe').style.display="none";
+        document.getElementById('convi').style.display="none";
+        document.getElementById('food').style.display="none";
+        document.getElementById('hosp').style.display="none";
+        document.getElementById('study').style.display="none";
+        if(name == 'cafe'){
+            document.getElementById("cafe").style.display="block";
+        } else if(name == 'convi'){
+            document.getElementById("convi").style.display="block";
+        } else if(name == 'food'){
+            document.getElementById("food").style.display="block";
+        } else if(name == 'hosp'){
+            document.getElementById("hosp").style.display="block";
+        } else if(name == 'study'){
+            document.getElementById("study").style.display="block";
+        }
+    }
+    else
+    {
+        document.getElementById('cafe').style.display="none";
+        document.getElementById('convi').style.display="none";
+        document.getElementById('food').style.display="none";
+        document.getElementById('hosp').style.display="none";
+        document.getElementById('study').style.display="none";
     }
 
 }
