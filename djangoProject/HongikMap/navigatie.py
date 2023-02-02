@@ -16,14 +16,20 @@ def search(departure: str, destination: str, elevator: bool) -> dict:
                 nodes = value[1:]
 
                 compressed_route = get_compressed_route(nodes)
-                route = utility.nodes2recommends(compressed_route)
+                route = nodes2recommends(compressed_route)
+
+                coordinates = get_coordinates(nodes)
+
+                return {"distance": distance,
+                        "route": route,
+                        "coordinates": coordinates}
 
 
 def get_result_path(elevator: bool) -> str:
     if elevator:
-        return "HongikMap/static/data/result_with_elevator.txt"
+        return result_with_elevator_path
     else:
-        return "HongikMap/static/data/result_without_elevator.txt"
+        return result_without_elevator_path
 
 
 def get_compressed_route(nodes: list) -> list:
@@ -36,7 +42,7 @@ def get_compressed_route(nodes: list) -> list:
 def compress_hallway_and_external(nodes: list) -> list:
     result = [nodes[0]]
     for node in nodes[1:]:
-        if (is_hallway(node) or is_external(node)) and same_kind(node[-1], node):
+        if (is_hallway(node) or is_external(node)) and same_kind(result[-1], node):
             pass
         else:
             result.append(node)
@@ -58,5 +64,41 @@ def compress_elevator_and_stair(nodes: list) -> list:
     return result
 
 
-def get_coordinates():
-    pass
+def get_coordinates(nodes: list) -> list:
+    result = OrderedDict()
+    for node in nodes:
+        if valid_node_for_coordinate(node):
+            if is_external(node):
+                node = get_external_node_number(node)
+            result[node] = []
+
+    with open(coordinate_path, "r", encoding='UTF8') as f:
+        for line in f.readlines():
+            if invalid_line_for_coordinate(line):
+                continue
+
+            name, x, y = line.split()
+            if name in result.keys():
+                result[name] = [x, y]
+
+    return list(result.values())
+
+
+def valid_node_for_coordinate(node: str) -> bool:
+    if is_external(node):
+        return True
+
+    if get_kind(node) in ["S", "E", "X"]:
+        return True
+
+    return False
+
+
+def invalid_line_for_coordinate(line: str) -> bool:
+    if "#" in line:
+        return True
+
+    if len(line.split()) != 3:
+        return True
+
+    return False

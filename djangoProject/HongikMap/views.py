@@ -5,6 +5,8 @@ from django.http import JsonResponse
 from . import features
 from . import suggest
 from . import utility
+from . import navigatie
+
 
 # Create your views here.
 
@@ -30,15 +32,15 @@ def recommend(request):
 def submit(request):
     departure = request.POST.get('departure')
     destination = request.POST.get('destination')
-    # departure_node, destination_node = features.recommend2node(departure), features.recommend2node(destination)
 
     departure_node = utility.recommend2node(departure)
     destination_node = utility.recommend2node(destination)
 
-    elevatorUse = features.find_route_in_result(departure_node, destination_node, elevator=True)
-    elevatorNoUse = features.find_route_in_result(departure_node, destination_node, elevator=False)
+    elevatorUse = navigatie.search(departure_node, destination_node, elevator=True)
+    elevatorNoUse = navigatie.search(departure_node, destination_node, elevator=False)
 
-    return JsonResponse({'elevatorUse': elevatorUse, 'elevatorNoUse': elevatorNoUse})
+    return JsonResponse({'elevatorUse': elevatorUse,
+                         'elevatorNoUse': elevatorNoUse})
 
 
 def compute(request):
