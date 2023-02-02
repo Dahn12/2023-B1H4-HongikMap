@@ -3,10 +3,6 @@ from collections import OrderedDict
 
 
 class Recommend:
-    def __init__(self):
-        self.recommends = dict()
-        self.keywords = dict()
-
     def find(self, keyword: str):
 
         ret = []
@@ -16,9 +12,8 @@ class Recommend:
 
         keyword_list = self.find_in_keywords(keyword)
         parsing_list = self.find_by_parsing(keyword)
-        # parsing_list.sort(key=lambda x: (int(x[1:].split("_")[0]), x[0]))
-        # ret = list(set(keyword_list) | set(parsing_list))
-        ret = keyword_list + parsing_list
+        sorted_parsing_list = self.sort_parsing_list(parsing_list)
+        ret = keyword_list + sorted_parsing_list
         # if not ret:
         #    ret = self.find_by_parsing(keyword)
 
@@ -33,6 +28,17 @@ class Recommend:
         #     ret = self.find_in_keywords(keyword)
         return ret
 
+    def find_in_keywords(self, keyword):
+        ret = []
+        # keywords 만 찾음
+        with open("HongikMap/static/data/keywords.txt", "r", encoding="UTF8") as rec:
+            for line in rec.readlines():
+                key, recommends = line.split(":")
+                recommends = recommends.split(",")
+                if any([keyword in x for x in recommends]):
+                    ret.append(recommends[0])
+        return ret
+
     def find_by_parsing(self, keyword):
         ret = []
 
@@ -44,16 +50,13 @@ class Recommend:
                     ret.append((key, recommends[0]))
         return [x[1] for x in sorted(ret, key=lambda x: x[0])]
 
-    def find_in_keywords(self, keyword):
-        ret = []
-        # keywords 만 찾음
-        with open("HongikMap/static/data/keywords.txt", "r", encoding="UTF8") as rec:
-            for line in rec.readlines():
-                key, recommends = line.split(":")
-                recommends = recommends.split(",")
-                if any([keyword in x for x in recommends]):
-                    ret.append(recommends[0])
-        return ret
+    def sort_parsing_list(self, parsing_list: list):
+        underground = list(filter(lambda x: x[1] == "B", parsing_list))
+        ground = list(set(parsing_list) - set(underground))
+
+        underground.sort(key=lambda x: int(x[2:]))
+        ground.sort(key=lambda x: int(x[1:]))
+        return underground + ground
 
 
 class Graph:
@@ -329,6 +332,9 @@ def get_coordinates(nodes: list):
 def valid_external_node(node: str):
     building, floor, entity = node.split("-")
 
-    if building == "외부" or entity[0] in ["S", "E", "X"]:
+    if building == "외부":
         return True
+    if entity[0] in ["S", "E", "X"]:
+        return True
+
     return False
