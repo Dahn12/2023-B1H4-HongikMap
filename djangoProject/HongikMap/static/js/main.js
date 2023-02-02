@@ -3,7 +3,7 @@
 //테스트케이스
 
 
-let pathResult = [[207,538],[240,490],[294,436],[445,225],[401,210],[461,79],];
+let pathResult = [];
 //canvas 엘리먼트를 취득한다.
 const canvas = document.getElementById('myCanvas');
 // 2d모드의 그리기 객체를 취득한다. => 이 객체를 통해 canvas에 그림을 그릴 수 있다.
@@ -25,11 +25,13 @@ function drawLine(pathResult){
         if(pathResult[i].length==0 || pathResult[i+1].length==0 ){
             continue;
         }
+        //시작점 지정
         ctx.moveTo(pathResult[i][0], pathResult[i][1]);
-        ctx.lineTo(pathResult[i+1][0], pathResult[i+1][1]);
         //도착점 지정
-        ctx.stroke();
+        ctx.lineTo(pathResult[i+1][0], pathResult[i+1][1]);
         //실선 그리기
+        ctx.stroke();
+
     }
 }
 
@@ -44,36 +46,23 @@ canvas.onclick = function(event){
 }
 
 let number=0;
+let conviName;
 
 //##편의시설 아이콘띄우기
 function convenienceIcon(name){
+    // 같은 버튼 눌렀는지 체크
+    if(conviName != name){
+        number= 0;
+    }
     number++;
     if((number%2)!=0)
     {
-        document.getElementById('cafe').style.display="none";
-        document.getElementById('convi').style.display="none";
-        document.getElementById('food').style.display="none";
-        document.getElementById('hosp').style.display="none";
-        document.getElementById('study').style.display="none";
-        if(name == 'cafe'){
-            document.getElementById("cafe").style.display="block";
-        } else if(name == 'convi'){
-            document.getElementById("convi").style.display="block";
-        } else if(name == 'food'){
-            document.getElementById("food").style.display="block";
-        } else if(name == 'hosp'){
-            document.getElementById("hosp").style.display="block";
-        } else if(name == 'study'){
-            document.getElementById("study").style.display="block";
-        }
+        $("#MapConviText div").css('display','none');
+        document.getElementById(name).style.display="block";
     }
     else
     {
-        document.getElementById('cafe').style.display="none";
-        document.getElementById('convi').style.display="none";
-        document.getElementById('food').style.display="none";
-        document.getElementById('hosp').style.display="none";
-        document.getElementById('study').style.display="none";
+        $("#MapConviText div").css('display','none');
     }
 
 }
