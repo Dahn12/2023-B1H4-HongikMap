@@ -296,24 +296,30 @@ var textList = {
 };
 
 
-let ElevUsePageDiv = document.getElementById("ElevUsePage");
-let ElevNoUsePageDiv = document.getElementById("ElevNoUsePage");
-function ElevUsePage(){
-    //Elev체크했을때 div표시
-    ElevUsePageDiv.style.display="block";
-    ElevNoUsePageDiv.style.display="none";
-    ElevUsePageDiv.style.textAlign="center";
+function ElevPage(name){
+    let show;
+    let noShow;
+    if(name=='use'){
+        show = document.getElementById("elevatorUse");
+        noShow = document.getElementById("elevatorNoUse");
+    } else{
+        show = document.getElementById("elevatorNoUse");
+        noShow = document.getElementById("elevatorUse");
+    }
+    show.style.display="block";
+    noShow.style.display="none";
+    show.style.textAlign="center";
 
-    ElevUsePageDiv.replaceChildren();
+    show.replaceChildren();
     //최소 주기
+
     let timeText = document.createElement('div');
     timeText.setAttribute("id", "timeText");//속성주기
     timeText.innerHTML="최소";
-    ElevUsePageDiv.appendChild(timeText);
+    show.appendChild(timeText);
 
     //시간주기
-
-    const seconds = parseInt(textList["elevatorUse"]["distance"]);
+    const seconds = parseInt(textList[show.getAttribute('id')]["distance"]);
     var min = parseInt((seconds%3600)/60);
     var sec = seconds%60;
 
@@ -324,85 +330,33 @@ function ElevUsePage(){
     } else{
         newDivTime.innerHTML=min+"분 "+sec+"초";
     }
-    ElevUsePageDiv.appendChild(newDivTime);
+    show.appendChild(newDivTime);
 
     var j=1;
 
-    for (var i=0; i<textList["elevatorUse"]['route'].length;i++){
+    for (var i=0; i<textList[show.getAttribute('id')]['route'].length;i++){
         let newDiv = document.createElement('div');
         newDiv.style.textAlign="center";
-        newDiv.innerHTML=textList["elevatorUse"]['route'][i];
-        ElevUsePageDiv.appendChild(newDiv);
+        newDiv.innerHTML=textList[show.getAttribute('id')]['route'][i];
+        show.appendChild(newDiv);
 
-        if(j<textList["elevatorUse"]['route'].length)
+        if(j<textList[show.getAttribute('id')]['route'].length)
         {
             let arrow_image=document.createElement('img');
             arrow_image.setAttribute('src', '../../static/logo/arrow.png');
             arrow_image.setAttribute('width', 30);
             arrow_image.setAttribute('height', 30);
             arrow_image.setAttribute("alt", "loading..");
-            ElevUsePageDiv.appendChild(arrow_image);
+            show.appendChild(arrow_image);
             j++;
         }
 
     }
-    ElevUsePageDiv.appendChild(document.createElement('br'));
-    drawLine(textList["elevatorUse"]["coordinates"]);
+    show.appendChild(document.createElement('br'));
+    drawLine(textList[show.getAttribute('id')]["coordinates"]);
 }
 
-function ElevNoUsePage(){
-    ElevUsePageDiv.style.display="none";
-    ElevNoUsePageDiv.style.display="block";
-    ElevNoUsePageDiv.style.textAlign="center";
 
-    //자식모두지우고 받은리스트 추가
-    ElevNoUsePageDiv.replaceChildren();
-
-     //최소 주기
-    let timeText = document.createElement('div');
-    timeText.setAttribute("id", "timeText");//속성주기
-    timeText.innerHTML="최소";
-    ElevNoUsePageDiv.appendChild(timeText);
-
-    //시간주기
-    const seconds = textList["elevatorNoUse"]["distance"];
-    var min = parseInt((seconds%3600)/60);
-    var sec = seconds%60;
-
-
-    let newDivTime = document.createElement('div');
-    newDivTime.setAttribute("id", "time");//속성주기
-    //분이 0인지 구분
-    if(min == 0){
-        newDivTime.innerHTML=sec+"초";
-    } else {
-        newDivTime.innerHTML = min + "분 " + sec + "초";
-    }
-    ElevNoUsePageDiv.appendChild(newDivTime);
-
-    var k=1;
-
-    for (var i=0; i<textList["elevatorNoUse"]['route'].length;i++){
-        let newDiv = document.createElement('div');
-        newDiv.style.textAlign="center";
-        newDiv.innerHTML=textList["elevatorNoUse"]['route'][i];
-        ElevNoUsePageDiv.appendChild(newDiv);
-
-        if(k<textList["elevatorNoUse"]['route'].length)
-        {
-            let arrow_image=document.createElement('img');
-            arrow_image.setAttribute('src', '../../static/logo/arrow.png');
-            arrow_image.setAttribute('width', 30);
-            arrow_image.setAttribute('height', 30);
-            arrow_image.setAttribute('alt', "loading..");
-            ElevNoUsePageDiv.appendChild(arrow_image);
-            k++;
-        }
-
-    }
-    ElevNoUsePageDiv.appendChild(document.createElement('br')); //띄어쓰기
-    drawLine(textList["elevatorNoUse"]["coordinates"]); //경로그리기
-}
 
 //##경로표시
 let boolDepartureCheck = false;
@@ -438,6 +392,7 @@ function submitCheck(event) {
     if(getDirectionCheck()){
         //결과경로창 보이게끔
         document.getElementById("showRoute").style.visibility="visible";
+        document.getElementById("elevatorCheck").style.visibility="visible";
         $.ajax({
             url: 'place_submit',
             type: 'POST',
@@ -447,14 +402,10 @@ function submitCheck(event) {
             datatype: 'json',
             success: function(data){
                 textList = data;
-                document.getElementById('cafe').style.display="none";
-                document.getElementById('convi').style.display="none";  
-                document.getElementById('food').style.display="none";
-                document.getElementById('hosp').style.display="none";
-                document.getElementById('study').style.display="none";
+                $('#MapConviText div').css('display','none');
                 //엘리베이터 시간주기
                 elevTimePlus(textList);
-                ElevUsePage();
+                ElevPage('use');
                 drawLine(textList["elevatorUse"]["coordinates"]);
             }
 
