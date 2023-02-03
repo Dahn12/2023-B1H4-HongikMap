@@ -8,6 +8,7 @@ STAIR = "S"
 EXIT = "X"
 BASEMENT = "B"
 
+data_path = "HongikMap/static/data/data.txt"
 keywords_path = "HongikMap/static/data/keywords.txt"
 recommends_by_parsing_path = "HongikMap/static/data/recommends_by_parsing.txt"
 result_with_elevator_path = "HongikMap/static/data/result_with_elevator.txt"
