@@ -64,7 +64,7 @@ function convenienceIcon(name){
     {
         $("#MapConviText div").css('display','none');
     }
-
+    conviName = name;
 }
 
 
