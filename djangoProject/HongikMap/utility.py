@@ -15,7 +15,7 @@ result_without_elevator_path = "HongikMap/static/data/result_without_elevator.tx
 coordinate_path = "HongikMap/static/data/coordinate.txt"
 
 
-def recommend2node(input_recommend: str):
+def recommend2node(input_recommend: str) -> str:
     with open(keywords_path, "r", encoding="UTF8") as f:
         for line in f.readlines():
             node, recommend = line.split(":")
@@ -31,7 +31,7 @@ def recommend2node(input_recommend: str):
     return ""
 
 
-def nodes2recommends(input_nodes: list):
+def nodes2recommends(input_nodes: list) -> list:
     result = OrderedDict()
 
     for node in input_nodes:
@@ -133,10 +133,12 @@ def is_exit(node: str) -> bool:
     return node.split("-")[2][0] == EXIT
 
 
+# Return True if entity of the node is room
 def is_room(node: str) -> bool:
     return node.split("-")[2][0].isdecimal()
 
 
+# Return what is entity of the node
 def get_kind(node: str) -> str:
     if is_external(node):
         return EXTERNAL
