@@ -16,12 +16,25 @@
     }
 }
 
+html, body{
+    display: flex;
+    justify-content: center;
+}
+
+#background{
+
+    position:relative;
+    width: 1300px;
+    height: 700px;
+}
 /*학교이미지*/
 .img-fluid{
     position: absolute;
+
+    right: -45px;
+    top : 7px;
     width: 1300px;
     height: 700px;
-    right: 0;
     z-index: 0;
     animation: fadein 4s ease 2s;
     -webkit-animation: fadein 2s;
@@ -33,8 +46,7 @@
 /*캔버스*/
 #myCanvas{
     position: absolute;
-    right: 0;
-    overflow: auto;
+    left:0px;
     z-index: 1;
     /*원래 z index
     z-index: 10;*/
@@ -45,15 +57,16 @@
 /*편의시설아이콘 및 텍스트*/
 #MapConviText{
     position: absolute;
+    left:0px;
     width: 1300px;
     height: 700px;
-    right: 0;
     overflow: auto;
     z-index: 2;
 
 }
 #MapConviText div{
     position: absolute;
+    left:0px;
     width: 1300px;
     height: 700px;
     right: 0;
