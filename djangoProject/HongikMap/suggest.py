@@ -1,4 +1,4 @@
-from . import utility
+from .utility import *
 
 
 def recommend(keyword: str):
@@ -14,14 +14,14 @@ def recommend(keyword: str):
     keyword_nodes.sort()
     parsed_nodes = sort_parsed_nodes(parsed_nodes)
 
-    result = utility.nodes2recommends(keyword_nodes + parsed_nodes)
+    result = nodes2recommends(keyword_nodes + parsed_nodes)
 
     return result
 
 
 def nodes_from_keywords(keyword: str):
     result = []
-    with open("HongikMap/static/data/keywords.txt", "r", encoding="UTF8") as f:
+    with open(keywords_path, "r", encoding="UTF8") as f:
         for line in f.readlines():
             key, recommends = map(str, line.split(":"))
             recommends = recommends.split(",")
@@ -32,7 +32,7 @@ def nodes_from_keywords(keyword: str):
 
 def nodes_from_parsed(keyword: str):
     result = []
-    with open("HongikMap/static/data/recommends_by_parsing.txt", "r", encoding="UTF8") as f:
+    with open(recommends_by_parsing_path, "r", encoding="UTF8") as f:
         for line in f.readlines():
             key, recommends = map(str, line.split(":"))
             recommends = recommends.split(",")
@@ -46,8 +46,8 @@ def sort_parsed_nodes(parsed_nodes: list):
     underground = list(filter(lambda x: x.split("-")[1].startswith("B"), parsed_nodes))
     ground = list(set(parsed_nodes) - set(underground))
 
-    underground.sort(key=lambda x: (int(x.split("-")[1][1:]), x[0]))
-    ground.sort(key=lambda x: (int(x.split("-")[1]), x[0]))
+    underground.sort(key=lambda x: (int(x.split("-")[1][1:]), int(x.split("-")[2]), x[0]))
+    ground.sort(key=lambda x: (int(x.split("-")[1]), int(x.split("-")[2]), x[0]))
     return underground + ground
 
 
