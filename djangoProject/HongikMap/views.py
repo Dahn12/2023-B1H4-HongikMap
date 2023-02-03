@@ -6,6 +6,8 @@ from . import features
 from . import suggest
 from . import utility
 from . import navigatie
+from . import computation
+
 
 
 # Create your views here.
@@ -36,7 +38,7 @@ def submit(request):
     departure_node = utility.recommend2node(departure)
     destination_node = utility.recommend2node(destination)
 
-    print(f'submitted_node: {departure_node} {destination_node}')
+    # print(f'submitted_node: {departure_node} {destination_node}')
     elevatorUse = navigatie.search(departure_node, destination_node, elevator=True)
     elevatorNoUse = navigatie.search(departure_node, destination_node, elevator=False)
 
@@ -45,7 +47,7 @@ def submit(request):
 
 
 def compute(request):
-    graph_with_elevator = features.Graph()
+    graph_with_elevator = features.Graph(elevator=True)
     graph_without_elevator = features.Graph(elevator=False)
 
     path_with_elevator = features.Path(graph_with_elevator)
@@ -68,5 +70,7 @@ def compute(request):
         for room in path_with_elevator.rooms:
             building, floor, entity = room.split("-")
             f.write(f'{room}:{building + floor}{entity:0>2},{building}동 {floor}층 {entity}호\n')
+
+    # computation.update()
 
     return render(request, 'HongikMap/welcome.html', {})
