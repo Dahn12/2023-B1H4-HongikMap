@@ -1,7 +1,7 @@
 from .utility import *
 
 
-def recommend(keyword: str):
+def recommend(keyword: str) -> list:
     keyword_length = len(keyword)
     if keyword_length <= 0:
         return []
@@ -19,7 +19,7 @@ def recommend(keyword: str):
     return result
 
 
-def nodes_from_keywords(keyword: str):
+def nodes_from_keywords(keyword: str) -> list:
     result = []
     with open(keywords_path, "r", encoding="UTF8") as f:
         for line in f.readlines():
@@ -30,7 +30,7 @@ def nodes_from_keywords(keyword: str):
     return result
 
 
-def nodes_from_parsed(keyword: str):
+def nodes_from_parsed(keyword: str) -> list:
     result = []
     with open(recommends_by_parsing_path, "r", encoding="UTF8") as f:
         for line in f.readlines():
@@ -42,7 +42,7 @@ def nodes_from_parsed(keyword: str):
     return result
 
 
-def sort_parsed_nodes(parsed_nodes: list):
+def sort_parsed_nodes(parsed_nodes: list) -> list:
     underground = list(filter(lambda x: x.split("-")[1].startswith("B"), parsed_nodes))
     ground = list(set(parsed_nodes) - set(underground))
 
@@ -51,7 +51,7 @@ def sort_parsed_nodes(parsed_nodes: list):
     return underground + ground
 
 
-def remove_duplicates(keyword_nods: list, parsed_nodes: list):
+def remove_duplicates(keyword_nods: list, parsed_nodes: list) -> list:
     result = list(set(parsed_nodes) - set(keyword_nods))
 
     return result
