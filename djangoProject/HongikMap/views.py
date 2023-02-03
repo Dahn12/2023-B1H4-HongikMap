@@ -36,6 +36,7 @@ def submit(request):
     departure_node = utility.recommend2node(departure)
     destination_node = utility.recommend2node(destination)
 
+    print(f'submitted_node: {departure_node} {destination_node}')
     elevatorUse = navigatie.search(departure_node, destination_node, elevator=True)
     elevatorNoUse = navigatie.search(departure_node, destination_node, elevator=False)
 

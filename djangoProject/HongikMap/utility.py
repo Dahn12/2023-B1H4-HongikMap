@@ -19,7 +19,7 @@ def recommend2node(input_recommend: str) -> str:
     with open(keywords_path, "r", encoding="UTF8") as f:
         for line in f.readlines():
             node, recommend = line.split(":")
-            if input_recommend == recommend.split(",")[0]:
+            if input_recommend == recommend.split(",")[0].rstrip("\n"):
                 return node
 
     with open(recommends_by_parsing_path, "r", encoding="UTF8") as f:
@@ -41,7 +41,7 @@ def nodes2recommends(input_nodes: list) -> list:
         for line in f.readlines():
             node, value = line.split(":")
             if node in input_nodes:
-                result[node] = value.split(",")[0]
+                result[node] = value.split(",")[0].rstrip("\n")
                 input_nodes.remove(node)
                 if not input_nodes:
                     break
