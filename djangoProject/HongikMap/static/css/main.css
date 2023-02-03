@@ -255,16 +255,19 @@ input[id="submit"]{
     background-color: white;
     color: #34495e;
     flex-grow:1;
-    overflow: auto;
     display: flex;
     flex-direction: column;
+    overflow: auto;
 }
 
 
 /*엘리베이터*/
 #elevatorCheck{
+
+    visibility: hidden;
     display: grid;
     grid-template-columns:50% 50%;
+
 }
 
  #elevatorCheck label{
@@ -282,16 +285,20 @@ input[type=radio]:checked + label{
     background-color: lightgray;
     background-image: none;
 }
-#ElevUsePage{
+#elevatorUse{
+    flex-grow:1;
     font-weight: 500;
     border: 1.25px solid lightgray;
-    overflow: auto;
+
+
 }
-#ElevNoUsePage{
+#elevatorNoUse{
+    flex-grow:1;
     display: none;
     font-weight: 500;
     border: 1.25px solid lightgray;
-    overflow: auto;
+
+
 }
 #timeText{
     text-align: left;

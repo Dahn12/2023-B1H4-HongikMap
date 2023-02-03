@@ -95,14 +95,14 @@
                 </div>
             </div>
             <!--엘레베이터 여부 _ 추후에 버튼 형식으로 수정-->
+            <div id="elevatorCheck">
+                    <input type="radio" id="radio1" name="elevatorCheck" onclick="ElevPage('use')" checked><label for="radio1">엘리베이터 사용</label>
+                    <input type="radio" id="radio2" name="elevatorCheck" onclick="ElevPage('noUse')"><label for="radio2">엘리베이터 미사용</label>
+            </div>
             <div id="showRoute">
-                <div id="elevatorCheck">
-                    <input type="radio" id="radio1" name="elevatorCheck" onclick="ElevUsePage()" checked><label for="radio1">엘리베이터 사용</label>
-                    <input type="radio" id="radio2" name="elevatorCheck" onclick="ElevNoUsePage()"><label for="radio2">엘리베이터 미사용</label> 
+                <div id="elevatorUse">
                 </div>
-                <div id="ElevUsePage">
-                </div>
-                <div id="ElevNoUsePage">
+                <div id="elevatorNoUse">
                 </div>        
             </div>
         </div>
