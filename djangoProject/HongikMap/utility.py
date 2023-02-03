@@ -133,7 +133,9 @@ def is_exit(node: str) -> bool:
 
 # Return True if entity of the node is room
 def is_room(node: str) -> bool:
-    return node.split("-")[2][0].isdecimal()
+    if not is_external(node) and node.split("-")[2][0].isdecimal():
+        return True
+    return False
 
 
 # Return what is entity of the node
