@@ -1,8 +1,13 @@
+html, body{
+    display: flex;
+    justify-content: center;
+}
 .container {
   text-align: center;
   width: 1300px;
   height: 700px;
   position: absolute;
+  vertical-align:middle;
   z-index: 1;
 }
 .container::after {
@@ -12,7 +17,8 @@
   background: url("../logo/lightmap.png");
   background-size: cover;
   position: absolute;
-  right: 0;
+  right: -45px;
+  top : 7px;
   z-index: -1;
   animation: fadein 4s ease 2s;
   -webkit-animation: fadein 2s;
