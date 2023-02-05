@@ -1,3 +1,25 @@
+.w-btn-gra1 {
+    background: linear-gradient(-45deg, #33ccff 0%, #ff99cc 100%);
+    color: white;
+}
+
+.w-btn-gra-anim {
+    background-size: 400% 400%;
+    animation: gradient1 5s ease infinite;
+}
+
+@keyframes gradient1 {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
 @keyframes fadein {
     from {
         opacity: 0.1;
@@ -199,10 +221,19 @@ input[id="autoInput1"]{
 }
 input[id="submit"]{
     position: absolute;
+    border: none;
     right: 17px;
-    margin-top:4px;
+    width: 57px;
+    height: 23px;
+    margin-top:10px;
     margin-bottom: 30px;
     cursor: pointer;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+    color: white;
+    animation: gradient1 5s ease infinite;
+    border-radius: 8px;
 }
 #textBar{
 
