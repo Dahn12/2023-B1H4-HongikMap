@@ -9,7 +9,6 @@ from . import navigatie
 from . import computation
 
 
-
 # Create your views here.
 
 def welcome(request):
@@ -18,6 +17,10 @@ def welcome(request):
 
 def main(request):
     return render(request, 'HongikMap/main.html', {})
+
+
+def responsiveWebMain(request):
+    return render(request, 'HongikMap/responsiveWebMain.html', {})
 
 
 def main2(request):
