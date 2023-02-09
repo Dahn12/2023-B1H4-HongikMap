@@ -1,0 +1,150 @@
+
+/*길찾기버튼*/
+.w-btn-gra1 {
+    background: linear-gradient(-45deg, #33ccff 0%, #ff99cc 100%);
+    color: white;
+}
+
+.w-btn-gra-anim {
+    background-size: 400% 400%;
+    animation: gradient1 5s ease infinite;
+}
+
+@keyframes gradient1 {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0.1;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadein {
+    from {
+        opacity: 0.1;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/*지도위의 편의시설*/
+#MapConviText{
+    z-index: 2;
+}
+#MapConviText div{
+    display: none;
+}
+
+/*사이드비*/
+.mySidebar{
+    width: 300px;
+    border: 1px solid lightgray;
+    height: 100vh;
+    position: absolute;
+    z-index: 3;
+    display: flex;
+}
+/*모바일사이드바*/
+@media (max-width: 500px) {
+    .mySidebar{
+        width: 60%;
+        border: 1px solid lightgray;
+        height: 100vh;
+        position: absolute;
+        z-index: 3;
+        display: flex;
+    }
+}
+
+
+/*자동완성*/
+.autocomplete {
+    position: relative;
+    display: inline-block;
+    color:black ;
+}
+
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 101;
+     top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 180px;
+    overflow: auto;
+}
+
+.autocomplete-items div {
+    padding: 2px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+.autocomplete-items div:hover {
+    background-color: #e9e9e9;
+}
+
+.autocomplete-active {
+   background-color: DodgerBlue !important;
+    color: #ffffff;
+}
+
+
+
+/*엘리베이터버튼*/
+#elevatorCheck{
+    visibility: hidden;
+}
+
+#elevatorUse{
+    flex-grow:1;
+    font-weight: 500;
+    border: 1.25px solid lightgray;
+}
+#elevatorNoUse{
+    flex-grow:1;
+    display: none;
+    font-weight: 500;
+    border: 1.25px solid lightgray;
+
+
+}
+
+/*결과경로*/
+#showRoute {
+    visibility: hidden;
+    color: #34495e;
+    flex-grow:1;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+#timeText{
+    text-align: left;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+#time{
+    text-align: left;
+    font-weight: bold;
+    padding-left: 10px;
+}
+

@@ -1,8 +1,29 @@
+
+let conviDiv = {
+    'cafe':[["R동 L층 카페나무",187,430],["와우관 4층 카페나무",437,92],["R동 2층 카페 그라찌에",265,417],["R동 2층 다과점 파프라카",204,486],["카페 캠퍼",910,507],["A동 1층 카페드림",898,274],["C동 8층 간이카페",999,198],["중앙도서관 2층 북카페",535,116]],
+    'convi':[["R동 B2 홍익대학서적",228,451],["와우관 4층 편의점",437,92],["R동 3층 편의점",226,432],["R동 L층 한가람 문구센터",186,383],["제2기숙사 지하1층 편의점",938,470]],
+    'food':[["제2기숙사 학생식당",936,474],["향차이",916,531],["메리킹",165,458]],
+    'hosp':[["약국(원이 약국)",549,567],["건강진료센터",570,259]],
+    'study':[["T동 3,4층 열람실",821,499],["A동 2층 열람실",823,227],["R동 8층 열람실",257,531],["중앙도서관 열람실",521,219]]
+}
+function conviInMap(name) {
+    //위치조정
+    //위치조정은 기본 1300*700px의 지도 위치를 기준으로 한다.
+    // 페이지확대,축소할때 다시 실행하도록 수정해야한다
+    let widthRatio = document.getElementById('outerImage').getBoundingClientRect().width / 1300;
+    let heightRatio = document.getElementById('outerImage').getBoundingClientRect().height / 700;
+    for(let i=0; conviDiv[name].length;i++){
+        $('<img>', {
+            src: '../../static/logo/position.png',
+            title:conviDiv[name][i][0],
+            width: '44px',
+            height: '44px'
+        }).css('left', widthRatio*conviDiv[name][i][1]).css('top',heightRatio*conviDiv[name][i][2]).css('position','absolute').appendTo(document.getElementById("MapConviText"));
+    }
+
+}
+conviInMap(testConvi,'cafe');
 //##선그리기
-
-//테스트케이스
-
-
 let pathResult = [];
 //canvas 엘리먼트를 취득한다.
 const canvas = document.getElementById('myCanvas');
@@ -46,26 +67,8 @@ canvas.onclick = function(event){
 }
 
 let number=0;
-let conviName;
+let conviName='cafe';
 
-//##편의시설 아이콘띄우기
-function convenienceIcon(name){
-    // 같은 버튼 눌렀는지 체크
-    if(conviName != name){
-        number= 0;
-    }
-    number++;
-    if((number%2)!=0)
-    {
-        $("#MapConviText div").css('display','none');
-        document.getElementById(name).style.display="block";
-    }
-    else
-    {
-        $("#MapConviText div").css('display','none');
-    }
-    conviName = name;
-}
 
 
 
@@ -424,3 +427,4 @@ function elevTimePlus(textList) {
     }
     textList["elevatorUse"]["distance"] = seconds;
 }
+
