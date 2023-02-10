@@ -40,12 +40,14 @@
     }
 }
 
+
 /*지도위의 편의시설*/
 #MapConviText{
     z-index: 2;
 }
 #MapConviText div{
-    display: none;
+    display: flex;
+    visibility: hidden;
 }
 
 /*사이드비*/
