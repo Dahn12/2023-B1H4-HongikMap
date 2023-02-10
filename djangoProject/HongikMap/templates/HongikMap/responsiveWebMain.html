@@ -12,10 +12,20 @@
 
     </head>
     <body class="position-relative">
+        <div class="card position-absolute end-0 top-100" id="card" style="width: 18rem;">
+              <img src="../../static/logo/schoolMap.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                          <button type="button" class="btn btn-primary">출발지</button>
+                          <button type="button" class="btn btn-primary">도착지</button>
+                    </div>
+              </div>
+        </div>
 
-
-		<!-- 위의창 -->
-		<nav class="navbar navbar-dark bg-dark">
+        <!-- 위의창 -->
+        <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
             <!-- 타겟id를 collapse형태로 나타나게 한다. aria를 이용하여 -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,16 +33,16 @@
             </button>
              <!-- 홍익맵로고 -->
             <a href="main" class=" link-white text-decoration-none">
-                <span class="fs-3 text-center fw-semibold w-100" style='display: block;'>HONGIK MAP</span	>
+                <span class="fs-3 text-center fw-semibold w-100" style='display: block;'>HONGIK MAP</span   >
             </a>
         </div>
-		</nav>
+        </nav>
 
-		<!-- 학교사진 및 캔버스	-->
-		<!-- ratio클래스로인해 자식요소 크기 자동조절 -->
-		<div class='ratio position-absolute ' style="--bs-aspect-ratio: 53.84615384%;" id="outerImage">
-			<img src="../../static/logo/schoolMap.jpg" alt="...">
-			<canvas id="myCanvas"width="1300" height="700"></canvas>
+        <!-- 학교사진 및 캔버스 -->
+        <!-- ratio클래스로인해 자식요소 크기 자동조절 -->
+        <div class='ratio position-absolute ' style="--bs-aspect-ratio: 53.84615384%;" id="outerImage">
+            <img src="../../static/logo/schoolMap.jpg" alt="...">
+            <canvas id="myCanvas"width="1300" height="700"></canvas>
 
             <!-- 편의시설텍스트 -->
             <div class="img-fluid d-flex" id="MapConviText">
@@ -42,24 +52,24 @@
                 <div class="flex-grow-1" id="hosp"></div>
                 <div class="flex-grow-1" id="study"></div>
             </div>
-		</div>
+        </div>
 
-		<!-- 사이드바 -->
-		<!-- 클래스로 callapse를 주어 숨김처리 및 수평으로 나오게 한다. flex-shrink를 통해 줄어들었을 때 고려 -->
-		<!-- d-flex를 통해 flex-conatainer표시 -->
-		<div class="flex-shrink-0 p-3 bg-white mySidebar collapse collapse-horizontal position-absolute" id="navbarToggleExternalContent" 		>
-			<!-- div를 flex속성을 위해 다시 넣었다 -->
-			<div class="d-flex flex-column" id="innerSidebar" style="display: flex">
+        <!-- 사이드바 -->
+        <!-- 클래스로 callapse를 주어 숨김처리 및 수평으로 나오게 한다. flex-shrink를 통해 줄어들었을 때 고려 -->
+        <!-- d-flex를 통해 flex-conatainer표시 -->
+        <div class="flex-shrink-0 p-3 bg-white mySidebar collapse collapse-horizontal position-absolute" id="navbarToggleExternalContent"       >
+            <!-- div를 flex속성을 위해 다시 넣었다 -->
+            <div class="d-flex flex-column" id="innerSidebar" style="display: flex">
 
-				<!-- 검색창 -->
+                <!-- 검색창 -->
                 {% csrf_token %}
                 <div class="autocomplete">
-				    <input class="form-control mb-1 searchText w-100" id="autoInput" type="search" placeholder="출발지를 입력하세요" aria-label="Search" oninput="sendingData(this);" autocomplete="off">
+                    <input class="form-control mb-1 searchText w-100" id="autoInput" type="search" placeholder="출발지를 입력하세요" aria-label="Search" oninput="sendingData(this);" autocomplete="off">
                 </div>
                 <div class="autocomplete">
                     <input class="form-control mb-1 searchText w-100" id="autoInput1" type="search" placeholder="도착지를 입력하세요" aria-label="Search" oninput="sendingData(this);" autocomplete="off">
                 </div>
-				<button type="button" class="btn btn-primary mb-1 float-end w-btn w-btn-gra1 w-btn-gra-anim" onclick="submitCheck()">길찾기</button>
+                <button type="button" class="btn btn-primary mb-1 float-end w-btn w-btn-gra1 w-btn-gra-anim" onclick="submitCheck()">길찾기</button>
                 <!-- 편의시설 -->
                 <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
                     <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off" onclick="conviShow('cafe',event);">
@@ -86,14 +96,14 @@
                     <label class="btn btn-outline-primary" for="btnradio2">엘리베이터 미사용</label>
                 </div>
 
-				<div id="showRoute">
+                <div id="showRoute">
                     <div id="elevatorUse">
                     </div>
                     <div id="elevatorNoUse">
                     </div>
-				</div>
+                </div>
             </div>
-		</div>
+        </div>
 
 
 
