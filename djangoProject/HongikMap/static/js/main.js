@@ -46,25 +46,25 @@ canvas.onclick = function(event){
 }
 
 let number=0;
-let conviName;
+let amenitiesName;
 
 //##편의시설 아이콘띄우기
 function convenienceIcon(name){
     // 같은 버튼 눌렀는지 체크
-    if(conviName != name){
+    if(amenitiesName != name){
         number= 0;
     }
     number++;
     if((number%2)!=0)
     {
-        $("#MapConviText div").css('display','none');
+        $("#amenitiesOnMap div").css('display','none');
         document.getElementById(name).style.display="block";
     }
     else
     {
-        $("#MapConviText div").css('display','none');
+        $("#amenitiesOnMap div").css('display','none');
     }
-    conviName = name;
+    amenitiesName = name;
 }
 
 
@@ -402,7 +402,7 @@ function submitCheck(event) {
             datatype: 'json',
             success: function(data){
                 textList = data;
-                $('#MapConviText div').css('display','none');
+                $('#amenitiesOnMap div').css('display','none');
                 //엘리베이터 시간주기
                 elevTimePlus(textList);
                 ElevPage('use');

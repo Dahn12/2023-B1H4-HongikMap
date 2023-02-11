@@ -40,17 +40,17 @@
 
         <!-- 학교사진 및 캔버스 -->
         <!-- ratio클래스로인해 자식요소 크기 자동조절 -->
-        <div class='ratio position-absolute ' style="--bs-aspect-ratio: 53.84615384%;" id="outerImage">
+        <div class='ratio position-absolute ' style="--bs-aspect-ratio: 53.84615384%;" id="background">
             <img src="../../static/logo/schoolMap.jpg" alt="...">
             <canvas id="myCanvas"width="1300" height="700"></canvas>
 
-            <!-- 편의시설텍스트 -->
-            <div class="img-fluid d-flex" id="MapConviText">
+            <!-- 편의시설화살표 -->
+            <div class="img-fluid d-flex" id="amenitiesOnMap">
                 <div class="flex-grow-1" id="cafe"></div>
-                <div class="flex-grow-1" id="convi"></div>
-                <div class="flex-grow-1" id="food"></div>
-                <div class="flex-grow-1" id="hosp"></div>
-                <div class="flex-grow-1" id="study"></div>
+                <div class="flex-grow-1" id="convenienceStore"></div>
+                <div class="flex-grow-1" id="restaurant"></div>
+                <div class="flex-grow-1" id="medicalRoom"></div>
+                <div class="flex-grow-1" id="readingRoom"></div>
             </div>
         </div>
 
@@ -72,17 +72,17 @@
                 <button type="button" class="btn btn-primary mb-1 float-end w-btn w-btn-gra1 w-btn-gra-anim" onclick="submitCheck()">길찾기</button>
                 <!-- 편의시설 -->
                 <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-                    <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off" onclick="conviShow('cafe',event);">
+                    <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off" onclick="amenitiesShow('cafe',event);">
                     <label class="btn btn-outline-primary" for="btncheck1"><i class="bi bi-cup-fill"></i></label>
 
-                    <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off" onclick="conviShow('convi',event);">
+                    <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off" onclick="amenitiesShow('convenienceStore',event);">
                     <label class="btn btn-outline-primary" for="btncheck2" ><i class="bi bi-basket2-fill"></i></label>
 
-                    <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off" onclick="conviShow('food',event);">
+                    <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off" onclick="amenitiesShow('restaurant',event);">
                     <label class="btn btn-outline-primary" for="btncheck3"><i class="bi bi-house"></i></label>
-                    <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off" onclick="conviShow('hosp',event);">
+                    <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off" onclick="amenitiesShow('medicalRoom',event);">
                     <label class="btn btn-outline-primary" for="btncheck4"><i class="bi bi-plus-square"></i></label>
-                    <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off" onclick="conviShow('study',event);">
+                    <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off" onclick="amenitiesShow('readingRoom',event);">   
                     <label class="btn btn-outline-primary" for="btncheck5"><i class="bi bi-pencil-fill"></i></label>
                 </div>
 

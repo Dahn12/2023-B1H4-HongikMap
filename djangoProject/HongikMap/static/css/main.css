@@ -77,7 +77,7 @@ html, body{
 
 
 /*편의시설아이콘 및 텍스트*/
-#MapConviText{
+#amenitiesOnMap{
     position: absolute;
     left:0px;
     width: 1300px;
@@ -86,7 +86,7 @@ html, body{
     z-index: 2;
 
 }
-#MapConviText div{
+#amenitiesOnMap div{
     position: absolute;
     left:0px;
     width: 1300px;
@@ -96,18 +96,18 @@ html, body{
     display: none;
 }
 
-#cafe img, #convi img, #study img{
+#cafe img, #convenieneceStore img, #readingRoom img{
     width: 44px;
     height: 44px;
     position: absolute;
 
 }
-#food img{
+#restaurant img{
     width: 40px;
     height: 40px;
     position: absolute;
 }
-#hosp img{
+#medicalRoom img{
     width: 34px;
     height: 34px;
     position: absolute;

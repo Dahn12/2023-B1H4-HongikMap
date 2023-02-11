@@ -44,7 +44,7 @@ canvas.onclick = function(event){
 }
 
 let number=0;
-let conviName='cafe';
+let amenitiesName='cafe';
 
 
 
@@ -382,7 +382,7 @@ function submitCheck(event) {
             datatype: 'json',
             success: function(data){
                 textList = data;
-                $('#MapConviText div').css('display','none');
+                $('#amenitiesOnMap div').css('display','none');
                 //엘리베이터 시간주기
                 elevTimePlus(textList);
                 ElevPage('use');
@@ -405,7 +405,7 @@ function elevTimePlus(textList) {
     textList["elevatorUse"]["distance"] = seconds;
 }
 
-function conviShow(name,e){
+function amenitiesShow(name,e){
     if(e.target.checked){
         document.getElementById(name).style.visibility = 'visible';
     } else{
@@ -413,33 +413,39 @@ function conviShow(name,e){
     }
 }
 
-let conviDic = {
+let amenitiesDic = {
     'cafe':[["R동 L층 카페나무",187,430],["와우관 4층 카페나무",437,92],["R동 2층 카페 그라찌에",265,417],["R동 2층 다과점 파프라카",204,486],["카페 캠퍼",910,507],["A동 1층 카페드림",898,274],["C동 8층 간이카페",999,198],["중앙도서관 2층 북카페",535,116]],
-    'convi':[["R동 B2 홍익대학서적",228,451],["와우관 4층 편의점",437,92],["R동 3층 편의점",226,432],["R동 L층 한가람 문구센터",186,383],["제2기숙사 지하1층 편의점",938,470]],
-    'food':[["제2기숙사 학생식당",936,474],["향차이",916,531],["메리킹",165,458]],
-    'hosp':[["약국(원이 약국)",916,550],["건강진료센터",570,259]],
-    'study':[["T동 3,4층 열람실",821,499],["A동 2층 열람실",823,227],["R동 8층 열람실",257,531],["중앙도서관 열람실",521,219]]
+    'convenienceStore':[["R동 B2 홍익대학서적",228,451],["와우관 4층 편의점",437,92],["R동 3층 편의점",226,432],["R동 L층 한가람 문구센터",186,383],["제2기숙사 지하1층 편의점",938,470]],
+    'restaurant':[["제2기숙사 학생식당",936,474],["향차이",916,531],["메리킹",165,458]],
+    'medicalRoom':[["약국(원이 약국)",916,550],["건강진료센터",570,259]],
+    'readingRoom':[["T동 3,4층 열람실",821,499],["A동 2층 열람실",823,227],["R동 8층 열람실",257,531],["중앙도서관 열람실",521,219]]
 }
-function conviInMap() {
-    $('#MapConviText div').empty();
+function amenitiesInMap() {
+    //지도위 편의시설 전부 삭제
+    $('#amenitiesOnMap div').empty();
     //위치조정
     //위치조정은 기본 1300*700px의 지도 위치를 기준으로 한다.
-    let widthRatio = document.getElementById('outerImage').getBoundingClientRect().width / 1300;
-    let heightRatio = document.getElementById('outerImage').getBoundingClientRect().height / 700;
-    for(let key in conviDic){
-        for(let i=0; i < conviDic[key].length;i++){
-        $('<img>', {
-            src: '../../static/logo/position.png',
-            title:conviDic[key][i][0],
-            width: 44*widthRatio+'px',
-            height: 44*heightRatio+'px'
-            }).css('left', widthRatio*conviDic[key][i][1]).css('top',heightRatio*conviDic[key][i][2]).css('position','absolute').appendTo(document.getElementById(key));
+    //이함수는 페이지 로드될떄와 화면크기가 변할때 실행된다.
+    
+    //화면비율
+    let widthRatio = document.getElementById('background').getBoundingClientRect().width / 1300;
+    let heightRatio = document.getElementById('background').getBoundingClientRect().height / 700;
+    for(let key in amenitiesDic){
+        for(let i=0; i < amenitiesDic[key].length;i++){
+            //제이쿼리를 통해 img의 속성와 css를 주고 div안에 넣어준다
+            $('<img>', {
+                src: '../../static/logo/position.png',
+                title:amenitiesDic[key][i][0],
+                width: 44*widthRatio+'px',
+                height: 44*heightRatio+'px'
+                }).css('left', widthRatio*amenitiesDic[key][i][1]).css('top',heightRatio*amenitiesDic[key][i][2]).css('position','absolute').appendTo(document.getElementById(key));
         }
     }
 }
-conviInMap();
+amenitiesInMap();
 //화면 크기 변할 때 편의시설 조정
 window.onresize = function() {
-    conviInMap();
+    amenitiesInMap();
 }
+
 

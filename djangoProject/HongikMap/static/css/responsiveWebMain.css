@@ -42,14 +42,15 @@
 
 #card{
     z-index: 10;
+    visibility: hidden;
 }
 
 
 /*지도위의 편의시설*/
-#MapConviText{
+#amenitiesOnMap{
     z-index: 2;
 }
-#MapConviText div{
+#amenitiesOnMap div{
     display: flex;
     visibility: hidden;
 }
