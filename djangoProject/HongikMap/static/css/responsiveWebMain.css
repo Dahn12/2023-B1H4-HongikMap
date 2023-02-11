@@ -40,6 +40,9 @@
     }
 }
 
+
+
+/*카드*/
 #card{
     z-index: 10;
     visibility: hidden;
@@ -68,11 +71,6 @@
 @media (max-width: 500px) {
     .mySidebar{
         width: 60%;
-        border: 1px solid lightgray;
-        height: 100vh;
-        position: absolute;
-        z-index: 3;
-        display: flex;
     }
 }
 
@@ -121,17 +119,13 @@
 }
 
 #elevatorUse{
-    flex-grow:1;
     font-weight: 500;
     border: 1.25px solid lightgray;
 }
 #elevatorNoUse{
-    flex-grow:1;
     display: none;
     font-weight: 500;
     border: 1.25px solid lightgray;
-
-
 }
 
 /*결과경로*/
@@ -139,7 +133,6 @@
     visibility: hidden;
     color: #34495e;
     flex-grow:1;
-    display: flex;
     flex-direction: column;
     overflow: auto;
 }

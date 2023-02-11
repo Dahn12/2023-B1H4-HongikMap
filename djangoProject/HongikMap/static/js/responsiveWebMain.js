@@ -448,4 +448,26 @@ window.onresize = function() {
     amenitiesInMap();
 }
 
+let amenitiesInCardDic={
 
+};
+//카드
+function getCardContents() {
+    $.ajax({
+        url: 'card_contents',
+        type: 'POST',
+        data: {
+        'csrfmiddlewaretoken':csrftoken,
+        },
+        datatype: 'json',
+        success: function(cardData){
+            amenitiesInCardDic = cardData;
+            showCardContents(amenitiesInCardDic);
+        }
+
+    });
+}
+
+function showCardContents(contents){
+
+}
