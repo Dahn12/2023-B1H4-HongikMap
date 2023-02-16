@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from . import features
 from . import suggest
 from . import utility
-from . import navigatie
+from . import navigate
 from . import computation
 
 
@@ -42,8 +42,8 @@ def submit(request):
     destination_node = utility.recommend2node(destination)
 
     # print(f'submitted_node: {departure_node} {destination_node}')
-    elevatorUse = navigatie.search(departure_node, destination_node, elevator=True)
-    elevatorNoUse = navigatie.search(departure_node, destination_node, elevator=False)
+    elevatorUse = navigate.search(departure_node, destination_node, elevator=True)
+    elevatorNoUse = navigate.search(departure_node, destination_node, elevator=False)
 
     return JsonResponse({'elevatorUse': elevatorUse,
                          'elevatorNoUse': elevatorNoUse})
