@@ -17,6 +17,12 @@ coordinate_path = "HongikMap/static/data/coordinate.txt"
 
 
 def recommend2node(input_recommend: str) -> str:
+    """
+    Convert input recommend into node
+    by searching keywords.txt and recommends_by_paring.txt
+    :param input_recommend
+    :return: node
+    """
     with open(keywords_path, "r", encoding="UTF8") as f:
         for line in f.readlines():
             node, recommend = line.split(":")
@@ -33,6 +39,11 @@ def recommend2node(input_recommend: str) -> str:
 
 
 def nodes2recommends(input_nodes: list) -> list:
+    """
+    Convert list of node into list of recommended
+    :param input_nodes: list
+    :return: list
+    """
     result = OrderedDict()
 
     for node in input_nodes:
@@ -63,6 +74,7 @@ def nodes2recommends(input_nodes: list) -> list:
     return list(result.values())
 
 
+# Not using
 def get_recommends(recommend_path: str, search_nodes: list) -> (dict, list):
     result = dict()
     with open(recommend_path, "r", encoding='UTF8') as f:
@@ -78,6 +90,16 @@ def get_recommends(recommend_path: str, search_nodes: list) -> (dict, list):
 
 
 def node2keyword(node: str) -> str:
+    """
+    Convert node into keyword including Entity name
+
+    ---Example---
+    A-1-1 -> A101
+    T-5-X1 -> T동 5층 출입문
+
+    :param node: str
+    :return: keyword string
+    """
     building, floor, entity = node.split("-")
 
     if is_external(node):
