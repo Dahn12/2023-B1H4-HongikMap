@@ -266,7 +266,8 @@ let autocomplete = (function () {
 
 
 
-
+//엘리베이터 사용 미사용과 경로 간략화에 관한 전역변수 페이지가 몇번 로드되는지에 대한 값을 저장
+var checked=0;
 
 //##결과경로표시
 //테스트케이스
@@ -275,8 +276,33 @@ var textList = {
     "elevatorNoUse":{'distance': 0, 'route': [], 'coordinates':[]}
 };
 
+var k;
+var p;
+
+function is_checked() {
+
+    k=p;
+    // 1. checkbox element를 찾습니다.
+    const checkbox = document.getElementById('my_checkbox');
+
+    // 2. checked 속성을 체크합니다.
+    const is_checked = checkbox.checked;
+
+    // 3. 결과를 출력합니다.
+    if(is_checked)
+    {
+        checked=1;
+        ElevPage(k);
+    }
+    else
+    {
+        checked=0;
+        ElevPage(k);
+    }
+}
 
 function ElevPage(name){
+    p=name;
     let show;
     let noShow;
     if(name=='use'){
@@ -314,27 +340,87 @@ function ElevPage(name){
 
     var j=1;
 
-    for (var i=0; i<textList[show.getAttribute('id')]['route'].length;i++){
-        let newDiv = document.createElement('div');
-        newDiv.style.textAlign="center";
-        newDiv.innerHTML=textList[show.getAttribute('id')]['route'][i];
-        show.appendChild(newDiv);
 
-        if(j<textList[show.getAttribute('id')]['route'].length)
+    //경로 총 길이
+    const ways = textList[show.getAttribute('id')]['route'].length; 
+
+    //경로에 포함되는 건물들 배열
+    var buildings_in_ways=[];
+
+    for (var i=1; i<textList[show.getAttribute('id')]['route'].length-1;i++){
+        //전체 경로 돌면서 각 경로의 첫번째 알파벳을 배열에 push
+        var x=textList[show.getAttribute('id')]['route'][i];
+        var y=x.charCodeAt(0);
+
+        if(65<=y && y<=90){
+            buildings_in_ways.push(x[0]);
+        }
+
+    }
+
+    var set = new Set(buildings_in_ways);
+    var Set_buildings_in_ways=Array.from(set);
+
+    console.log(Set_buildings_in_ways);
+
+    for(var q=0; q<Set_buildings_in_ways.length; q++)
+    {
+        Set_buildings_in_ways[q]=Set_buildings_in_ways[q]+"동";
+    }
+
+    
+    if(checked==1) //간략 경로
+    {
+        console.log("checked");
+    
+        for(var m=0; m<Set_buildings_in_ways.length; m++)
         {
+            let newDiv = document.createElement('div');
+            newDiv.style.textAlign="center";
+            newDiv.innerHTML=Set_buildings_in_ways[m];
+            show.appendChild(newDiv);
+    
+            if(m+1<Set_buildings_in_ways.length)
+            {
+                let arrow_image=document.createElement('img');
+                arrow_image.setAttribute('src', '../../static/logo/arrow.png');
+                arrow_image.setAttribute('width', 30);
+                arrow_image.setAttribute('height', 30);
+                arrow_image.setAttribute("alt", "loading..");
+                show.appendChild(arrow_image);
+            }
+        }
+    }
+    else // 상세 경로
+    {
+        console.log("not checked");
+    
+        for (var i=0; i<textList[show.getAttribute('id')]['route'].length;i++){
+            let newDiv = document.createElement('div');
+            newDiv.style.textAlign="center";
+            newDiv.innerHTML=textList[show.getAttribute('id')]['route'][i];
+            show.appendChild(newDiv);
+    
+            if(i<textList[show.getAttribute('id')]['route'].length-1)
+            {
             let arrow_image=document.createElement('img');
             arrow_image.setAttribute('src', '../../static/logo/arrow.png');
             arrow_image.setAttribute('width', 30);
             arrow_image.setAttribute('height', 30);
             arrow_image.setAttribute("alt", "loading..");
             show.appendChild(arrow_image);
-            j++;
+            }
         }
 
     }
+
     show.appendChild(document.createElement('br'));
     drawLine(textList[show.getAttribute('id')]["coordinates"]);
+
+    console.log(ways);
+
 }
+
 
 
 
@@ -443,6 +529,7 @@ function amenitiesInMap() {
     }
 }
 amenitiesInMap();
+
 //화면 크기 변할 때 편의시설 조정
 window.onresize = function() {
     amenitiesInMap();
