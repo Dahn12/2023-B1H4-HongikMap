@@ -1,14 +1,25 @@
 
 
-/*길찾기버튼*/
-.w-btn-gra1 {
-    background: linear-gradient(-45deg, #33ccff 0%, #ff99cc 100%);
-    color: white;
-}
-
-.w-btn-gra-anim {
-    background-size: 400% 400%;
-    animation: gradient1 5s ease infinite;
+/* !!!!!!!!!길찾기버튼*/
+/*media에서 hover상태가 지속되는 오류 잡기*/
+/*마우스 hover가 가능한 pc상태의 경우*/
+@media(hover:hover){
+    .btn-primary{
+        --bs-btn-color: #fff;
+        --bs-btn-bg: #B6BBDA;
+        --bs-btn-border-color: #B6BBDA;
+        --bs-btn-hover-color: #fff;
+        --bs-btn-hover-bg:  #969bba;
+        --bs-btn-hover-border-color: #B6BBDA;
+        --bs-btn-focus-shadow-rgb: 49,132,253;
+        --bs-btn-active-color: #fff;
+        --bs-btn-active-bg:  #B6BBDA; 
+        --bs-btn-active-border-color: #B6BBDA;
+        --bs-btn-active-shadow: inset 0 3px 5pxrgba(0, 0, 0, 0.125);
+        --bs-btn-disabled-color: #fff;
+        --bs-btn-disabled-bg:  #B6BBDA;
+        --bs-btn-disabled-border-color: #B6BBDA;
+    }
 }
 
 @keyframes gradient1 {
@@ -64,6 +75,11 @@
     visibility: hidden;
 }
 
+/* !!!!!!위의 창 nav*/
+.navbar-custom{
+    background-color: #163A63;
+ }
+
 /*사이드비*/
 .mySidebar{
     width: 300px;
@@ -78,6 +94,45 @@
     .mySidebar{
         width: 60%;
     }
+
+
+}
+
+/*media에서 hover상태가 지속되는 오류 잡기*/
+/*마우스 hover가 가능한 pc상태의 경우*/
+@media(hover:hover){
+    .btn-primary{
+        --bs-btn-color: #fff;
+        --bs-btn-bg: #B6BBDA;
+        --bs-btn-border-color: #B6BBDA;
+        --bs-btn-hover-color: #fff;
+        --bs-btn-hover-bg:  #969bba;
+        --bs-btn-hover-border-color: #B6BBDA;
+        --bs-btn-focus-shadow-rgb: 49,132,253;
+        --bs-btn-active-color: #fff;
+        --bs-btn-active-bg:  #B6BBDA; 
+        --bs-btn-active-border-color: #B6BBDA;
+        --bs-btn-active-shadow: inset 0 3px 5pxrgba(0, 0, 0, 0.125);
+        --bs-btn-disabled-color: #fff;
+        --bs-btn-disabled-bg:  #B6BBDA;
+        --bs-btn-disabled-border-color: #B6BBDA;
+    }
+}
+
+
+/* !!!!!!햄버거 색상 변경
+    bootstrap의 기존 아이콘 파일에서 색상만 변경:
+    아래 url중 
+    stroke='rgba%28_, _, _, _%29'의 _에 rgba 컬러 차트 찾아서 변경
+*/
+.navbar-toggler-icon{
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='rgba%28237, 237, 237, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+}
+
+.navbar{
+    --bs-navbar-toggler-focus-width: 0.15rem;
+    
+
 }
 
 
