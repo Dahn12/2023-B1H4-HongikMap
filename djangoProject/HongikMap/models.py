@@ -5,7 +5,6 @@ from django.db import models
 def initialize_database():
     pass
 
-
 def initialize_table():
     pass
 
@@ -26,11 +25,15 @@ def initialize_coordinate_table():
     pass
 
 
+def clean():
+    pass
+
+
 def save_building(building: str, result: dict):
     pass
 
 
-def get_route(node: str) -> dict:
+def get_route(node: str, elevator: bool) -> dict:
     pass
 
 
