@@ -3,24 +3,32 @@
 /* !!!!!!!!!길찾기버튼*/
 /*media에서 hover상태가 지속되는 오류 잡기*/
 /*마우스 hover가 가능한 pc상태의 경우*/
-@media(hover:hover){
-    .btn-primary{
-        --bs-btn-color: #fff;
-        --bs-btn-bg: #B6BBDA;
-        --bs-btn-border-color: #B6BBDA;
-        --bs-btn-hover-color: #fff;
-        --bs-btn-hover-bg:  #969bba;
-        --bs-btn-hover-border-color: #B6BBDA;
-        --bs-btn-focus-shadow-rgb: 49,132,253;
-        --bs-btn-active-color: #fff;
-        --bs-btn-active-bg:  #B6BBDA; 
-        --bs-btn-active-border-color: #B6BBDA;
-        --bs-btn-active-shadow: inset 0 3px 5pxrgba(0, 0, 0, 0.125);
-        --bs-btn-disabled-color: #fff;
-        --bs-btn-disabled-bg:  #B6BBDA;
-        --bs-btn-disabled-border-color: #B6BBDA;
+.btnsubmit{
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #B6BBDA;
+    --bs-btn-border-color: #B6BBDA;
+    --bs-btn-focus-shadow-rgb: 49,132,253;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg:  #B6BBDA;
+    --bs-btn-hover-border-color: #B6BBDA;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg:  #B6BBDA; 
+    --bs-btn-active-border-color: #B6BBDA;
+    --bs-btn-active-shadow: inset 0 3px 5pxrgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg:  #B6BBDA;
+    --bs-btn-disabled-border-color: #B6BBDA;
+}
+
+@media (hover:hover){
+    .btnsubmit:hover{
+        
+        background-color:  #969bba;
+        border-color: #B6BBDA;
     }
 }
+
+
 
 @keyframes gradient1 {
     0% {
@@ -96,27 +104,6 @@
     }
 
 
-}
-
-/*media에서 hover상태가 지속되는 오류 잡기*/
-/*마우스 hover가 가능한 pc상태의 경우*/
-@media(hover:hover){
-    .btn-primary{
-        --bs-btn-color: #fff;
-        --bs-btn-bg: #B6BBDA;
-        --bs-btn-border-color: #B6BBDA;
-        --bs-btn-hover-color: #fff;
-        --bs-btn-hover-bg:  #969bba;
-        --bs-btn-hover-border-color: #B6BBDA;
-        --bs-btn-focus-shadow-rgb: 49,132,253;
-        --bs-btn-active-color: #fff;
-        --bs-btn-active-bg:  #B6BBDA; 
-        --bs-btn-active-border-color: #B6BBDA;
-        --bs-btn-active-shadow: inset 0 3px 5pxrgba(0, 0, 0, 0.125);
-        --bs-btn-disabled-color: #fff;
-        --bs-btn-disabled-bg:  #B6BBDA;
-        --bs-btn-disabled-border-color: #B6BBDA;
-    }
 }
 
 
