@@ -1,4 +1,5 @@
 
+
 /*길찾기버튼*/
 .w-btn-gra1 {
     background: linear-gradient(-45deg, #33ccff 0%, #ff99cc 100%);
@@ -38,6 +39,11 @@
     to {
         opacity: 1;
     }
+}
+
+#checkbox_check{
+    visibility: hidden;
+
 }
 
 

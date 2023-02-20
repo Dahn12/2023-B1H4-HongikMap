@@ -459,6 +459,7 @@ function submitCheck(event) {
         //결과경로창 보이게끔
         document.getElementById("showRoute").style.visibility="visible";
         document.getElementById("elevatorCheck").style.visibility="visible";
+        document.getElementById("checkbox_check").style.visibility="visible";
         $.ajax({
             url: 'place_submit',
             type: 'POST',
