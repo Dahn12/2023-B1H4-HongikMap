@@ -1,6 +1,6 @@
 
 
-/* !!!!!!!!!길찾기버튼*/
+/*길찾기버튼*/
 /*media에서 hover상태가 지속되는 오류 잡기*/
 /*마우스 hover가 가능한 pc상태의 경우*/
 .btnsubmit{
@@ -30,6 +30,8 @@
 
 
 
+
+/*무슨 기능인지 확인 할 것*/
 @keyframes gradient1 {
     0% {
         background-position: 0% 50%;
@@ -60,6 +62,12 @@
     }
 }
 
+
+
+
+
+
+
 #checkbox_check{
     visibility: hidden;
 
@@ -83,7 +91,7 @@
     visibility: hidden;
 }
 
-/* !!!!!!위의 창 nav*/
+/*위의 창 nav*/
 .navbar-custom{
     background-color: #163A63;
  }
@@ -103,7 +111,7 @@
         width: 60%;
     }
 
-
+    
 }
 
 
@@ -196,3 +204,26 @@
     padding-left: 10px;
 }
 
+.btn-outline-secondary{
+    --bs-btn-color: #6c757d;
+    --bs-btn-border-color: #fff;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #6c757d;
+    --bs-btn-hover-border-color: #6c757d;
+    --bs-btn-focus-shadow-rgb: 108,117,125;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #6c757d;
+    --bs-btn-active-border-color: #6c757d;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
+    --bs-btn-disabled-color: #6c757d;
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #6c757d;
+    --bs-gradient: none;
+}
+
+
+
+/*버튼 가로 길이 변화*/
+.btn-group{
+    display: inline;
+}
