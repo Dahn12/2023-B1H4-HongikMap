@@ -9,8 +9,8 @@
     --bs-btn-border-color: #2787F5;
     --bs-btn-focus-shadow-rgb: 49,132,253;
     --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #2580E8;
-    --bs-btn-hover-border-color: #2580E8;
+    --bs-btn-hover-bg: #2787F5;
+    --bs-btn-hover-border-color: #2787F5;
     --bs-btn-active-color: #fff;
     --bs-btn-active-bg: #2580E8;
     --bs-btn-active-border-color: #2580E8;
@@ -229,8 +229,18 @@
     flex-wrap: wrap;
 }
 
+@media (max-width: 391px){
+    .btn-group {
+        display: inline-grid;
+    }
+}
+
 /*검색창 디자인*/
 .form-control{
     background-color: #EBF1F7;
     border: 1px solid #EBF1F7;
+}
+
+[type=search] {
+    text-align: center;
 }
