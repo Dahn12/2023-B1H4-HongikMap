@@ -225,5 +225,6 @@
 
 /*버튼 가로 길이 변화*/
 .btn-group{
-    display: inline;
+    display: flex;
+    flex-wrap: wrap;
 }
