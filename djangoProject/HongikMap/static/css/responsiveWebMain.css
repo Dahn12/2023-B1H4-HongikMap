@@ -5,26 +5,26 @@
 /*마우스 hover가 가능한 pc상태의 경우*/
 .btnsubmit{
     --bs-btn-color: #fff;
-    --bs-btn-bg: #B6BBDA;
-    --bs-btn-border-color: #B6BBDA;
+    --bs-btn-bg: #2787F5;
+    --bs-btn-border-color: #2787F5;
     --bs-btn-focus-shadow-rgb: 49,132,253;
     --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg:  #B6BBDA;
-    --bs-btn-hover-border-color: #B6BBDA;
+    --bs-btn-hover-bg: #2580E8;
+    --bs-btn-hover-border-color: #2580E8;
     --bs-btn-active-color: #fff;
-    --bs-btn-active-bg:  #B6BBDA; 
-    --bs-btn-active-border-color: #B6BBDA;
+    --bs-btn-active-bg: #2580E8;
+    --bs-btn-active-border-color: #2580E8;
     --bs-btn-active-shadow: inset 0 3px 5pxrgba(0, 0, 0, 0.125);
     --bs-btn-disabled-color: #fff;
-    --bs-btn-disabled-bg:  #B6BBDA;
+    --bs-btn-disabled-bg: #B6BBDA;
     --bs-btn-disabled-border-color: #B6BBDA;
 }
 
 @media (hover:hover){
     .btnsubmit:hover{
         
-        background-color:  #969bba;
-        border-color: #B6BBDA;
+        background-color:#2580E8;
+        border-color: #2580E8;
     }
 }
 
@@ -92,11 +92,9 @@
 }
 
 /*위의 창 nav*/
-.navbar-custom{
-    background-color: #163A63;
- }
 
-/*사이드비*/
+
+/*사이드바*/
 .mySidebar{
     width: 300px;
     border: 1px solid lightgray;
@@ -104,6 +102,8 @@
     position: absolute;
     z-index: 3;
     display: flex;
+    background-color: #F6F9FB;
+    border-top-style: hidden;
 }
 /*모바일사이드바*/
 @media (max-width: 500px) {
@@ -205,20 +205,20 @@
 }
 
 .btn-outline-secondary{
-    --bs-btn-color: #6c757d;
     --bs-btn-border-color: #fff;
     --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #6c757d;
+    --bs-btn-hover-bg: #fff;
     --bs-btn-hover-border-color: #6c757d;
     --bs-btn-focus-shadow-rgb: 108,117,125;
-    --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #6c757d;
-    --bs-btn-active-border-color: #6c757d;
+    --bs-btn-active-bg: #EBF1F7;
+    --bs-btn-active-border-color: #EBF1F7;
     --bs-btn-active-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
     --bs-btn-disabled-color: #6c757d;
     --bs-btn-disabled-bg: transparent;
     --bs-btn-disabled-border-color: #6c757d;
     --bs-gradient: none;
+    --bs-btn-bg: #fff;
+    --bs-btn-active-color: #FFC107;
 }
 
 
@@ -227,4 +227,10 @@
 .btn-group{
     display: flex;
     flex-wrap: wrap;
+}
+
+/*검색창 디자인*/
+.form-control{
+    background-color: #EBF1F7;
+    border: 1px solid #EBF1F7;
 }
