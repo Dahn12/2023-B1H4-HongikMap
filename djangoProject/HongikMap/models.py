@@ -2,8 +2,52 @@ from django.db import models
 
 
 # Create your models here.
+class Node(models.Model):
+    node = models.CharField(max_length=30, primary_key=True)
+
+    class Meta:
+        db_table = 'node'
+
+
+class ResultWithElevator(models.Model):
+    class Meta:
+        db_table = 'result_with_elevator'
+        unique_together = (('departure', 'destination'),)
+
+    departure = models.OneToOneField(Node, primary_key=True, db_column='departure', on_delete=models.CASCADE,
+                                     to_field='node', related_name='departure_with_elevator')
+    destination = models.OneToOneField(Node, db_column='destination', on_delete=models.CASCADE,
+                                       to_field='node', related_name='destination_with_elevator')
+    distance = models.IntegerField()
+    route = models.CharField(max_length=1000)
+
+
+class ResultWithoutElevator(models.Model):
+    class Meta:
+        db_table = 'result_without_elevator'
+        unique_together = (('departure', 'destination'),)
+
+    departure = models.OneToOneField(Node, primary_key=True, db_column='departure', on_delete=models.CASCADE,
+                                     to_field='node', related_name='departure_without_elevator')
+    destination = models.OneToOneField(Node, db_column='destination', on_delete=models.CASCADE,
+                                       to_field='node', related_name='destination_without_elevator')
+    distance = models.IntegerField()
+    route = models.CharField(max_length=1000)
+
+
+class Coordinate(models.Model):
+    class Meta:
+        db_table = 'coordinate'
+
+    node = models.OneToOneField(Node, to_field='node', db_column='node', primary_key=True, on_delete=models.CASCADE,
+                                related_name='coordinate_node')
+    x = models.IntegerField()
+    y = models.IntegerField()
+
+
 def initialize_database():
     pass
+
 
 def initialize_table():
     pass
@@ -29,11 +73,27 @@ def clean():
     pass
 
 
-def save_building(building: str, result: dict):
-    pass
+def save(result: dict, elevator: bool):
+    print(f'Save New Data with{"" if elevator else "out"} elevator')
+
+    if elevator:
+        for departure, destination, value in result.items():
+            distance = value['distance']
+            route = ','.join(value['route'])
+            result_with_elevator = ResultWithElevator(departure=departure, destination=destination,
+                                                      distance=distance, route=route)
+            result_with_elevator.save()
+
+    if not elevator:
+        for departure, destination, value in result.items():
+            distance = value['distance']
+            route = ','.join(value['route'])
+            result_without_elevator = ResultWithoutElevator(departure=departure, destination=destination,
+                                                            distance=distance, route=route)
+            result_without_elevator.save()
 
 
-def get_route(node: str, elevator: bool) -> dict:
+def get_route(start: str, end: str, elevator: bool) -> dict:
     pass
 
 
