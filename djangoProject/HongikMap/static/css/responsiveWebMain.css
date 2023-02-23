@@ -115,20 +115,16 @@
 }
 
 
-/* !!!!!!햄버거 색상 변경
-    bootstrap의 기존 아이콘 파일에서 색상만 변경:
-    아래 url중 
-    stroke='rgba%28_, _, _, _%29'의 _에 rgba 컬러 차트 찾아서 변경
-*/
-.navbar-toggler-icon{
-    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='rgba%28237, 237, 237, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
-}
 
+/*상단바*/
 .navbar{
-    --bs-navbar-toggler-focus-width: 0.15rem;
-    
-
+    border-bottom: 1px solid #E5E9EF;
+    --bs-navbar-color: rgba(0, 0, 0, 0);
 }
+.navbar-toggler{
+    border: 1px solid transparent;
+}
+
 
 
 /*자동완성*/
@@ -204,6 +200,29 @@
     padding-left: 10px;
 }
 
+
+
+
+/*편의시설 버튼*/
+@media (max-width: 395px){
+    .btn-group{
+        display: none;
+    } 
+
+}
+
+@media (min-width: 395px){
+    .dropdown{
+        display: none;
+    }
+
+    .btn-group{
+        display: flex;
+        flex-wrap: wrap;
+    }    
+}
+
+
 .btn-outline-secondary{
     --bs-btn-border-color: #fff;
     --bs-btn-hover-color: #fff;
@@ -223,17 +242,18 @@
 
 
 
+
 /*버튼 가로 길이 변화*/
-.btn-group{
+/*.btn-group{
     display: flex;
     flex-wrap: wrap;
-}
+}*/
 
-@media (max-width: 391px){
-    .btn-group {
+/*@media (max-width: 391px){
+    .btn-group1 {
         display: inline-grid;
     }
-}
+}*/
 
 /*검색창 디자인*/
 .form-control{
