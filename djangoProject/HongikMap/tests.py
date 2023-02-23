@@ -177,24 +177,35 @@ class ModelFunctionTest(TestCase):
             departure.save()
             destination.save()
 
-            compared_node_with_elevator = ResultWithElevator(departure=departure, destination=destination,
-                                                             distance=distance, route=route)
-            compared_node_without_elevator = ResultWithoutElevator(departure=departure, destination=destination,
-                                                                   distance=distance, route=route)
+            compared_result_with_elevator = ResultWithElevator(departure=departure, destination=destination,
+                                                               distance=distance, route=route)
+            compared_result_without_elevator = ResultWithoutElevator(departure=departure, destination=destination,
+                                                                     distance=distance, route=route)
 
-            self.assertEquals(compared_node_with_elevator,
+            self.assertEquals(compared_result_with_elevator,
                               ResultWithElevator.objects.get(departure=departure, destination=destination))
-            self.assertEquals(compared_node_without_elevator,
+            self.assertEquals(compared_result_without_elevator,
                               ResultWithoutElevator.objects.get(departure=departure, destination=destination))
 
     def test_get_route(self):
+        # Given
         test_result = {
-            ('TestNode-1-1', 'TestNode-1-1'): {'distance': 10, 'route': 'TestRoute1'},
-            ('TestNode-1-2', 'TestNode-1-5'): {'distance': 20, 'route': 'TestRoute2'},
-            ('TestNode-1-3', 'TestNode-1-6'): {'distance': 30, 'route': 'TestRoute3'},
-            ('TestNode-1-4', 'TestNode-1-7'): {'distance': 40, 'route': 'TestRoute4'},
+            ('TestNode-1-1', 'TestNode-1-2'): {'distance': 10, 'route': 'TestRoute1'},
+            ('TestNode-1-3', 'TestNode-1-3'): {'distance': 20, 'route': 'TestRoute2'},
         }
+
+        # When
         save(test_result, elevator=True)
         save(test_result, elevator=False)
+
+        # Then
+        for (departure, destination), value in test_result.items():
+            departure = Node(node=departure)
+            destination = Node(node=destination)
+            distance = value['distance']
+            route = value['route']
+
+            departure.save()
+            destination.save()
 
 
