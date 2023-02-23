@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from .models import Node, ResultWithElevator, ResultWithoutElevator, Coordinate
-from .models import save
+from .models import save, get_route
 
 
 # Create your tests here.
@@ -202,10 +202,14 @@ class ModelFunctionTest(TestCase):
         for (departure, destination), value in test_result.items():
             departure = Node(node=departure)
             destination = Node(node=destination)
-            distance = value['distance']
-            route = value['route']
 
             departure.save()
             destination.save()
+
+            route_with_elevator = get_route(departure.node, destination.node, elevator=True)
+            route_without_elevator = get_route(departure.node, destination.node, elevator=False)
+
+            self.assertEquals(route_with_elevator, value)
+            self.assertEquals(route_without_elevator, value)
 
 
