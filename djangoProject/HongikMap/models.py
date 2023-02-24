@@ -68,7 +68,7 @@ def clean():
 
 
 def save(result: dict, elevator: bool):
-    print(f'Save New Data with{"" if elevator else "out"} elevator')
+    # print(f'Save New Data with{"" if elevator else "out"} elevator')
 
     if elevator:
         for (departure, destination), value in result.items():
@@ -94,13 +94,33 @@ def save(result: dict, elevator: bool):
             distance = value['distance']
             route = ','.join(value['route'])
 
+            if not Node.objects.filter(node=departure.node).exists():
+                departure.save()
+            if not Node.objects.filter(node=departure.node).exists():
+                destination.save()
+
             result_without_elevator = ResultWithoutElevator(departure=departure, destination=destination,
                                                             distance=distance, route=route)
             result_without_elevator.save()
 
 
 def get_route(start: str, end: str, elevator: bool) -> dict:
-    pass
+    if not Node.objects.filter(node=start).exists() or not Node.objects.filter(node=end).exists():
+        print('NonExistentNode: There is no such node')
+        return {}
+    departure = Node.objects.get(node=start)
+    destination = Node.objects.get(node=end)
+
+    if elevator:
+        if not ResultWithElevator.objects.filter(departure=departure, destination=destination).exists():
+            print('NonExistentRoute: There is no such route')
+            return {}
+        return ResultWithElevator.objects.filter(departure=departure, destination=destination).values()[0]
+
+    if not elevator:
+        if not ResultWithoutElevator.objects.filter(departure=departure, destination=destination).exists():
+            print('NonExistentRoute: There is no such route')
+        return ResultWithoutElevator.objects.filter(departure=departure, destination=destination).values()[0]
 
 
 def get_coordinate(node: str) -> (int, int):
