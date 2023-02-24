@@ -1,13 +1,14 @@
 from .utility import *
 
-
+#다익스트라 결과 파일에서 출발지와 도착지에 해당하는 경로를 찾아온다.
 def search(departure: str, destination: str, elevator: bool) -> dict:
+    #엘리베이터 유무에따라 가져오는 파일이 다르다.
     result_path = get_result_path(elevator)
 
     with open(result_path, "r", encoding="UTF8") as f:
         for line in f.readlines():
             pair, value = line.split(":")
-
+            #출발지,도착지를 pair에 담고 이를 튜플화하고 그걸다시 pair에 담는다.recommend.strip(' ')
             pair = tuple(pair.split())
             value = value.split()
 

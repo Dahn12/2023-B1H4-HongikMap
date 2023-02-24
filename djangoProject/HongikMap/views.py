@@ -43,7 +43,7 @@ def submit(request):
 
     departure_node = utility.recommend2node(departure)
     destination_node = utility.recommend2node(destination)
-
+    #여기서 출발지, 도착지를 DB에 보낸다. 그럼 DB에서 출발지->x ,도착지->x에 대한 정보를 준다. 그럼 이중 for문을 통해 모든 경우에 대한 경로를 요구하고, 이를 받아서 최소를 출력한다.
     # print(f'submitted_node: {departure_node} {destination_node}')
     elevatorUse = navigate.search(departure_node, destination_node, elevator=True)
     elevatorNoUse = navigate.search(departure_node, destination_node, elevator=False)
