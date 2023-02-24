@@ -60,8 +60,7 @@ def compute(f: object, filename: str = ''):
     path_without_elevator = features.Path(graph_without_elevator)
 
     # XtoX에 저장할 건물내에서 출입구 출입구사이 가중치를 저장할 파일을 열어준다.
-    result_with_elevator_XtoX = open("HongikMap/static/data/external_node/result_with_elevator_XtoX.txt", 'a',
-                                     encoding="UTF8")
+
     result_without_elevator_XtoX = open("HongikMap/static/data/external_node/result_without_elevator_XtoX.txt", 'a',
                                         encoding="UTF8")
 
@@ -74,6 +73,11 @@ def compute(f: object, filename: str = ''):
 
     for start in graph_without_elevator.rooms + graph_without_elevator.exits:
         path_without_elevator.dijkstra(start)
+        for key, value in path_without_elevator.result.items():
+            if key[0].split('-')[2][0] == 'X' and key[1].split('-')[2][0] == 'X':
+                result_without_elevator_XtoX.write(
+                    f'{key[0]} {key[1]}:{value["distance"]} {" ".join(value["route"])}\n')
+                
     # models.save(path_without_elevator.result, False)
     # #이름을 파싱해준다. 다만 with elevator와 without elevator의 rooms는 동일하니 하나만.
     # with open("HongikMap/static/data/recommends_by_parsing.txt", "w", encoding="UTF8") as f:
