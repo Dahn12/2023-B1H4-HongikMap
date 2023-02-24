@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from .models import Node, ResultWithElevator, ResultWithoutElevator, Coordinate
-from .models import save, get_route
+from .models import save, get_route, get_coordinate
 
 
 # Create your tests here.
@@ -174,9 +174,6 @@ class ModelFunctionTest(TestCase):
             distance = value['distance']
             route = value['route']
 
-            departure.save()
-            destination.save()
-
             compared_result_with_elevator = ResultWithElevator(departure=departure, destination=destination,
                                                                distance=distance, route=route)
             compared_result_without_elevator = ResultWithoutElevator(departure=departure, destination=destination,
@@ -190,8 +187,10 @@ class ModelFunctionTest(TestCase):
     def test_get_route(self):
         # Given
         test_result = {
-            ('TestNode-1-1', 'TestNode-1-2'): {'distance': 10, 'route': 'TestRoute1'},
-            ('TestNode-1-3', 'TestNode-1-3'): {'distance': 20, 'route': 'TestRoute2'},
+            ('TestNode-1-1', 'TestNode-1-2'): {'distance': 10,
+                                               'route': ['TestNode-1-1', 'TestNode-1-3', 'TestNode-1-2']},
+            ('TestNode-1-3', 'TestNode-1-3'): {'distance': 20,
+                                               'route': ['TestNode-1-3']},
         }
 
         # When
@@ -212,4 +211,5 @@ class ModelFunctionTest(TestCase):
             self.assertEquals(route_with_elevator, value)
             self.assertEquals(route_without_elevator, value)
 
-
+    def test_get_coordinate(self):
+        pass
