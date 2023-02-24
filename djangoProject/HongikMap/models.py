@@ -115,13 +115,33 @@ def get_route(start: str, end: str, elevator: bool) -> dict:
         if not ResultWithElevator.objects.filter(departure=departure, destination=destination).exists():
             print('NonExistentRoute: There is no such route')
             return {}
-        return ResultWithElevator.objects.filter(departure=departure, destination=destination).values()[0]
+        retrieved_route = ResultWithElevator.objects.get(departure=departure, destination=destination)
+        distance = retrieved_route.distance
+        route = retrieved_route.route.split(',')
+        return {
+            'distance': distance,
+            'route': route
+        }
 
     if not elevator:
         if not ResultWithoutElevator.objects.filter(departure=departure, destination=destination).exists():
             print('NonExistentRoute: There is no such route')
-        return ResultWithoutElevator.objects.filter(departure=departure, destination=destination).values()[0]
+            return {}
+        retrieved_route = ResultWithoutElevator.objects.get(departure=departure, destination=destination)
+        distance = retrieved_route.distance
+        route = retrieved_route.route.split(',')
+        return {
+            'distance': distance,
+            'route': route
+        }
 
 
 def get_coordinate(node: str) -> (int, int):
-    pass
+    node = Node(node=node)
+    if not Node.objects.filter(node=node.node).exists():
+        node.save()
+    if not Coordinate.objects.filter(node=node).exists():
+        print('NonExsistentCorridnate: There is no such coordinate')
+        return ()
+
+    return Coordinate.objects.filter(node=node).values()[0]
