@@ -21,8 +21,8 @@ def distance2time():
                         line = end + ' ' + start + ' ' + str(weights) + '\n'
                         lines.append(line)
                     elif int(s_floor) == int(e_floor):
-                        print("line ", i, ", floor error: same stair level", line)
-                        exit()
+                        line = start + ' ' + end + ' ' + str(weights) + ' t\n'
+                        lines.append(line)
                     else:
                         print("line ", i, ", floor error: other type of stair", line)
                         exit()
@@ -231,5 +231,5 @@ def checkDuplication(start, end, edge_list, i, line):
 
 
 if __name__ == "__main__":
-    dataIntegrityCheck()
-    #distance2time()
+    #dataIntegrityCheck()
+    distance2time()
