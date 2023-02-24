@@ -6,7 +6,6 @@ from . import features
 from . import suggest
 from . import utility
 from . import navigate
-from . import computation
 from . import models
 
 import os
@@ -71,11 +70,11 @@ def compute(f: object, filename: str = ''):
     # 모든 위치를 기준으로 하여 모든 장소에 대한 최단 거리를 구한다. 그리고 이 경로를 저장한다.
     for start in graph_with_elevator.rooms + graph_with_elevator.exits:
         path_with_elevator.dijkstra(start)
-    models.save(path_with_elevator.result, True)
+    # models.save(path_with_elevator.result, True)
 
     for start in graph_without_elevator.rooms + graph_without_elevator.exits:
         path_without_elevator.dijkstra(start)
-    models.save(path_without_elevator.result, False)
+    # models.save(path_without_elevator.result, False)
     # #이름을 파싱해준다. 다만 with elevator와 without elevator의 rooms는 동일하니 하나만.
     # with open("HongikMap/static/data/recommends_by_parsing.txt", "w", encoding="UTF8") as f:
     #     for room in path_with_elevator.rooms:

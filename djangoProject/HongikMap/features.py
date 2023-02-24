@@ -67,7 +67,7 @@ class Graph:
         if node not in self.nodes:
             self.nodes.append(node)
         # rooms에 노드가 없고, 3번째인자가 숫자로만(강의실 혹은 외부위치)구성되어있으며, 이것이 외부노드가 아닐 떄 (전체적으로 강의실일때) rooms에 추가
-        if node not in self.rooms:
+        if node not in self.rooms and entity[0].isdecimal():
             self.rooms.append(node)
         if node not in self.rooms and entity[0] == 'X' or entity[0] == 'x':
             self.exits.append(node)
