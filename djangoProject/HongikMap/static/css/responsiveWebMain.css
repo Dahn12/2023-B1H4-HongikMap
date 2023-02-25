@@ -28,6 +28,9 @@
     }
 }
 
+.container-fluid{
+    height: 5vh;
+}
 
 
 
@@ -98,7 +101,7 @@
 .mySidebar{
     width: 300px;
     border: 1px solid lightgray;
-    height: 100vh;
+    height: 94vh;
     position: absolute;
     z-index: 3;
     display: flex;
@@ -140,7 +143,7 @@
     border-bottom: none;
     border-top: none;
     z-index: 101;
-     top: 100%;
+    top: 100%;
     left: 0;
     right: 0;
     max-height: 180px;
@@ -159,7 +162,7 @@
 }
 
 .autocomplete-active {
-   background-color: DodgerBlue !important;
+    background-color: DodgerBlue !important;
     color: #ffffff;
 }
 
@@ -211,7 +214,7 @@
 }
 
 @media (min-width: 395px){
-   .dropdown{
+    .dropdown{
         display: none;
     }
 

@@ -11,7 +11,7 @@ ctx.strokeStyle = '#FF5A5A';
 //굵기
 ctx.lineWidth = 6;
 //꺽인부분처리
- ctx.lineCap = 'round';
+ctx.lineCap = 'round';
 //선긋는 함수 pathResult에 경로좌표리스트
 function drawLine(pathResult){
     //선 초기화
@@ -430,18 +430,21 @@ let boolDestinationCheck = false;
 
 //출발지, 도착지가 옳은 형식인지 체크
 function getDirectionCheck(){
-  if(boolDepartureCheck && boolDestinationCheck){
-    return true;
-  } else if(!boolDepartureCheck && boolDestinationCheck){
-    alert('출발지를 입력하세요.');
-    return false;
-  } else if(boolDepartureCheck && !boolDestinationCheck){
-    alert('도착지를 입력하세요.');
-    return false;
-  } else {
-    alert('출발지, 도착지를 입력하세요.');
-    return false;
-  }
+    if(boolDepartureCheck && boolDestinationCheck){
+        return true;
+    } 
+    else if(!boolDepartureCheck && boolDestinationCheck){
+        alert('출발지를 입력하세요.');
+        return false;
+    } 
+    else if(boolDepartureCheck && !boolDestinationCheck){
+        alert('도착지를 입력하세요.');
+        return false;
+    } 
+    else {
+        alert('출발지, 도착지를 입력하세요.');
+        return false;
+    }
 }
 
 function submitCheck(event) {
@@ -486,7 +489,7 @@ function elevTimePlus(textList) {
     let seconds = parseInt(textList["elevatorUse"]["distance"]);
     for(let i = 0; i<textList["elevatorUse"]["route"].length; i++){
             if(textList["elevatorUse"]["route"][i].includes("엘리베이터")){
-                 seconds += 60;//한번탈때 엘리베이터 두번주므로 120초를 두번에 나눠서 준다
+                seconds += 60;//한번탈때 엘리베이터 두번주므로 120초를 두번에 나눠서 준다
             }
     }
     textList["elevatorUse"]["distance"] = seconds;
