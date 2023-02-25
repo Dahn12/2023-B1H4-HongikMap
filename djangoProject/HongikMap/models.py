@@ -19,7 +19,7 @@ class ResultWithElevator(models.Model):
             )
         ]
 
-    departure = models.ForeignKey("Node", unique=False, primary_key=True, db_column='departure',
+    departure = models.ForeignKey("Node", unique=False, db_column='departure',
                                   on_delete=models.CASCADE, related_name='departure_with_elevator')
     destination = models.ForeignKey("Node", unique=False, db_column='destination',
                                     on_delete=models.CASCADE, related_name='destination_with_elevator')
@@ -37,10 +37,10 @@ class ResultWithoutElevator(models.Model):
             )
         ]
 
-    departure = models.ForeignKey("Node", unique=False, primary_key=True, db_column='departure',
+    departure = models.ForeignKey("Node", unique=False, db_column='departure',
                                   on_delete=models.CASCADE, related_name='departure_without_elevator')
-    destination = models.ForeignKey("Node", unique=False, db_column='destination', on_delete=models.CASCADE,
-                                    related_name='destination_without_elevator')
+    destination = models.ForeignKey("Node", unique=False, db_column='destination',
+                                    on_delete=models.CASCADE, related_name='destination_without_elevator')
     distance = models.IntegerField()
     route = models.CharField(max_length=1000)
 
@@ -72,6 +72,7 @@ def save(result: dict, elevator: bool):
 
     if elevator:
         for (departure, destination), value in result.items():
+            print(f'Save Data | {departure:10} {destination:10} elevator={elevator} ', end="")
             departure = Node(node=departure)
             destination = Node(node=destination)
             distance = value['distance']
@@ -83,12 +84,21 @@ def save(result: dict, elevator: bool):
             if not Node.objects.filter(node=destination.node).exists():
                 destination.save()
 
-            result_with_elevator = ResultWithElevator(departure=departure, destination=destination,
-                                                      distance=distance, route=route)
-            result_with_elevator.save()
+            if ResultWithElevator.objects.filter(departure=departure, destination=destination).exists():
+                print("update data")
+                update_result = ResultWithElevator.objects.get(departure=departure, destination=destination)
+                update_result.distance = distance
+                update_result.route = route
+                update_result.save()
+            if not ResultWithElevator.objects.filter(departure=departure, destination=destination).exists():
+                print("create node")
+                result_with_elevator = ResultWithElevator(departure=departure, destination=destination,
+                                                          distance=distance, route=route)
+                result_with_elevator.save()
 
     if not elevator:
         for (departure, destination), value in result.items():
+            print(f'Save Data | {departure:10} {destination:10} elevator={elevator} ', end="")
             departure = Node(node=departure)
             destination = Node(node=destination)
             distance = value['distance']
@@ -98,10 +108,17 @@ def save(result: dict, elevator: bool):
                 departure.save()
             if not Node.objects.filter(node=departure.node).exists():
                 destination.save()
-
-            result_without_elevator = ResultWithoutElevator(departure=departure, destination=destination,
-                                                            distance=distance, route=route)
-            result_without_elevator.save()
+            if ResultWithoutElevator.objects.filter(departure=departure, destination=destination).exists():
+                print("update node")
+                update_result = ResultWithoutElevator.objects.get(departure=departure, destination=destination)
+                update_result.distance = distance
+                update_result.route = route
+                update_result.save()
+            if not ResultWithoutElevator.objects.filter(departure=departure, destination=destination).exists():
+                print("create node")
+                result_without_elevator = ResultWithoutElevator(departure=departure, destination=destination,
+                                                                distance=distance, route=route)
+                result_without_elevator.save()
 
 
 def get_route(start: str, end: str, elevator: bool) -> dict:
@@ -141,7 +158,7 @@ def get_coordinate(node: str) -> (int, int):
     if not Node.objects.filter(node=node.node).exists():
         node.save()
     if not Coordinate.objects.filter(node=node).exists():
-        print('NonExsistentCorridnate: There is no such coordinate')
+        print('NonExistentCoordinate: There is no such coordinate')
         return ()
 
     return Coordinate.objects.filter(node=node).values()[0]
