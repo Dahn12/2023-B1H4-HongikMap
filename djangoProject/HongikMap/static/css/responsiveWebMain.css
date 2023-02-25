@@ -1,37 +1,3 @@
-/*길찾기버튼*/
-/*media에서 hover상태가 지속되는 오류 잡기*/
-/*마우스 hover가 가능한 pc상태의 경우*/
-.btnsubmit{
-    --bs-btn-color: #fff;
-    --bs-btn-bg: #2787F5;
-    --bs-btn-border-color: #2787F5;
-    --bs-btn-focus-shadow-rgb: 49,132,253;
-    --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #2787F5;
-    --bs-btn-hover-border-color: #2787F5;
-    --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #2580E8;
-    --bs-btn-active-border-color: #2580E8;
-    --bs-btn-active-shadow: inset 0 3px 5pxrgba(0, 0, 0, 0.125);
-    --bs-btn-disabled-color: #fff;
-    --bs-btn-disabled-bg: #B6BBDA;
-    --bs-btn-disabled-border-color: #B6BBDA;
-}
-
-@media (hover:hover){
-    .btnsubmit:hover{
-        
-        background-color:#2580E8;
-        border-color: #2580E8;
-    }
-}
-
-.container-fluid{
-    height: 5vh;
-}
-
-
-
 /*무슨 기능인지 확인 할 것*/
 @keyframes gradient1 {
     0% {
@@ -85,7 +51,6 @@
     visibility: hidden;
 }
 
-/*위의 창 nav*/
 
 
 /*사이드바*/
@@ -117,6 +82,10 @@
 }
 .navbar-toggler{
     border: 1px solid transparent;
+}
+/*위의 창 nav*/
+.container-fluid{
+    height: 5vh;
 }
 
 
@@ -157,6 +126,62 @@
     color: #ffffff;
 }
 
+.form-control{
+    background-color: #EBF1F7;
+    border: 1px solid #EBF1F7;
+}
+
+[type=search] {
+    text-align: center;
+}
+
+
+
+/*길찾기 버튼*/
+.btnsubmit{
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #2787F5;
+    --bs-btn-border-color: #2787F5;
+    --bs-btn-focus-shadow-rgb: 49,132,253;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #2787F5;
+    --bs-btn-hover-border-color: #2787F5;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #2580E8;
+    --bs-btn-active-border-color: #2580E8;
+    --bs-btn-active-shadow: inset 0 3px 5pxrgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #B6BBDA;
+    --bs-btn-disabled-border-color: #B6BBDA;
+}
+
+@media (hover:hover){
+    .btnsubmit:hover{
+        
+        background-color:#2580E8;
+        border-color: #2580E8;
+    }
+}
+
+
+
+/*편의시설 버튼*/
+.btn-outline-secondary{
+    --bs-btn-border-color: #fff;
+    --bs-btn-hover-color: #FFC107;
+    --bs-btn-hover-bg: #fff;
+    --bs-btn-hover-border-color: #fff;
+    --bs-btn-focus-shadow-rgb: 108,117,125;
+    --bs-btn-active-bg: #EBF1F7;
+    --bs-btn-active-border-color: #EBF1F7;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
+    --bs-btn-disabled-color: #6c757d;
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #6c757d;
+    --bs-gradient: none;
+    --bs-btn-bg: #fff;
+    --bs-btn-active-color: #FFC107;
+}
 
 
 /*엘리베이터버튼*/
@@ -220,94 +245,4 @@
     text-align: left;
     font-weight: bold;
     padding-left: 10px;
-}
-
-
-
-
-/*!*편의시설 버튼*!*/
-/*@media (max-width: 395px){*/
-/*    .btn-group{*/
-/*        display: none;*/
-/*    }*/
-/*}*/
-
-/*@media (min-width: 395px){*/
-/*    .dropdown{*/
-/*        display: none;*/
-/*    }*/
-
-/*    .btn-group{*/
-/*        display: flex;*/
-/*        flex-wrap: wrap;*/
-/*    }*/
-/*}*/
-
-
-.btn-outline-secondary{
-    --bs-btn-border-color: #fff;
-    --bs-btn-hover-color: #FFC107;
-    --bs-btn-hover-bg: #fff;
-    --bs-btn-hover-border-color: #fff;
-    --bs-btn-focus-shadow-rgb: 108,117,125;
-    --bs-btn-active-bg: #EBF1F7;
-    --bs-btn-active-border-color: #EBF1F7;
-    --bs-btn-active-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
-    --bs-btn-disabled-color: #6c757d;
-    --bs-btn-disabled-bg: transparent;
-    --bs-btn-disabled-border-color: #6c757d;
-    --bs-gradient: none;
-    --bs-btn-bg: #fff;
-    --bs-btn-active-color: #FFC107;
-}
-
-.btn-outline-warning{
-    --bs-btn-color: gray;
-    --bs-btn-border-color: #fff;
-    --bs-btn-bg: #fff;
-    --bs-btn-hover-color: gray;
-    --bs-btn-hover-bg: #fff;
-    --bs-btn-hover-border-color: #fff;
-    --bs-btn-focus-shadow-rgb: 255,193,7;
-    --bs-btn-active-color: #ffc107;
-    --bs-btn-active-bg: #fff;
-    --bs-btn-active-border-color: #fff;
-    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-    --bs-btn-disabled-color: #ffc107;
-    --bs-btn-disabled-bg: transparent;
-    --bs-btn-disabled-border-color: #ffc107;
-    --bs-gradient: none;
-    display: block;
-}
-
-
-.dropdown-menu{
-    --bs-dropdown-min-width: 100%;
-    --bs-dropdown-border-color: #fff;
-
-}
-
-
-
-
-/*버튼 가로 길이 변화*/
-/*.btn-group{
-    display: flex;
-    flex-wrap: wrap;
-}*/
-
-/*@media (max-width: 391px){
-    .btn-group1 {
-        display: inline-grid;
-    }
-}*/
-
-/*검색창 디자인*/
-.form-control{
-    background-color: #EBF1F7;
-    border: 1px solid #EBF1F7;
-}
-
-[type=search] {
-    text-align: center;
 }
