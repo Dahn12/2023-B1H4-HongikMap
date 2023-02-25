@@ -42,7 +42,7 @@ def submit(request):
 
     departure_node = utility.recommend2node(departure)
     destination_node = utility.recommend2node(destination)
-    #여기서 출발지, 도착지를 DB에 보낸다. 그럼 DB에서 출발지->x ,도착지->x에 대한 정보를 준다. 그럼 이중 for문을 통해 모든 경우에 대한 경로를 요구하고, 이를 받아서 최소를 출력한다.
+    # 여기서 출발지, 도착지를 DB에 보낸다. 그럼 DB에서 출발지->x ,도착지->x에 대한 정보를 준다. 그럼 이중 for문을 통해 모든 경우에 대한 경로를 요구하고, 이를 받아서 최소를 출력한다.
     # print(f'submitted_node: {departure_node} {destination_node}')
     elevatorUse = navigate.search(departure_node, destination_node, elevator=True)
     elevatorNoUse = navigate.search(departure_node, destination_node, elevator=False)
@@ -60,19 +60,25 @@ def compute(f: object, filename: str = ''):
     path_without_elevator = features.Path(graph_without_elevator)
 
     # XtoX에 저장할 건물내에서 출입구 출입구사이 가중치를 저장할 파일을 열어준다.
-
+    result_with_elevator_XtoX = open("HongikMap/static/data/external_node/result_with_elevator_XtoX.txt", 'a',
+                                     encoding="UTF8")
     result_without_elevator_XtoX = open("HongikMap/static/data/external_node/result_without_elevator_XtoX.txt", 'a',
                                         encoding="UTF8")
-
 
     print(graph_with_elevator.rooms + graph_with_elevator.exits)
     # 모든 위치를 기준으로 하여 모든 장소에 대한 최단 거리를 구한다. 그리고 이 경로를 저장한다.
     for start in graph_with_elevator.rooms + graph_with_elevator.exits:
         path_with_elevator.dijkstra(start)
+    # XtoX를 엘리베이터 사용 유무에 따라 분리해서 저장한다.
+    if filename != 'external_node.txt':
+        for key, value in path_with_elevator.result.items():
+            if key[0].split('-')[2][0] == 'X' and key[1].split('-')[2][0] == 'X':
+                result_with_elevator_XtoX.write(f'{key[0]} {key[1]}:{value["distance"]} {" ".join(value["route"])}\n')
     models.save(path_with_elevator.result, True)
 
     for start in graph_without_elevator.rooms + graph_without_elevator.exits:
         path_without_elevator.dijkstra(start)
+    if filename != 'external_node.txt':
         for key, value in path_without_elevator.result.items():
             if key[0].split('-')[2][0] == 'X' and key[1].split('-')[2][0] == 'X':
                 result_without_elevator_XtoX.write(
@@ -89,7 +95,8 @@ def compute(f: object, filename: str = ''):
     #
     # return render(request, 'HongikMap/welcome.html', {})
 
-#각 건물별로 XToX가 있을경우 저장
+
+# 각 건물별로 XToX가 있을경우 저장
 def XToXDataization():
     externalNode = open("HongikMap/static/data/external_node/external_node.txt", 'r', encoding="UTF8")
     result_without_elevator_XtoX = open("HongikMap/static/data/external_node/result_without_elevator_XtoX.txt", 'r',
@@ -112,7 +119,7 @@ def XToXDataization():
 
 
 def preprocessing(request):
-    #동적으로 생긴 XtoX에 똑같은 자료가 다시 들어가는 것을 방지하기위해 초기화
+    # 동적으로 생긴 XtoX에 똑같은 자료가 다시 들어가는 것을 방지하기위해 초기화
     open("HongikMap/static/data/external_node/result_with_elevator_XtoX.txt", 'w', encoding="UTF8").close()
     open("HongikMap/static/data/external_node/result_without_elevator_XtoX.txt", 'w', encoding="UTF8").close()
 
@@ -128,3 +135,4 @@ def preprocessing(request):
     with open('HongikMap/static/data/external_node/merged_external_node.txt', 'r', encoding="UTF8") as f:
         compute(f, 'external_node.txt')
         f.close()
+    return render(request, 'HongikMap/welcome.html', {})
