@@ -64,7 +64,7 @@
                 <!-- 검색창 -->
                 {% csrf_token %}
                 <div class="autocomplete">
-                    <input class="form-control mb-1 searchText w-100" id="autoInput" type="search" placeholder="출발지를 입력하세요" aria-label="Search" oninput="sendingData(this);" autocomplete="off">
+                    <input class="form-control searchText w-100" id="autoInput" type="search" placeholder="출발지를 입력하세요" aria-label="Search" oninput="sendingData(this);" autocomplete="off">
                 </div>
                 <div class="autocomplete">
                     <input class="form-control mb-1 searchText w-100" id="autoInput1" type="search" placeholder="도착지를 입력하세요" aria-label="Search" oninput="sendingData(this);" autocomplete="off">
@@ -123,7 +123,7 @@
 
                 <!-- 결과경로 -->
 
-                <div class="btn-group w-100" id="elevatorCheck" role="group" aria-label="Basic radio toggle button group">
+                <div class="btn-group" id="elevatorCheck" role="group" aria-label="Basic radio toggle button group">
                     <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked onclick="ElevPage('use')">
                     <label class="btn btn-outline-primary" for="btnradio1">엘리베이터 사용</label>
 
