@@ -76,13 +76,6 @@
 
 
 
-/*카드*/
-#card{
-    z-index: 10;
-    visibility: hidden;
-}
-
-
 /*지도위의 편의시설*/
 #amenitiesOnMap{
     z-index: 2;
