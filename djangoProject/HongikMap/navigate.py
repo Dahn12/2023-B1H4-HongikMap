@@ -6,11 +6,12 @@ from . import models
 def search(departure: str, destination: str, elevator: bool) -> dict:
     # sending_dic는 딕셔너리이고 키로는  출발지도착지, 경로가 들어있고, 경로를 결과경로 간소화 시키고 좌표를 얻어 추가해서 리턴한다.
     sending_dic = models.get_route(departure, destination, elevator)
+    sending_dic['coordinates'] = get_coordinates(sending_dic['route'])
     # 압축경로 만들기
     compressed_route = get_compressed_route(sending_dic['route'])
     sending_dic['route'] = nodes2recommends(compressed_route)
     # 노드 얻기
-    sending_dic['coordinates'] = get_coordinates(sending_dic['route'])
+
     return sending_dic
     # with open(result_path, "r", encoding="UTF8") as f:
     #     for line in f.readlines():
@@ -36,7 +37,7 @@ def get_result_path(elevator: bool) -> str:
     else:
         return result_without_elevator_path
 
-
+# 경로중 건물복도이동, 엘리베이터 이동등 축소
 def get_compressed_route(nodes: list) -> list:
     nodes = compress_hallway_and_external(nodes)
     nodes = compress_elevator_and_stair(nodes)
