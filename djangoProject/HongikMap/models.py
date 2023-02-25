@@ -91,7 +91,7 @@ def save(result: dict, elevator: bool):
                 update_result.route = route
                 update_result.save()
             if not ResultWithElevator.objects.filter(departure=departure, destination=destination).exists():
-                print("create node")
+                print("create data")
                 result_with_elevator = ResultWithElevator(departure=departure, destination=destination,
                                                           distance=distance, route=route)
                 result_with_elevator.save()
@@ -109,13 +109,13 @@ def save(result: dict, elevator: bool):
             if not Node.objects.filter(node=departure.node).exists():
                 destination.save()
             if ResultWithoutElevator.objects.filter(departure=departure, destination=destination).exists():
-                print("update node")
+                print("update data")
                 update_result = ResultWithoutElevator.objects.get(departure=departure, destination=destination)
                 update_result.distance = distance
                 update_result.route = route
                 update_result.save()
             if not ResultWithoutElevator.objects.filter(departure=departure, destination=destination).exists():
-                print("create node")
+                print("create data")
                 result_without_elevator = ResultWithoutElevator(departure=departure, destination=destination,
                                                                 distance=distance, route=route)
                 result_without_elevator.save()
@@ -167,13 +167,41 @@ def get_coordinate(node: str) -> (int, int):
 def get_routes_of_start_building(start: str, elevator: bool) -> list:
     if not Node.objects.filter(node=start).exists():
         print('NonExistentNode: There is no such node')
+        return []
 
     departure = Node.objects.get(node=start)
     if elevator:
-        pass
+        if not ResultWithElevator.objects.filter(departure=departure).exists():
+            print('NonExistentRoute: There is no such route')
+            return []
+        routes = [{'distance': result['distance'], 'route': result['route'].split(',')} for result in
+                  ResultWithElevator.objects.values(departure=departure)]
+        return routes
     if not elevator:
-        pass
+        if not ResultWithoutElevator.objects.filter(departure=departure).exists():
+            print('NonExistentRoute: There is no such route')
+            return []
+        routes = [{'distance': result['distance'], 'route': result['route'].split(',')} for result in
+                  ResultWithoutElevator.objects.values(departure=departure)]
+        return routes
 
 
 def get_routes_of_end_building(end: str, elevator: bool) -> list:
-    pass
+    if not Node.objects.filter(node=end).exists():
+        print('NonExistentNode: There is no such node')
+        return []
+    destination = Node.objects.get(node=end)
+    if elevator:
+        if not ResultWithElevator.objects.filter(destination=destination).exists():
+            print('NonExistentRoute: There is no such route')
+            return []
+        routes = [{'distance': result['distance'], 'route': result['route'].split(',')} for result in
+                  ResultWithElevator.objects.values(destination=destination)]
+        return routes
+    if not elevator:
+        if not ResultWithoutElevator.objects.filter(destination=destination).exists():
+            print('NonExistentRoute: There is no such route')
+            return []
+        routes = [{'distance': result['distance'], 'route': result['route'].split(',')} for result in
+                  ResultWithoutElevator.objects.values(destination=destination)]
+        return routes
