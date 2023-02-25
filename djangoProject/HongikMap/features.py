@@ -127,6 +127,9 @@ class Path:
 
     def store(self, start: str, path: dict):
         for end in self.rooms + self.exits:
+            #만약 end가 외부이면 result에 저장하지않는다.
+            if end.split('-')[0] == '외부':
+                continue
             route = [end]
             print(start, end)
             # route의 마지막이 시작점이 될때까지 중간경로를 계속해서 넣어준다. 즉 route는 마지막 장소부터 역순으로 들어간다.
@@ -134,10 +137,8 @@ class Path:
                 # 넣은 것의 parent를 계속해서 붙여준다.
                 route.append(path[route[-1]]['parent'])
                 # 리스트[start:end:step] step만큼 건너뛴다.
+
             self.result[(start, end)] = {'distance': path[end]['distance'], 'route': route[::-1]}
 
     def find(self, start, end):
         return self.result[(start, end)]
-
-
-

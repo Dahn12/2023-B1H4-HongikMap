@@ -68,6 +68,8 @@ def compute(f: object, filename: str = ''):
     print(graph_with_elevator.rooms + graph_with_elevator.exits)
     # 모든 위치를 기준으로 하여 모든 장소에 대한 최단 거리를 구한다. 그리고 이 경로를 저장한다.
     for start in graph_with_elevator.rooms + graph_with_elevator.exits:
+        if start.split('-')[0] == '외부':
+            continue
         path_with_elevator.dijkstra(start)
     # XtoX를 엘리베이터 사용 유무에 따라 분리해서 저장한다.
     if filename != 'external_node.txt':
@@ -77,6 +79,9 @@ def compute(f: object, filename: str = ''):
     models.save(path_with_elevator.result, True)
 
     for start in graph_without_elevator.rooms + graph_without_elevator.exits:
+        # 외부노드가 시작점이면 다익스트라를 돌리지않는다.
+        if start.split('-')[0] == '외부':
+            continue
         path_without_elevator.dijkstra(start)
     if filename != 'external_node.txt':
         for key, value in path_without_elevator.result.items():
@@ -119,20 +124,23 @@ def XToXDataization():
 
 
 def preprocessing(request):
-    # 동적으로 생긴 XtoX에 똑같은 자료가 다시 들어가는 것을 방지하기위해 초기화
-    open("HongikMap/static/data/external_node/result_with_elevator_XtoX.txt", 'w', encoding="UTF8").close()
-    open("HongikMap/static/data/external_node/result_without_elevator_XtoX.txt", 'w', encoding="UTF8").close()
-
-    # 각 파일별로 읽어낸다. listdir은 디렉토리의 파일명을 리스트로 저장, join은 두 경로를 합쳐준다.
-    for filename in os.listdir("HongikMap/static/data/all_buildings_data"):
-        with open(os.path.join("HongikMap/static/data/all_buildings_data", filename), 'r', encoding="UTF8") as f:
-            # print(filename)
-            compute(f, filename)
-            f.close()
-
-    XToXDataization()
+    # # 동적으로 생긴 XtoX에 똑같은 자료가 다시 들어가는 것을 방지하기위해 초기화
+    # open("HongikMap/static/data/external_node/result_with_elevator_XtoX.txt", 'w', encoding="UTF8").close()
+    # open("HongikMap/static/data/external_node/result_without_elevator_XtoX.txt", 'w', encoding="UTF8").close()
+    #
+    # # 각 파일별로 읽어낸다. listdir은 디렉토리의 파일명을 리스트로 저장, join은 두 경로를 합쳐준다.
+    # for filename in os.listdir("HongikMap/static/data/all_buildings_data"):
+    #     with open(os.path.join("HongikMap/static/data/all_buildings_data", filename), 'r', encoding="UTF8") as f:
+    #         # print(filename)
+    #         compute(f, filename)
+    #         f.close()
+    #
+    # XToXDataization()
     # 외부노드에 대한 다익스트라를 돌린다.
     with open('HongikMap/static/data/external_node/merged_external_node.txt', 'r', encoding="UTF8") as f:
         compute(f, 'external_node.txt')
         f.close()
     return render(request, 'HongikMap/welcome.html', {})
+
+
+
