@@ -162,3 +162,18 @@ def get_coordinate(node: str) -> (int, int):
         return ()
 
     return Coordinate.objects.filter(node=node).values()[0]
+
+
+def get_routes_of_start_building(start: str, elevator: bool) -> list:
+    if not Node.objects.filter(node=start).exists():
+        print('NonExistentNode: There is no such node')
+
+    departure = Node.objects.get(node=start)
+    if elevator:
+        pass
+    if not elevator:
+        pass
+
+
+def get_routes_of_end_building(end: str, elevator: bool) -> list:
+    pass
