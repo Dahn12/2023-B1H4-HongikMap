@@ -1,12 +1,16 @@
 from .utility import *
 from . import models
 
+
 # 다익스트라 결과 파일에서 출발지와 도착지에 해당하는 경로를 찾아온다.
 def search(departure: str, destination: str, elevator: bool) -> dict:
-
+    # sending_dic는 딕셔너리이고 키로는  출발지도착지, 경로가 들어있고, 경로를 결과경로 간소화 시키고 좌표를 얻어 추가해서 리턴한다.
     sending_dic = models.get_route(departure, destination, elevator)
+    # 압축경로 만들기
+    compressed_route = get_compressed_route(sending_dic['route'])
+    sending_dic['route'] = nodes2recommends(compressed_route)
+    # 노드 얻기
     sending_dic['coordinates'] = get_coordinates(sending_dic['route'])
-
     return sending_dic
     # with open(result_path, "r", encoding="UTF8") as f:
     #     for line in f.readlines():
@@ -24,7 +28,6 @@ def search(departure: str, destination: str, elevator: bool) -> dict:
     #             route = nodes2recommends(compressed_route)
     #
     #             coordinates = get_coordinates(nodes)
-
 
 
 def get_result_path(elevator: bool) -> str:
