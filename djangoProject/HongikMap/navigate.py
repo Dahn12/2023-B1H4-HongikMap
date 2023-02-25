@@ -4,31 +4,33 @@ from . import models
 
 # 다익스트라 결과 파일에서 출발지와 도착지에 해당하는 경로를 찾아온다.
 def search(departure: str, destination: str, elevator: bool) -> dict:
-    # sending_dic는 딕셔너리이고 키로는  출발지도착지, 경로가 들어있고, 경로를 결과경로 간소화 시키고 좌표를 얻어 추가해서 리턴한다.
-    sending_dic = models.get_route(departure, destination, elevator)
-    sending_dic['coordinates'] = get_coordinates(sending_dic['route'])
-    # 압축경로 만들기
-    compressed_route = get_compressed_route(sending_dic['route'])
-    sending_dic['route'] = nodes2recommends(compressed_route)
-    # 노드 얻기
+    result = {}
+    minimum_route = {}
 
-    return sending_dic
-    # with open(result_path, "r", encoding="UTF8") as f:
-    #     for line in f.readlines():
-    #         pair, value = line.split(":")
-    #         # 출발지,도착지를 pair에 담고 이를 튜플화하고 그걸다시 pair에 담는다.recommend.strip(' ')
-    #         pair = tuple(pair.split())
-    #
-    #         value = value.split()
-    #
-    #         if (departure, destination) == pair:
-    #             distance = value[0]
-    #             nodes = value[1:]
-    #
-    #             compressed_route = get_compressed_route(nodes)
-    #             route = nodes2recommends(compressed_route)
-    #
-    #             coordinates = get_coordinates(nodes)
+    if models.exist_route(departure, destination, elevator):
+        minimum_route = models.get_route(departure, destination, elevator)
+
+    if not models.exist_route(departure, destination, elevator):
+        start_to_exit = models.get_routes_of_start_building(departure, elevator)
+        exit_to_end = models.get_routes_of_end_building(destination, elevator)
+        merged_route = []
+
+        for start_route in start_to_exit:
+            for end_route in exit_to_end:
+                exit_to_exit = models.get_route(start_route['route'][-1], end_route['route'][0], elevator)
+                distance = start_route['distance'] + exit_to_exit['distance'] + end_route['distance']
+                route = start_route['route'] + exit_to_exit['route'][1:-1] + end_route['route']
+                merged_route.append({
+                    'distance': distance,
+                    'route': route
+                })
+        minimum_route = sorted(merged_route, key=lambda x: x['distance'])[0]
+    compressed_route = get_compressed_route(minimum_route['route'])
+    result['distance'] = minimum_route['distance']
+    result['route'] = nodes2recommends(compressed_route)
+    result['coordinates'] = get_coordinates(minimum_route['route'])
+
+    return result
 
 
 def get_result_path(elevator: bool) -> str:
@@ -36,6 +38,7 @@ def get_result_path(elevator: bool) -> str:
         return result_with_elevator_path
     else:
         return result_without_elevator_path
+
 
 # 경로중 건물복도이동, 엘리베이터 이동등 축소
 def get_compressed_route(nodes: list) -> list:
