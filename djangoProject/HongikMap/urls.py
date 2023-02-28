@@ -10,4 +10,9 @@ urlpatterns = [
     path('place_submit', views.submit, name='submit'),
     path('preprocessing', views.preprocessing, name='preprocessing'),
     path('admin', views.admin, name='admin'),
+    path('update', views.update, name='update'),
+    path('QandA', views.QandA, name='QandA'),
+    path('txtCorrection', views.txtCorrection, name='txtCorrection'),
+    path('coordinateCorrection', views.coordinateCorrection, name='ccordinateCorrection'),
+    path('date', views.date, name='date'),
 ]

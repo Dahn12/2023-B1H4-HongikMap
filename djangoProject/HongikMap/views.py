@@ -29,6 +29,30 @@ def admin(request):
     return render(request, 'HongikMap/admin_main.html', {})
 
 
+def admin(request):
+    return render(request, 'HongikMap/admin_main.html', {})
+
+
+def update(request):
+    return render(request, 'HongikMap/update.html', {})
+
+
+def QandA(request):
+    return render(request, 'HongikMap/QandA.html', {})
+
+
+def txtCorrection(request):
+    return render(request, 'HongikMap/txtCorrection.html', {})
+
+
+def coordinateCorrection(request):
+    return render(request, 'HongikMap/coordinateCorrection.html', {})
+
+
+def date(request):
+    return render(request, 'HongikMap/date.html', {})
+
+
 def main2(request):
     return render(request, 'HongikMap/main2.html', {})
 
