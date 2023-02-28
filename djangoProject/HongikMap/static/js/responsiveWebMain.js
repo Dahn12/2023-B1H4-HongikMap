@@ -472,7 +472,6 @@ function submitCheck(event) {
             datatype: 'json',
             success: function(data){
                 textList = data;
-                $('#amenitiesOnMap div').css('display','none');
                 //엘리베이터 시간주기
                 elevTimePlus(textList);
                 ElevPage('use');
