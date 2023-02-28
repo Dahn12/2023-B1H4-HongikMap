@@ -9,4 +9,5 @@ urlpatterns = [
     path('recommend', views.recommend, name='recommend'),
     path('place_submit', views.submit, name='submit'),
     path('preprocessing', views.preprocessing, name='preprocessing'),
+    path('admin', views.admin, name='admin'),
 ]

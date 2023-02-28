@@ -25,6 +25,10 @@ def responsiveWebMain(request):
     return render(request, 'HongikMap/responsiveWebMain.html', {})
 
 
+def admin(request):
+    return render(request, 'HongikMap/admin_main.html', {})
+
+
 def main2(request):
     return render(request, 'HongikMap/main2.html', {})
 

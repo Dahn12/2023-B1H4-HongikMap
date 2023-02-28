@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="canonical" href="https://getbootstrap.kr/docs/5.2/examples/sidebars/">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>관리자 페이지</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+    	a{
+			text-decoration: none;
+			color: black;
+		}
+		#content {
+			background-color: white;
+			border: 1px solid lightgray;
+			width: 85%;
+			min-height: 1000px;
+
+		}
+		#logo {
+			font-weight: bold;
+		}
+    </style>
+
+</head>
+
+<body class="d-flex flex-row">
+	<aside>
+		<div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 200px; height: 100vh; overflow: auto;">
+			<a href="preprocessing.html" class="text-white nav-link">
+				<span class="fs-4">Admin Page</span>
+			</a>
+
+		    <hr>
+		    <ul class="nav nav-pills flex-column mb-auto">
+		      <li class="nav-item">
+		        <a data-url="txtCorrection.html" class="nav-link text-white " aria-current="page">
+		          txt 수정
+		        </a>
+		      </li>
+		      <li>
+		        <a data-url="coordinateCorrection.html" class="nav-link text-white">
+		          coordinate 수정
+		        </a>
+		      </li>
+		      <li>
+		        <a data-url="preprocessing.html" class="nav-link text-white">
+		          Preprocessing
+		        </a>
+		      </li>
+		      <li>
+		        <a data-url="date.html" class="nav-link text-white">
+		          일정
+		        </a>
+		      </li>
+		      <li>
+		        <a data-url="QandA.html" class="nav-link text-white">
+		          Q&A
+		        </a>
+		      </li>
+		    </ul>
+		    <hr>
+		    <div class="dropdown">
+		      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+		        <img src="#" alt="" width="32" height="32" class="rounded-circle me-2">
+		        <strong>윤찬호</strong>
+		      </a>
+		      <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+		        <li><a class="dropdown-item" href="#">Settings</a></li>
+		        <li><a class="dropdown-item" href="#">Profile</a></li>
+		        <li><hr class="dropdown-divider"></li>
+		        <li><a class="dropdown-item" href="#">Sign out</a></li>
+		      </ul>
+		    </div>
+		</div>
+
+	</aside>
+
+  	<main class="flex-fill " id="main">
+  		<div class='d-flex  flex-column align-items-center' style='background-color: lightgray; width: 100%; height: 100%; overflow: auto;' >
+  			<header >
+				<div class="text-center display-3" id='logo'><a href="main">HONGIK MAP</a></div>
+
+			</header>
+			<div id='content'>
+				<iframe id="iframe" class="p-4"src="HongikMap/templates/HongikMap/preprocessing.html" width="100%" height="100%" ></iframe>
+			</div>
+
+
+			<footer>
+				<div class='text-center'>
+					B1H4팀의 기여자분들의 도움으로 페이지가 운영되고 있습니다.
+				</div>
+			</footer>
+  		</div>
+
+
+  	</main>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="admin_main.js"></script>
+  </body>
+</html>
