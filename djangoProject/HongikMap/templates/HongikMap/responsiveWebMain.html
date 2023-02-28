@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="brightnessFromButton">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1", maximum-scale=1.0, user-scalable=1">
@@ -18,7 +18,7 @@
         <nav class="navbar navbar-bg-light">
         <div class="container-fluid">
             <!-- 타겟id를 collapse형태로 나타나게 한다. aria를 이용하여 -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation" onclick="shadowing()">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <!-- 홍익맵로고 -->
@@ -30,8 +30,8 @@
 
         <!-- 학교사진 및 캔버스 -->
         <!-- ratio클래스로인해 자식요소 크기 자동조절 -->
-        <div class='ratio position-absolute ' style="--bs-aspect-ratio: 53.84615384%;" id="background">
-            <img src="../../static/logo/schoolMap.jpg" alt="...">
+        <div class='ratio position-absolute brightnessFromButton' style="--bs-aspect-ratio: 53.84615384%;" id="background" >
+            <img id="backgroundImage" src="../../static/logo/schoolMap.jpg" alt="..." >
             <canvas id="myCanvas"width="1300" height="700"></canvas>
 
             <!-- 편의시설화살표 -->

@@ -1,5 +1,3 @@
-
-
 //선그리기
 let pathResult = [];
 //canvas 엘리먼트를 취득한다.
@@ -12,21 +10,22 @@ ctx.strokeStyle = '#FF5A5A';
 ctx.lineWidth = 6;
 //꺽인부분처리
 ctx.lineCap = 'round';
+
 //선긋는 함수 pathResult에 경로좌표리스트
-function drawLine(pathResult){
+function drawLine(pathResult) {
     //선 초기화
     ctx.clearRect(0, 0, 1300, 700);
     //새 선 그리기
     ctx.beginPath();
 
-    for(var i=0; i<pathResult.length-1; i++){
-        if(pathResult[i].length==0 || pathResult[i+1].length==0 ){
+    for (var i = 0; i < pathResult.length - 1; i++) {
+        if (pathResult[i].length == 0 || pathResult[i + 1].length == 0) {
             continue;
         }
         //시작점 지정
         ctx.moveTo(pathResult[i][0], pathResult[i][1]);
         //도착점 지정
-        ctx.lineTo(pathResult[i+1][0], pathResult[i+1][1]);
+        ctx.lineTo(pathResult[i + 1][0], pathResult[i + 1][1]);
         //실선 그리기
         ctx.stroke();
 
@@ -35,7 +34,7 @@ function drawLine(pathResult){
 
 
 //클릭하면 콘솔에 좌표 출력
-canvas.onclick = function(event){
+canvas.onclick = function (event) {
 
     const x = event.clientX - ctx.canvas.offsetLeft;
 
@@ -43,11 +42,8 @@ canvas.onclick = function(event){
     console.log(x, y);
 }
 
-let number=0;
-let amenitiesName='cafe';
-
-
-
+let number = 0;
+let amenitiesName = 'cafe';
 
 
 //##입력데이터 백으로 보내기 및 처리된 데이터 받기
@@ -71,29 +67,57 @@ function getCookie(name) {
 var csrftoken = getCookie('csrftoken');
 
 //변수 선언
-let receivedList =[];
+let receivedList = [];
 
 //데이터 보내기, setautocomplete함수밑에서 보내는 동작 구현
-function sendingData(inp){ //inp는 input객체
-    if(inp == document.getElementById('autoInput')){
+function sendingData(inp) { //inp는 input객체
+    if (inp == document.getElementById('autoInput')) {
         boolDepartureCheck = false;
-    } else{
+    } else {
         boolDestinationCheck = false;
     }
     $.ajax({
         url: 'recommend',
         type: 'POST',
-        data: {'input_val':inp.value.toUpperCase(), //대문자 변환해서 소문자도 검색가능
-        'csrfmiddlewaretoken':csrftoken,
+        data: {
+            'input_val': inp.value.toUpperCase(), //대문자 변환해서 소문자도 검색가능
+            'csrfmiddlewaretoken': csrftoken,
         },
         datatype: 'json',
-        success: function(data){
+        success: function (data) {
             receivedList = data['recommendations'];
             autocomplete.setAutocomplete(inp, receivedList); //autocomplete함수를 input객체를 받아 실행
             console.log(receivedList);
         }
     });
 }
+
+
+// ##사이드바 햄버거버튼 누르면 그림자화
+let shadowingCheck = 0;
+
+function shadowing() {
+    // 화면 넓이를 측정해 500px이하일때 html 백그라운드와 지도가 밝기감소
+    if (screen.width < 500) {
+        if (shadowingCheck % 2 == 0) {
+            brightnessFromButton = document.getElementsByClassName('brightnessFromButton');
+
+            for (var i = 0; i < brightnessFromButton.length; i++) {
+                $(brightnessFromButton).css('background-color', 'rgba(0,0,0,0.5)')
+                $('#backgroundImage').css('filter', 'brightness(0.5)')
+            }
+
+        } else {
+            for (var i = 0; i < brightnessFromButton.length; i++) {
+                $(brightnessFromButton).css('background-color', 'rgba(0,0,0,0)')
+                $('#backgroundImage').css('filter', 'brightness(1)')
+            }
+        }
+        shadowingCheck++;
+    }
+
+}
+
 
 //##자동완성
 // autocomplete 부분을 생성
@@ -156,25 +180,25 @@ let autocomplete = (function () {
         for (i = 0; i < _arr.length; i++) {
             // 배열의 요소를 현재 input의 value의 값만큼 자른 후, 같으면 추가한다.
 
-                b = document.createElement("DIV");
-                // value의 값 만큼 굵게 표시
-                b.innerHTML = "<strong>" + _arr[i].substr(0, val.length) + "</strong>";
-                b.innerHTML += _arr[i].substr(val.length);
-                b.innerHTML += "<input type='hidden' value='" + _arr[i] + "'>";
+            b = document.createElement("DIV");
+            // value의 값 만큼 굵게 표시
+            b.innerHTML = "<strong>" + _arr[i].substr(0, val.length) + "</strong>";
+            b.innerHTML += _arr[i].substr(val.length);
+            b.innerHTML += "<input type='hidden' value='" + _arr[i] + "'>";
 
-                // 생성된 div에서 이벤트 발생시 hidden으로 생성된 input안의 value의 값을 autocomplete할 요소에 넣기
-                b.addEventListener("click", function (e) {
-                    if(_inp == document.getElementById('autoInput')){
-                        boolDepartureCheck = true;
-                    } else{
-                        boolDestinationCheck = true;
-                    }
-                    _inp.value = this.getElementsByTagName("input")[0].value;
-                    closeAllLists();
-                });
+            // 생성된 div에서 이벤트 발생시 hidden으로 생성된 input안의 value의 값을 autocomplete할 요소에 넣기
+            b.addEventListener("click", function (e) {
+                if (_inp == document.getElementById('autoInput')) {
+                    boolDepartureCheck = true;
+                } else {
+                    boolDestinationCheck = true;
+                }
+                _inp.value = this.getElementsByTagName("input")[0].value;
+                closeAllLists();
+            });
 
-                // autocomplete 리스트를 붙이기.
-                a.appendChild(b);
+            // autocomplete 리스트를 붙이기.
+            a.appendChild(b);
 
         }
     }
@@ -202,9 +226,9 @@ let autocomplete = (function () {
             addActive(x);
         } else if (e.keyCode == 13) {
             // enter
-            if(this == document.getElementById('autoInput')){
+            if (this == document.getElementById('autoInput')) {
                 boolDepartureCheck = true;
-            } else{
+            } else {
                 boolDestinationCheck = true;
             }
             e.preventDefault();
@@ -264,16 +288,14 @@ let autocomplete = (function () {
 })();
 
 
-
-
 //엘리베이터 사용 미사용과 경로 간략화에 관한 전역변수 페이지가 몇번 로드되는지에 대한 값을 저장
-var checked=0;
+var checked = 0;
 
 //##결과경로표시
 //테스트케이스
 var textList = {
-    "elevatorUse":{'distance': 0, 'route': [], 'coordinates':[]},
-    "elevatorNoUse":{'distance': 0, 'route': [], 'coordinates':[]}
+    "elevatorUse": {'distance': 0, 'route': [], 'coordinates': []},
+    "elevatorNoUse": {'distance': 0, 'route': [], 'coordinates': []}
 };
 
 var k;
@@ -281,7 +303,7 @@ var p;
 
 function is_checked() {
 
-    k=p;
+    k = p;
     // 1. checkbox element를 찾습니다.
     const checkbox = document.getElementById('my_checkbox');
 
@@ -289,100 +311,94 @@ function is_checked() {
     const is_checked = checkbox.checked;
 
     // 3. 결과를 출력합니다.
-    if(is_checked)
-    {
-        checked=1;
+    if (is_checked) {
+        checked = 1;
         ElevPage(k);
-    }
-    else
-    {
-        checked=0;
+    } else {
+        checked = 0;
         ElevPage(k);
     }
 }
 
-function ElevPage(name){
-    p=name;
+function ElevPage(name) {
+    p = name;
     let show;
     let noShow;
-    if(name=='use'){
+    if (name == 'use') {
         show = document.getElementById("elevatorUse");
         noShow = document.getElementById("elevatorNoUse");
-    } else{
+    } else {
         show = document.getElementById("elevatorNoUse");
         noShow = document.getElementById("elevatorUse");
     }
-    show.style.display="block";
-    noShow.style.display="none";
-    show.style.textAlign="center";
+    show.style.display = "block";
+    noShow.style.display = "none";
+    show.style.textAlign = "center";
 
     show.replaceChildren();
     //최소 주기
 
     let timeText = document.createElement('div');
     timeText.setAttribute("id", "timeText");//속성주기
-    timeText.innerHTML="최소";
+    timeText.innerHTML = "최소";
     show.appendChild(timeText);
 
     //시간주기
     const seconds = parseInt(textList[show.getAttribute('id')]["distance"]);
-    var min = parseInt((seconds%3600)/60);
-    var sec = seconds%60;
+    var min = parseInt((seconds % 3600) / 60);
+    var sec = seconds % 60;
 
     let newDivTime = document.createElement('div');
     newDivTime.setAttribute("id", "time");//속성주기
-    if(min == 0){
-        newDivTime.innerHTML=sec+"초";
-    } else{
-        newDivTime.innerHTML=min+"분 "+sec+"초";
+    if (min == 0) {
+        newDivTime.innerHTML = sec + "초";
+    } else {
+        newDivTime.innerHTML = min + "분 " + sec + "초";
     }
     show.appendChild(newDivTime);
 
-    var j=1;
+    var j = 1;
 
 
     //경로 총 길이
-    const ways = textList[show.getAttribute('id')]['route'].length; 
+    const ways = textList[show.getAttribute('id')]['route'].length;
 
     //경로에 포함되는 건물들 배열
-    var buildings_in_ways=[];
+    var buildings_in_ways = [];
 
-    for (var i=1; i<textList[show.getAttribute('id')]['route'].length-1;i++){
+    for (var i = 1; i < textList[show.getAttribute('id')]['route'].length - 1; i++) {
         //전체 경로 돌면서 각 경로의 첫번째 알파벳을 배열에 push
-        var x=textList[show.getAttribute('id')]['route'][i];
-        var y=x.charCodeAt(0);
+        var x = textList[show.getAttribute('id')]['route'][i];
+        var y = x.charCodeAt(0);
 
-        if(65<=y && y<=90){
+        if (65 <= y && y <= 90) {
             buildings_in_ways.push(x[0]);
         }
 
     }
 
     var set = new Set(buildings_in_ways);
-    var Set_buildings_in_ways=Array.from(set);
+    var Set_buildings_in_ways = Array.from(set);
 
     console.log(Set_buildings_in_ways);
 
-    for(var q=0; q<Set_buildings_in_ways.length; q++)
-    {
-        Set_buildings_in_ways[q]=Set_buildings_in_ways[q]+"동";
+    for (var q = 0; q < Set_buildings_in_ways.length; q++) {
+        Set_buildings_in_ways[q] = Set_buildings_in_ways[q] + "동";
     }
 
-    
-    if(checked==1) //간략 경로
+
+    if (checked == 1) //간략 경로
     {
         console.log("checked");
-    
-        for(var m=0; m<Set_buildings_in_ways.length; m++)
-        {
+
+        for (var m = 0; m < Set_buildings_in_ways.length; m++) {
             let newDiv = document.createElement('div');
-            newDiv.style.textAlign="center";
-            newDiv.innerHTML=Set_buildings_in_ways[m];
+            newDiv.style.textAlign = "center";
+            newDiv.innerHTML = Set_buildings_in_ways[m];
             show.appendChild(newDiv);
-    
-            if(m+1<Set_buildings_in_ways.length)
-            {
-                let arrow_image=document.createElement('img');
+
+            if (m + 1 < Set_buildings_in_ways.length) {
+                let arrow_image = document.createElement('img');
                 arrow_image.setAttribute('src', '../../static/logo/arrow.png');
                 arrow_image.setAttribute('width', 30);
                 arrow_image.setAttribute('height', 30);
@@ -390,25 +406,23 @@ function ElevPage(name){
                 show.appendChild(arrow_image);
             }
         }
-    }
-    else // 상세 경로
+    } else // 상세 경로
     {
         console.log("not checked");
-    
-        for (var i=0; i<textList[show.getAttribute('id')]['route'].length;i++){
+
+        for (var i = 0; i < textList[show.getAttribute('id')]['route'].length; i++) {
             let newDiv = document.createElement('div');
-            newDiv.style.textAlign="center";
-            newDiv.innerHTML=textList[show.getAttribute('id')]['route'][i];
+            newDiv.style.textAlign = "center";
+            newDiv.innerHTML = textList[show.getAttribute('id')]['route'][i];
             show.appendChild(newDiv);
-    
-            if(i<textList[show.getAttribute('id')]['route'].length-1)
-            {
-            let arrow_image=document.createElement('img');
-            arrow_image.setAttribute('src', '../../static/logo/arrow.png');
-            arrow_image.setAttribute('width', 30);
-            arrow_image.setAttribute('height', 30);
-            arrow_image.setAttribute("alt", "loading..");
-            show.appendChild(arrow_image);
+
+            if (i < textList[show.getAttribute('id')]['route'].length - 1) {
+                let arrow_image = document.createElement('img');
+                arrow_image.setAttribute('src', '../../static/logo/arrow.png');
+                arrow_image.setAttribute('width', 30);
+                arrow_image.setAttribute('height', 30);
+                arrow_image.setAttribute("alt", "loading..");
+                show.appendChild(arrow_image);
             }
         }
 
@@ -422,26 +436,21 @@ function ElevPage(name){
 }
 
 
-
-
 //##경로표시
 let boolDepartureCheck = false;
 let boolDestinationCheck = false;
 
 //출발지, 도착지가 옳은 형식인지 체크
-function getDirectionCheck(){
-    if(boolDepartureCheck && boolDestinationCheck){
+function getDirectionCheck() {
+    if (boolDepartureCheck && boolDestinationCheck) {
         return true;
-    } 
-    else if(!boolDepartureCheck && boolDestinationCheck){
+    } else if (!boolDepartureCheck && boolDestinationCheck) {
         alert('출발지를 입력하세요.');
         return false;
-    } 
-    else if(boolDepartureCheck && !boolDestinationCheck){
+    } else if (boolDepartureCheck && !boolDestinationCheck) {
         alert('도착지를 입력하세요.');
         return false;
-    } 
-    else {
+    } else {
         alert('출발지, 도착지를 입력하세요.');
         return false;
     }
@@ -458,19 +467,20 @@ function submitCheck(event) {
 
 
     //출발지 도착지형식이 참이면 백으로 출발지 도착지 보내기
-    if(getDirectionCheck()){
+    if (getDirectionCheck()) {
         //결과경로창 보이게끔
-        document.getElementById("showRoute").style.visibility="visible";
-        document.getElementById("elevatorCheck").style.visibility="visible";
-        document.getElementById("checkbox_check").style.visibility="visible";
+        document.getElementById("showRoute").style.visibility = "visible";
+        document.getElementById("elevatorCheck").style.visibility = "visible";
+        document.getElementById("checkbox_check").style.visibility = "visible";
         $.ajax({
             url: 'place_submit',
             type: 'POST',
-            data: {'departure': departure, 'destination': destination,
-            'csrfmiddlewaretoken':csrftoken,
+            data: {
+                'departure': departure, 'destination': destination,
+                'csrfmiddlewaretoken': csrftoken,
             },
             datatype: 'json',
-            success: function(data){
+            success: function (data) {
                 textList = data;
                 //엘리베이터 시간주기
                 elevTimePlus(textList);
@@ -486,58 +496,58 @@ function submitCheck(event) {
 // 엘리베이터 실제시간주기
 function elevTimePlus(textList) {
     let seconds = parseInt(textList["elevatorUse"]["distance"]);
-    for(let i = 0; i<textList["elevatorUse"]["route"].length; i++){
-            if(textList["elevatorUse"]["route"][i].includes("엘리베이터")){
-                seconds += 60;//한번탈때 엘리베이터 두번주므로 120초를 두번에 나눠서 준다
-            }
+    for (let i = 0; i < textList["elevatorUse"]["route"].length; i++) {
+        if (textList["elevatorUse"]["route"][i].includes("엘리베이터")) {
+            seconds += 60;//한번탈때 엘리베이터 두번주므로 120초를 두번에 나눠서 준다
+        }
     }
     textList["elevatorUse"]["distance"] = seconds;
 }
 
-function amenitiesShow(name,e){
-    if(e.target.checked){
+function amenitiesShow(name, e) {
+    if (e.target.checked) {
         document.getElementById(name).style.visibility = 'visible';
-    } else{
+    } else {
         document.getElementById(name).style.visibility = 'hidden';
     }
 }
 
 let amenitiesDic = {
-    'cafe':[["R동 L층 카페나무",187,430],["와우관 4층 카페나무",437,92],["R동 2층 카페 그라찌에",265,417],["R동 2층 다과점 파프라카",204,486],["카페 캠퍼",910,507],["A동 1층 카페드림",898,274],["C동 8층 간이카페",999,198],["중앙도서관 2층 북카페",535,116]],
-    'convenienceStore':[["R동 B2 홍익대학서적",228,451],["와우관 4층 편의점",437,92],["R동 3층 편의점",226,432],["R동 L층 한가람 문구센터",186,383],["제2기숙사 지하1층 편의점",938,470]],
-    'restaurant':[["제2기숙사 학생식당",936,474],["향차이",916,531],["메리킹",165,458]],
-    'medicalRoom':[["약국(원이 약국)",916,550],["건강진료센터",570,259]],
-    'readingRoom':[["T동 3,4층 열람실",821,499],["A동 2층 열람실",823,227],["R동 8층 열람실",257,531],["중앙도서관 열람실",521,219]]
+    'cafe': [["R동 L층 카페나무", 187, 430], ["와우관 4층 카페나무", 437, 92], ["R동 2층 카페 그라찌에", 265, 417], ["R동 2층 다과점 파프라카", 204, 486], ["카페 캠퍼", 910, 507], ["A동 1층 카페드림", 898, 274], ["C동 8층 간이카페", 999, 198], ["중앙도서관 2층 북카페", 535, 116]],
+    'convenienceStore': [["R동 B2 홍익대학서적", 228, 451], ["와우관 4층 편의점", 437, 92], ["R동 3층 편의점", 226, 432], ["R동 L층 한가람 문구센터", 186, 383], ["제2기숙사 지하1층 편의점", 938, 470]],
+    'restaurant': [["제2기숙사 학생식당", 936, 474], ["향차이", 916, 531], ["메리킹", 165, 458]],
+    'medicalRoom': [["약국(원이 약국)", 916, 550], ["건강진료센터", 570, 259]],
+    'readingRoom': [["T동 3,4층 열람실", 821, 499], ["A동 2층 열람실", 823, 227], ["R동 8층 열람실", 257, 531], ["중앙도서관 열람실", 521, 219]]
 }
+
 function amenitiesInMap() {
     //지도위 편의시설 전부 삭제
     $('#amenitiesOnMap div').empty();
     //위치조정
     //위치조정은 기본 1300*700px의 지도 위치를 기준으로 한다.
     //이함수는 페이지 로드될떄와 화면크기가 변할때 실행된다.
-    
+
     //화면비율
     let widthRatio = document.getElementById('background').getBoundingClientRect().width / 1300;
     let heightRatio = document.getElementById('background').getBoundingClientRect().height / 700;
-    for(let key in amenitiesDic){
-        for(let i=0; i < amenitiesDic[key].length;i++){
+    for (let key in amenitiesDic) {
+        for (let i = 0; i < amenitiesDic[key].length; i++) {
             //제이쿼리를 통해 img의 속성와 css를 주고 div안에 넣어준다
             $('<img>', {
                 src: '../../static/logo/position.png',
-                title:amenitiesDic[key][i][0],
-                width: 44*widthRatio+'px',
-                height: 44*heightRatio+'px'
-                }).css('left', widthRatio*amenitiesDic[key][i][1]).css('top',heightRatio*amenitiesDic[key][i][2]).css('position','absolute').appendTo(document.getElementById(key));
+                title: amenitiesDic[key][i][0],
+                width: 44 * widthRatio + 'px',
+                height: 44 * heightRatio + 'px'
+            }).css('left', widthRatio * amenitiesDic[key][i][1]).css('top', heightRatio * amenitiesDic[key][i][2]).css('position', 'absolute').appendTo(document.getElementById(key));
         }
     }
 }
+
 amenitiesInMap();
 
 //화면 크기 변할 때 편의시설 조정
-window.onresize = function() {
+window.onresize = function () {
     amenitiesInMap();
 }
 
-let amenitiesInCardDic={
-
-};
+let amenitiesInCardDic = {};
