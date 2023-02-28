@@ -13,6 +13,7 @@ urlpatterns = [
     path('update', views.update, name='update'),
     path('QandA', views.QandA, name='QandA'),
     path('txtCorrection', views.txtCorrection, name='txtCorrection'),
-    path('coordinateCorrection', views.coordinateCorrection, name='ccordinateCorrection'),
+    path('coordinateCorrection', views.coordinateCorrection, name='coordinateCorrection'),
     path('date', views.date, name='date'),
+    path('good', views.good, name='good'),
 ]

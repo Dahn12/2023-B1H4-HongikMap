@@ -8,6 +8,7 @@
     <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+
 	<table class="table">
 	    <thead>
 		    <tr>
@@ -44,6 +45,7 @@
 				</select>
 
 		</td>
+                {% csrf_token %}
 	      <td><button id="buildingButton" type="button" class="btn btn-primary" onclick="preprocessingSubmit(event)">Start</button></td>
 	    </tr>
 	    <tr>
@@ -58,7 +60,10 @@
 	    </tr>
 	  </tbody>
 	</table>
-	 #한번 시작하면 끝날 때까지 기다려야 하며, 중간에 멈출 경우 처음부터 다시 돌려야한다.
+    #처음 돌린다면 반드시 1번 부터 순서대로 돌려야 한다. 1,2,3번을 모두 한번씩 돌렸던 경우에만 1번 중 특정 건물에 대해 돌려도 된다. <br>
+    #건물.txt 수정에 의하여 1번 특정 건물에 대해 돌렸을 경우, 바뀐 정보가 X와 관련된 정보가 아닐 경우 2,3번 돌릴 필요 없다. X에 관련되면 2,3번 돌려야한다. <br>
+    #한번 시작하면 끝날 때까지 기다려야 하며, 중간에 멈출 경우 처음부터 다시 돌려야한다. <br>
+
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script src="../../static/js/update.js"></script>

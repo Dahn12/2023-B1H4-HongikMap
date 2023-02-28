@@ -118,7 +118,6 @@ def compute(f: object, filename: str = ''):
                         XtoX_route = XtoX_route['route'][1:-1]
                         path_with_elevator.result[key]['route'][value_index + 1:value_index + 1] = XtoX_route
 
-
     models.save(path_with_elevator.result, True)
 
     for start in graph_without_elevator.rooms + graph_without_elevator.exits:
@@ -196,3 +195,7 @@ def preprocessing(request):
         compute(f, 'external_node.txt')
         f.close()
     return render(request, 'HongikMap/welcome.html', {})
+
+
+def good(request):
+    return JsonResponse('good')
