@@ -2,8 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <link rel="canonical" href="https://getbootstrap.kr/docs/5.2/examples/sidebars/">
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>관리자 페이지</title>
@@ -31,6 +29,7 @@
 </head>
 
 <body class="d-flex flex-row">
+    {#사이드바#}
 	<aside>
 		<div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 200px; height: 100vh; overflow: auto;">
 			<a href="update.html" class="text-white nav-link">
@@ -40,32 +39,34 @@
 		    <hr>
 		    <ul class="nav nav-pills flex-column mb-auto">
 		      <li class="nav-item">
-		        <a data-url="txtCorrection" class="nav-link text-white " aria-current="page">
+		        <a data-url="txtCorrection" class="nav-link text-white link" >
 		          txt 수정
 		        </a>
 		      </li>
 		      <li>
-		        <a data-url="coordinateCorrection" class="nav-link text-white">
+		        <a data-url="coordinateCorrection" class="nav-link text-white link">
 		          coordinate 수정
 		        </a>
 		      </li>
 		      <li>
-		        <a data-url="update" class="nav-link text-white">
+		        <a data-url="update" class="nav-link text-white link">
 		          Update
 		        </a>
 		      </li>
 		      <li>
-		        <a data-url="date" class="nav-link text-white">
+		        <a data-url="date" class="nav-link text-white link">
 		          일정
 		        </a>
 		      </li>
 		      <li>
-		        <a data-url="QandA" class="nav-link text-white">
+		        <a data-url="QandA" class="nav-link text-white link">
 		          Q&A
 		        </a>
 		      </li>
 		    </ul>
 		    <hr>
+
+            {#프로필#}
 		    <div class="dropdown">
 		      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 		        <img src="../../static/logo/schoolMap.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
@@ -79,9 +80,8 @@
 		      </ul>
 		    </div>
 		</div>
-
 	</aside>
-
+    {#본문#}
   	<main class="flex-fill " id="main">
   		<div class='d-flex  flex-column align-items-center' style='background-color: lightgray; width: 100%; height: 100%; overflow: auto;' >
   			<header >
