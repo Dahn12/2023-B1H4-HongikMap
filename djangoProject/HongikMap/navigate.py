@@ -25,26 +25,6 @@ def search(departure: str, destination: str, elevator: bool) -> dict:
                     'route': route
                 })
         minimum_route = sorted(merged_route, key=lambda x: x['distance'])[0]
-
-        # 건물 안 경로 만들어주는함수
-        new_minimum_route = minimum_route['route']
-        for number in range(len(minimum_route['route']) - 1):
-            if minimum_route['route'][number].split('-')[2][0] == 'X' and minimum_route['route'][number + 1].split('-')[2][0] == 'X':
-
-                print(minimum_route['route'][number + 1].split('-')[2])
-                # minimum_route에서 XtoX를찾으면 경로를 XtoX.txt에서 가져와야 한다.
-                if elevator:
-                    f = open('external_node/result_with_elevator_XtoX.txt', 'r', encoding="UTF8")
-                else:
-                    f = open('external_node/result_with_elevator_XtoX.txt', 'r', encoding="UTF8")
-                for line in f.readlines():
-
-                    intermediate_place1 = line.split(':')[0].split(' ')[0]
-                    intermediate_place2 = line.split(':')[0].split(' ')[1]
-                    XtoX_route = line.split(':')[1].split(' ')[2:-1]
-                    if intermediate_place1 == minimum_route['route'][number] and intermediate_place2 == minimum_route['route'][number + 1]:
-                        new_minimum_route[number + 1:number + 1] = XtoX_route
-        minimum_route['route'] = new_minimum_route
     compressed_route = get_compressed_route(minimum_route['route'])
     result['distance'] = minimum_route['distance']
     result['route'] = nodes2recommends(compressed_route)

@@ -72,10 +72,25 @@ def compute(f: object, filename: str = ''):
             continue
         path_with_elevator.dijkstra(start)
     # XtoX를 엘리베이터 사용 유무에 따라 분리해서 저장한다.
+    # 외부노드가 아닌경우에는 XtoX에 출입구에서 출입구를 넣어주고 아닌 경우에는 경로에 X->X가 있을경우 중간경로를 넣어준다,
     if filename != 'external_node.txt':
         for key, value in path_with_elevator.result.items():
             if key[0].split('-')[2][0] == 'X' and key[1].split('-')[2][0] == 'X':
                 result_with_elevator_XtoX.write(f'{key[0]} {key[1]}:{value["distance"]} {" ".join(value["route"])}\n')
+    # 건물 안 경로 만들어주는함수
+    else:
+        copy_result = path_with_elevator.result
+        for key, value in copy_result.items():
+            for value_index in range(len(value['route']) - 1):
+                intermediate_place1 = value['route'][value_index]
+                intermediate_place2 = value['route'][value_index + 1]
+                if intermediate_place1.split('-')[2][0] == 'X' and intermediate_place2.split('-')[2][0] == 'X':
+                    XtoX_route = models.get_route(intermediate_place1, intermediate_place2, True)
+                    if XtoX_route != {}:
+                        XtoX_route = XtoX_route['route'][1:-1]
+                        path_with_elevator.result[key]['route'][value_index + 1:value_index + 1] = XtoX_route
+
+
     models.save(path_with_elevator.result, True)
 
     for start in graph_without_elevator.rooms + graph_without_elevator.exits:
@@ -88,6 +103,18 @@ def compute(f: object, filename: str = ''):
             if key[0].split('-')[2][0] == 'X' and key[1].split('-')[2][0] == 'X':
                 result_without_elevator_XtoX.write(
                     f'{key[0]} {key[1]}:{value["distance"]} {" ".join(value["route"])}\n')
+    # 건물 안 경로 만들어주는함수
+    else:
+        copy_result = path_without_elevator.result
+        for key, value in copy_result.items():
+            for value_index in range(len(value['route']) - 1):
+                intermediate_place1 = value['route'][value_index]
+                intermediate_place2 = value['route'][value_index + 1]
+                if intermediate_place1.split('-')[2][0] == 'X' and intermediate_place2.split('-')[2][0] == 'X':
+                    XtoX_route = models.get_route(intermediate_place1, intermediate_place2, False)
+                    if XtoX_route != {}:
+                        XtoX_route = XtoX_route['route'][1:-1]
+                        path_without_elevator.result[key]['route'][value_index + 1:value_index + 1] = XtoX_route
 
     models.save(path_without_elevator.result, False)
     # #이름을 파싱해준다. 다만 with elevator와 without elevator의 rooms는 동일하니 하나만.
@@ -124,7 +151,7 @@ def XToXDataization():
 
 
 def preprocessing(request):
-    # # 동적으로 생긴 XtoX에 똑같은 자료가 다시 들어가는 것을 방지하기위해 초기화
+    # 동적으로 생긴 XtoX에 똑같은 자료가 다시 들어가는 것을 방지하기위해 초기화
     open("HongikMap/static/data/external_node/result_with_elevator_XtoX.txt", 'w', encoding="UTF8").close()
     open("HongikMap/static/data/external_node/result_without_elevator_XtoX.txt", 'w', encoding="UTF8").close()
 
