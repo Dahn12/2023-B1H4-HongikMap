@@ -525,7 +525,7 @@ function amenitiesInMap() {
     $('#amenitiesOnMap div').empty();
     //위치조정
     //위치조정은 기본 1300*700px의 지도 위치를 기준으로 한다.
-    //이함수는 페이지 로드될떄와 화면크기가 변할때 실행된다.
+    //이 함수는 페이지 로드될 떄와 화면크기가 변할때 실행된다.
 
     //화면비율
     let widthRatio = document.getElementById('background').getBoundingClientRect().width / 1300;
@@ -534,7 +534,7 @@ function amenitiesInMap() {
         for (let i = 0; i < amenitiesDic[key].length; i++) {
             //제이쿼리를 통해 img의 속성와 css를 주고 div안에 넣어준다
             $('<img>', {
-                src: '../../static/logo/position.png',
+                src: '../../static/logo/'+key+'.svg',
                 title: amenitiesDic[key][i][0],
                 width: 44 * widthRatio + 'px',
                 height: 44 * heightRatio + 'px'
