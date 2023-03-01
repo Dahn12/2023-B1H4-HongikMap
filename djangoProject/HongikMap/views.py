@@ -175,6 +175,16 @@ def XToXDataization():
     merged_externalNode.close()
 
 
+def building_preprocessing(request):
+    building = request.POST.get('building')
+    if building == 'ALL':
+        print('all building')
+        preprocessing(request)
+    else:
+        specific_preprocessing(building)
+    return JsonResponse({})
+
+
 def preprocessing(request):
     # 동적으로 생긴 XtoX에 똑같은 자료가 다시 들어가는 것을 방지하기위해 초기화
     open("HongikMap/static/data/external_node/result_with_elevator_XtoX.txt", 'w', encoding="UTF8").close()
@@ -192,8 +202,8 @@ def preprocessing(request):
     with open('HongikMap/static/data/external_node/merged_external_node.txt', 'r', encoding="UTF8") as f:
         compute(f, 'external_node.txt')
         f.close()
-    return render(request, 'HongikMap/welcome.html', {})
+    return JsonResponse({})
 
 
-def good(request):
-    return JsonResponse('good')
+def specific_preprocessing(building: str):
+    print(f'specific_preprocessing : {building}')

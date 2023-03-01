@@ -17,34 +17,26 @@ function getCookie(name) {
 
 var csrftoken = getCookie('csrftoken');
 
-function preprocessingSubmit(e) {
-    // 어떤 버튼인지 구분
-    if (e.target.id == "buildingButton") {
-        // 전체인지 건물하나인지 구분
-        if ($('#buildingName').val() == 'ALL') {
-            $.ajax({
-                url: 'good',
-                type: 'POST',
-                datatype: 'json',
-                data: {
-                    'input_val': '111', //대문자 변환해서 소문자도 검색가능
-                    'csrfmiddlewaretoken': csrftoken,
-                },
-                success: function (data) {
-                    if (data == "success") {
-                        alert('DB저장완료')
-                    }
-
-                }
-            });
-        } else {
-            txtName = $('#buildingName').val() + '.txt'
+function building_preprocessing(e){
+    var building=$('#buildingName').val();
+    $.ajax({
+        url:'building_preprocessing',
+        type: 'POST',
+        data: {
+            'csrfmiddlewaretoken': csrftoken,
+            'building': building,
+        },
+        datatype: 'json',
+        success: function (data){
+            console.log('success');
         }
+    });
+}
 
+function XtoX_preprocessing(e){
 
-    } else if (e.target.id == "XtoXButton") {
+}
 
-    } else if (e.target.id == "externalNodeButton") {
+function external_preprocessing(e){
 
-    }
 }
