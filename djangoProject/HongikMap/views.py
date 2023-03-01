@@ -102,9 +102,15 @@ def compute(f: object, filename: str = ''):
     # XtoX를 엘리베이터 사용 유무에 따라 분리해서 저장한다.
     # 외부노드가 아닌경우에는 XtoX에 출입구에서 출입구를 넣어주고 아닌 경우에는 경로에 X->X가 있을경우 중간경로를 넣어준다,
     if filename != 'external_node.txt':
+        # XtoX일경우에만 XtoX파이에 넣어준다.
         for key, value in path_with_elevator.result.items():
             if key[0].split('-')[2][0] == 'X' and key[1].split('-')[2][0] == 'X':
                 result_with_elevator_XtoX.write(f'{key[0]} {key[1]}:{value["distance"]} {" ".join(value["route"])}\n')
+        # 강의실 이름 붙여준다.
+        with open("HongikMap/static/data/recommends_by_parsing.txt", "a", encoding="UTF8") as f:
+            for room in path_with_elevator.rooms:
+                building, floor, entity = room.split("-")
+                f.write(f'{room}:{building + floor}{entity:0>2},{building}동 {floor}층 {entity}호\n')
     # 건물 안 경로 만들어주는함수
     else:
         copy_result = path_with_elevator.result
@@ -144,15 +150,7 @@ def compute(f: object, filename: str = ''):
                         path_without_elevator.result[key]['route'][value_index + 1:value_index + 1] = XtoX_route
 
     models.save(path_without_elevator.result, False)
-    # #이름을 파싱해준다. 다만 with elevator와 without elevator의 rooms는 동일하니 하나만.
-    # with open("HongikMap/static/data/recommends_by_parsing.txt", "w", encoding="UTF8") as f:
-    #     for room in path_with_elevator.rooms:
-    #         building, floor, entity = room.split("-")
-    #         f.write(f'{room}:{building + floor}{entity:0>2},{building}동 {floor}층 {entity}호\n')
-    #
-    # # computation.update()
-    #
-    # return render(request, 'HongikMap/welcome.html', {})
+    # 이름을 파싱해준다. 다만 with elevator와 without elevator의 rooms는 동일하니 하나만.
 
 
 # 각 건물별로 XToX가 있을경우 저장
@@ -181,7 +179,7 @@ def preprocessing(request):
     # 동적으로 생긴 XtoX에 똑같은 자료가 다시 들어가는 것을 방지하기위해 초기화
     open("HongikMap/static/data/external_node/result_with_elevator_XtoX.txt", 'w', encoding="UTF8").close()
     open("HongikMap/static/data/external_node/result_without_elevator_XtoX.txt", 'w', encoding="UTF8").close()
-
+    open("HongikMap/static/data/recommends_by_parsing.txt", "w", encoding="UTF8").close()
     # 각 파일별로 읽어낸다. listdir은 디렉토리의 파일명을 리스트로 저장, join은 두 경로를 합쳐준다.
     for filename in os.listdir("HongikMap/static/data/all_buildings_data"):
         with open(os.path.join("HongikMap/static/data/all_buildings_data", filename), 'r', encoding="UTF8") as f:
