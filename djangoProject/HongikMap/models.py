@@ -58,6 +58,15 @@ class Coordinate(models.Model):
     y = models.IntegerField()
 
 
+class Recommendation(models.Model):
+    class Meta:
+        db_table = 'recommendation'
+
+    node = models.OneToOneField("Node", db_column='node', primary_key=True, on_delete=models.CASCADE,
+                                related_name='coordinate_node')
+    recommendation = models.CharField(max_length=30)
+
+
 def initialize_database():
     pass
 
@@ -83,7 +92,7 @@ def save(result: dict, elevator: bool):
         route = ','.join(value['route'])
 
         if exist_route(start, end, elevator):
-            print(f'update data | {start} {end} elevator={elevator}')
+            # print(f'update data | {start} {end} elevator={elevator}')
             update_result = None
             if elevator:
                 update_result = ResultWithElevator.objects.get(departure=departure, destination=destination)
@@ -93,7 +102,7 @@ def save(result: dict, elevator: bool):
             update_result.route = route
             update_result.save()
         if not exist_route(start, end, elevator):
-            print(f'create data | {start} {end} elevator={elevator}')
+            # print(f'create data | {start} {end} elevator={elevator}')
             if elevator:
                 result_with_elevator = ResultWithElevator(departure=departure, destination=destination,
                                                           distance=distance, route=route)
