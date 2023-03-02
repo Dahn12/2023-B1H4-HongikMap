@@ -251,10 +251,10 @@ let autocomplete = (function () {
             }
         }
     }
-    // //바깥 클릭하면 자동완성 사라짐
-    // document.addEventListener("click", function (e) {
-    //     closeAllLists(e.target);
-    // });
+    //바깥 클릭하면 자동완성 사라짐
+    document.addEventListener("click", function (e) {
+        closeAllLists(e.target);
+    });
 
 
     let addActive = function (x) {
