@@ -162,9 +162,16 @@ def save(result: dict, elevator: bool):
 
 
 def save_recommendation(rooms: list):
+    create_recommendations = []
+
     for room in rooms:
-        if exist_node(room):
-            pass
+        building, floor, entity = room.split('-')
+        if not exist_recommendations(room):
+            node = Node.objects.get(node='room')
+            recommendation = f'{building} {floor}{entity:0>2}'
+            create_recommendation = Recommendation(node=node, recommendation=recommendation)
+            create_recommendations.append(create_recommendation)
+    Recommendation.objects.bulk_create(create_recommendations)
 
 
 def get_route(start: str, end: str, elevator: bool) -> dict:
@@ -269,3 +276,13 @@ def exist_route(start: str, end: str, elevator: bool) -> bool:
         return ResultWithElevator.objects.filter(departure=departure, destination=destination).exists()
     if not elevator:
         return ResultWithoutElevator.objects.filter(departure=departure, destination=destination).exists()
+
+
+def exist_recommendations(node: str) -> bool:
+    if not exist_node(node):
+        return False
+    retrieved_node = Node.objects.get(node=node)
+    if Recommendation.objects.filter(node=retrieved_node).exists():
+        return True
+    else:
+        return False
