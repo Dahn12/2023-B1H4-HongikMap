@@ -81,6 +81,11 @@ def clean():
 
 def save(result: dict, elevator: bool):
     # print(f'Save New Data with{"" if elevator else "out"} elevator')
+    create_results_with_elevator = []
+    create_results_without_elevator = []
+    update_results_with_elevator = []
+    update_results_without_elevator = []
+
     for (start, end), value in result.items():
         if not exist_node(start):
             Node(node=start).save()
@@ -92,73 +97,37 @@ def save(result: dict, elevator: bool):
         route = ','.join(value['route'])
 
         if exist_route(start, end, elevator):
-            # print(f'update data | {start} {end} elevator={elevator}')
+            print(f'update data | {start} {end} elevator={elevator}')
             update_result = None
             if elevator:
                 update_result = ResultWithElevator.objects.get(departure=departure, destination=destination)
+                update_result.distance = distance
+                update_result.route = route
+                update_results_with_elevator.append(update_result)
             if not elevator:
                 update_result = ResultWithoutElevator.objects.get(departure=departure, destination=destination)
-            update_result.distance = distance
-            update_result.route = route
-            update_result.save()
+                update_result.distance = distance
+                update_result.route = route
+                update_results_without_elevator.append(update_result)
+            # update_result.save()
         if not exist_route(start, end, elevator):
-            # print(f'create data | {start} {end} elevator={elevator}')
+            print(f'create data | {start} {end} elevator={elevator}')
             if elevator:
                 result_with_elevator = ResultWithElevator(departure=departure, destination=destination,
                                                           distance=distance, route=route)
-                result_with_elevator.save()
+                # result_with_elevator.save()
+                create_results_with_elevator.append(result_with_elevator)
             if not elevator:
                 result_without_elevator = ResultWithoutElevator(departure=departure, destination=destination,
                                                                 distance=distance, route=route)
-                result_without_elevator.save()
+                # result_without_elevator.save()
+                create_results_without_elevator.append(result_without_elevator)
 
-    # if elevator:
-    #     for (departure, destination), value in result.items():
-    #         departure = Node(node=departure)
-    #         destination = Node(node=destination)
-    #         distance = value['distance']
-    #         route = ','.join(value['route'])
-    #
-    #         if not Node.objects.filter(node=departure.node).exists():
-    #             departure.save()
-    #
-    #         if not Node.objects.filter(node=destination.node).exists():
-    #             destination.save()
-    #
-    #         if ResultWithElevator.objects.filter(departure=departure, destination=destination).exists():
-    #             print(f'update data | {departure.node} {destination.node} elevator={elevator}')
-    #             update_result = ResultWithElevator.objects.get(departure=departure, destination=destination)
-    #             update_result.distance = distance
-    #             update_result.route = route
-    #             update_result.save()
-    #         if not ResultWithElevator.objects.filter(departure=departure, destination=destination).exists():
-    #             print(f'create data | {departure.node} {destination.node} elevator={elevator}')
-    #             result_with_elevator = ResultWithElevator(departure=departure, destination=destination,
-    #                                                       distance=distance, route=route)
-    #             result_with_elevator.save()
-    #
-    # if not elevator:
-    #     for (departure, destination), value in result.items():
-    #         departure = Node(node=departure)
-    #         destination = Node(node=destination)
-    #         distance = value['distance']
-    #         route = ','.join(value['route'])
-    #
-    #         if not Node.objects.filter(node=departure.node).exists():
-    #             departure.save()
-    #         if not Node.objects.filter(node=departure.node).exists():
-    #             destination.save()
-    #         if ResultWithoutElevator.objects.filter(departure=departure, destination=destination).exists():
-    #             print(f'update data | {departure.node} {destination.node} elevator={elevator}')
-    #             update_result = ResultWithoutElevator.objects.get(departure=departure, destination=destination)
-    #             update_result.distance = distance
-    #             update_result.route = route
-    #             update_result.save()
-    #         if not ResultWithoutElevator.objects.filter(departure=departure, destination=destination).exists():
-    #             print(f'create data | {departure.node} {destination.node} elevator={elevator}')
-    #             result_without_elevator = ResultWithoutElevator(departure=departure, destination=destination,
-    #                                                             distance=distance, route=route)
-    #             result_without_elevator.save()
+    ResultWithElevator.objects.bulk_create(create_results_with_elevator)
+    ResultWithoutElevator.objects.bulk_create(create_results_without_elevator)
+
+    ResultWithElevator.objects.bulk_update(update_results_with_elevator, ['distance', 'route'])
+    ResultWithoutElevator.objects.bulk_update(update_results_without_elevator, ['distance', 'route'])
 
 
 def save_recommendation(rooms: list):
@@ -257,6 +226,14 @@ def get_routes_of_end_building(end: str, elevator: bool) -> list:
         routes = [{'distance': result['distance'], 'route': result['route'].split(',')} for result in
                   ResultWithoutElevator.objects.filter(departure__node__contains='X', destination=destination).values()]
         return routes
+
+
+def get_same_building_XtoX():
+    pass
+
+
+def is_same_building():
+    pass
 
 
 def get_recommendation(keyword: str) -> list:
