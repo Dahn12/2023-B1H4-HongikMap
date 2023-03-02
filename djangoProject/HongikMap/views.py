@@ -107,10 +107,7 @@ def compute(f: object, filename: str = ''):
             if key[0].split('-')[2][0] == 'X' and key[1].split('-')[2][0] == 'X':
                 result_with_elevator_XtoX.write(f'{key[0]} {key[1]}:{value["distance"]} {" ".join(value["route"])}\n')
         # 강의실 이름 붙여준다.
-        with open("HongikMap/static/data/recommends_by_parsing.txt", "a", encoding="UTF8") as f:
-            for room in path_with_elevator.rooms:
-                building, floor, entity = room.split("-")
-                f.write(f'{room}:{building + floor}{entity:0>2},{building}동 {floor}층 {entity}호\n')
+        models.sava_recommandation(path_with_elevator)
     # 건물 안 경로 만들어주는함수
     else:
         copy_result = path_with_elevator.result
@@ -189,7 +186,6 @@ def preprocessing(request):
     # 동적으로 생긴 XtoX에 똑같은 자료가 다시 들어가는 것을 방지하기위해 초기화
     open("HongikMap/static/data/external_node/result_with_elevator_XtoX.txt", 'w', encoding="UTF8").close()
     open("HongikMap/static/data/external_node/result_without_elevator_XtoX.txt", 'w', encoding="UTF8").close()
-    open("HongikMap/static/data/recommends_by_parsing.txt", "w", encoding="UTF8").close()
     # 각 파일별로 읽어낸다. listdir은 디렉토리의 파일명을 리스트로 저장, join은 두 경로를 합쳐준다.
     for filename in os.listdir("HongikMap/static/data/all_buildings_data"):
         with open(os.path.join("HongikMap/static/data/all_buildings_data", filename), 'r', encoding="UTF8") as f:
