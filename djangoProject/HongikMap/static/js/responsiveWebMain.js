@@ -251,6 +251,8 @@ let autocomplete = (function () {
         if (_currentFocus >= x.length) _currentFocus = 0;
         if (_currentFocus < 0) _currentFocus = (x.length - 1);
         x[_currentFocus].classList.add("autocomplete-active");
+        // 키다운이벤트 따라가기
+        $('.autocomplete-items').scrollTop(_currentFocus*28)
     }
 
 
