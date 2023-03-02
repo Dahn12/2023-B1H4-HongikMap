@@ -102,7 +102,7 @@ def compute(f: object, filename: str = ''):
     # XtoX를 엘리베이터 사용 유무에 따라 분리해서 저장한다.
     # 외부노드가 아닌경우에는 XtoX에 출입구에서 출입구를 넣어주고 아닌 경우에는 경로에 X->X가 있을경우 중간경로를 넣어준다,
     if filename != 'external_node.txt':
-        # XtoX일경우에만 XtoX파이에 넣어준다.
+        # XtoX일경우에만 XtoX 파일에 넣어준다.
         for key, value in path_with_elevator.result.items():
             if key[0].split('-')[2][0] == 'X' and key[1].split('-')[2][0] == 'X':
                 result_with_elevator_XtoX.write(f'{key[0]} {key[1]}:{value["distance"]} {" ".join(value["route"])}\n')
@@ -147,18 +147,18 @@ def compute(f: object, filename: str = ''):
                         path_without_elevator.result[key]['route'][value_index + 1:value_index + 1] = XtoX_route
 
     models.save(path_without_elevator.result, False)
-    # 이름을 파싱해준다. 다만 with elevator와 without elevator의 rooms는 동일하니 하나만.
+    # 이름을 파싱 해준다. 다만 with elevator와 without elevator의 rooms는 동일하니 하나만.
 
 
-# 각 건물별로 XToX가 있을경우 저장
+# 각 건물 별로 XToX가 있을 경우 저장
 def XToXDataization():
     externalNode = open("HongikMap/static/data/external_node/external_node.txt", 'r', encoding="UTF8")
     result_without_elevator_XtoX = open("HongikMap/static/data/external_node/result_without_elevator_XtoX.txt", 'r',
                                         encoding="UTF8")
 
     # 외부노드와 XtoX를 합쳐서 merged_externalNode로 만들어준다.
-    with open("HongikMap/static/data/external_node/merged_external_node.txt", 'w',
-              encoding="UTF8") as merged_externalNode:
+    merged_external_node_path = "HongikMap/static/data/external_node/merged_external_node.txt"
+    with open(merged_external_node_path, 'w', encoding="UTF8") as merged_externalNode:
         for line in result_without_elevator_XtoX.readlines():
             destination = line.split()[1]
             edge = destination.split(':')[1]
