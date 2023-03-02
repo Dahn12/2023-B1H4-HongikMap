@@ -69,8 +69,20 @@ var csrftoken = getCookie('csrftoken');
 //변수 선언
 let receivedList = [];
 
+
+//keycode가져오기
+let nowKeyboardCode = 0;
+$('#autoInput').bind('keydown', function (e){
+   nowKeyboardCode = e.keyCode;
+
+} )
+$('#autoInput1').bind('keydown', function (e){
+   nowKeyboardCode = e.keyCode;
+} )
+
 //데이터 보내기, setautocomplete함수밑에서 보내는 동작 구현
 function sendingData(inp) { //inp는 input객체
+
     if (inp == document.getElementById('autoInput')) {
         boolDepartureCheck = false;
     } else {
@@ -87,6 +99,8 @@ function sendingData(inp) { //inp는 input객체
         success: function (data) {
             receivedList = data['recommendations'];
             autocomplete.setAutocomplete(inp, receivedList); //autocomplete함수를 input객체를 받아 실행
+            autocomplete.inputEvent(nowKeyboardCode);
+            autocomplete.keydownEvent(nowKeyboardCode);
             console.log(receivedList);
         }
     });
@@ -144,17 +158,15 @@ let autocomplete = (function () {
 
         // 새로운 input 의 리스너 추가.
         _inp = inp;
-        _inp.addEventListener("keyup", inputEvent);
-        _inp.addEventListener("keydown", keydownEvent);
 
     }
 
     let inputEvent = function (e) {
         //화살표 및 엔터면 출력된 자동완성 초기화 안한다
-        if (e.keyCode == 40 || e.keyCode == 38 || e.keyCode == 13) {
+        if (e == 40 || e == 38 || e == 13) {
             return false;
         }
-        var a, b, i, val = this.value;//a,b,i는 지정되지않고 val만 입력값으로 저장
+        var a, b, i, val = _inp.value;//a,b,i는 지정되지않고 val만 입력값으로 저장
         // 이전 생성된 div 제거
         closeAllLists();
 
@@ -169,12 +181,12 @@ let autocomplete = (function () {
         // autocomplet에서 항목을 보여줄 div 생성하고 이를 a에 준다.
         a = document.createElement("DIV");
         //
-        a.setAttribute("id", this.id + "autocomplete-list");//속성주기
+        a.setAttribute("id", _inp.id + "autocomplete-list");//속성주기
         // css 적용
         a.setAttribute("class", "autocomplete-items");
 
         // input 아래의 div 붙이기.
-        this.parentNode.appendChild(a);
+        _inp.parentNode.appendChild(a);
 
         // autocomplet할 요소 찾기
         for (i = 0; i < _arr.length; i++) {
@@ -204,7 +216,7 @@ let autocomplete = (function () {
     }
 
     let keydownEvent = function (e) {
-        var x = document.getElementById(this.id + "autocomplete-list");
+        var x = document.getElementById(_inp.id + "autocomplete-list");
         // 선택할 요소 없으면 null ,
         if (x) {
             // 태그 네임을 가지는 엘리먼트의 유요한 html 컬렉션을 반환.
@@ -212,21 +224,21 @@ let autocomplete = (function () {
             x = x.getElementsByTagName("div");
         }
 
-        if (e.keyCode == 40) {
+        if (e == 40) {
             // down
             // 현재위치 증가
             _currentFocus++;
             // 현재위치의 포커스 나타내기
             addActive(x);
-        } else if (e.keyCode == 38) {
+        } else if (e == 38) {
             // up
             // 현재위치 감소
             _currentFocus--;
             // 현재위치의 포커스 나타내기
             addActive(x);
-        } else if (e.keyCode == 13) {
+        } else if (e == 13) {
             // enter
-            if (this == document.getElementById('autoInput')) {
+            if (_inp == document.getElementById('autoInput')) {
                 boolDepartureCheck = true;
             } else {
                 boolDestinationCheck = true;
@@ -285,6 +297,12 @@ let autocomplete = (function () {
         setAutocomplete: function (inp, arr) {
             _setAutocomplete(inp, arr);
         },
+        inputEvent: function(){
+            inputEvent();
+        },
+        keydownEvent: function (){
+            keydownEvent();
+        }
     }
 
 })();
