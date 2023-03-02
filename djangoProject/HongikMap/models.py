@@ -166,12 +166,14 @@ def save_recommendation(rooms: list):
 
     for room in rooms:
         building, floor, entity = room.split('-')
-        if not exist_recommendations(room):
-            node = Node.objects.get(node='room')
+        if not exist_node(room):
+            Node(node='room').save()
+        node = Node.objects.get(node='room')
+        if not Recommendation.objects.filter(node=node).exists():
             recommendation = f'{building} {floor}{entity:0>2}'
-            create_recommendation = Recommendation(node=node, recommendation=recommendation)
-            create_recommendations.append(create_recommendation)
-    Recommendation.objects.bulk_create(create_recommendations)
+            # create_recommendation = Recommendation(node=node, recommendation=recommendation)
+            # create_recommendations.append(create_recommendation)
+            Recommendation(node=node, recommendation=recommendation).save()
 
 
 def get_route(start: str, end: str, elevator: bool) -> dict:
@@ -255,6 +257,13 @@ def get_routes_of_end_building(end: str, elevator: bool) -> list:
         routes = [{'distance': result['distance'], 'route': result['route'].split(',')} for result in
                   ResultWithoutElevator.objects.filter(departure__node__contains='X', destination=destination).values()]
         return routes
+
+
+def get_recommendation(keyword: str) -> list:
+    result = []
+    for node in Recommendation.objects.filter(recommendation__contains=keyword).values():
+        result.append(node.node)
+    return result
 
 
 def exist_node(node: str) -> bool:

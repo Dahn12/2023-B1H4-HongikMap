@@ -1,4 +1,5 @@
 from .utility import *
+from .models import get_recommendation
 
 
 def recommend(keyword: str) -> list:
@@ -7,8 +8,8 @@ def recommend(keyword: str) -> list:
         return []
 
     keyword_nodes = nodes_from_keywords(keyword)
-    parsed_nodes = nodes_from_parsed(keyword)
-
+    # parsed_nodes = nodes_from_parsed(keyword)
+    parsed_nodes = get_recommendation(keyword)
     parsed_nodes = remove_duplicates(keyword_nodes, parsed_nodes)
 
     keyword_nodes.sort()
