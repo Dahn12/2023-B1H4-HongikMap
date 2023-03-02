@@ -158,12 +158,11 @@ let autocomplete = (function () {
 
         // 새로운 input 의 리스너 추가.
         _inp = inp;
-
     }
 
-    let inputEvent = function (e) {
+    let inputEvent = function (keyCord) {
         //화살표 및 엔터면 출력된 자동완성 초기화 안한다
-        if (e == 40 || e == 38 || e == 13) {
+        if (keyCord == 40 || keyCord == 38 || keyCord == 13) {
             return false;
         }
         var a, b, i, val = _inp.value;//a,b,i는 지정되지않고 val만 입력값으로 저장
@@ -215,7 +214,7 @@ let autocomplete = (function () {
         }
     }
 
-    let keydownEvent = function (e) {
+    let keydownEvent = function (keyCord) {
         var x = document.getElementById(_inp.id + "autocomplete-list");
         // 선택할 요소 없으면 null ,
         if (x) {
@@ -224,26 +223,26 @@ let autocomplete = (function () {
             x = x.getElementsByTagName("div");
         }
 
-        if (e == 40) {
+        if (keyCord == 40) {
             // down
             // 현재위치 증가
             _currentFocus++;
             // 현재위치의 포커스 나타내기
             addActive(x);
-        } else if (e == 38) {
+        } else if (keyCord == 38) {
             // up
             // 현재위치 감소
             _currentFocus--;
             // 현재위치의 포커스 나타내기
             addActive(x);
-        } else if (e == 13) {
+        } else if (keyCord == 13) {
             // enter
             if (_inp == document.getElementById('autoInput')) {
                 boolDepartureCheck = true;
             } else {
                 boolDestinationCheck = true;
             }
-            e.preventDefault();
+            keyCord.preventDefault();
             // 현재위치가 아이템 선택창내에 있는 경우
             if (_currentFocus > -1) {
                 // 현재 위치의 값 클릭
@@ -297,11 +296,11 @@ let autocomplete = (function () {
         setAutocomplete: function (inp, arr) {
             _setAutocomplete(inp, arr);
         },
-        inputEvent: function(){
-            inputEvent();
+        inputEvent: function(keyCode){
+            inputEvent(keyCode);
         },
-        keydownEvent: function (){
-            keydownEvent();
+        keydownEvent: function (keyCode){
+            keydownEvent(keyCode);
         }
     }
 
