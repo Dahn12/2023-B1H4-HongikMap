@@ -107,7 +107,7 @@ def compute(f: object, filename: str = ''):
             if key[0].split('-')[2][0] == 'X' and key[1].split('-')[2][0] == 'X':
                 result_with_elevator_XtoX.write(f'{key[0]} {key[1]}:{value["distance"]} {" ".join(value["route"])}\n')
         # 강의실 이름 붙여준다.
-        models.sava_recommandation(path_with_elevator)
+        models.save_recommendation(path_with_elevator.rooms)
     # 건물 안 경로 만들어주는함수
     else:
         copy_result = path_with_elevator.result
@@ -191,14 +191,11 @@ def preprocessing(request):
         with open(os.path.join("HongikMap/static/data/all_buildings_data", filename), 'r', encoding="UTF8") as f:
             # print(filename)
             compute(f, filename)
-            f.close()
 
     XToXDataization()
     # 외부노드에 대한 다익스트라를 돌린다.
     with open('HongikMap/static/data/external_node/merged_external_node.txt', 'r', encoding="UTF8") as f:
         compute(f, 'external_node.txt')
-        f.close()
-    return JsonResponse({})
 
 
 def specific_preprocessing(building: str):
