@@ -35,6 +35,7 @@ P-6-E1 P-7-E1 10 t
 P-7-E1 P-8-E1 10 t
     #수평구조
         #B2
+P-B2-X1 P-B2-H1 5 t
 P-B2-S1 P-B2-H1 18.0 t
 P-B2-S2 P-B2-H1 18.0 t
 P-B2-S3 P-B2-H1 18.0 t
