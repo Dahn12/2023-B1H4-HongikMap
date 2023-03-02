@@ -34,7 +34,17 @@ function building_preprocessing(e){
 }
 
 function XtoX_preprocessing(e){
-
+    $.ajax({
+        url: 'XtoX_preprocessing',
+        type:'POST',
+        data:{
+            'csrfmiddlewaretoken': csrftoken,
+        },
+        datatype:'json',
+        success:function(data){
+            console.log('success');
+        }
+    });
 }
 
 function external_preprocessing(e){

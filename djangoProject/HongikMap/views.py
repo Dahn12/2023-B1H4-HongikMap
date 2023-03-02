@@ -191,11 +191,19 @@ def preprocessing(request):
         with open(os.path.join("HongikMap/static/data/all_buildings_data", filename), 'r', encoding="UTF8") as f:
             # print(filename)
             compute(f, filename)
-
     XToXDataization()
     # 외부노드에 대한 다익스트라를 돌린다.
     with open('HongikMap/static/data/external_node/merged_external_node.txt', 'r', encoding="UTF8") as f:
         compute(f, 'external_node.txt')
+
+
+def XtoX_preprocessing(request):
+    XToXDataization()
+    # 외부노드에 대한 다익스트라를 돌린다.
+    with open('HongikMap/static/data/external_node/merged_external_node.txt', 'r', encoding="UTF8") as f:
+        compute(f, 'external_node.txt')
+
+    return JsonResponse({})
 
 
 def specific_preprocessing(building: str):

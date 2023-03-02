@@ -14,5 +14,6 @@ urlpatterns = [
     path('txtCorrection', views.txtCorrection, name='txtCorrection'),
     path('coordinateCorrection', views.coordinateCorrection, name='coordinateCorrection'),
     path('date', views.date, name='date'),
-    path('building_preprocessing', views.building_preprocessing, name='bulding_preprocessing')
+    path('building_preprocessing', views.building_preprocessing, name='building_preprocessing'),
+    path('XtoX_preprocessing', views.XtoX_preprocessing, name='XtoX_preprocessing'),
 ]
