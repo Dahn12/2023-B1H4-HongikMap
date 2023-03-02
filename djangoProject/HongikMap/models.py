@@ -136,7 +136,7 @@ def save_recommendation(rooms: list):
     for room in rooms:
         building, floor, entity = room.split('-')
         if not exist_node(room):
-            Node(node='room').save()
+            Node(node=room).save()
         node = Node.objects.get(node=room)
         if not Recommendation.objects.filter(node=node).exists():
             recommendation = f'{building} {floor}{entity:0>2}'
