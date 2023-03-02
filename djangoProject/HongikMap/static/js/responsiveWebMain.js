@@ -242,7 +242,7 @@ let autocomplete = (function () {
             } else {
                 boolDestinationCheck = true;
             }
-            keyCord.preventDefault();
+            // keyCord.preventDefault();
             // 현재위치가 아이템 선택창내에 있는 경우
             if (_currentFocus > -1) {
                 // 현재 위치의 값 클릭
