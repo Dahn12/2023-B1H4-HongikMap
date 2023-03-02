@@ -63,7 +63,7 @@ class Recommendation(models.Model):
         db_table = 'recommendation'
 
     node = models.OneToOneField("Node", db_column='node', primary_key=True, on_delete=models.CASCADE,
-                                related_name='coordinate_node')
+                                related_name='recommendation_node')
     recommendation = models.CharField(max_length=30)
 
 
@@ -159,6 +159,12 @@ def save(result: dict, elevator: bool):
     #             result_without_elevator = ResultWithoutElevator(departure=departure, destination=destination,
     #                                                             distance=distance, route=route)
     #             result_without_elevator.save()
+
+
+def save_recommendation(rooms: list):
+    for room in rooms:
+        if exist_node(room):
+            pass
 
 
 def get_route(start: str, end: str, elevator: bool) -> dict:
