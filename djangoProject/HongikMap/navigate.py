@@ -97,8 +97,11 @@ def valid_node_for_coordinate(node: str) -> bool:
     if is_external(node):
         return True
 
-    if get_kind(node) in ["S", "E", "X"]:
+    if is_exit(node):
         return True
+
+    # if get_kind(node) in ["S", "E", "X"]:
+    #     return True
 
     return False
 
