@@ -1,4 +1,5 @@
 from collections import OrderedDict
+from .models import Recommendation
 
 BUILDING_EXTERNAL = "건물 외부"
 EXTERNAL = "외부"
@@ -29,12 +30,14 @@ def recommend2node(input_recommend: str) -> str:
             if input_recommend == recommend.split(",")[0].rstrip("\n"):
                 return node
 
-    with open(recommends_by_parsing_path, "r", encoding="UTF8") as f:
-        for line in f.readlines():
-            node, recommend = line.split(":")
-            if input_recommend == recommend.split(",")[0]:
-                return node
+    # with open(recommends_by_parsing_path, "r", encoding="UTF8") as f:
+    #     for line in f.readlines():
+    #         node, recommend = line.split(":")
+    #         if input_recommend == recommend.split(",")[0]:
+    #             return node
 
+    if Recommendation.objects.filter(recommendation=input_recommend).exists():
+        return Recommendation.objects.get(recommendation=input_recommend).node.node
     return ""
 
 
