@@ -72,13 +72,13 @@ let receivedList = [];
 
 //keycode가져오기
 let nowKeyboardCode = 0;
-$('#autoInput').bind('keydown', function (e){
-   nowKeyboardCode = e.keyCode;
+$('#autoInput').bind('keydown', function (e) {
+    nowKeyboardCode = e.keyCode;
 
-} )
-$('#autoInput1').bind('keydown', function (e){
-   nowKeyboardCode = e.keyCode;
-} )
+})
+$('#autoInput1').bind('keydown', function (e) {
+    nowKeyboardCode = e.keyCode;
+})
 
 //데이터 보내기, setautocomplete함수밑에서 보내는 동작 구현
 function sendingData(inp) { //inp는 input객체
@@ -263,7 +263,7 @@ let autocomplete = (function () {
         if (_currentFocus < 0) _currentFocus = (x.length - 1);
         x[_currentFocus].classList.add("autocomplete-active");
         // 키다운이벤트 따라가기
-        $('.autocomplete-items').scrollTop(_currentFocus*28)
+        $('.autocomplete-items').scrollTop(_currentFocus * 28)
     }
 
 
@@ -296,10 +296,10 @@ let autocomplete = (function () {
         setAutocomplete: function (inp, arr) {
             _setAutocomplete(inp, arr);
         },
-        inputEvent: function(keyCode){
+        inputEvent: function (keyCode) {
             inputEvent(keyCode);
         },
-        keydownEvent: function (keyCode){
+        keydownEvent: function (keyCode) {
             keydownEvent(keyCode);
         }
     }
@@ -552,13 +552,16 @@ function amenitiesInMap() {
     for (let key in amenitiesDic) {
         for (let i = 0; i < amenitiesDic[key].length; i++) {
             //제이쿼리를 통해 img의 속성와 css를 주고 div안에 넣어준다
-            $('<img>', {
-                src: '../../static/logo/'+key+'.svg',
-                title: amenitiesDic[key][i][0],
-                width: 44 * widthRatio + 'px',
-                height: 44 * heightRatio + 'px'
-            }).css('left', widthRatio * amenitiesDic[key][i][1]).css('top', heightRatio * amenitiesDic[key][i][2]).css('position', 'absolute').appendTo(document.getElementById(key));
+            $('<img>').attr('src', '../../static/logo/position.png').attr('onclick', 'amenitiesTitle(event, this)').attr('title', amenitiesDic[key][i][0]).css('width', 44 * widthRatio + 'px').css('height', 44 * heightRatio + 'px').css('left', widthRatio * amenitiesDic[key][i][1]).css('top', heightRatio * amenitiesDic[key][i][2]).css('position', 'absolute').appendTo(document.getElementById(key));
         }
+
+        // , {
+        //         src: '../../static/logo/'+key+'.svg',
+        //         title: amenitiesDic[key][i][0],
+        //         width: 44 * widthRatio + 'px',
+        //         height: 44 * heightRatio + 'px',
+        //     }
+        console.log(key);
     }
 }
 
@@ -569,4 +572,24 @@ window.onresize = function () {
     amenitiesInMap();
 }
 
-let amenitiesInCardDic = {};
+function amenitiesTitle(e, img) {
+    var divTop = e.clientY; //상단 좌표 위치 안맞을시 e.pageY
+    var divLeft = e.clientX; //좌측 좌표 위치 안맞을시 e.pageX
+    var title = $(img).attr("title");
+    $('#divView').empty().append('<div style="position:absolute;right:5px"><span id="close" style="cursor:pointer;font-size:2px" title="닫기">X</span> </div><br>' + title);
+    $('#divView').css({
+        "background-color" : "black",
+        "color" : "white",
+        "top": divTop,
+        "left": divLeft,
+        "position": "absolute",
+        "z-index" : 11,
+        "border-radius": "10px",
+    }).show();
+    $('#close').click(function(){document.getElementById('divView').style.display='none'});
+
+
+    // var x = e.pageX;
+    // var y = e.pageY;
+    // $('<div>').css('height').css('left', widthRatio * amenitiesDic[key][i][1]).css('top', heightRatio * amenitiesDic[key][i][2])
+}
