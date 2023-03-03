@@ -1,5 +1,4 @@
 from django.db import models
-from .utility import is_basement
 
 NonExistentNode = '[NonExistentNode]: There is no such node'
 NonExistentRoute = '[NonExistentRoute]: There is no such route'
@@ -141,7 +140,7 @@ def save_recommendation(rooms: list):
         node = Node.objects.get(node=room)
 
         building, floor, entity = room.split('-')
-        if is_basement(room):
+        if floor.startswith('B'):
             floor = f'0{floor[1:]}'
             recommendation = f'{building}{floor}{entity}'
         else:
@@ -207,6 +206,8 @@ def get_coordinate(node: str) -> (int, int):
 
 
 def get_routes_of_start_building(start: str, elevator: bool) -> list:
+    # print('get_start_building : ', start)
+
     if not exist_node(start):
         return []
 
@@ -218,6 +219,7 @@ def get_routes_of_start_building(start: str, elevator: bool) -> list:
         routes = [{'distance': result['distance'], 'route': result['route'].split(',')} for result in
                   ResultWithElevator.objects.filter(departure=departure, destination__node__contains='X').values()]
         return routes
+
     if not elevator:
         if not ResultWithoutElevator.objects.filter(departure=departure).exists():
             print(NonExistentRoute)
@@ -238,6 +240,7 @@ def get_routes_of_end_building(end: str, elevator: bool) -> list:
         routes = [{'distance': result['distance'], 'route': result['route'].split(',')} for result in
                   ResultWithElevator.objects.filter(departure__node__contains='X', destination=destination).values()]
         return routes
+
     if not elevator:
         if not ResultWithoutElevator.objects.filter(destination=destination).exists():
             print(NonExistentRoute)
