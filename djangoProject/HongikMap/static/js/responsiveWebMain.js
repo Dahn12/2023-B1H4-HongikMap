@@ -552,7 +552,7 @@ function amenitiesInMap() {
     for (let key in amenitiesDic) {
         for (let i = 0; i < amenitiesDic[key].length; i++) {
             //제이쿼리를 통해 img의 속성와 css를 주고 div안에 넣어준다
-            $('<img>').attr('src', '../../static/logo/position.png').attr('onclick', 'amenitiesTitle(event, this)').attr('title', amenitiesDic[key][i][0]).css('width', 32 * widthRatio + 'px').css('height', 32 * heightRatio + 'px').css('left', widthRatio * amenitiesDic[key][i][1]).css('top', heightRatio * amenitiesDic[key][i][2]).css('position', 'absolute').appendTo(document.getElementById(key));
+            $('<img>').attr('src', '../../static/logo/'+key+'.svg').attr('onclick', 'amenitiesTitle(event, this)').attr('title', amenitiesDic[key][i][0]).css('width', 32 * widthRatio + 'px').css('height', 32 * heightRatio + 'px').css('left', widthRatio * amenitiesDic[key][i][1]).css('top', heightRatio * amenitiesDic[key][i][2]).css('position', 'absolute').appendTo(document.getElementById(key));
         }
     }
 }
