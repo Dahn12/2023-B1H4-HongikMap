@@ -552,15 +552,11 @@ function amenitiesInMap() {
     for (let key in amenitiesDic) {
         for (let i = 0; i < amenitiesDic[key].length; i++) {
             //제이쿼리를 통해 img의 속성와 css를 주고 div안에 넣어준다
-            $('<img>', {
-                src: '../../static/logo/'+key+'.svg',
-                title: amenitiesDic[key][i][0],
-                width: 32 * widthRatio + 'px',
-                height: 32 * heightRatio + 'px'
-            }).css('left', widthRatio * amenitiesDic[key][i][1]).css('top', heightRatio * amenitiesDic[key][i][2]).css('position', 'absolute').appendTo(document.getElementById(key));
+            $('<img>').attr('src', '../../static/logo/position.png').attr('onclick', 'amenitiesTitle(event, this)').attr('title', amenitiesDic[key][i][0]).css('width', 32 * widthRatio + 'px').css('height', 32 * heightRatio + 'px').css('left', widthRatio * amenitiesDic[key][i][1]).css('top', heightRatio * amenitiesDic[key][i][2]).css('position', 'absolute').appendTo(document.getElementById(key));
         }
     }
 }
+
 
 amenitiesInMap();
 
@@ -570,23 +566,14 @@ window.onresize = function () {
 }
 
 function amenitiesTitle(e, img) {
-    var divTop = e.clientY; //상단 좌표 위치 안맞을시 e.pageY
-    var divLeft = e.clientX; //좌측 좌표 위치 안맞을시 e.pageX
-    var title = $(img).attr("title");
-    $('#divView').empty().append('<div style="position:absolute;right:5px"><span id="close" style="cursor:pointer;font-size:2px" title="닫기">X</span> </div><br>' + title);
-    $('#divView').css({
-        "background-color" : "black",
-        "color" : "white",
-        "top": divTop,
-        "left": divLeft,
-        "position": "absolute",
-        "z-index" : 11,
-        "border-radius": "10px",
-    }).show();
-    $('#close').click(function(){document.getElementById('divView').style.display='none'});
+    if (screen.width < 500) {
+        var title = $(img).attr("title");
+        $('.card').css('display', 'flex');
+        $('.card-title').html(title);
+    }
 
-
-    // var x = e.pageX;
-    // var y = e.pageY;
-    // $('<div>').css('height').css('left', widthRatio * amenitiesDic[key][i][1]).css('top', heightRatio * amenitiesDic[key][i][2])
 }
+$('#close').click(function(){
+    document.getElementById('card').style.display='none'
+});
+

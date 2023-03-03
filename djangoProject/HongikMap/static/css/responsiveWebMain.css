@@ -64,6 +64,13 @@
     background-color: #F6F9FB;
     border-top-style: hidden;
 }
+
+.card {
+    display: none;
+    --bs-card-border-radius: 1.375rem;
+    transition: all .35s;
+}
+
 /*모바일사이드바*/
 @media (max-width: 500px) {
     .mySidebar{
