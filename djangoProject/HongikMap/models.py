@@ -238,8 +238,8 @@ def is_same_building():
 
 def get_recommendation(keyword: str) -> list:
     result = []
-    for node in Recommendation.objects.filter(recommendation__contains=keyword).values():
-        result.append(node.node)
+    for node in Recommendation.objects.filter(recommendation__contains=keyword).values('node'):
+        result.append(node['node'])
     return result
 
 
