@@ -532,11 +532,11 @@ function amenitiesShow(name, e) {
 }
 
 let amenitiesDic = {
-    'cafe': [["R동 L층 카페나무", 187, 440], ["와우관 4층 카페나무", 437, 114], ["R동 2층 카페 그라찌에", 265, 427], ["R동 2층 다과점 파프라카", 204, 496], ["카페 캠퍼", 910, 517], ["A동 1층 카페드림", 898, 284], ["C동 8층 간이카페", 999, 218], ["중앙도서관 2층 북카페", 505, 176]],
-    'convenienceStore': [["R동 B2 홍익대학서적", 228, 451], ["와우관 4층 편의점", 437, 114], ["R동 3층 편의점", 226, 432], ["R동 L층 한가람 문구센터", 186, 383], ["제2기숙사 지하1층 편의점", 938, 470]],
-    'restaurant': [["제2기숙사 학생식당", 936, 474], ["향차이", 916, 531], ["메리킹", 165, 458]],
-    'medicalRoom': [["약국(원이 약국)", 916, 550], ["건강진료센터", 570, 259]],
-    'readingRoom': [["T동 3,4층 열람실", 821, 499], ["A동 2층 열람실", 823, 227], ["R동 8층 열람실", 257, 531], ["중앙도서관 열람실", 521, 219]]
+    'cafe': [["R동 L층 카페나무", 193, 452], ["와우관 4층 카페나무", 443, 126], ["R동 2층 카페 그라찌에", 271, 439], ["R동 2층 다과점 파프라카", 210, 508], ["카페 캠퍼", 916, 529], ["A동 1층 카페드림", 904, 296], ["C동 8층 간이카페", 1005, 230], ["중앙도서관 2층 북카페", 511, 188]],
+    'convenienceStore': [["R동 B2 홍익대학서적", 234, 463], ["와우관 4층 편의점", 433, 126], ["R동 3층 편의점", 232, 444], ["R동 L층 한가람 문구센터", 192, 395], ["제2기숙사 지하1층 편의점", 944, 482]],
+    'restaurant': [["제2기숙사 학생식당", 942, 486], ["향차이", 922, 543], ["메리킹", 171, 470]],
+    'medicalRoom': [["약국(원이 약국)", 922, 562], ["건강진료센터", 576, 271]],
+    'readingRoom': [["T동 3,4층 열람실", 827, 511], ["A동 2층 열람실", 829, 239], ["R동 8층 열람실", 263, 543], ["중앙도서관 열람실", 527, 231]]
 }
 
 function amenitiesInMap() {
@@ -552,16 +552,13 @@ function amenitiesInMap() {
     for (let key in amenitiesDic) {
         for (let i = 0; i < amenitiesDic[key].length; i++) {
             //제이쿼리를 통해 img의 속성와 css를 주고 div안에 넣어준다
-            $('<img>').attr('src', '../../static/logo/position.png').attr('onclick', 'amenitiesTitle(event, this)').attr('title', amenitiesDic[key][i][0]).css('width', 44 * widthRatio + 'px').css('height', 44 * heightRatio + 'px').css('left', widthRatio * amenitiesDic[key][i][1]).css('top', heightRatio * amenitiesDic[key][i][2]).css('position', 'absolute').appendTo(document.getElementById(key));
+            $('<img>', {
+                src: '../../static/logo/'+key+'.svg',
+                title: amenitiesDic[key][i][0],
+                width: 32 * widthRatio + 'px',
+                height: 32 * heightRatio + 'px'
+            }).css('left', widthRatio * amenitiesDic[key][i][1]).css('top', heightRatio * amenitiesDic[key][i][2]).css('position', 'absolute').appendTo(document.getElementById(key));
         }
-
-        // , {
-        //         src: '../../static/logo/'+key+'.svg',
-        //         title: amenitiesDic[key][i][0],
-        //         width: 44 * widthRatio + 'px',
-        //         height: 44 * heightRatio + 'px',
-        //     }
-        console.log(key);
     }
 }
 

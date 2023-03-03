@@ -165,10 +165,15 @@
 
 
 
+/*편의시설 이름*/
+.amenitiesname{
+    font-size: small;
+    color: #6c7576;
+}
 /*편의시설 버튼*/
 .btn-outline-secondary{
     --bs-btn-border-color: #fff;
-    --bs-btn-hover-color: #FFC107;
+    --bs-btn-hover-color: #6c7576;
     --bs-btn-hover-bg: #fff;
     --bs-btn-hover-border-color: #fff;
     --bs-btn-focus-shadow-rgb: 108,117,125;
@@ -180,7 +185,13 @@
     --bs-btn-disabled-border-color: #6c757d;
     --bs-gradient: none;
     --bs-btn-bg: #fff;
-    --bs-btn-active-color: #FFC107;
+    --bs-btn-active-color: #6c7576;
+}
+
+.newicon{
+    fill:#6c757d;
+    width: 1.1rem;
+    height: 1.1rem;
 }
 
 /*엘리베이터버튼*/

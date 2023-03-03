@@ -12,7 +12,7 @@
 
     </head>
     <body class="position-relative">
-        {#편의시설 텍스트바#}
+        <!--편의시설 텍스트바-->
         <div id="divView"></div>
 
         <!-- 위의창 -->
@@ -55,13 +55,14 @@
                 <!-- 검색창 -->
                 {% csrf_token %}
                 <div class="autocomplete">
-                    <input class="form-control searchText w-100" id="autoInput" type="search" placeholder="출발지를 입력하세요" aria-label="Search" onkeyup="sendingData(this);" autocomplete="off">
+                    <input class="form-control mb-1 searchText w-100" id="autoInput" type="search" placeholder="출발지를 입력하세요" aria-label="Search" onkeyup="sendingData(this);" autocomplete="off">
                 </div>
                 <div class="autocomplete">
-                    <input class="form-control mb-1 searchText w-100" id="autoInput1" type="search" placeholder="도착지를 입력하세요" aria-label="Search" onkeyup="sendingData(this);" autocomplete="off">
+                    <input class="form-control mb-2 searchText w-100" id="autoInput1" type="search" placeholder="도착지를 입력하세요" aria-label="Search" onkeyup="sendingData(this);" autocomplete="off">
                 </div>
-                <button type="button" class="btn btnsubmit btn-primary mb-1 float-end btn-sm" onclick="submitCheck()">길찾기</button>
+                <button type="button" class="btn mb-3 btnsubmit btn-primary mb-1 float-end btn-sm" onclick="submitCheck()">길찾기</button>
                 <!-- 편의시설 -->
+                <div class="amenitiesname">amenities</div>
                 <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
                     <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off"  onclick="amenitiesShow('cafe',event);">
                     <label class="btn btn-outline-secondary" for="btncheck1" title="cafe"><i class="bi bi-cup-fill"></i></label>
@@ -70,22 +71,16 @@
                     <label class="btn btn-outline-secondary" for="btncheck2" title="convenienceStore" ><i class="bi bi-basket2-fill"></i></label>
 
                     <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off" onclick="amenitiesShow('restaurant',event);">
-                    <label class="btn btn-outline-secondary" for="btncheck3" title="restaurant"><i class="bi bi-house"></i></label>
+                    <label class="btn btn-outline-secondary" for="btncheck3" title="음식점"><svg class="newicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.496 24h-.001c-.715 0-1.5-.569-1.5-1.5v-8.5s-1.172-.003-2.467 0c.802-6.996 3.103-14 4.66-14 .447 0 .804.357.807.851.01 1.395.003 16.612.001 21.649 0 .828-.672 1.5-1.5 1.5zm-11.505-12.449c0-.691-.433-.917-1.377-1.673-.697-.56-1.177-1.433-1.088-2.322.252-2.537.862-7.575.862-7.575h.6v6h1.003l.223-6h.607l.173 6h1.003l.242-6h.562l.199 6h1.003v-6h.549s.674 5.005.951 7.55c.098.902-.409 1.792-1.122 2.356-.949.751-1.381.967-1.381 1.669v10.925c0 .828-.673 1.5-1.505 1.5-.831 0-1.504-.672-1.504-1.5v-10.93z"/></svg></label>
 
             
                     <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off" onclick="amenitiesShow('medicalRoom',event);">
-                    <label class="btn btn-outline-secondary" for="btncheck4" title="medicalRoom"><i class="bi bi-plus-square"></i></label>
+                    <label class="btn btn-outline-secondary" for="btncheck4" title="의료시설"><svg class="newicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 9h-9v-9h-6v9h-9v6h9v9h6v-9h9z"/></svg></label>
 
                     <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off" onclick="amenitiesShow('readingRoom',event);">   
                     <label class="btn btn-outline-secondary" for="btncheck5" title="library"><i class="bi bi-pencil-fill"></i></label>
                 </div>
-                <div class="btn-name-group">
-                    <div class="btn-name">카페</div>
-                    <div class="btn-name">편의점</div>
-                    <div class="btn-name">음식점</div>
-                    <div class="btn-name">의료시설</div>
-                    <div class="btn-name">열람실</div>
-                </div>
+                
 
 
 
