@@ -132,17 +132,24 @@ def save(result: dict, elevator: bool):
 
 def save_recommendation(rooms: list):
     create_recommendations = []
+    update_recommendations = []
 
     for room in rooms:
         building, floor, entity = room.split('-')
         if not exist_node(room):
             Node(node=room).save()
         node = Node.objects.get(node=room)
+        recommendation = f'{building} {floor}{entity:0>2}'
         if not Recommendation.objects.filter(node=node).exists():
-            recommendation = f'{building} {floor}{entity:0>2}'
-            # create_recommendation = Recommendation(node=node, recommendation=recommendation)
-            # create_recommendations.append(create_recommendation)
-            Recommendation(node=node, recommendation=recommendation).save()
+            create_recommendation = Recommendation(node=node, recommendation=recommendation)
+            create_recommendations.append(create_recommendation)
+            # Recommendation(node=node, recommendation=recommendation).save()
+        else:
+            update_recommendation = Recommendation.objects.get(node=node)
+            update_recommendation.recommendation = recommendation
+            update_recommendations.append(update_recommendation)
+    Recommendation.objects.bulk_create(create_recommendations)
+    Recommendation.objects.bulk_update(update_recommendations, ['recommendation'])
 
 
 def get_route(start: str, end: str, elevator: bool) -> dict:
