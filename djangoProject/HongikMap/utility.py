@@ -118,6 +118,8 @@ def node2keyword(node: str) -> str:
         return "{}동 {}층 {}".format(building, floor, "출입문")
 
     if is_room(node):
+        if is_basement(node):
+            floor = f'0{floor[1:]}'
         return "{}{}{:0>2}".format(building, floor, entity)
 
     return node

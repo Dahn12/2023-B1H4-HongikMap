@@ -1,4 +1,5 @@
 from django.db import models
+from .utility import is_basement
 
 NonExistentNode = '[NonExistentNode]: There is no such node'
 NonExistentRoute = '[NonExistentRoute]: There is no such route'
@@ -64,7 +65,7 @@ class Recommendation(models.Model):
 
     node = models.OneToOneField("Node", db_column='node', primary_key=True, on_delete=models.CASCADE,
                                 related_name='recommendation_node')
-    recommendation = models.CharField(max_length=30)
+    recommendation = models.CharField(max_length=50)
 
 
 def initialize_database():
@@ -135,11 +136,22 @@ def save_recommendation(rooms: list):
     update_recommendations = []
 
     for room in rooms:
-        building, floor, entity = room.split('-')
         if not exist_node(room):
             Node(node=room).save()
         node = Node.objects.get(node=room)
-        recommendation = f'{building} {floor}{entity:0>2}'
+
+        building, floor, entity = room.split('-')
+        if is_basement(room):
+            floor = f'0{floor[1:]}'
+            recommendation = f'{building}{floor}{entity}'
+        else:
+            if "_" in entity:
+                prefix_entity, postfix_entity = entity.split("_")
+                recommendation = f'{building}{floor}{prefix_entity:0>2}_{postfix_entity}'
+            else:
+                recommendation = f'{building}{floor}{entity:0>2}'
+            # recommendation = f'{building}{floor}{entity if "_" in entity else entity:0>2}'
+        # recommendation = f'{building}{floor}{entity:0>2}'
         if not Recommendation.objects.filter(node=node).exists():
             create_recommendation = Recommendation(node=node, recommendation=recommendation)
             create_recommendations.append(create_recommendation)
