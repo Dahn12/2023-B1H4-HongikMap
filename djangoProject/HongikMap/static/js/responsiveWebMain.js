@@ -213,6 +213,7 @@ let autocomplete = (function () {
 
         }
     }
+    let lastkeyCord=0;
 
     let keydownEvent = function (keyCord) {
         var x = document.getElementById(_inp.id + "autocomplete-list");
@@ -228,13 +229,13 @@ let autocomplete = (function () {
             // 현재위치 증가
             _currentFocus++;
             // 현재위치의 포커스 나타내기
-            addActive(x);
+            addActive(x, keyCord, lastkeyCord);
         } else if (keyCord == 38) {
             // up
             // 현재위치 감소
             _currentFocus--;
             // 현재위치의 포커스 나타내기
-            addActive(x);
+            addActive(x, keyCord, lastkeyCord);
         } else if (keyCord == 13) {
             // enter
             if (_inp == document.getElementById('autoInput')) {
@@ -249,6 +250,7 @@ let autocomplete = (function () {
                 if (x) x[_currentFocus].click();
             }
         }
+        lastkeyCord=keyCord;
     }
     //바깥 클릭하면 자동완성 사라짐
     document.addEventListener("click", function (e) {
@@ -256,14 +258,29 @@ let autocomplete = (function () {
     });
 
 
-    let addActive = function (x) {
+    let addActive = function (x, keyCode, lastkeyCord) {
+        let now_keyCode = keyCode;
+        let last_keyCode = lastkeyCord
         if (!x) return false;
         removeActive(x);
         if (_currentFocus >= x.length) _currentFocus = 0;
         if (_currentFocus < 0) _currentFocus = (x.length - 1);
         x[_currentFocus].classList.add("autocomplete-active");
         // 키다운이벤트 따라가기
-        $('.autocomplete-items').scrollTop(_currentFocus * 28)
+
+        if(last_keyCode!=now_keyCode && _currentFocus%6==5){
+            $('.autocomplete-items').scrollTop((_currentFocus-5) * 28);
+        }
+
+        if(_currentFocus%6==0 && now_keyCode==40)
+        {
+            $('.autocomplete-items').scrollTop(_currentFocus * 28);
+        }
+        else if (_currentFocus%6==0 && now_keyCode==38)
+        {
+            $('.autocomplete-items').scrollTop((_currentFocus-5) * 28);
+        }
+        
     }
 
 
