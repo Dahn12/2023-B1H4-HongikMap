@@ -9,12 +9,12 @@ STAIR = "S"
 EXIT = "X"
 BASEMENT = "B"
 
-data_path = "HongikMap/static/data/data.txt"
-keywords_path = "HongikMap/static/data/keywords.txt"
-recommends_by_parsing_path = "HongikMap/static/data/recommends_by_parsing.txt"
-result_with_elevator_path = "HongikMap/static/data/result_with_elevator.txt"
-result_without_elevator_path = "HongikMap/static/data/result_without_elevator.txt"
-coordinate_path = "HongikMap/static/data/coordinate.txt"
+data_path = "/home/hongikmap2023/2023-B1H4-HongikMap/djangoProject/static/data/data.txt"
+keywords_path = "/home/hongikmap2023/2023-B1H4-HongikMap/djangoProject/static/data/keywords.txt"
+recommends_by_parsing_path = "/home/hongikmap2023/2023-B1H4-HongikMap/djangoProject/static/data/recommends_by_parsing.txt"
+result_with_elevator_path = "/home/hongikmap2023/2023-B1H4-HongikMap/djangoProject/static/data/result_with_elevator.txt"
+result_without_elevator_path = "/home/hongikmap2023/2023-B1H4-HongikMap/djangoProject/static/data/result_without_elevator.txt"
+coordinate_path = "/home/hongikmap2023/2023-B1H4-HongikMap/djangoProject/static/data/coordinate.txt"
 
 
 def recommend2node(input_recommend: str) -> str:
