@@ -6,7 +6,7 @@ from . import models
 def search(departure: str, destination: str, elevator: bool) -> dict:
     result = {}
     minimum_route = {}
-    # 경로가 DB에 있을경우 바로가져온다
+    # 경로가 DB에 있을경우 바로 가져온다
     if models.exist_route(departure, destination, elevator):
         minimum_route = models.get_route(departure, destination, elevator)
     # DB에 경로가 없을경우 셋으로 나눠서 가져와야한다.
@@ -79,7 +79,7 @@ def get_coordinates(nodes: list) -> list:
         if valid_node_for_coordinate(node):
             if is_external(node):
                 node = get_external_node_number(node)
-            result[node] = []
+        result[node] = []
 
     with open(coordinate_path, "r", encoding='UTF8') as f:
         for line in f.readlines():
