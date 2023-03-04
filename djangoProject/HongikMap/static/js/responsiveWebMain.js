@@ -539,6 +539,11 @@ let amenitiesDic = {
     'readingRoom': [["T동 3,4층 열람실", 827, 511], ["R동 8층 열람실", 263, 543], ["중앙도서관 열람실", 527, 231]]
 }
 
+let amenitiesText = {
+    'R동 L층 카페나무':['(평일, 학기중) 08:00 – 21:00', '(평일, 방학중) 08:30 – 20:30', '(주말, 학기중) 09:00 – 20:00', '(주말, 방학중) 09:00 – 19:30'],
+    '와우관 4층 카페나무':['(평일, 학기중) 08:30 – 20:00', '(평일, 방학중) 08:30 – 19:30', '(주말/공휴일) 09:00 – 18:00'],
+}
+
 function amenitiesInMap() {
     //지도위 편의시설 전부 삭제
     $('#amenitiesOnMap div').empty();
@@ -552,7 +557,7 @@ function amenitiesInMap() {
     for (let key in amenitiesDic) {
         for (let i = 0; i < amenitiesDic[key].length; i++) {
             //제이쿼리를 통해 img의 속성와 css를 주고 div안에 넣어준다
-            $('<img>').attr('src', '../../static/logo/'+key+'.svg').attr('onclick', 'amenitiesTitle(event, this)').attr('title', amenitiesDic[key][i][0]).css('width', 32 * widthRatio + 'px').css('height', 32 * heightRatio + 'px').css('left', widthRatio * amenitiesDic[key][i][1]).css('top', heightRatio * amenitiesDic[key][i][2]).css('position', 'absolute').appendTo(document.getElementById(key));
+            $('<img>').attr('src', '../../static/logo/' + key + '.svg').attr('onclick', 'amenitiesTitle(event, this)').attr('title', amenitiesDic[key][i][0]).css('width', 32 * widthRatio + 'px').css('height', 32 * heightRatio + 'px').css('left', widthRatio * amenitiesDic[key][i][1]).css('top', heightRatio * amenitiesDic[key][i][2]).css('position', 'absolute').appendTo(document.getElementById(key));
         }
     }
 }
@@ -568,12 +573,17 @@ window.onresize = function () {
 function amenitiesTitle(e, img) {
     if (screen.width < 500) {
         var title = $(img).attr("title");
+        var titleWithoutSpace = title.replace(/ /g, '_')
         $('.card').css('display', 'flex');
         $('.card-title').html(title);
+
+        $('.card-img-top').attr('src', '../../static/logo/amenitiespic/'+title+'.jpg');
+        $('.card-text').html('<h3>'+title+'</h3>')
     }
 
 }
-$('#close').click(function(){
-    document.getElementById('card').style.display='none'
+
+$('#close').click(function () {
+    document.getElementById('card').style.display = 'none'
 });
 
