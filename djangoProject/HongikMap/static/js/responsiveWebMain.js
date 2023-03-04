@@ -123,17 +123,19 @@ function shadowing() {
     // 화면 넓이를 측정해 500px이하일때 html 백그라운드와 지도가 밝기감소
     if (screen.width < 500) {
         if (shadowingCheck % 2 == 0) {
+            // 햄버거 바 버튼 누르면 shadowing
             brightnessFromButton = document.getElementsByClassName('brightnessFromButton');
 
             for (var i = 0; i < brightnessFromButton.length; i++) {
-                $(brightnessFromButton).css('background-color', 'rgba(0,0,0,0.5)')
-                $('#backgroundImage').css('filter', 'brightness(0.5)')
+                $('#total').css('background-color', 'rgba(0,0,0,0.5)');
+                $(brightnessFromButton).css('filter', 'brightness(0.5)');
+
             }
 
         } else {
-            for (var i = 0; i < brightnessFromButton.length; i++) {
-                $(brightnessFromButton).css('background-color', 'rgba(0,0,0,0)')
-                $('#backgroundImage').css('filter', 'brightness(1)')
+            for (let i = 0; i < brightnessFromButton.length; i++) {
+                $('#total').css('background-color', 'rgba(0,0,0,0)');
+                $(brightnessFromButton).css('filter', 'brightness(1)');
             }
         }
         shadowingCheck++;

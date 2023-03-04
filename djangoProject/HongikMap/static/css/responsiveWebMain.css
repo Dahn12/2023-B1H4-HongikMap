@@ -71,7 +71,11 @@
     .mySidebar {
         width: 85%;
     }
-
+    #footer {
+        font-size : 30%;
+        position : absolute;
+        bottom: 0;
+    }
 
 }
 
@@ -272,4 +276,21 @@
     text-align: left;
     font-weight: bold;
     padding-left: 10px;
+}
+
+#footer {
+    position:static;
+    border-top: 1px solid lightgray;
+    z-index:1;
+}
+@media (max-width: 500px) {
+    #footer {
+        font-size : 30%;
+        position : absolute;
+        bottom: 0;
+    }
+
+}
+#footer div ul {
+    list-style:none;
 }

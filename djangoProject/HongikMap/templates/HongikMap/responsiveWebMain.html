@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="brightnessFromButton">
+<html lang="en" id="total">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1", maximum-scale=1.0, user-scalable=1">
@@ -29,21 +29,6 @@
         </div>
         </nav>
 
-        <!-- 학교사진 및 캔버스 -->
-        <!-- ratio클래스로인해 자식요소 크기 자동조절 -->
-        <div class='ratio position-absolute brightnessFromButton' style="--bs-aspect-ratio: 53.84615384%;" id="background" >
-            <img id="backgroundImage" src="../../static/logo/schoolMap.jpg" alt="..." >
-            <canvas id="myCanvas"width="1300" height="700"></canvas>
-
-            <!-- 편의시설화살표 -->
-            <div class="img-fluid d-flex" id="amenitiesOnMap">
-                <div class="flex-grow-1" id="cafe"></div>
-                <div class="flex-grow-1" id="convenienceStore"></div>
-                <div class="flex-grow-1" id="restaurant"></div>
-                <div class="flex-grow-1" id="medicalRoom"></div>
-                <div class="flex-grow-1" id="readingRoom"></div>
-            </div>
-        </div>
 
         <!-- 사이드바 -->
         <!-- 클래스로 callapse를 주어 숨김처리 및 수평으로 나오게 한다. flex-shrink를 통해 줄어들었을 때 고려 -->
@@ -73,14 +58,14 @@
                     <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off" onclick="amenitiesShow('restaurant',event);">
                     <label class="btn btn-outline-secondary" for="btncheck3" title="Restaurant"><svg class="newicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.496 24h-.001c-.715 0-1.5-.569-1.5-1.5v-8.5s-1.172-.003-2.467 0c.802-6.996 3.103-14 4.66-14 .447 0 .804.357.807.851.01 1.395.003 16.612.001 21.649 0 .828-.672 1.5-1.5 1.5zm-11.505-12.449c0-.691-.433-.917-1.377-1.673-.697-.56-1.177-1.433-1.088-2.322.252-2.537.862-7.575.862-7.575h.6v6h1.003l.223-6h.607l.173 6h1.003l.242-6h.562l.199 6h1.003v-6h.549s.674 5.005.951 7.55c.098.902-.409 1.792-1.122 2.356-.949.751-1.381.967-1.381 1.669v10.925c0 .828-.673 1.5-1.505 1.5-.831 0-1.504-.672-1.504-1.5v-10.93z"/></svg></label>
 
-            
+
                     <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off" onclick="amenitiesShow('medicalRoom',event);">
                     <label class="btn btn-outline-secondary" for="btncheck4" title="MedicalRoom"><svg class="newicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 9h-9v-9h-6v9h-9v6h9v9h6v-9h9z"/></svg></label>
 
-                    <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off" onclick="amenitiesShow('readingRoom',event);">   
+                    <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off" onclick="amenitiesShow('readingRoom',event);">
                     <label class="btn btn-outline-secondary" for="btncheck5" title="Library"><i class="bi bi-pencil-fill"></i></label>
                 </div>
-                
+
 
 
 
@@ -109,10 +94,40 @@
                 </div>
             </div>
         </div>
+        <!-- 학교사진 및 캔버스 -->
+        <!-- ratio클래스로인해 자식요소 크기 자동조절 -->
+        <div class='ratio brightnessFromButton' style="--bs-aspect-ratio: 53.84615384%;" id="background" >
+            <img id="backgroundImage" src="../../static/logo/schoolMap.jpg" alt="..." >
+            <canvas id="myCanvas"width="1300" height="700"></canvas>
 
+            <!-- 편의시설화살표 -->
+            <div class="img-fluid d-flex" id="amenitiesOnMap">
+                <div class="flex-grow-1" id="cafe"></div>
+                <div class="flex-grow-1" id="convenienceStore"></div>
+                <div class="flex-grow-1" id="restaurant"></div>
+                <div class="flex-grow-1" id="medicalRoom"></div>
+                <div class="flex-grow-1" id="readingRoom"></div>
+            </div>
+        </div>
+
+        <!-- footer -->
+        <footer id="footer"  style="width: 100%;">
+            <br>
+            <div  class='text-center'>
+                contact us:
+                <ul>
+                    <li>email: hongikmap2023@gmail.com</li>
+                    <li><a href="https://www.instagram.com/hongmap2023/?igshid=OTJlNzQ0NWM%3D">instagram: @hongmap2023</a></li>
+                    <li></li>
+
+                </ul>
+                B1H4팀의 기여자분들의 도움으로 페이지가 운영되고 있습니다.<br>
+                Thanks to Coffee Enthusiastic<br><br>
+            </div>
+        </footer>
 
         <!--카드-->
-        <div class="card position-absolute bottom-0" id="card" style="width: 100%;">
+        <div class="card position-absolute bottom-0 brightnessFromButton" id="card" style="width: 100%;">
             <div style="display:flex; justify-content: center"><span id="close" style="cursor:pointer;font-size:2px" title="닫기"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#6c7576" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
   <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
 </svg></span></div>
@@ -123,6 +138,8 @@
 
             </div>
         </div>
+
+
 
 
 
