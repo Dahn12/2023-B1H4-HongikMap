@@ -15,10 +15,10 @@ D-B1-S3 D-1-S3 15 t
 D-B2-S3 D-B1-S3 15 t
 D-B3-S3 D-B2-S3 15 t
         #엘리베이터
-D-2-E1 D-1-E1 10 t
-D-1-E1 D-B1-E1 10 t
-D-B1-E1 D-B2-E1 10 t
-D-B2-E1 D-B3-E1 10 t
+D-2-E1 D-1-E1 1 t
+D-1-E1 D-B1-E1 1 t
+D-B1-E1 D-B2-E1 1 t
+D-B2-E1 D-B3-E1 1 t
     #수평구조
         #B1
 D-B1-H1 D-B1-S1 5 t

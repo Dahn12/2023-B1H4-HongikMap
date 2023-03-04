@@ -34,28 +34,28 @@ C-7-S6 C-8-S6 15 t
 C-8-S6 C-9-S6 15 t
         #엘리베이터
 #E1
-C-1-E1 C-2-E1 10 t
-C-2-E1 C-3-E1 10 t
-C-3-E1 C-4-E1 10 t
-C-4-E1 C-5-E1 10 t
-C-5-E1 C-6-E1 10 t
-C-6-E1 C-7-E1 10 t
-C-7-E1 C-8-E1 10 t
+C-1-E1 C-2-E1 1 t
+C-2-E1 C-3-E1 1 t
+C-3-E1 C-4-E1 1 t
+C-4-E1 C-5-E1 1 t
+C-5-E1 C-6-E1 1 t
+C-6-E1 C-7-E1 1 t
+C-7-E1 C-8-E1 1 t
 #E2
-C-1-E2 C-2-E2 10 t
-C-2-E2 C-3-E2 10 t
-C-3-E2 C-4-E2 10 t
-C-4-E2 C-5-E2 10 t
-C-5-E2 C-6-E2 10 t
-C-6-E2 C-7-E2 10 t
-C-7-E2 C-8-E2 10 t
+C-1-E2 C-2-E2 1 t
+C-2-E2 C-3-E2 1 t
+C-3-E2 C-4-E2 1 t
+C-4-E2 C-5-E2 1 t
+C-5-E2 C-6-E2 1 t
+C-6-E2 C-7-E2 1 t
+C-7-E2 C-8-E2 1 t
 #E4
-C-3-E4 C-4-E4 10 t
-C-4-E4 C-5-E4 10 t
-C-5-E4 C-6-E4 10 t
-C-6-E4 C-7-E4 10 t
-C-7-E4 C-8-E4 10 t
-C-8-E4 C-9-E4 10 t
+C-3-E4 C-4-E4 1 t
+C-4-E4 C-5-E4 1 t
+C-5-E4 C-6-E4 1 t
+C-6-E4 C-7-E4 1 t
+C-7-E4 C-8-E4 1 t
+C-8-E4 C-9-E4 1 t
     #수평구조
         #B1
 C-B1-S1 C-B1-H1 4 t

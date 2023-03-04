@@ -24,15 +24,15 @@ P-7-S2 P-8-S2 15 t
 P-B2-S3 P-B1-S3 15 t
 P-B1-S3 P-1-S3 15 t
         #엘리베이터
-P-B2-E1 P-B1-E1 10 t
-P-B1-E1 P-1-E1 10 t
-P-1-E1 P-2-E1 10 t
-P-2-E1 P-3-E1 10 t
-P-3-E1 P-4-E1 10 t
-P-4-E1 P-5-E1 10 t
-P-5-E1 P-6-E1 10 t
-P-6-E1 P-7-E1 10 t
-P-7-E1 P-8-E1 10 t
+P-B2-E1 P-B1-E1 1 t
+P-B1-E1 P-1-E1 1 t
+P-1-E1 P-2-E1 1 t
+P-2-E1 P-3-E1 1 t
+P-3-E1 P-4-E1 1 t
+P-4-E1 P-5-E1 1 t
+P-5-E1 P-6-E1 1 t
+P-6-E1 P-7-E1 1 t
+P-7-E1 P-8-E1 1 t
     #수평구조
         #B2
 P-B2-X1 P-B2-H1 5 t

@@ -20,15 +20,15 @@ U-4-S2 U-5-S2 15 t
 U-5-S2 U-6-S2 15 t
 U-6-S2 U-7-S2 15 t
         #엘리베이터
-U-B3-E1 U-B2-E1 10 t
-U-B2-E1 U-B1-E1 10 t
-U-B1-E1 U-1-E1 10 t
-U-1-E1 U-2-E1 10 t
-U-2-E1 U-3-E1 10 t
-U-3-E1 U-4-E1 10 t
-U-4-E1 U-5-E1 10 t
-U-5-E1 U-6-E1 10 t
-U-6-E1 U-7-E1 10 t
+U-B3-E1 U-B2-E1 1 t
+U-B2-E1 U-B1-E1 1 t
+U-B1-E1 U-1-E1 1 t
+U-1-E1 U-2-E1 1 t
+U-2-E1 U-3-E1 1 t
+U-3-E1 U-4-E1 1 t
+U-4-E1 U-5-E1 1 t
+U-5-E1 U-6-E1 1 t
+U-6-E1 U-7-E1 1 t
     #수평구조
 	#B3
 U-B3-H1 U-B3-E1 6.25 t
