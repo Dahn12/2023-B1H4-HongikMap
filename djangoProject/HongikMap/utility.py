@@ -123,6 +123,7 @@ def node2keyword(node: str) -> str:
     if is_room(node):
         if is_basement(node):
             floor = f'0{floor[1:]}'
+            return "{}{}{}".format(building, floor, entity)
         return "{}{}{:0>2}".format(building, floor, entity)
 
     return node
