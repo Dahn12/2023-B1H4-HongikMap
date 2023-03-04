@@ -26,6 +26,7 @@ def search(departure: str, destination: str, elevator: bool) -> dict:
                 })
         minimum_route = sorted(merged_route, key=lambda x: x['distance'])[0]
     compressed_route = get_compressed_route(minimum_route['route'])
+    print(minimum_route['route'])
     result['distance'] = minimum_route['distance']
     result['route'] = nodes2recommends(compressed_route)
     result['coordinates'] = get_coordinates(minimum_route['route'])

@@ -1,3 +1,12 @@
+//변수선언
+//##경로표시
+let boolDepartureCheck = false;
+let boolDestinationCheck = false;
+
+
+
+
+
 //선그리기
 let pathResult = [];
 //canvas 엘리먼트를 취득한다.
@@ -472,9 +481,7 @@ function ElevPage(name) {
 }
 
 
-//##경로표시
-let boolDepartureCheck = false;
-let boolDestinationCheck = false;
+
 
 //출발지, 도착지가 옳은 형식인지 체크
 function getDirectionCheck() {
@@ -519,6 +526,7 @@ function submitCheck(event) {
             success: function (data) {
                 textList = data;
                 //엘리베이터 시간주기
+                console.log(textList);
                 elevTimePlus(textList);
                 ElevPage('use');
                 drawLine(textList["elevatorUse"]["coordinates"]);
