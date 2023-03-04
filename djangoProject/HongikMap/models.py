@@ -261,17 +261,12 @@ def get_same_building_XtoX(elevator: bool) -> list:
 
     for route in XtoX:
         if is_same_building(route):
-            print(route)
-            departure = route['departure']
-            destination = route['destination']
-            distance = route['distance']
-            path = route['route']
-            result.append({(departure, destination): {'distance': distance, 'route': path}})
+            result.append(route)
     return result
 
 
 def is_same_building(route: dict) -> bool:
-    return route['departure'][0] == route['destination'][0]
+    return route['departure_id'][0] == route['destination_id'][0]
 
 
 def get_recommendation(keyword: str) -> list:
