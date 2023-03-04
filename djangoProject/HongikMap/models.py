@@ -250,12 +250,28 @@ def get_routes_of_end_building(end: str, elevator: bool) -> list:
         return routes
 
 
-def get_same_building_XtoX():
-    pass
+def get_same_building_XtoX(elevator: bool) -> list:
+    result = []
+    if elevator:
+        XtoX = ResultWithElevator.objects.filter(departure__node__contains='X',
+                                                 destination__node__contains='X').values()
+    else:
+        XtoX = ResultWithoutElevator.objects.filter(departure__node__contains='X',
+                                                    destination__node__contains='X').values()
+
+    for route in XtoX:
+        if is_same_building(route):
+            print(route)
+            departure = route['departure']
+            destination = route['destination']
+            distance = route['distance']
+            path = route['route']
+            result.append({(departure, destination): {'distance': distance, 'route': path}})
+    return result
 
 
-def is_same_building():
-    pass
+def is_same_building(route: dict) -> bool:
+    return route['departure'][0] == route['destination'][0]
 
 
 def get_recommendation(keyword: str) -> list:
