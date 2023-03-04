@@ -1,3 +1,9 @@
+let deleteCookie = function(name) {
+  document.cookie = name + '=; expires=Thu, 01 Jan 1999 00:00:10 GMT;';
+}
+// deleteCookie(변수이름)
+deleteCookie('name');
+
 //변수선언
 //##경로표시
 let boolDepartureCheck = false;
@@ -619,7 +625,7 @@ window.onresize = function () {
 
 
 function amenitiesTitle(e, img) {
-    if (screen.width < 500) {
+    if (screen.width < 25500) {
         let title = $(img).attr("title");
 
         let titleWithoutSpace = title.replace(/ /g, '_')
