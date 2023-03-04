@@ -36,6 +36,10 @@
 }
 
 
+#background {
+    margin-top: 70px;
+}
+
 /*지도위의 편의시설*/
 #amenitiesOnMap {
     z-index: 2;
@@ -86,16 +90,27 @@
 /*상단바*/
 .navbar {
     border-bottom: 1px solid #E5E9EF;
-    --bs-navbar-color: rgba(0, 0, 0, 0);
+    --bs-navbar-color: rgb(0, 0, 0);
+    position: fixed;
+    top:0;
+    left: 0;
+    z-index: 10;
+    height: 60px;
+    width: 100%;
+    background-color: white;
 }
 
 .navbar-toggler {
     border: 1px solid transparent;
 }
 
+#navbarToggleExternalContent{
+    position: fixed;
+    top: 60px ;
+}
+
 /*위의 창 nav*/
 .container-fluid {
-    height: 5vh;
 }
 
 
