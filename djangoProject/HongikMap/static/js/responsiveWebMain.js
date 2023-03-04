@@ -542,6 +542,24 @@ let amenitiesDic = {
 let amenitiesText = {
     'R동 L층 카페나무':['(평일, 학기중) 08:00 – 21:00', '(평일, 방학중) 08:30 – 20:30', '(주말, 학기중) 09:00 – 20:00', '(주말, 방학중) 09:00 – 19:30'],
     '와우관 4층 카페나무':['(평일, 학기중) 08:30 – 20:00', '(평일, 방학중) 08:30 – 19:30', '(주말/공휴일) 09:00 – 18:00'],
+    'R동 2층 카페 그라찌에':['(평일) 08:00 – 20:00', '(주말) 09:00 – 18:00'],
+    'R동 2층 다과점 파프라카':['am08:00 – pm08:00'],
+    '카페 캠퍼':[],
+    'A동 1층 카페드림':['학기중','(평일) 1층 08:00 – 20:00, 2층 08:00~23:00', '(주말) 1층 09:00 – 19:00, 2층 09:00~23:00','방학중','(평일) 1층 10:00~17:00, 2층 09:00~23:00','(주말) 1층 10:00~17:00, 2층 09:00~23:00'],
+    'C동 8층 간이카페':['(평일, 학기중) 08:30 - 20:00','(평일, 방학중) 08:30 - 18:00','(일요일/공휴일) 휴무'],
+    '중앙도서관 2층 북카페':['(평일, 학기중) 10:00 - 19:00','(평일, 방학중) 09:00 - 18:00','(일요일/공휴일) 휴무'],
+    'R동 B2 홍익대학서적':['평일 : am09:00 - pm07:00 (학기중)','토요일 : am09:00 - pm02:00 (학기중)','일요일 및 공휴일 휴무'],
+    '와우관 4층 편의점':['(평일, 학기중) 08:30 - 21:00','(평일, 방학중) 08:30 - 20:00','(주말/공휴일) 08:30 - 18:00'],
+    'R동 3층 편의점':['(평일, 학기중) 08:00 - 21:00','(평일, 방학중) 08:00 - 18:00','(주말/공휴일) 휴무'],
+    'R동 L층 한가람 문구센터':['평일 : am08:30 - pm8:30','주말 및 공휴일 : am10:00 - pm08:00'],
+    '제2기숙사 지하1층 편의점':[],
+    '제2기숙사 학생식당':['08:00~09:00(조식), 11:30~14:30(중식), 17:30~19:20(석식)','[방학중 주말/공휴일] 휴무'],
+    '향차이':[],
+    '약국(원이 약국)':['(평일) 08:30 - 23:00','(주말) 11:00 - 22:00'],
+    '건강진료센터':[],
+    'T동 3,4층 열람실':['06:00-23:00 연중무휴'],
+    'R동 8층 열람실':['06:00-23:00 연중무휴'],
+    '중앙도서관 열람실':['06:00-23:00 연중무휴','(제4공학관 4층 일반열람실 24시간 개방)'],
 }
 
 function amenitiesInMap() {
@@ -557,7 +575,7 @@ function amenitiesInMap() {
     for (let key in amenitiesDic) {
         for (let i = 0; i < amenitiesDic[key].length; i++) {
             //제이쿼리를 통해 img의 속성와 css를 주고 div안에 넣어준다
-            $('<img>').attr('src', '../../static/logo/' + key + '.svg').attr('onclick', 'amenitiesTitle(event, this)').attr('title', amenitiesDic[key][i][0]).css('width', 32 * widthRatio + 'px').css('height', 32 * heightRatio + 'px').css('left', widthRatio * amenitiesDic[key][i][1]).css('top', heightRatio * amenitiesDic[key][i][2]).css('position', 'absolute').appendTo(document.getElementById(key));
+            $('<img>').attr('src', '../../static/logo/' + key + '.svg').attr('onclick', 'amenitiesTitle(event, this)').attr('title', amenitiesDic[key][i][0]).css('width', 32 * widthRatio + 'px').css('height', 32 * heightRatio + 'px').css('left', widthRatio * amenitiesDic[key][i][1]).css('top', heightRatio * amenitiesDic[key][i][2]).css('position', 'absolute').css('z-index','3').appendTo(document.getElementById(key));
         }
     }
 }
@@ -570,15 +588,30 @@ window.onresize = function () {
     amenitiesInMap();
 }
 
+
+
+
 function amenitiesTitle(e, img) {
     if (screen.width < 500) {
-        var title = $(img).attr("title");
-        var titleWithoutSpace = title.replace(/ /g, '_')
-        $('.card').css('display', 'flex');
-        $('.card-title').html(title);
+        let title = $(img).attr("title");
 
-        $('.card-img-top').attr('src', '../../static/logo/amenitiespic/'+title+'.jpg');
-        $('.card-text').html('<h3>'+title+'</h3>')
+        let titleWithoutSpace = title.replace(/ /g, '_')
+        console.log(titleWithoutSpace);
+        // 카드 히든 제거
+        $('.card').css('display', 'flex');
+        // 이미지 넣어 주기
+        $('.card-img-top').attr('src', '../../static/logo/amenitiespic/'+titleWithoutSpace+'.jpg');
+        // 타이틀
+        $('.card-title').html('<h3>'+title+'</h3>');
+        let textWithList = '';
+        // text 내용물 만드는 과정
+        for (let list in amenitiesText[title]) {
+            console.log(list);
+            list = '<li>' + amenitiesText[title][list] +'</li>';
+            textWithList += list ;
+        }
+        textWithList = '<ul>'+ textWithList +'</ul>';
+        $('.card-text').html(textWithList);
     }
 
 }

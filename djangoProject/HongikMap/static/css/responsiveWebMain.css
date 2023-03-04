@@ -30,36 +30,30 @@
 }
 
 
-
-
-
-
-
-#checkbox_check{
+#checkbox_check {
     visibility: hidden;
 
 }
 
 
-
 /*지도위의 편의시설*/
-#amenitiesOnMap{
+#amenitiesOnMap {
     z-index: 2;
 }
-#amenitiesOnMap div{
+
+#amenitiesOnMap div {
     display: flex;
     visibility: hidden;
 }
 
 
-
 /*사이드바*/
-.mySidebar{
+.mySidebar {
     width: 300px;
     border: 1px solid lightgray;
     height: 94vh;
     position: absolute;
-    z-index: 3;
+    z-index: 10;
     display: flex;
     background-color: #F6F9FB;
     border-top-style: hidden;
@@ -69,39 +63,40 @@
     display: none;
     --bs-card-border-radius: 1.375rem;
     transition: all .35s;
+    z-index: 4;
 }
 
 /*모바일사이드바*/
 @media (max-width: 500px) {
-    .mySidebar{
+    .mySidebar {
         width: 85%;
     }
 
-    
-}
 
+}
 
 
 /*상단바*/
-.navbar{
+.navbar {
     border-bottom: 1px solid #E5E9EF;
     --bs-navbar-color: rgba(0, 0, 0, 0);
 }
-.navbar-toggler{
+
+.navbar-toggler {
     border: 1px solid transparent;
 }
+
 /*위의 창 nav*/
-.container-fluid{
+.container-fluid {
     height: 5vh;
 }
-
 
 
 /*자동완성*/
 .autocomplete {
     position: relative;
     display: inline-block;
-    color:black ;
+    color: black;
 }
 
 .autocomplete-items {
@@ -109,7 +104,7 @@
     border: 1px solid #d4d4d4;
     border-bottom: none;
     border-top: none;
-    z-index: 101;
+    z-index: 11;
     top: 100%;
     left: 0;
     right: 0;
@@ -133,7 +128,7 @@
     color: #ffffff;
 }
 
-.form-control{
+.form-control {
     background-color: #EBF1F7;
     border: 1px solid #EBF1F7;
 }
@@ -143,13 +138,12 @@
 }
 
 
-
 /*길찾기 버튼*/
-.btnsubmit{
+.btnsubmit {
     --bs-btn-color: #fff;
     --bs-btn-bg: #2787F5;
     --bs-btn-border-color: #2787F5;
-    --bs-btn-focus-shadow-rgb: 49,132,253;
+    --bs-btn-focus-shadow-rgb: 49, 132, 253;
     --bs-btn-hover-color: #fff;
     --bs-btn-hover-bg: #2787F5;
     --bs-btn-hover-border-color: #2787F5;
@@ -162,31 +156,31 @@
     --bs-btn-disabled-border-color: #B6BBDA;
 }
 
-@media (hover:hover){
-    .btnsubmit:hover{
-        
-        background-color:#2580E8;
+@media (hover: hover) {
+    .btnsubmit:hover {
+
+        background-color: #2580E8;
         border-color: #2580E8;
     }
 }
 
 
-
 /*편의시설 이름*/
-.amenitiesname{
+.amenitiesname {
     font-size: small;
     color: #6c7576;
 }
+
 /*편의시설 버튼*/
-.btn-outline-secondary{
+.btn-outline-secondary {
     --bs-btn-border-color: #fff;
     --bs-btn-hover-color: #6c7576;
     --bs-btn-hover-bg: #fff;
     --bs-btn-hover-border-color: #fff;
-    --bs-btn-focus-shadow-rgb: 108,117,125;
+    --bs-btn-focus-shadow-rgb: 108, 117, 125;
     --bs-btn-active-bg: #EBF1F7;
     --bs-btn-active-border-color: #EBF1F7;
-    --bs-btn-active-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --bs-btn-disabled-color: #6c757d;
     --bs-btn-disabled-bg: transparent;
     --bs-btn-disabled-border-color: #6c757d;
@@ -195,57 +189,58 @@
     --bs-btn-active-color: #6c7576;
 }
 
-.newicon{
-    fill:#6c757d;
+.newicon {
+    fill: #6c757d;
     width: 1.1rem;
     height: 1.1rem;
 }
 
 /*엘리베이터버튼*/
-#elevatorCheck{
+#elevatorCheck {
     visibility: hidden;
 }
 
-#elevatorUse{
+#elevatorUse {
     font-weight: 500;
     border: 1.25px solid lightgray;
 }
-#elevatorNoUse{
+
+#elevatorNoUse {
     display: none;
     font-weight: 500;
     border: 1.25px solid lightgray;
 }
 
 
-.btn-group[id="elevatorCheck"]{
+.btn-group[id="elevatorCheck"] {
     display: flex;
     position: relative;
     flex-wrap: nowrap;
     margin-top: 50px;
 }
 
-.btn-name-group{
+.btn-name-group {
     display: flex;
     position: relative;
     flex-wrap: nowrap;
     margin-top: 10px;
 }
 
-.btn-name{
+.btn-name {
     font-size: 13px;
     position: relative;
     width: 25%;
-    text-align : center;
+    text-align: center;
 }
 
-.btn-outline-primary{
+.btn-outline-primary {
     --bs-btn-color: gray;
     --bs-btn-border-color: #EBF1F7;
-    --bs-btn-bg:#EBF1F7;
+    --bs-btn-bg: #EBF1F7;
     --bs-btn-hover-color: #fff;
     --bs-btn-hover-bg: #fff;
     --bs-btn-hover-border-color: #EBF1F7;
-    --bs-btn-focus-shadow-rgb: 13,110,253;
+    --bs-btn-focus-shadow-rgb: 13, 110, 253;
     --bs-btn-active-color: black;
     --bs-btn-active-bg: #FFF;
     --bs-btn-active-border-color: #EBF1F7;
@@ -262,17 +257,18 @@
 #showRoute {
     visibility: hidden;
     color: #34495e;
-    flex-grow:1;
+    flex-grow: 1;
     flex-direction: column;
     overflow: auto;
 }
 
-#timeText{
+#timeText {
     text-align: left;
     padding-top: 10px;
     padding-left: 10px;
 }
-#time{
+
+#time {
     text-align: left;
     font-weight: bold;
     padding-left: 10px;
