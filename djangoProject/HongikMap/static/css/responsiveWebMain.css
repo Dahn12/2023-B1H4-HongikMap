@@ -55,7 +55,7 @@
 .mySidebar {
     width: 300px;
     border: 1px solid lightgray;
-    height: 94vh;
+    height: 92vh;
     position: absolute;
     z-index: 10;
     display: flex;
@@ -95,7 +95,7 @@
     top:0;
     left: 0;
     z-index: 10;
-    height: 60px;
+    height: 8vh;
     width: 100%;
     background-color: white;
 }
@@ -106,7 +106,7 @@
 
 #navbarToggleExternalContent{
     position: fixed;
-    top: 60px ;
+    top: 8vh ;
 }
 
 /*위의 창 nav*/
@@ -238,7 +238,6 @@
     display: flex;
     position: relative;
     flex-wrap: nowrap;
-    margin-top: 50px;
 }
 
 .btn-name-group {
