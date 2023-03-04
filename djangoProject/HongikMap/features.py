@@ -1,6 +1,7 @@
 import heapq
 from collections import OrderedDict
 
+
 class Graph:
     def __init__(self, f, elevator: bool = True):
         self.exits = []
@@ -8,10 +9,9 @@ class Graph:
         self.nodes = []
         self.weights = []
         self.useless = []
-        #파일의 첫부분부터 읽도록 포인터 조정
+        # 파일의 첫 부분부터 읽도록 포인터 조정
         f.seek(0)
         # read()는 전체 읽기 readline은 한줄읽기, readlines는 줄별로 리스트로 만들어준다.
-
 
         for line in f.readlines():
             # 현재 읽는 줄을 출력
@@ -19,7 +19,7 @@ class Graph:
             # equality는 방향, 무방향 체크
             equality = False
 
-            #형식체크
+            # 형식체크
             # 줄에 #이 있거나 길이가 3혹은 4가 아닌경우 쓸모없는 리스트에 추가하고 다음줄로 넘어간다.
             # split는 기본적으로 whitespace단위로 최대한 나눈다.
             line_length = len(line.split())
@@ -46,7 +46,7 @@ class Graph:
                 self.weights.append((start, end, weight))
             else:
                 self.useless.append("duplicated: " + line)
-            #만약 방향성이 있을때 출발지와 도착지를 뒤집어서 다시 넣어준다.
+            # 만약 방향성이 있을때 출발지와 도착지를 뒤집어서 다시 넣어준다.
             if equality:
                 if (end, start, weight) not in self.weights:
                     self.weights.append((end, start, weight))
@@ -127,7 +127,7 @@ class Path:
 
     def store(self, start: str, path: dict):
         for end in self.rooms + self.exits:
-            #만약 end가 외부이면 result에 저장하지않는다.
+            # 만약 end가 외부이면 result에 저장하지않는다.
             if end.split('-')[0] == '외부':
                 continue
             route = [end]
