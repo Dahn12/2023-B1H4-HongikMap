@@ -26,7 +26,7 @@ def search(departure: str, destination: str, elevator: bool) -> dict:
                 })
         minimum_route = sorted(merged_route, key=lambda x: x['distance'])[0]
     compressed_route = get_compressed_route(minimum_route['route'])
-    print(minimum_route['route'])
+    # print(minimum_route['route'])
     result['distance'] = minimum_route['distance']
     result['route'] = nodes2recommends(compressed_route)
     result['coordinates'] = get_coordinates(minimum_route['route'])
@@ -45,6 +45,7 @@ def get_result_path(elevator: bool) -> str:
 def get_compressed_route(nodes: list) -> list:
     nodes = compress_hallway_and_external(nodes)
     nodes = compress_elevator_and_stair(nodes)
+    nodes = compress_out_building(nodes)
 
     return nodes
 
@@ -71,6 +72,16 @@ def compress_elevator_and_stair(nodes: list) -> list:
         elif is_stair(node) or is_elevator(node):
             prev = node
 
+    return result
+
+
+def compress_out_building(nodes: list) -> list:
+    result = [nodes[0]]
+    for node in nodes[1:]:
+        if node.startswith('OUT') and is_exit(node):
+            pass
+        else:
+            result.append(node)
     return result
 
 
