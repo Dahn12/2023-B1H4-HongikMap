@@ -149,6 +149,50 @@ def compute(f: object, filename: str = ''):
     models.save(path_without_elevator.result, False)
     # 이름을 파싱 해준다. 다만 with elevator와 without elevator의 rooms는 동일하니 하나만.
 
+#
+# def compute_XtoX():
+#     with open('HongikMap/static/data/external_node/merged_external_node_with_elevator.txt', 'r', encoding='UTF8') as f:
+#         graph_with_elevator = features.Graph(f, elevator=True)
+#         path_with_elevator = features.Path(graph_with_elevator)
+#         for start in graph_with_elevator.rooms + graph_with_elevator.exits:
+#             if start.split('-')[0] == '외부':
+#                 continue
+#             path_with_elevator.dijkstra(start)
+#
+#         copy_result = path_with_elevator.result
+#         for key, value in copy_result.items():
+#             for value_index in range(len(value['route']) - 1):
+#                 intermediate_place1 = value['route'][value_index]
+#                 intermediate_place2 = value['route'][value_index + 1]
+#                 if intermediate_place1.split('-')[2][0] == 'X' and intermediate_place2.split('-')[2][0] == 'X':
+#                     XtoX_route = models.get_route(intermediate_place1, intermediate_place2, True)
+#                     if XtoX_route != {}:
+#                         XtoX_route = XtoX_route['route'][1:-1]
+#                         path_with_elevator.result[key]['route'][value_index + 1:value_index + 1] = XtoX_route
+#         print('save_path_with_elevator.result')
+#         models.save(path_with_elevator.result, True)
+#
+#     with open('HongikMap/static/data/external_node/merged_external_node_without_elevator.txt', 'r',
+#               encoding='UTF8') as f:
+#         graph_without_elevator = features.Graph(f, elevator=False)
+#         path_without_elevator = features.Path(graph_without_elevator)
+#         for start in graph_without_elevator.rooms + graph_without_elevator.exits:
+#             if start.split('-')[0] == '외부':
+#                 continue
+#             path_without_elevator.dijkstra(start)
+#
+#         copy_result = path_without_elevator.result
+#         for key, value in copy_result.items():
+#             for value_index in range(len(value['route']) - 1):
+#                 intermediate_place1 = value['route'][value_index]
+#                 intermediate_place2 = value['route'][value_index + 1]
+#                 if intermediate_place1.split('-')[2][0] == 'X' and intermediate_place2.split('-')[2][0] == 'X':
+#                     XtoX_route = models.get_route(intermediate_place1, intermediate_place2, False)
+#                     if XtoX_route != {}:
+#                         XtoX_route = XtoX_route['route'][1:-1]
+#                         path_without_elevator.result[key]['route'][value_index + 1:value_index + 1] = XtoX_route
+#         models.save(path_without_elevator.result, False)
+
 
 # 각 건물 별로 XToX가 있을 경우 저장
 def XToXDataization():
@@ -171,6 +215,35 @@ def XToXDataization():
     result_without_elevator_XtoX.close()
     merged_externalNode.close()
 
+    # external_nodes = open('HongikMap/static/data/external_node/external_node.txt', 'r', encoding='UTF8')
+    # with open('HongikMap/static/data/external_node/merged_external_node_with_elevator.txt', 'w', encoding='UTF8') as f:
+    #     external_node_lines = [line + '\n' for line in external_nodes.readlines()]
+    #     f.writelines(external_node_lines)
+    #
+    #     for line in models.get_same_building_XtoX(elevator=True):
+    #         departure = line['departure_id']
+    #         destination = line['destination_id']
+    #         distance = line['distance']
+    #
+    #         sentence = f'{departure} {destination} {distance} t\n'
+    #         f.write(sentence)
+    # external_nodes.close()
+
+    # external_nodes = open('HongikMap/static/data/external_node/external_node.txt', 'r', encoding='UTF8')
+    # with open('HongikMap/static/data/external_node/merged_external_node_without_elevator.txt', 'w',
+    #           encoding='UTF8') as f:
+    #     external_node_lines = [line + '\n' for line in external_nodes.readlines()]
+    #     f.writelines(external_node_lines)
+    #
+    #     for line in models.get_same_building_XtoX(elevator=False):
+    #         departure = line['departure_id']
+    #         destination = line['destination_id']
+    #         distance = line['distance']
+    #
+    #         sentence = f'{departure} {destination} {distance} t\n'
+    #         f.write(sentence)
+    # external_nodes.close()
+
 
 def building_preprocessing(request):
     building = request.POST.get('building')
@@ -191,7 +264,9 @@ def preprocessing(request):
         with open(os.path.join("HongikMap/static/data/all_buildings_data", filename), 'r', encoding="UTF8") as f:
             # print(filename)
             compute(f, filename)
+
     XToXDataization()
+    # compute_XtoX()
     # 외부노드에 대한 다익스트라를 돌린다.
     with open('HongikMap/static/data/external_node/merged_external_node.txt', 'r', encoding="UTF8") as f:
         compute(f, 'external_node.txt')
@@ -199,6 +274,7 @@ def preprocessing(request):
 
 def XtoX_preprocessing(request):
     XToXDataization()
+    # compute_XtoX()
     # 외부노드에 대한 다익스트라를 돌린다.
     with open('HongikMap/static/data/external_node/merged_external_node.txt', 'r', encoding="UTF8") as f:
         compute(f, 'external_node.txt')
