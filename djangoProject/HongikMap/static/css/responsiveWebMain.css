@@ -297,7 +297,6 @@
 
 #footer {
     position:static;
-    border-top: 1px solid lightgray;
     z-index:1;
     color: gray;
 }

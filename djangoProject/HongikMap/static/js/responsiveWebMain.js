@@ -1,8 +1,4 @@
-let deleteCookie = function(name) {
-  document.cookie = name + '=; expires=Thu, 01 Jan 1999 00:00:10 GMT;';
-}
-// deleteCookie(변수이름)
-deleteCookie('name');
+
 
 //변수선언
 //##경로표시
