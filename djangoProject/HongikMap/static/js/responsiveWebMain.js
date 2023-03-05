@@ -226,7 +226,7 @@ let autocomplete = (function () {
 
         }
     }
-    let lastkeyCord=0;
+    let lastkeyCord=40;
 
     let keydownEvent = function (keyCord) {
         var x = document.getElementById(_inp.id + "autocomplete-list");
@@ -415,13 +415,20 @@ function ElevPage(name) {
     //경로에 포함되는 건물들 배열
     var buildings_in_ways = [];
 
-    for (var i = 1; i < textList[show.getAttribute('id')]['route'].length - 1; i++) {
+    for (var i = 0; i < textList[show.getAttribute('id')]['route'].length; i++) {
         //전체 경로 돌면서 각 경로의 첫번째 알파벳을 배열에 push
         var x = textList[show.getAttribute('id')]['route'][i];
         var y = x.charCodeAt(0);
 
-        if (65 <= y && y <= 90) {
-            buildings_in_ways.push(x[0]);
+        if (65 <= y && y < 90) {
+            buildings_in_ways.push(x[0]+"동");
+        }
+        else if(y==90){ //z동만 예외 z1,z2,z3는 두글자 따와야됨
+            buildings_in_ways.push(x[0]+x[1]+"동");
+
+        }
+        else{
+            buildings_in_ways.push(x);
         }
 
     }
@@ -432,7 +439,7 @@ function ElevPage(name) {
     console.log(Set_buildings_in_ways);
 
     for (var q = 0; q < Set_buildings_in_ways.length; q++) {
-        Set_buildings_in_ways[q] = Set_buildings_in_ways[q] + "동";
+        Set_buildings_in_ways[q] = Set_buildings_in_ways[q];
     }
 
 
