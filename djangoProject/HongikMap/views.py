@@ -17,10 +17,6 @@ def welcome(request):
     return render(request, 'HongikMap/welcome.html', {})
 
 
-def main(request):
-    return render(request, 'HongikMap/main.html', {})
-
-
 def responsiveWebMain(request):
     return render(request, 'HongikMap/responsiveWebMain.html', {})
 
@@ -51,10 +47,6 @@ def coordinateCorrection(request):
 
 def date(request):
     return render(request, 'HongikMap/date.html', {})
-
-
-def main2(request):
-    return render(request, 'HongikMap/main2.html', {})
 
 
 def recommend(request):
