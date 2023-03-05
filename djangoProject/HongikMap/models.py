@@ -206,8 +206,6 @@ def get_coordinate(node: str) -> (int, int):
 
 
 def get_routes_of_start_building(start: str, elevator: bool) -> list:
-    # print('get_start_building : ', start)
-
     if not exist_node(start):
         return []
 
@@ -269,9 +267,15 @@ def is_same_building(route: dict) -> bool:
     return route['departure_id'][0] == route['destination_id'][0]
 
 
+def is_out_building(node: str) -> bool:
+    return node.startswith('OUT')
+
+
 def get_recommendation(keyword: str) -> list:
     result = []
     for node in Recommendation.objects.filter(recommendation__contains=keyword).values('node'):
+        if is_out_building(node['node']):
+            continue
         result.append(node['node'])
     return result
 
