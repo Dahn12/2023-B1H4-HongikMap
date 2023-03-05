@@ -299,10 +299,11 @@
     position:static;
     z-index:1;
     color: gray;
+    font-size: 20px  ;
 }
 @media (max-width: 500px) {
     #footer {
-        font-size : 30%;
+        font-size : 80%;
         position : absolute;
         bottom: 0;
 
