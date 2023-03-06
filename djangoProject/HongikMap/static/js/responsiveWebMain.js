@@ -564,11 +564,11 @@ function amenitiesShow(name, e) {
 }
 
 let amenitiesDic = {
-    'cafe': [["R동 L층 카페나무", 193, 452], ["와우관 4층 카페나무", 443, 126], ["R동 2층 카페 그라찌에", 271, 439], ["R동 2층 다과점 파프리카", 260, 508], ["카페 캠퍼", 916, 529], ["A동 1층 카페드림", 904, 296], ["C동 8층 간이카페", 1005, 230], ["중앙도서관 2층 북카페", 511, 188]],
-    'convenienceStore': [["R동 B2 홍익대학서적", 234, 463], ["와우관 4층 편의점", 433, 126], ["R동 3층 편의점", 232, 444], ["R동 L층 한가람 문구센터", 276, 430], ["제2기숙사 지하1층 편의점", 944, 482]],
-    'restaurant': [["제2기숙사 학생식당", 942, 486], ["향차이", 922, 543]],
-    'medicalRoom': [["약국(원이 약국)", 922, 562], ["건강진료센터", 576, 271]],
-    'readingRoom': [["T동 3,4층 열람실", 827, 511], ["R동 8층 열람실", 263, 543], ["중앙도서관 열람실", 527, 231]]
+    'cafe': [["R동 L층 카페나무", 193, 452], ["와우관 4층 카페나무", 443, 126], ["R동 2층 카페 그라찌에", 271, 439], ["R동 2층 다과점 파프리카", 260, 508], ["카페 캠퍼", 916, 529], ["A동 1층 카페드림", 904, 296], ["C동 8층 간이카페", 1005, 230], ["중앙도서관 2층 북카페", 511, 188], ['집가고싶다', 213, 578]],
+    'convenienceStore': [["R동 B2 홍익대학서적", 234, 463], ["와우관 4층 편의점", 433, 126], ["R동 3층 편의점", 232, 444], ["R동 L층 한가람 문구센터", 276, 430], ["제2기숙사 지하1층 편의점", 944, 482],['집가고싶다', 213, 578]],
+    'restaurant': [["제2기숙사 학생식당", 942, 486], ["향차이", 922, 543],['집가고싶다', 213, 578]],
+    'medicalRoom': [["약국(원이 약국)", 922, 562], ["건강진료센터", 576, 271],['집가고싶다', 213, 578]],
+    'readingRoom': [["T동 3,4층 열람실", 827, 511], ["R동 8층 열람실", 263, 543], ["중앙도서관 열람실", 527, 231],['집가고싶다', 213, 578]]
 }
 
 let amenitiesText = {
@@ -592,6 +592,7 @@ let amenitiesText = {
     'T동 3,4층 열람실':['06:00-23:00 연중무휴','(제4공학관 4층 일반열람실 24시간 개방)'],
     'R동 8층 열람실':['06:00-23:00 연중무휴'],
     '중앙도서관 열람실':['06:00-23:00 연중무휴'],
+    '집가고싶다':['죽겠어요..'],
 }
 
 function amenitiesInMap() {
@@ -607,7 +608,13 @@ function amenitiesInMap() {
     for (let key in amenitiesDic) {
         for (let i = 0; i < amenitiesDic[key].length; i++) {
             //제이쿼리를 통해 img의 속성와 css를 주고 div안에 넣어준다
+            if (amenitiesDic[key][i][0]=='집가고싶다') {
+                $('<img>').attr('src', '../../static/logo/' + key + '.svg').attr('onclick', 'amenitiesTitle(event, this)').attr('title', amenitiesDic[key][i][0]).css('width', 32 * widthRatio + 'px').css('height', 32 * heightRatio + 'px').css('left', widthRatio * amenitiesDic[key][i][1]).css('top', heightRatio * amenitiesDic[key][i][2]).css('position', 'absolute').css('opacity', '0').css('z-index','3').appendTo(document.getElementById(key));
+
+                continue;
+            }
             $('<img>').attr('src', '../../static/logo/' + key + '.svg').attr('onclick', 'amenitiesTitle(event, this)').attr('title', amenitiesDic[key][i][0]).css('width', 32 * widthRatio + 'px').css('height', 32 * heightRatio + 'px').css('left', widthRatio * amenitiesDic[key][i][1]).css('top', heightRatio * amenitiesDic[key][i][2]).css('position', 'absolute').css('z-index','3').appendTo(document.getElementById(key));
+
         }
     }
 }
