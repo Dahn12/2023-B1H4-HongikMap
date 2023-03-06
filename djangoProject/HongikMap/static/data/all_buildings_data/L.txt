@@ -9,13 +9,13 @@ L-5-S1 L-6-S1 15 t
 L-6-S1 L-7-S1 15 t
 L-7-S1 L-8-S1 15 t
         #엘리베이터
-L-1-E1 L-2-E1 1 t
-L-2-E1 L-3-E1 1 t
-L-3-E1 L-4-E1 1 t
-L-4-E1 L-5-E1 1 t
-L-5-E1 L-6-E1 1 t
-L-6-E1 L-7-E1 1 t
-L-7-E1 L-8-E1 1 t
+L-1-E1 L-2-E1 5 t
+L-2-E1 L-3-E1 5 t
+L-3-E1 L-4-E1 5 t
+L-4-E1 L-5-E1 5 t
+L-5-E1 L-6-E1 5 t
+L-6-E1 L-7-E1 5 t
+L-7-E1 L-8-E1 5 t
     #수평구조
         #1
 L-1-X1 L-1-H1 1 t
