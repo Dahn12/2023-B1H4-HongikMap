@@ -129,6 +129,7 @@ function shadowing() {
             brightnessFromButton = document.getElementsByClassName('brightnessFromButton');
 
             for (var i = 0; i < brightnessFromButton.length; i++) {
+                $('#backgroundClick').css('background-color', 'rgba(0,0,0,0.5)');
                 $('#total').css('background-color', 'rgba(0,0,0,0.5)');
                 $(brightnessFromButton).css('filter', 'brightness(0.5)');
 
@@ -136,6 +137,7 @@ function shadowing() {
 
         } else {
             for (let i = 0; i < brightnessFromButton.length; i++) {
+                $('#backgroundClick').css('background-color', 'rgba(0,0,0,0)');
                 $('#total').css('background-color', 'rgba(0,0,0,0)');
                 $(brightnessFromButton).css('filter', 'brightness(1)');
             }
@@ -650,3 +652,15 @@ $('#close').click(function () {
     document.getElementById('card').style.display = 'none'
 });
 
+function backgroundClick(e) {
+    let list = document.getElementById('navbarToggleExternalContent').classList;
+    for (let key in list){
+        if(list[key] == 'show') {
+            document.getElementById('navbarToggleExternalContent').classList.remove('show');
+            shadowing();
+        }
+    }
+}
+// document.getElementById('backgroundClick').addEventListener("click", function (e) {
+//
+// });
