@@ -506,6 +506,12 @@ function getDirectionCheck() {
     }
 }
 
+
+
+// 스피너 안보이게 
+$("#mySpinner").hide();
+
+// 길찾기 버튼 이벤트
 function submitCheck(event) {
     //submit될 때 페이지 리로드 방지
     //event.preventDefault();
@@ -515,13 +521,10 @@ function submitCheck(event) {
     departure = departure.toUpperCase();//소문자 대문자 변환
     destination = destination.toUpperCase();
 
-
     //출발지 도착지형식이 참이면 백으로 출발지 도착지 보내기
     if (getDirectionCheck()) {
         //결과경로창 보이게끔
-        document.getElementById("showRoute").style.visibility = "visible";
-        document.getElementById("elevatorCheck").style.visibility = "visible";
-        document.getElementById("checkbox_check").style.visibility = "visible";
+
         $.ajax({
             url: 'place_submit',
             type: 'POST',
@@ -530,14 +533,25 @@ function submitCheck(event) {
                 'csrfmiddlewaretoken': csrftoken,
             },
             datatype: 'json',
+            beforeSend : function(request){
+                // Performed before calling Ajax
+                $("#mySpinner").show();
+                document.getElementById("showRoute").style.visibility = "hidden";
+                document.getElementById("elevatorCheck").style.visibility = "hidden";
+                document.getElementById("checkbox_check").style.visibility = "hidden";
+              },
             success: function (data) {
+                document.getElementById("showRoute").style.visibility = "visible";
+                document.getElementById("elevatorCheck").style.visibility = "visible";
+                document.getElementById("checkbox_check").style.visibility = "visible";
+                $("#mySpinner").hide();
                 textList = data;
                 //엘리베이터 시간주기
                 console.log(textList);
                 elevTimePlus(textList);
                 ElevPage('use');
                 drawLine(textList["elevatorUse"]["coordinates"]);
-            }
+            },
 
         });
     }

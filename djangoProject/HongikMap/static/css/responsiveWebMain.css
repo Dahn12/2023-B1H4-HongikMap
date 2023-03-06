@@ -218,6 +218,12 @@
     height: 1.1rem;
 }
 
+/*스피너*/
+#mySpinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 /*엘리베이터버튼*/
 #elevatorCheck {
     visibility: hidden;
