@@ -127,7 +127,7 @@ def node2keyword(node: str) -> str:
         # return "{}{}{:0>2}".format(building, floor, entity)
         if '_' in entity:
             prefix, postfix = entity.split("_")
-            return "{}{}{:0>2}_{}".format(building,floor,prefix, postfix)
+            return "{}{}{:0>2}_{}".format(building, floor, prefix, postfix)
         else:
             return "{}{}{:0>2}".format(building, floor, entity)
     return node
