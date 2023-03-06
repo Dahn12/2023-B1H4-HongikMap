@@ -96,7 +96,7 @@
     top:0;
     left: 0;
     z-index: 10;
-    height: 8vh;
+    height: 10vh;
     width: 100%;
     background-color: white;
 }
@@ -107,7 +107,7 @@
 
 #navbarToggleExternalContent{
     position: fixed;
-    top: 8vh ;
+    top: 10vh ;
 }
 
 /*위의 창 nav*/
@@ -323,5 +323,5 @@
 
 #backgroundClick {
     position: relative;
-    height: 92vh;
+    height: 90vh;
 }
