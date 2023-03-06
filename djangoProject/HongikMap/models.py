@@ -231,7 +231,7 @@ def get_routes_of_start_building(start: str, elevator: bool) -> list:
         building = start.split('-')[0]
         routes = [{'distance': result['distance'], 'route': result['route'].split(',')} for result in
                   ResultWithElevator.objects.filter(departure=departure, destination__node__startswith=building,
-                                                    destination__node__contains='X').values()]
+                                                    destination__node__contains='X').values('distance', 'route')]
         return routes
 
     if not elevator:
@@ -241,7 +241,7 @@ def get_routes_of_start_building(start: str, elevator: bool) -> list:
         building = start.split('-')[0]
         routes = [{'distance': result['distance'], 'route': result['route'].split(',')} for result in
                   ResultWithoutElevator.objects.filter(departure=departure, destination__node__startswith=building,
-                                                       destination__node__contains='X').values()]
+                                                       destination__node__contains='X').values('distance', 'route')]
         return routes
 
 
@@ -256,7 +256,7 @@ def get_routes_of_end_building(end: str, elevator: bool) -> list:
         building = end.split('-')[0]
         routes = [{'distance': result['distance'], 'route': result['route'].split(',')} for result in
                   ResultWithElevator.objects.filter(departure__node__startswith=building, departure__node__contains='X',
-                                                    destination=destination).values()]
+                                                    destination=destination).values('distance', 'route')]
         return routes
 
     if not elevator:
@@ -266,7 +266,8 @@ def get_routes_of_end_building(end: str, elevator: bool) -> list:
         building = end.split('-')[0]
         routes = [{'distance': result['distance'], 'route': result['route'].split(',')} for result in
                   ResultWithoutElevator.objects.filter(departure__node__startswith=building,
-                                                       departure__node__contains='X', destination=destination).values()]
+                                                       departure__node__contains='X',
+                                                       destination=destination).values('distance', 'route')]
         return routes
 
 
