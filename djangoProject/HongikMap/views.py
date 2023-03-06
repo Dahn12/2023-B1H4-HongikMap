@@ -209,7 +209,7 @@ def XToXDataization():
 
     external_nodes = open('HongikMap/static/data/external_node/external_node.txt', 'r', encoding='UTF8')
     with open('HongikMap/static/data/external_node/merged_external_node_with_elevator.txt', 'w', encoding='UTF8') as f:
-        external_node_lines = [line + '\n' for line in external_nodes.readlines()]
+        external_node_lines = [line for line in external_nodes.readlines()]
         f.writelines(external_node_lines)
 
         for line in models.get_same_building_XtoX(elevator=True):
@@ -224,7 +224,7 @@ def XToXDataization():
     external_nodes = open('HongikMap/static/data/external_node/external_node.txt', 'r', encoding='UTF8')
     with open('HongikMap/static/data/external_node/merged_external_node_without_elevator.txt', 'w',
               encoding='UTF8') as f:
-        external_node_lines = [line + '\n' for line in external_nodes.readlines()]
+        external_node_lines = [line for line in external_nodes.readlines()]
         f.writelines(external_node_lines)
 
         for line in models.get_same_building_XtoX(elevator=False):
