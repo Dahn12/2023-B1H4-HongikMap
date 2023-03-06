@@ -185,24 +185,26 @@ def get_route(start: str, end: str, elevator: bool) -> dict:
         if not exist_route(start, end, elevator):
             print(f'NonExistentRoute: There is no such route | ({start}, {end})')
             return {}
-        retrieved_route = ResultWithElevator.objects.get(departure=departure, destination=destination)
-        # distance = retrieved_route.distance
-        # route = retrieved_route.route.split(',')
+        retrieved_route = ResultWithElevator.objects.filter(departure=departure,
+                                                            destination=destination).values('distance', 'route').first()
+        distance = retrieved_route['distance']
+        route = retrieved_route['route'].split(',')
         return {
-            'distance': retrieved_route.distance,
-            'route': retrieved_route.route.split(',')
+            'distance': distance,
+            'route': route
         }
 
     if not elevator:
         if not exist_route(start, end, elevator):
             print(f'NonExistentRoute: There is no such route | ({start}, {end})')
             return {}
-        retrieved_route = ResultWithoutElevator.objects.get(departure=departure, destination=destination)
-        # distance = retrieved_route.distance
-        # route = retrieved_route.route.split(',')
+        retrieved_route = ResultWithoutElevator. \
+            objects.filter(departure=departure, destination=destination).values('distance', 'route').first()
+        distance = retrieved_route['distance']
+        route = retrieved_route['route'].split(',')
         return {
-            'distance': retrieved_route.distance,
-            'route': retrieved_route.route.split(',')
+            'distance': distance,
+            'route': route
         }
 
 
@@ -226,16 +228,20 @@ def get_routes_of_start_building(start: str, elevator: bool) -> list:
         if not ResultWithElevator.objects.filter(departure=departure).exists():
             print(NonExistentRoute)
             return []
+        building = start.split('-')[0]
         routes = [{'distance': result['distance'], 'route': result['route'].split(',')} for result in
-                  ResultWithElevator.objects.filter(departure=departure, destination__node__contains='X').values()]
+                  ResultWithElevator.objects.filter(departure=departure, destination__node__startswith=building,
+                                                    destination__node__contains='X').values()]
         return routes
 
     if not elevator:
         if not ResultWithoutElevator.objects.filter(departure=departure).exists():
             print(NonExistentRoute)
             return []
+        building = start.split('-')[0]
         routes = [{'distance': result['distance'], 'route': result['route'].split(',')} for result in
-                  ResultWithoutElevator.objects.filter(departure=departure, destination__node__contains='X').values()]
+                  ResultWithoutElevator.objects.filter(departure=departure, destination__node__startswith=building,
+                                                       destination__node__contains='X').values()]
         return routes
 
 
@@ -247,16 +253,20 @@ def get_routes_of_end_building(end: str, elevator: bool) -> list:
         if not ResultWithElevator.objects.filter(destination=destination).exists():
             print(NonExistentRoute)
             return []
+        building = end.split('-')[0]
         routes = [{'distance': result['distance'], 'route': result['route'].split(',')} for result in
-                  ResultWithElevator.objects.filter(departure__node__contains='X', destination=destination).values()]
+                  ResultWithElevator.objects.filter(departure__node__startswith=building, departure__node__contains='X',
+                                                    destination=destination).values()]
         return routes
 
     if not elevator:
         if not ResultWithoutElevator.objects.filter(destination=destination).exists():
             print(NonExistentRoute)
             return []
+        building = end.split('-')[0]
         routes = [{'distance': result['distance'], 'route': result['route'].split(',')} for result in
-                  ResultWithoutElevator.objects.filter(departure__node__contains='X', destination=destination).values()]
+                  ResultWithoutElevator.objects.filter(departure__node__startswith=building,
+                                                       departure__node__contains='X', destination=destination).values()]
         return routes
 
 
