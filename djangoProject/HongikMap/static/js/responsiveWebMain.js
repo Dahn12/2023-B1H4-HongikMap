@@ -293,7 +293,7 @@ let autocomplete = (function () {
         {
             $('.autocomplete-items').scrollTop((_currentFocus-5) * 28);
         }
-        
+
     }
 
 
@@ -454,11 +454,8 @@ function ElevPage(name) {
             show.appendChild(newDiv);
 
             if (m + 1 < Set_buildings_in_ways.length) {
-                let arrow_image = document.createElement('img');
-                arrow_image.setAttribute('src', '../../static/logo/arrow.png');
-                arrow_image.setAttribute('width', 30);
-                arrow_image.setAttribute('height', 30);
-                arrow_image.setAttribute("alt", "loading..");
+                let arrow_image = document.createElement('i');
+                arrow_image.setAttribute('class', 'bi bi-caret-down-fill');
                 show.appendChild(arrow_image);
             }
         }
@@ -473,11 +470,8 @@ function ElevPage(name) {
             show.appendChild(newDiv);
 
             if (i < textList[show.getAttribute('id')]['route'].length - 1) {
-                let arrow_image = document.createElement('img');
-                arrow_image.setAttribute('src', '../../static/logo/arrow.png');
-                arrow_image.setAttribute('width', 30);
-                arrow_image.setAttribute('height', 30);
-                arrow_image.setAttribute("alt", "loading..");
+                let arrow_image = document.createElement('i');
+                arrow_image.setAttribute('class', 'bi bi-caret-down-fill');
                 show.appendChild(arrow_image);
             }
         }
