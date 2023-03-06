@@ -10,6 +10,9 @@ class Node(models.Model):
 
     class Meta:
         db_table = 'node'
+        indexes = [
+            models.Index(fields=['node'], name='node_idx')
+        ]
 
 
 class ResultWithElevator(models.Model):
@@ -20,6 +23,9 @@ class ResultWithElevator(models.Model):
                 fields=["departure", "destination"],
                 name="UniqueConstraintWithElevator",
             )
+        ]
+        indexes = [
+            models.Index(fields=['departure', 'destination'], name='result_with_elevator_idx'),
         ]
 
     departure = models.ForeignKey("Node", unique=False, db_column='departure',
@@ -38,6 +44,9 @@ class ResultWithoutElevator(models.Model):
                 fields=["departure", "destination"],
                 name="UniqueConstraintWithoutElevator",
             )
+        ]
+        indexes = [
+            models.Index(fields=['departure', 'destination'], name='result_without_elevator_idx'),
         ]
 
     departure = models.ForeignKey("Node", unique=False, db_column='departure',
@@ -61,6 +70,9 @@ class Coordinate(models.Model):
 class Recommendation(models.Model):
     class Meta:
         db_table = 'recommendation'
+        indexes = [
+            models.Index(fields=['recommendation'], name='recommendation_idx')
+        ]
 
     node = models.OneToOneField("Node", db_column='node', primary_key=True, on_delete=models.CASCADE,
                                 related_name='recommendation_node')
@@ -174,11 +186,11 @@ def get_route(start: str, end: str, elevator: bool) -> dict:
             print(f'NonExistentRoute: There is no such route | ({start}, {end})')
             return {}
         retrieved_route = ResultWithElevator.objects.get(departure=departure, destination=destination)
-        distance = retrieved_route.distance
-        route = retrieved_route.route.split(',')
+        # distance = retrieved_route.distance
+        # route = retrieved_route.route.split(',')
         return {
-            'distance': distance,
-            'route': route
+            'distance': retrieved_route.distance,
+            'route': retrieved_route.route.split(',')
         }
 
     if not elevator:
@@ -186,11 +198,11 @@ def get_route(start: str, end: str, elevator: bool) -> dict:
             print(f'NonExistentRoute: There is no such route | ({start}, {end})')
             return {}
         retrieved_route = ResultWithoutElevator.objects.get(departure=departure, destination=destination)
-        distance = retrieved_route.distance
-        route = retrieved_route.route.split(',')
+        # distance = retrieved_route.distance
+        # route = retrieved_route.route.split(',')
         return {
-            'distance': distance,
-            'route': route
+            'distance': retrieved_route.distance,
+            'route': retrieved_route.route.split(',')
         }
 
 
