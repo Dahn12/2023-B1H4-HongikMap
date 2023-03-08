@@ -1,5 +1,5 @@
 //첫시작 설정
-window.onload= function (){
+window.onload = function () {
     if (screen.width < 500) {
         document.getElementById('navbarToggleExternalContent').classList.remove('collapse-horizontal');
     }
@@ -14,14 +14,10 @@ window.onresize = function () {
 }
 
 
-
 //변수선언
 //##경로표시
 let boolDepartureCheck = false;
 let boolDestinationCheck = false;
-
-
-
 
 
 //선그리기
@@ -163,6 +159,78 @@ function sendingData(inp) { //inp는 input객체
 // }
 
 
+// // 대상 Element 선택
+// const resizer = document.getElementById('navbarToggleExternalContent');
+// const sideBar = document.getElementById('navbarToggleExternalContent');
+// const background = document.getElementById('backgroundClick');
+// // const rightSide = resizer.nextElementSibling;
+//
+// // 마우스의 위치값 저장을 위해 선언
+// // let x = 0;
+// let y = 0;
+//
+// // 크기 조절시 왼쪽 Element를 기준으로 삼기 위해 선언
+// let sidebarHeight = 0;
+//
+// // resizer에 마우스 이벤트가 발생하면 실행하는 Handler
+// const mouseDownHandler = function (e) {
+//     console.log('down');
+//     // 마우스 위치값을 가져와 x, y에 할당
+//     // x = e.clientX;
+//     y = e.clientY;
+//     console.log(y);
+//     // left Element에 Viewport 상 width 값을 가져와 넣음
+//     sidebarHeight = sideBar.getBoundingClientRect().height;
+//
+//     // 마우스 이동과 해제 이벤트를 등록
+//     document.addEventListener('mousemove', mouseMoveHandler(event));
+//     document.addEventListener('mouseup', mouseUpHandler());
+// };
+//
+// function mouseMoveHandler(e){
+//     console.log('move');
+//
+//     // 마우스가 움직이면 기존 초기 마우스 위치에서 현재 위치값과의 차이를 계산
+//     // const dx = e.clientX - x;
+//     console.log(y);
+//     console.log(e.clientY);
+//     const dy = e.clientY - y;
+//     console.log(dy);
+//   	// 크기 조절 중 마우스 커서를 변경함
+//     // class="resizer"에 적용하면 위치가 변경되면서 커서가 해제되기 때문에 body에 적용
+//
+//     // 이동 중 양쪽 영역(왼쪽, 오른쪽)에서 마우스 이벤트와 텍스트 선택을 방지하기 위해 추가
+//     sideBar.style.userSelect = 'none';
+//     sideBar.style.pointerEvents = 'none';
+//
+//     background.style.userSelect = 'none';
+//     background.style.pointerEvents = 'none';
+//
+//     // 초기 width 값과 마우스 드래그 거리를 더한 뒤 상위요소(container)의 너비를 이용해 퍼센티지를 구함
+//     // 계산된 퍼센티지는 새롭게 left의 width로 적용
+//     const newHeight = ((sidebarHeight + dy) * 100) / screen.height;
+//     sideBar.style.height = newHeight + 'vh';
+// }
+//
+// function mouseUpHandler() {
+//     console.log('up');
+//     // 모든 커서 관련 사항은 마우스 이동이 끝나면 제거됨
+//
+//     sideBar.style.removeProperty('user-select');
+//     sideBar.style.removeProperty('pointer-events');
+//
+//     background.style.removeProperty('user-select');
+//     background.style.removeProperty('pointer-events');
+//
+//     // 등록한 마우스 이벤트를 제거
+//     document.removeEventListener('mousemove', mouseMoveHandler);
+//     document.removeEventListener('mouseup', mouseUpHandler);
+// };
+//
+// // 마우스 down 이벤트를 등록
+// resizer.addEventListener('mousedown', mouseDownHandler);
+
+
 //##자동완성
 // autocomplete 부분을 생성
 let autocomplete = (function () {
@@ -243,7 +311,7 @@ let autocomplete = (function () {
 
         }
     }
-    let lastkeyCord=40;
+    let lastkeyCord = 40;
 
     let keydownEvent = function (keyCord) {
         var x = document.getElementById(_inp.id + "autocomplete-list");
@@ -280,7 +348,7 @@ let autocomplete = (function () {
                 if (x) x[_currentFocus].click();
             }
         }
-        lastkeyCord=keyCord;
+        lastkeyCord = keyCord;
     }
     //바깥 클릭하면 자동완성 사라짐
     document.addEventListener("click", function (e) {
@@ -298,17 +366,14 @@ let autocomplete = (function () {
         x[_currentFocus].classList.add("autocomplete-active");
         // 키다운이벤트 따라가기
 
-        if(last_keyCode!=now_keyCode && _currentFocus%6==5){
-            $('.autocomplete-items').scrollTop((_currentFocus-5) * 28);
+        if (last_keyCode != now_keyCode && _currentFocus % 6 == 5) {
+            $('.autocomplete-items').scrollTop((_currentFocus - 5) * 28);
         }
 
-        if(_currentFocus%6==0 && now_keyCode==40)
-        {
+        if (_currentFocus % 6 == 0 && now_keyCode == 40) {
             $('.autocomplete-items').scrollTop(_currentFocus * 28);
-        }
-        else if (_currentFocus%6==0 && now_keyCode==38)
-        {
-            $('.autocomplete-items').scrollTop((_currentFocus-5) * 28);
+        } else if (_currentFocus % 6 == 0 && now_keyCode == 38) {
+            $('.autocomplete-items').scrollTop((_currentFocus - 5) * 28);
         }
 
     }
@@ -438,13 +503,11 @@ function ElevPage(name) {
         var y = x.charCodeAt(0);
 
         if (65 <= y && y < 90) {
-            buildings_in_ways.push(x[0]+"동");
-        }
-        else if(y==90){ //z동만 예외 z1,z2,z3는 두글자 따와야됨
-            buildings_in_ways.push(x[0]+x[1]+"동");
+            buildings_in_ways.push(x[0] + "동");
+        } else if (y == 90) { //z동만 예외 z1,z2,z3는 두글자 따와야됨
+            buildings_in_ways.push(x[0] + x[1] + "동");
 
-        }
-        else{
+        } else {
             buildings_in_ways.push(x);
         }
 
@@ -503,8 +566,6 @@ function ElevPage(name) {
 }
 
 
-
-
 //출발지, 도착지가 옳은 형식인지 체크
 function getDirectionCheck() {
     if (boolDepartureCheck && boolDestinationCheck) {
@@ -522,8 +583,7 @@ function getDirectionCheck() {
 }
 
 
-
-// 스피너 안보이게 
+// 스피너 안보이게
 $("#mySpinner").hide();
 
 // 길찾기 버튼 이벤트
@@ -548,13 +608,13 @@ function submitCheck(event) {
                 'csrfmiddlewaretoken': csrftoken,
             },
             datatype: 'json',
-            beforeSend : function(request){
+            beforeSend: function (request) {
                 // Performed before calling Ajax
                 $("#mySpinner").show();
                 document.getElementById("showRoute").style.visibility = "hidden";
                 document.getElementById("elevatorCheck").style.visibility = "hidden";
                 document.getElementById("checkbox_check").style.visibility = "hidden";
-              },
+            },
             success: function (data) {
                 document.getElementById("showRoute").style.visibility = "visible";
                 document.getElementById("elevatorCheck").style.visibility = "visible";
@@ -594,34 +654,34 @@ function amenitiesShow(name, e) {
 
 let amenitiesDic = {
     'cafe': [["R동 L층 카페나무", 193, 452], ["와우관 4층 카페나무", 443, 126], ["R동 2층 카페 그라찌에", 271, 439], ["R동 2층 다과점 파프리카", 260, 508], ["카페 캠퍼", 916, 529], ["A동 1층 카페드림", 904, 296], ["C동 8층 간이카페", 1005, 230], ["중앙도서관 2층 북카페", 511, 188], ['집가고싶다', 213, 578]],
-    'convenienceStore': [["R동 B2 홍익대학서적", 234, 463], ["와우관 4층 편의점", 433, 126], ["R동 3층 편의점", 232, 444], ["R동 L층 한가람 문구센터", 276, 430], ["제2기숙사 지하1층 편의점", 944, 482],['집가고싶다', 213, 578]],
-    'restaurant': [["제2기숙사 학생식당", 942, 486], ["향차이", 922, 543],['집가고싶다', 213, 578]],
-    'medicalRoom': [["약국(원이 약국)", 922, 562], ["건강진료센터", 576, 271],['집가고싶다', 213, 578]],
-    'readingRoom': [["T동 3,4층 열람실", 827, 511], ["R동 8층 열람실", 263, 543], ["중앙도서관 열람실", 527, 231],['집가고싶다', 213, 578]]
+    'convenienceStore': [["R동 B2 홍익대학서적", 234, 463], ["와우관 4층 편의점", 433, 126], ["R동 3층 편의점", 232, 444], ["R동 L층 한가람 문구센터", 276, 430], ["제2기숙사 지하1층 편의점", 944, 482], ['집가고싶다', 213, 578]],
+    'restaurant': [["제2기숙사 학생식당", 942, 486], ["향차이", 922, 543], ['집가고싶다', 213, 578]],
+    'medicalRoom': [["약국(원이 약국)", 922, 562], ["건강진료센터", 576, 271], ['집가고싶다', 213, 578]],
+    'readingRoom': [["T동 3,4층 열람실", 827, 511], ["R동 8층 열람실", 263, 543], ["중앙도서관 열람실", 527, 231], ['집가고싶다', 213, 578]]
 }
 
 let amenitiesText = {
-    'R동 L층 카페나무':['(평일, 학기중) 08:00 – 21:00', '(평일, 방학중) 08:30 – 20:30', '(주말, 학기중) 09:00 – 20:00', '(주말, 방학중) 09:00 – 19:30'],
-    '와우관 4층 카페나무':['(평일, 학기중) 08:30 – 20:00', '(평일, 방학중) 08:30 – 19:30', '(주말/공휴일) 09:00 – 18:00'],
-    'R동 2층 카페 그라찌에':['(평일) 08:00 – 20:00', '(주말) 09:00 – 18:00'],
-    'R동 2층 다과점 파프리카':['am08:00 – pm08:00'],
-    '카페 캠퍼':[],
-    'A동 1층 카페드림':['학기중','(평일) 1층 08:00 – 20:00, 2층 08:00~23:00', '(주말) 1층 09:00 – 19:00, 2층 09:00~23:00','방학중','(평일) 1층 10:00~17:00, 2층 09:00~23:00','(주말) 1층 10:00~17:00, 2층 09:00~23:00'],
-    'C동 8층 간이카페':['(평일, 학기중) 08:30 - 20:00','(평일, 방학중) 08:30 - 18:00','(일요일/공휴일) 휴무'],
-    '중앙도서관 2층 북카페':['(평일, 학기중) 10:00 - 19:00','(평일, 방학중) 09:00 - 18:00','(일요일/공휴일) 휴무'],
-    'R동 B2 홍익대학서적':['평일 : am09:00 - pm07:00 (학기중)','토요일 : am09:00 - pm02:00 (학기중)','일요일 및 공휴일 휴무'],
-    '와우관 4층 편의점':['(평일, 학기중) 08:30 - 21:00','(평일, 방학중) 08:30 - 20:00','(주말/공휴일) 08:30 - 18:00'],
-    'R동 3층 편의점':['(평일, 학기중) 08:00 - 21:00','(평일, 방학중) 08:00 - 18:00','(주말/공휴일) 휴무'],
-    'R동 L층 한가람 문구센터':['평일 : am08:30 - pm8:30','주말 및 공휴일 : am10:00 - pm08:00'],
-    '제2기숙사 지하1층 편의점':[],
-    '제2기숙사 학생식당':['08:00~09:00(조식), 11:30~14:30(중식), 17:30~19:20(석식)','[방학중 주말/공휴일] 휴무'],
-    '향차이':[],
-    '약국(원이 약국)':['(평일) 08:30 - 23:00','(주말) 11:00 - 22:00'],
-    '건강진료센터':[],
-    'T동 3,4층 열람실':['06:00-23:00 연중무휴','(제4공학관 4층 일반열람실 24시간 개방)'],
-    'R동 8층 열람실':['06:00-23:00 연중무휴'],
-    '중앙도서관 열람실':['06:00-23:00 연중무휴'],
-    '집가고싶다':['죽겠어요..'],
+    'R동 L층 카페나무': ['(평일, 학기중) 08:00 – 21:00', '(평일, 방학중) 08:30 – 20:30', '(주말, 학기중) 09:00 – 20:00', '(주말, 방학중) 09:00 – 19:30'],
+    '와우관 4층 카페나무': ['(평일, 학기중) 08:30 – 20:00', '(평일, 방학중) 08:30 – 19:30', '(주말/공휴일) 09:00 – 18:00'],
+    'R동 2층 카페 그라찌에': ['(평일) 08:00 – 20:00', '(주말) 09:00 – 18:00'],
+    'R동 2층 다과점 파프리카': ['am08:00 – pm08:00'],
+    '카페 캠퍼': [],
+    'A동 1층 카페드림': ['학기중', '(평일) 1층 08:00 – 20:00, 2층 08:00~23:00', '(주말) 1층 09:00 – 19:00, 2층 09:00~23:00', '방학중', '(평일) 1층 10:00~17:00, 2층 09:00~23:00', '(주말) 1층 10:00~17:00, 2층 09:00~23:00'],
+    'C동 8층 간이카페': ['(평일, 학기중) 08:30 - 20:00', '(평일, 방학중) 08:30 - 18:00', '(일요일/공휴일) 휴무'],
+    '중앙도서관 2층 북카페': ['(평일, 학기중) 10:00 - 19:00', '(평일, 방학중) 09:00 - 18:00', '(일요일/공휴일) 휴무'],
+    'R동 B2 홍익대학서적': ['평일 : am09:00 - pm07:00 (학기중)', '토요일 : am09:00 - pm02:00 (학기중)', '일요일 및 공휴일 휴무'],
+    '와우관 4층 편의점': ['(평일, 학기중) 08:30 - 21:00', '(평일, 방학중) 08:30 - 20:00', '(주말/공휴일) 08:30 - 18:00'],
+    'R동 3층 편의점': ['(평일, 학기중) 08:00 - 21:00', '(평일, 방학중) 08:00 - 18:00', '(주말/공휴일) 휴무'],
+    'R동 L층 한가람 문구센터': ['평일 : am08:30 - pm8:30', '주말 및 공휴일 : am10:00 - pm08:00'],
+    '제2기숙사 지하1층 편의점': [],
+    '제2기숙사 학생식당': ['08:00~09:00(조식), 11:30~14:30(중식), 17:30~19:20(석식)', '[방학중 주말/공휴일] 휴무'],
+    '향차이': [],
+    '약국(원이 약국)': ['(평일) 08:30 - 23:00', '(주말) 11:00 - 22:00'],
+    '건강진료센터': [],
+    'T동 3,4층 열람실': ['06:00-23:00 연중무휴', '(제4공학관 4층 일반열람실 24시간 개방)'],
+    'R동 8층 열람실': ['06:00-23:00 연중무휴'],
+    '중앙도서관 열람실': ['06:00-23:00 연중무휴'],
+    '집가고싶다': ['죽겠어요..'],
 }
 
 function amenitiesInMap() {
@@ -637,12 +697,12 @@ function amenitiesInMap() {
     for (let key in amenitiesDic) {
         for (let i = 0; i < amenitiesDic[key].length; i++) {
             //제이쿼리를 통해 img의 속성와 css를 주고 div안에 넣어준다
-            if (amenitiesDic[key][i][0]=='집가고싶다') {
-                $('<img>').attr('src', '../../static/logo/' + key + '.svg').attr('onclick', 'amenitiesTitle(event, this)').attr('title', amenitiesDic[key][i][0]).css('width', 32 * widthRatio + 'px').css('height', 32 * heightRatio + 'px').css('left', widthRatio * amenitiesDic[key][i][1]).css('top', heightRatio * amenitiesDic[key][i][2]).css('position', 'absolute').css('opacity', '0').css('z-index','3').appendTo(document.getElementById(key));
+            if (amenitiesDic[key][i][0] == '집가고싶다') {
+                $('<img>').attr('src', '../../static/logo/' + key + '.svg').attr('onclick', 'amenitiesTitle(event, this)').attr('title', amenitiesDic[key][i][0]).css('width', 32 * widthRatio + 'px').css('height', 32 * heightRatio + 'px').css('left', widthRatio * amenitiesDic[key][i][1]).css('top', heightRatio * amenitiesDic[key][i][2]).css('position', 'absolute').css('opacity', '0').css('z-index', '3').appendTo(document.getElementById(key));
 
                 continue;
             }
-            $('<img>').attr('src', '../../static/logo/' + key + '.svg').attr('onclick', 'amenitiesTitle(event, this)').attr('title', amenitiesDic[key][i][0]).css('width', 32 * widthRatio + 'px').css('height', 32 * heightRatio + 'px').css('left', widthRatio * amenitiesDic[key][i][1]).css('top', heightRatio * amenitiesDic[key][i][2]).css('position', 'absolute').css('z-index','3').appendTo(document.getElementById(key));
+            $('<img>').attr('src', '../../static/logo/' + key + '.svg').attr('onclick', 'amenitiesTitle(event, this)').attr('title', amenitiesDic[key][i][0]).css('width', 32 * widthRatio + 'px').css('height', 32 * heightRatio + 'px').css('left', widthRatio * amenitiesDic[key][i][1]).css('top', heightRatio * amenitiesDic[key][i][2]).css('position', 'absolute').css('z-index', '3').appendTo(document.getElementById(key));
 
         }
     }
@@ -657,7 +717,6 @@ window.onresize = function () {
 }
 
 
-
 // 편의시설 카드띄우기
 function amenitiesTitle(e, img) {
     let title = $(img).attr("title");
@@ -667,25 +726,26 @@ function amenitiesTitle(e, img) {
     // 카드 히든 제거
     $('.card').css('display', 'flex');
     // 이미지 넣어 주기
-    $('.card-img-top').attr('src', '../../static/logo/amenitiespic/'+titleWithoutSpace+'.jpg');
+    $('.card-img-top').attr('src', '../../static/logo/amenitiespic/' + titleWithoutSpace + '.jpg');
     // 타이틀
-    $('.card-title').html('<h3>'+title+'</h3>');
+    $('.card-title').html('<h3>' + title + '</h3>');
     let textWithList = '';
     // text 내용물 만드는 과정
     for (let list in amenitiesText[title]) {
         console.log(list);
-        list = '<li>' + amenitiesText[title][list] +'</li>';
-        textWithList += list ;
+        list = '<li>' + amenitiesText[title][list] + '</li>';
+        textWithList += list;
     }
-    textWithList = '<ul>'+ textWithList +'</ul>';
+    textWithList = '<ul>' + textWithList + '</ul>';
     $('.card-text').html(textWithList);
 
 }
 
 $('#close').click(function () {
-    document.getElementById('card').style.display = 'none'
-});
+    document.getElementById('card').style.display = 'none';
+    document.getElementById('navbarToggleExternalContent').classList.add('show');
 
+});
 
 
 // 뒷배경 누르면 사이드바사라짐
@@ -695,7 +755,5 @@ function backgroundClick(e) {
     // shadowing();
 
 }
-// document.getElementById('backgroundClick').addEventListener("click", function (e) {
-//
-// });
+
 

@@ -46,10 +46,13 @@
         <!-- 사이드바 -->
         <!-- 클래스로 callapse를 주어 숨김처리 및 수평으로 나오게 한다. flex-shrink를 통해 줄어들었을 때 고려 -->
         <!-- d-flex를 통해 flex-conatainer표시 -->
-        <div class="flex-shrink-0 p-3 mySidebar collapse collapse-horizontal" id="navbarToggleExternalContent"       >
+        <div class="flex-shrink-0 pt-3 ps-3 pe-3 pb-3 mySidebar collapse collapse-horizontal" id="navbarToggleExternalContent"       >
             <!-- div를 flex속성을 위해 다시 넣었다 -->
             <div class="d-flex flex-column" id="innerSidebar">
-
+{#                <!-- 닫기버튼 -->#}
+{#                <div id="sidebarScrollButton" style="display:flex; justify-content: center;"><span id="close" style="cursor:pointer;font-size:2px" title="닫기"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#6c7576" class="bi bi-caret-down-fill" viewBox="0 0 16 16">#}
+{#                  <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>#}
+{#                </svg></span></div>#}
                 <!-- 검색창 -->
                 {% csrf_token %}
                 <div class="autocomplete">
@@ -100,13 +103,23 @@
                 </div>
 
                 {#스피너#}
-                <div id='mySpinner'>
-                      <div>
-                            <span>
-                                <img src='//cdnjs.cloudflare.com/ajax/libs/galleriffic/2.0.1/css/loader.gif'>
-                            </span>
-                      </div>
+                <div id="mySpinner">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
                 </div>
+{#                <div id='mySpinner' class="spinner-border" role="status">#}
+{#                    <div>#}
+{#                        <span class="visually-hidden">Loading...</span>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div id='mySpinner'>#}
+{#                      <div>#}
+{#                            <span>#}
+{#                                <img src='//cdnjs.cloudflare.com/ajax/libs/galleriffic/2.0.1/css/loader.gif'>#}
+{#                            </span>#}
+{#                      </div>#}
+{#                </div>#}
 
 
                 <div id="showRoute">
@@ -119,7 +132,7 @@
             </div>
         </div>
 
-
+{#            sidebar사라지게하려면 onclick="backgroundClick(event)" 넣어야함#}
             <div id="backgroundClick" class="brightnessFromButton" onclick="backgroundClick(event)">
                 <!-- 학교사진 및 캔버스 -->
                 <!-- ratio클래스로인해 자식요소 크기 자동조절 -->
