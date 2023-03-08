@@ -1,3 +1,18 @@
+//첫시작 설정
+window.onload= function (){
+    if (screen.width < 500) {
+        document.getElementById('navbarToggleExternalContent').classList.remove('collapse-horizontal');
+    }
+
+}
+window.onresize = function () {
+    if (screen.width < 500) {
+        document.getElementById('navbarToggleExternalContent').classList.remove('collapse-horizontal');
+    } else {
+        document.getElementById('navbarToggleExternalContent').classList.add('collapse-horizontal');
+    }
+}
+
 
 
 //변수선언
@@ -118,34 +133,34 @@ function sendingData(inp) { //inp는 input객체
 }
 
 
-// ##사이드바 햄버거버튼 누르면 그림자화
-let shadowingCheck = 0;
-
-function shadowing() {
-    // 화면 넓이를 측정해 500px이하일때 html 백그라운드와 지도가 밝기감소
-    if (screen.width < 500) {
-        if (shadowingCheck % 2 == 0) {
-            // 햄버거 바 버튼 누르면 shadowing
-            brightnessFromButton = document.getElementsByClassName('brightnessFromButton');
-
-            for (var i = 0; i < brightnessFromButton.length; i++) {
-                $('#backgroundClick').css('background-color', 'rgba(0,0,0,0.5)');
-                $('#total').css('background-color', 'rgba(0,0,0,0.5)');
-                $(brightnessFromButton).css('filter', 'brightness(0.5)');
-
-            }
-
-        } else {
-            for (let i = 0; i < brightnessFromButton.length; i++) {
-                $('#backgroundClick').css('background-color', 'rgba(0,0,0,0)');
-                $('#total').css('background-color', 'rgba(0,0,0,0)');
-                $(brightnessFromButton).css('filter', 'brightness(1)');
-            }
-        }
-        shadowingCheck++;
-    }
-
-}
+// // ##사이드바 햄버거버튼 누르면 그림자화
+// let shadowingCheck = 0;
+//
+// function shadowing() {
+//     // 화면 넓이를 측정해 500px이하일때 html 백그라운드와 지도가 밝기감소
+//     if (screen.width < 500) {
+//         if (shadowingCheck % 2 == 0) {
+//             // 햄버거 바 버튼 누르면 shadowing
+//             brightnessFromButton = document.getElementsByClassName('brightnessFromButton');
+//
+//             for (var i = 0; i < brightnessFromButton.length; i++) {
+//                 $('#backgroundClick').css('background-color', 'rgba(0,0,0,0.5)');
+//                 $('#total').css('background-color', 'rgba(0,0,0,0.5)');
+//                 $(brightnessFromButton).css('filter', 'brightness(0.5)');
+//
+//             }
+//
+//         } else {
+//             for (let i = 0; i < brightnessFromButton.length; i++) {
+//                 $('#backgroundClick').css('background-color', 'rgba(0,0,0,0)');
+//                 $('#total').css('background-color', 'rgba(0,0,0,0)');
+//                 $(brightnessFromButton).css('filter', 'brightness(1)');
+//             }
+//         }
+//         shadowingCheck++;
+//     }
+//
+// }
 
 
 //##자동완성
@@ -643,29 +658,27 @@ window.onresize = function () {
 
 
 
-
+// 편의시설 카드띄우기
 function amenitiesTitle(e, img) {
-    if (screen.width < 25500) {
-        let title = $(img).attr("title");
+    let title = $(img).attr("title");
 
-        let titleWithoutSpace = title.replace(/ /g, '_')
-        console.log(titleWithoutSpace);
-        // 카드 히든 제거
-        $('.card').css('display', 'flex');
-        // 이미지 넣어 주기
-        $('.card-img-top').attr('src', '../../static/logo/amenitiespic/'+titleWithoutSpace+'.jpg');
-        // 타이틀
-        $('.card-title').html('<h3>'+title+'</h3>');
-        let textWithList = '';
-        // text 내용물 만드는 과정
-        for (let list in amenitiesText[title]) {
-            console.log(list);
-            list = '<li>' + amenitiesText[title][list] +'</li>';
-            textWithList += list ;
-        }
-        textWithList = '<ul>'+ textWithList +'</ul>';
-        $('.card-text').html(textWithList);
+    let titleWithoutSpace = title.replace(/ /g, '_')
+    console.log(titleWithoutSpace);
+    // 카드 히든 제거
+    $('.card').css('display', 'flex');
+    // 이미지 넣어 주기
+    $('.card-img-top').attr('src', '../../static/logo/amenitiespic/'+titleWithoutSpace+'.jpg');
+    // 타이틀
+    $('.card-title').html('<h3>'+title+'</h3>');
+    let textWithList = '';
+    // text 내용물 만드는 과정
+    for (let list in amenitiesText[title]) {
+        console.log(list);
+        list = '<li>' + amenitiesText[title][list] +'</li>';
+        textWithList += list ;
     }
+    textWithList = '<ul>'+ textWithList +'</ul>';
+    $('.card-text').html(textWithList);
 
 }
 
@@ -673,15 +686,16 @@ $('#close').click(function () {
     document.getElementById('card').style.display = 'none'
 });
 
+
+
+// 뒷배경 누르면 사이드바사라짐
 function backgroundClick(e) {
-    let list = document.getElementById('navbarToggleExternalContent').classList;
-    for (let key in list){
-        if(list[key] == 'show') {
-            document.getElementById('navbarToggleExternalContent').classList.remove('show');
-            shadowing();
-        }
-    }
+
+    document.getElementById('navbarToggleExternalContent').classList.remove('show');
+    // shadowing();
+
 }
 // document.getElementById('backgroundClick').addEventListener("click", function (e) {
 //
 // });
+
