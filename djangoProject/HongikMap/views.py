@@ -275,4 +275,10 @@ def XtoX_preprocessing(request):
 
 
 def specific_preprocessing(building: str):
-    print(f'specific_preprocessing : {building}')
+    # print(f'specific_preprocessing : {building}')
+    file_path = f'HongikMap/static/data/all_buildings_data/{building}.txt'
+    with open(file_path, "r", encoding="UTF8") as f:
+        compute(f, f'{building}.txt')
+
+    XToXDataization()
+    compute_XtoX()
