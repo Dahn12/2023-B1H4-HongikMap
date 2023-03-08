@@ -724,7 +724,7 @@ function amenitiesTitle(e, img) {
     let titleWithoutSpace = title.replace(/ /g, '_')
     console.log(titleWithoutSpace);
     // 카드 히든 제거
-    $('.card').css('display', 'flex');
+    $('.card').css('display', 'flex').css('z-index','11');
     // 이미지 넣어 주기
     $('.card-img-top').attr('src', '../../static/logo/amenitiespic/' + titleWithoutSpace + '.jpg');
     // 타이틀
@@ -743,17 +743,17 @@ function amenitiesTitle(e, img) {
 
 $('#close').click(function () {
     document.getElementById('card').style.display = 'none';
-    document.getElementById('navbarToggleExternalContent').classList.add('show');
+
 
 });
 
 
-// 뒷배경 누르면 사이드바사라짐
-function backgroundClick(e) {
-
-    document.getElementById('navbarToggleExternalContent').classList.remove('show');
-    // shadowing();
-
-}
+// // 뒷배경 누르면 사이드바사라짐
+// function backgroundClick(e) {
+//
+//     document.getElementById('navbarToggleExternalContent').classList.remove('show');
+//     // shadowing();
+//
+// }
 
 
