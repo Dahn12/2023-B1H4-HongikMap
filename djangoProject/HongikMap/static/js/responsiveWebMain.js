@@ -756,4 +756,24 @@ $('#close').click(function () {
 //
 // }
 
+function showRoadFindSidebar() {
+    if (screen.width < 500){
+        document.getElementById('navbarToggleExternalContent').classList.remove('show');
+    }
+    $('#roadFindSidebar').css('display', 'flex');
 
+}
+
+// ##사이드바 햄버거버튼 누르면 사이드바 및 길찾기 사라짐
+let sidebarCheck = 0;
+
+function sidebarButton() {
+    if (screen.width > 500){
+        if (sidebarCheck % 2 == 0) {
+        } else {
+            $('#roadFindSidebar').css('display', 'none');
+        }
+
+    }
+    sidebarCheck++;
+}
