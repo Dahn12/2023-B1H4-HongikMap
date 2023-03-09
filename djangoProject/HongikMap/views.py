@@ -18,11 +18,9 @@ def welcome(request):
 
 
 def responsiveWebMain(request):
-    return render(request, 'HongikMap/responsiveWebMain.html', {})
-
-
-def admin(request):
-    return render(request, 'HongikMap/admin_main.html', {})
+    departure = request.GET.get('departure', None)
+    destination = request.GET.get('destination', None)
+    return render(request, 'HongikMap/responsiveWebMain.html', {'departure': departure, 'destination': destination})
 
 
 def admin(request):
