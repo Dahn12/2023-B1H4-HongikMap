@@ -756,11 +756,28 @@ $('#close').click(function () {
 //
 // }
 
+window.onload = function () {
+    if (screen.width < 500){
+        $('#sidebarScrollButton').css('display', 'flex');
+    } else {
+        $('#sidebarScrollButton').css('display', 'none');
+    }
+}
+
+window.onresize = function () {
+    if (screen.width < 500){
+        $('#sidebarScrollButton').css('display', 'flex');
+    } else {
+        $('#sidebarScrollButton').css('display', 'none');
+    }
+}
+
 function showRoadFindSidebar() {
     if (screen.width < 500){
         document.getElementById('navbarToggleExternalContent').classList.remove('show');
     }
     $('#roadFindSidebar').css('display', 'flex');
+
 
 }
 
@@ -776,4 +793,9 @@ function sidebarButton() {
 
     }
     sidebarCheck++;
+}
+
+//지도길찾기 제거
+function roadFindSidebarRemove(){
+    $('#roadFindSidebar').css('display', 'none');
 }

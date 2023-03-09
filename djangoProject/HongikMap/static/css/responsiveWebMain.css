@@ -55,7 +55,7 @@
 .mySidebar {
     height: 90vh;
     position: fixed;
-    z-index: 10;
+    z-index: 12;
     display: flex;
     background-color: #F6F9FB;
     border-top-style: hidden;
@@ -99,6 +99,7 @@
     top: 10vh ;
     width: 300px;
     border: 1px solid lightgray;
+    padding: 16px;
 }
 @media (max-width: 500px) {
     #roadFindSidebar {
@@ -109,6 +110,8 @@
         height:60%;
         resize: vertical;
         overflow: auto;
+        border-radius: 1.375rem;
+        padding-top : 0;
     }
 }
 
