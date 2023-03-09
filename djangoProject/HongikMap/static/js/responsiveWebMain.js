@@ -1,17 +1,4 @@
-//첫시작 설정
-window.onload = function () {
-    if (screen.width < 500) {
-        document.getElementById('navbarToggleExternalContent').classList.remove('collapse-horizontal');
-    }
 
-}
-window.onresize = function () {
-    if (screen.width < 500) {
-        document.getElementById('navbarToggleExternalContent').classList.remove('collapse-horizontal');
-    } else {
-        document.getElementById('navbarToggleExternalContent').classList.add('collapse-horizontal');
-    }
-}
 
 
 //변수선언
