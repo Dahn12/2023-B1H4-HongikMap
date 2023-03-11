@@ -356,3 +356,20 @@
     position: relative;
     height: 90vh;
 }
+
+/*footer icon design*/
+.iconContainer{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.circle{
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border-color: #0d6efd;
+    background: #FFFFFF;
+    margin-left: 10px;
+    margin-right: 10px;
+}
