@@ -68,7 +68,7 @@
                     </a>
                   </li>
                   <li>
-                    <a data-url="coordinateCorrection" class="nav-link link text-black">
+                    <a data-url="coordinateCorrection" class="nav-link link text-black" onclick="showClubSidebar()">
                       동아리 박람회
                     </a>
                   </li>
@@ -84,7 +84,7 @@
                         <!-- div를 flex속성을 위해 다시 넣었다 -->
             <div class="d-flex flex-column" id="innerSidebar">
                 <!-- 닫기버튼 -->
-                <div id="sidebarScrollButton" style="display:flex; justify-content: center;"><span id="close" style="cursor:pointer;font-size:2px" title="닫기"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#6c7576" class="bi bi-caret-down-fill" viewBox="0 0 16 16" onclick="roadFindSidebarRemove()">
+                <div class="sidebarScrollButton" style="display:flex; justify-content: center;"><span id="close" style="cursor:pointer;font-size:2px" title="닫기"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#6c7576" class="bi bi-caret-down-fill" viewBox="0 0 16 16" onclick="roadFindSidebarRemove()">
                   <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
                 </svg></span></div>
                 <!-- 검색창 -->
@@ -149,7 +149,26 @@
                 </div>
             </div>
         </div>
+        {#하단바#}
+        <div id="clubSidebar" >
+                        <!-- div를 flex속성을 위해 다시 넣었다 -->
+            <div class="d-flex flex-column" id="innerSidebar">
+                <!-- 닫기버튼 -->
+                <div class="sidebarScrollButton" style="display:flex; justify-content: center;"><span id="close" style="cursor:pointer;font-size:2px" title="닫기"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#6c7576" class="bi bi-caret-down-fill" viewBox="0 0 16 16" onclick="clubSidebarRemove()">
+                  <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                </svg></span></div>
+                <!-- 검색창 -->
+                {% csrf_token %}
+                <div class="autocomplete">
+                    <input class="form-control mb-1 searchText w-100" id="autoInput" type="search" placeholder="출발지를 입력하세요" aria-label="Search" onkeyup="sendingData(this);" autocomplete="off">
+                </div>
+                <div class="autocomplete">
+                    <input class="form-control mb-2 searchText w-100" id="autoInput1" type="search" placeholder="도착지를 입력하세요" aria-label="Search" onkeyup="sendingData(this);" autocomplete="off">
+                </div>
+                <button type="button" class="btn btnsubmit btn-primary mb-1 float-end btn-sm" onclick="submitCheck()">길찾기</button>
 
+            </div>
+        </div>
 
 
 

@@ -701,6 +701,15 @@ amenitiesInMap();
 //화면 크기 변할 때 편의시설 조정
 window.onresize = function () {
     amenitiesInMap();
+    if (screen.width < 500){
+        $('.sidebarScrollButton').css('display', 'flex');
+    } else {
+        $('.sidebarScrollButton').css('display', 'none');
+    }
+    document.getElementById('navbarToggleExternalContent').classList.remove('show');
+    $('#clubSidebar').css('display', 'none');
+    $('#roadFindSidebar').css('display', 'none');
+
 }
 
 
@@ -745,27 +754,29 @@ $('#close').click(function () {
 
 window.onload = function () {
     if (screen.width < 500){
-        $('#sidebarScrollButton').css('display', 'flex');
+        $('.sidebarScrollButton').css('display', 'flex');
     } else {
-        $('#sidebarScrollButton').css('display', 'none');
+        $('.sidebarScrollButton').css('display', 'none');
     }
 }
 
-window.onresize = function () {
-    if (screen.width < 500){
-        $('#sidebarScrollButton').css('display', 'flex');
-    } else {
-        $('#sidebarScrollButton').css('display', 'none');
-    }
-}
+// window.onresize = function () {
+//
+// }
 
 function showRoadFindSidebar() {
     if (screen.width < 500){
         document.getElementById('navbarToggleExternalContent').classList.remove('show');
     }
+    $('#clubSidebar').css('display', 'none');
     $('#roadFindSidebar').css('display', 'flex');
-
-
+}
+function showClubSidebar() {
+    if (screen.width < 500){
+        document.getElementById('navbarToggleExternalContent').classList.remove('show');
+    }
+    $('#roadFindSidebar').css('display', 'none');
+    $('#clubSidebar').css('display', 'flex');
 }
 
 // ##사이드바 햄버거버튼 누르면 사이드바 및 길찾기 사라짐
@@ -785,4 +796,9 @@ function sidebarButton() {
 //지도길찾기 제거
 function roadFindSidebarRemove(){
     $('#roadFindSidebar').css('display', 'none');
+}
+
+//클럽사이드바 제거
+function clubSidebarRemove(){
+    $('#clubSidebar').css('display', 'none');
 }
