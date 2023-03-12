@@ -110,7 +110,7 @@ function sendingData(inp) { //inp는 input객체
             autocomplete.setAutocomplete(inp, receivedList); //autocomplete함수를 input객체를 받아 실행
             autocomplete.inputEvent(nowKeyboardCode);
             autocomplete.keydownEvent(nowKeyboardCode);
-            console.log(receivedList);
+//            console.log(receivedList);
         }
     });
 }
@@ -385,7 +385,7 @@ let autocomplete = (function () {
 
     let _removeListener = function () {
         if (_inp !== null) {
-            console.log(_inp)
+//            console.log(_inp)
             _inp.removeEventListener("keyup", inputEvent, false);
             _inp.removeEventListener("keydown", keydownEvent, false);
         }
@@ -503,7 +503,7 @@ function ElevPage(name) {
     var set = new Set(buildings_in_ways);
     var Set_buildings_in_ways = Array.from(set);
 
-    console.log(Set_buildings_in_ways);
+//    console.log(Set_buildings_in_ways);
 
     for (var q = 0; q < Set_buildings_in_ways.length; q++) {
         Set_buildings_in_ways[q] = Set_buildings_in_ways[q];
@@ -512,7 +512,7 @@ function ElevPage(name) {
 
     if (checked == 1) //간략 경로
     {
-        console.log("checked");
+//        console.log("checked");
 
         for (var m = 0; m < Set_buildings_in_ways.length; m++) {
             let newDiv = document.createElement('div');
@@ -528,7 +528,7 @@ function ElevPage(name) {
         }
     } else // 상세 경로
     {
-        console.log("not checked");
+//        console.log("not checked");
 
         for (var i = 0; i < textList[show.getAttribute('id')]['route'].length; i++) {
             let newDiv = document.createElement('div');
@@ -548,7 +548,7 @@ function ElevPage(name) {
     show.appendChild(document.createElement('br'));
     drawLine(textList[show.getAttribute('id')]["coordinates"]);
 
-    console.log(ways);
+//    console.log(ways);
 
 }
 
@@ -609,7 +609,7 @@ function submitCheck(event) {
                 $("#mySpinner").hide();
                 textList = data;
                 //엘리베이터 시간주기
-                console.log(textList);
+//                console.log(textList);
                 elevTimePlus(textList);
                 ElevPage('use');
                 drawLine(textList["elevatorUse"]["coordinates"]);
@@ -718,7 +718,7 @@ function amenitiesTitle(e, img) {
     let title = $(img).attr("title");
 
     let titleWithoutSpace = title.replace(/ /g, '_')
-    console.log(titleWithoutSpace);
+//    console.log(titleWithoutSpace);
     // 카드 히든 제거
     $('.card').css('display', 'flex').css('z-index','11');
     // 이미지 넣어 주기
@@ -728,7 +728,7 @@ function amenitiesTitle(e, img) {
     let textWithList = '';
     // text 내용물 만드는 과정
     for (let list in amenitiesText[title]) {
-        console.log(list);
+//        console.log(list);
         list = '<li>' + amenitiesText[title][list] + '</li>';
         textWithList += list;
     }
