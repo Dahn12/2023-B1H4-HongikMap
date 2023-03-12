@@ -350,6 +350,7 @@
 }
 #footer div ul {
     list-style:none;
+    padding-left:0;
 }
 
 #backgroundClick {
@@ -362,6 +363,7 @@
     display: flex;
     justify-content: center;
     text-align: center;
+    margin: auto;
 }
 .circle{
     align-items: center;
