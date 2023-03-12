@@ -81,7 +81,7 @@
         width: 60%;
     }
     .card {
-        position: absolute;
+        position: fixed;
         bottom: 0;
         width: 100%;
     }
@@ -103,6 +103,34 @@
 }
 @media (max-width: 500px) {
     #roadFindSidebar {
+        left: auto;
+        bottom:0;
+        top: auto;
+        width: 100%;
+        height:60%;
+        resize: vertical;
+        overflow: auto;
+        border-radius: 1.375rem;
+        padding-top : 0;
+    }
+}
+
+
+#clubSidebar {
+    left: 200px;
+    height: 90vh;
+    position: fixed;
+    z-index: 9;
+    display: none;
+    background-color: #F6F9FB;
+    border-top-style: hidden;
+    top: 10vh ;
+    width: 300px;
+    border: 1px solid lightgray;
+    padding: 16px;
+}
+@media (max-width: 500px) {
+    #clubSidebar {
         left: auto;
         bottom:0;
         top: auto;
