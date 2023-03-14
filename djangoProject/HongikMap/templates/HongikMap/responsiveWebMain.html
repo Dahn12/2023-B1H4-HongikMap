@@ -159,70 +159,37 @@
                 <div class="sidebarScrollButton" style="display:flex; justify-content: center;"><span id="close" style="cursor:pointer;font-size:2px" title="닫기"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#6c7576" class="bi bi-caret-down-fill" viewBox="0 0 16 16" onclick="clubExpoSidebarRemove()">
                   <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
                 </svg></span></div>
+
                 <!-- 드롭다운 -->
 
                 <div class="btn-group-vertical" role="group" aria-label="Vertical button group" style="width: 50%">
-                    <div class="btn-group dropend">
-                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            공연분과
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">HIUC</a></li>
-                            <li><a class="dropdown-item" href="#">네페르</a></li>
-                            <li><a class="dropdown-item" href="#">뚜라미</a></li>
-                        </ul>
+                    <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                        <button id='performence' type="button" class="btn btn-dark" onclick="clubExpoShow('performence',event);">공연분과 <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+  <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+</svg></span></button>
+                        <button id="leisure" type="button" class="btn btn-dark" onclick="clubExpoShow('leisure',event);">레저분과 <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+  <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+</svg></span></button>
+                        <button id="society" type="button" class="btn btn-dark" onclick="clubExpoShow('society',event);">사회분과 <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+  <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+</svg></span></button>
+                        <button id="sports" type="button" class="btn btn-dark" onclick="clubExpoShow('sports',event);">스포츠분과 <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+  <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+</svg></span></button>
+                        <button id="display" type="button" class="btn btn-dark" onclick="clubExpoShow('display',event);">전시분과 <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+  <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+</svg></span></button>
+                        <button id="religion" type="button" class="btn btn-dark" onclick="clubExpoShow('religion',event);">종교분과 <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+  <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+</svg></span></button>
+                        <button id="academic" type="button" class="btn btn-dark" onclick="clubExpoShow('academic',event);">학술분과 <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+  <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+</svg></span></button>
                     </div>
-                    <div class="btn-group dropend">
-                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            레저분과
-                        </button>
-                        <ul class="dropdown-menu">
-                            <!-- Dropdown menu links -->
-                        </ul>
-                    </div>
-                    <div class="btn-group dropend">
-                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            사회분과
-                        </button>
-                        <ul class="dropdown-menu">
-                            <!-- Dropdown menu links -->
-                        </ul>
-                    </div>
-                    <div class="btn-group dropend">
-                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            스포츠분과
-                        </button>
-                        <ul class="dropdown-menu">
-                            <!-- Dropdown menu links -->
-                        </ul>
-                    </div>
-                    <div class="btn-group dropend">
-                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            전시분과
-                        </button>
-                        <ul class="dropdown-menu">
-                            <!-- Dropdown menu links -->
-                        </ul>
-                    </div>
-                    <div class="btn-group dropend">
-                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            종교분과
-                        </button>
-                        <ul class="dropdown-menu">
-                            <!-- Dropdown menu links -->
-                        </ul>
-                    </div>
-                    <div class="btn-group dropend">
-                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            학술분과
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">HIUC</a></li>
-                            <li><a class="dropdown-item" href="#">네페르</a></li>
-                            <li><a class="dropdown-item" href="#">뚜라미</a></li>
-                        </ul>
-                    </div>
+
+
                 </div>
+                <div style="position: absolute; left: 50%">클럽리스트</div>
 
                 {#카드#}
                 <div class="card brightnessFromButton" id="clubExpoCard">
@@ -254,13 +221,13 @@
                     <div class="flex-grow-1" id="restaurant"></div>
                     <div class="flex-grow-1" id="medicalRoom"></div>
                     <div class="flex-grow-1" id="readingRoom"></div>
-                    <div class="flex-grow-1" id="공연분과"></div>
-                    <div class="flex-grow-1" id="레저분과"></div>
-                    <div class="flex-grow-1" id="사회분과"></div>
-                    <div class="flex-grow-1" id="스포츠분과"></div>
-                    <div class="flex-grow-1" id="전시분과"></div>
-                    <div class="flex-grow-1" id="종교분과"></div>
-                    <div class="flex-grow-1" id="학술분과"></div>
+                    <div class="flex-grow-1" id="performance"></div>
+                    <div class="flex-grow-1" id="leisure"></div>
+                    <div class="flex-grow-1" id="society"></div>
+                    <div class="flex-grow-1" id="sports"></div>
+                    <div class="flex-grow-1" id="display"></div>
+                    <div class="flex-grow-1" id="religion"></div>
+                    <div class="flex-grow-1" id="academy"></div>
                 </div>
             </div>
 
