@@ -701,13 +701,14 @@ amenitiesInMap();
 //화면 크기 변할 때 편의시설 조정
 window.onresize = function () {
     amenitiesInMap();
+    clubExpoInMap();
     if (screen.width < 500){
         $('.sidebarScrollButton').css('display', 'flex');
     } else {
         $('.sidebarScrollButton').css('display', 'none');
     }
     document.getElementById('navbarToggleExternalContent').classList.remove('show');
-    $('#clubSidebar').css('display', 'none');
+    $('#clubExpoSidebar').css('display', 'none');
     $('#roadFindSidebar').css('display', 'none');
 
 }
@@ -768,29 +769,33 @@ function showRoadFindSidebar() {
     if (screen.width < 500){
         document.getElementById('navbarToggleExternalContent').classList.remove('show');
     }
-    $('#clubSidebar').css('display', 'none');
+    $('#clubExpoSidebar').css('display', 'none');
     $('#roadFindSidebar').css('display', 'flex');
 }
-function showClubSidebar() {
+function showClubExpoSidebar() {
     if (screen.width < 500){
         document.getElementById('navbarToggleExternalContent').classList.remove('show');
     }
     $('#roadFindSidebar').css('display', 'none');
-    $('#clubSidebar').css('display', 'flex');
+    $('#clubExpoSidebar').css('display', 'flex');
 }
 
 // ##사이드바 햄버거버튼 누르면 사이드바 및 길찾기 사라짐
-let sidebarCheck = 0;
+let roadFindSidebarCheck = 0;
+let clubExpoSidebarCheck = 0;
 
 function sidebarButton() {
     if (screen.width > 500){
-        if (sidebarCheck % 2 == 0) {
-        } else {
+        if (roadFindSidebarCheck % 2 != 0) {
             $('#roadFindSidebar').css('display', 'none');
+        }
+        if(clubExpoSidebarCheck% 2 != 0){
+            $('#clubExpoSidebar').css('display', 'none');
         }
 
     }
-    sidebarCheck++;
+    clubExpoSidebarCheck++;
+    roadFindSidebarCheck++;
 }
 
 //지도길찾기 제거
@@ -799,8 +804,8 @@ function roadFindSidebarRemove(){
 }
 
 //클럽사이드바 제거
-function clubSidebarRemove(){
-    $('#clubSidebar').css('display', 'none');
+function clubExpoSidebarRemove(){
+    $('#clubExpoSidebar').css('display', 'none');
 }
 
 //동아리 박람회 좌표
@@ -874,4 +879,50 @@ let clubText = {
     '아톰': ['3D프린터와 아두이노로 아이디어를 구현하는 창작동아리'],
     '애뜨림': ['광고를 즐기는 홍익인들'],
     '짜라투스트라': ['짜라투스트라에서 여러분의 음악을 발견하세요']
+}
+
+function clubExpoInMap() {
+    //지도위 편의시설 전부 삭제
+    $('#clubExpoOnMap div').empty();
+    //위치조정
+    //위치조정은 기본 1300*700px의 지도 위치를 기준으로 한다.
+    //이 함수는 페이지 로드될 떄와 화면크기가 변할때 실행된다.
+
+    //화면비율
+    let widthRatio = document.getElementById('background').getBoundingClientRect().width / 1300;
+    let heightRatio = document.getElementById('background').getBoundingClientRect().height / 700;
+    for (let key in clubDic) {
+        for (let i = 0; i < clubDic[key].length; i++) {
+            //제이쿼리를 통해 img의 속성와 css를 주고 div안에 넣어준다
+            $('<img>').attr('src', '../../static/logo/clubExpo/' + key + '_' + clubDic[key][i][0] +'.png').attr('onclick', 'clubExpoTitle(event, this)').attr('title', key+'_'+clubDic[key][i][0]).css('width', 32 * widthRatio + 'px').css('height', 32 * heightRatio + 'px').css('left', widthRatio * clubDic[key][i][1]).css('top', heightRatio * clubDic[key][i][2]).css('position', 'absolute').css('z-index', '3').appendTo(document.getElementById(key));
+
+        }
+    }
+}
+
+clubExpoInMap();
+
+// 편의시설 카드띄우기
+function clubExpoTitle(e, img) {
+    let title1 = $(img).attr("title");
+    let title = title1.split('_')[1];
+
+    let titleWithoutSpace = title1.replace(/ /g, '_')
+    console.log(titleWithoutSpace);
+    // 카드 히든 제거
+    $('.card').css('display', 'flex').css('z-index','11');
+    // 이미지 넣어 주기
+    $('.card-img-top').attr('src', '../../static/logo/clubExpo/' + titleWithoutSpace + '.png');
+    // 타이틀
+    $('.card-title').html('<h3>' + title + '</h3>');
+    let textWithList = '';
+    // text 내용물 만드는 과정
+    for (let list in clubText[title]) {
+        console.log(list);
+        list = '<li>' + clubText[title][list] + '</li>';
+        textWithList += list;
+    }
+    textWithList = '<ul>' + textWithList + '</ul>';
+    $('.card-text').html(textWithList);
+
 }

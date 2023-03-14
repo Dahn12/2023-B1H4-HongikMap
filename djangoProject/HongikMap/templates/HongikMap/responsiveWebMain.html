@@ -45,6 +45,8 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation" onclick="sidebarButton()" >
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off"  onclick="amenitiesShow('학술분과',event);">
+            <label class="btn btn-outline-secondary" for="btncheck1" title="학술분과"><i class="bi bi-cup-fill"></i></label>
             <!-- 홍익맵로고 -->
             <a href="main" class=" link-dark text-decoration-none">
                 <img src="../../static/logo/hongmapLogo.svg" style="width: 159px; height: 53px;">
@@ -68,7 +70,7 @@
                     </a>
                   </li>
                   <li>
-                    <a data-url="coordinateCorrection" class="nav-link link text-black" onclick="showClubSidebar()">
+                    <a data-url="coordinateCorrection" class="nav-link link text-black" onclick="showClubExpoSidebar()">
                       동아리 박람회
                     </a>
                   </li>
@@ -79,7 +81,7 @@
 
         </div>
 
-        {#하단바#}
+        {#길찾기하단바#}
         <div id="roadFindSidebar" >
                         <!-- div를 flex속성을 위해 다시 넣었다 -->
             <div class="d-flex flex-column" id="innerSidebar">
@@ -149,24 +151,88 @@
                 </div>
             </div>
         </div>
-        {#하단바#}
-        <div id="clubSidebar" >
+        {#동아리하단바#}
+        <div id="clubExpoSidebar" >
                         <!-- div를 flex속성을 위해 다시 넣었다 -->
             <div class="d-flex flex-column" id="innerSidebar">
                 <!-- 닫기버튼 -->
-                <div class="sidebarScrollButton" style="display:flex; justify-content: center;"><span id="close" style="cursor:pointer;font-size:2px" title="닫기"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#6c7576" class="bi bi-caret-down-fill" viewBox="0 0 16 16" onclick="clubSidebarRemove()">
+                <div class="sidebarScrollButton" style="display:flex; justify-content: center;"><span id="close" style="cursor:pointer;font-size:2px" title="닫기"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#6c7576" class="bi bi-caret-down-fill" viewBox="0 0 16 16" onclick="clubExpoSidebarRemove()">
                   <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
                 </svg></span></div>
-                <!-- 검색창 -->
-                {% csrf_token %}
-                <div class="autocomplete">
-                    <input class="form-control mb-1 searchText w-100" id="autoInput" type="search" placeholder="출발지를 입력하세요" aria-label="Search" onkeyup="sendingData(this);" autocomplete="off">
-                </div>
-                <div class="autocomplete">
-                    <input class="form-control mb-2 searchText w-100" id="autoInput1" type="search" placeholder="도착지를 입력하세요" aria-label="Search" onkeyup="sendingData(this);" autocomplete="off">
-                </div>
-                <button type="button" class="btn btnsubmit btn-primary mb-1 float-end btn-sm" onclick="submitCheck()">길찾기</button>
+                <!-- 드롭다운 -->
 
+                <div class="btn-group-vertical" role="group" aria-label="Vertical button group" style="width: 50%">
+                    <div class="btn-group dropend">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            공연분과
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">HIUC</a></li>
+                            <li><a class="dropdown-item" href="#">네페르</a></li>
+                            <li><a class="dropdown-item" href="#">뚜라미</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group dropend">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            레저분과
+                        </button>
+                        <ul class="dropdown-menu">
+                            <!-- Dropdown menu links -->
+                        </ul>
+                    </div>
+                    <div class="btn-group dropend">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            사회분과
+                        </button>
+                        <ul class="dropdown-menu">
+                            <!-- Dropdown menu links -->
+                        </ul>
+                    </div>
+                    <div class="btn-group dropend">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            스포츠분과
+                        </button>
+                        <ul class="dropdown-menu">
+                            <!-- Dropdown menu links -->
+                        </ul>
+                    </div>
+                    <div class="btn-group dropend">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            전시분과
+                        </button>
+                        <ul class="dropdown-menu">
+                            <!-- Dropdown menu links -->
+                        </ul>
+                    </div>
+                    <div class="btn-group dropend">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            종교분과
+                        </button>
+                        <ul class="dropdown-menu">
+                            <!-- Dropdown menu links -->
+                        </ul>
+                    </div>
+                    <div class="btn-group dropend">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            학술분과
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">HIUC</a></li>
+                            <li><a class="dropdown-item" href="#">네페르</a></li>
+                            <li><a class="dropdown-item" href="#">뚜라미</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                {#카드#}
+                <div class="card brightnessFromButton" id="clubExpoCard">
+                    <img src="../../static/logo/schoolMap.jpg" class="card-img-top" alt="..." >
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        <p class="card-text"></p>
+
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -188,6 +254,13 @@
                     <div class="flex-grow-1" id="restaurant"></div>
                     <div class="flex-grow-1" id="medicalRoom"></div>
                     <div class="flex-grow-1" id="readingRoom"></div>
+                    <div class="flex-grow-1" id="공연분과"></div>
+                    <div class="flex-grow-1" id="레저분과"></div>
+                    <div class="flex-grow-1" id="사회분과"></div>
+                    <div class="flex-grow-1" id="스포츠분과"></div>
+                    <div class="flex-grow-1" id="전시분과"></div>
+                    <div class="flex-grow-1" id="종교분과"></div>
+                    <div class="flex-grow-1" id="학술분과"></div>
                 </div>
             </div>
 
