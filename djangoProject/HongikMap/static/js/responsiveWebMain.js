@@ -933,12 +933,28 @@ function clubExpoShow(name, e) {
     for (let key in clubDic){
         if (key == name){
             for(let clubDicList in clubDic[key]){
-                $('<li>').html(clubDic[key][clubDicList][0]).appendTo(clubListTag);
+                $('<li>').attr('id',clubDic[key][clubDicList][0]).attr('title',clubDic[key][clubDicList][0]).attr('onclick', 'showOneClub(this.id)').html(clubDic[key][clubDicList][0]).appendTo(clubListTag);
             }
         }
     }
 }
 
-function showClubList(){
-
+function showOneClub(title) {
+    let titleWithoutSpace = title.replace(/ /g, '_');
+    console.log(titleWithoutSpace);
+    // 카드 히든 제거
+    $('.card').css('display', 'flex').css('z-index','11');
+    // 이미지 넣어 주기
+    $('.card-img-top').attr('src', '../../static/logo/clubExpo/' + titleWithoutSpace + '.png');
+    // 타이틀
+    $('.card-title').html('<h3>' + title + '</h3>');
+    let textWithList = '';
+    // text 내용물 만드는 과정
+    for (let list in clubText[title]) {
+        console.log(list);
+        list = '<li>' + clubText[title][list] + '</li>';
+        textWithList += list;
+    }
+    textWithList = '<ul>' + textWithList + '</ul>';
+    $('.card-text').html(textWithList);
 }
