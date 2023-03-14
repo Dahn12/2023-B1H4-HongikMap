@@ -644,7 +644,14 @@ let amenitiesDic = {
     'convenienceStore': [["R동 B2 홍익대학서적", 234, 463], ["와우관 4층 편의점", 433, 126], ["R동 3층 편의점", 232, 444], ["R동 L층 한가람 문구센터", 276, 430], ["제2기숙사 지하1층 편의점", 944, 482], ['집가고싶다', 213, 578]],
     'restaurant': [["제2기숙사 학생식당", 942, 486], ["향차이", 922, 543], ['집가고싶다', 213, 578]],
     'medicalRoom': [["약국(원이 약국)", 922, 562], ["건강진료센터", 576, 271], ['집가고싶다', 213, 578]],
-    'readingRoom': [["T동 3,4층 열람실", 827, 511], ["R동 8층 열람실", 263, 543], ["중앙도서관 열람실", 527, 231], ['집가고싶다', 213, 578]]
+    'readingRoom': [["T동 3,4층 열람실", 827, 511], ["R동 8층 열람실", 263, 543], ["중앙도서관 열람실", 527, 231], ['집가고싶다', 213, 578]],
+    '공연분과': [["hiuc", 193, 452], ["네페르", 443, 126], ["뚜라미", 271, 439], ["매직스", 260, 508], ["브레인스워즈", 916, 529], ["블랙테트라", 904, 296], ["비츠플러우", 1005, 230], ["빛의소리", 511, 188], ["소리얼", 213, 578], ["스놀", 213, 578], ["악반", 213, 578], ["알로하", 213, 578], ["오픈런", 213, 578], ["홍익극연구회", 213, 578], ["히아모", 213, 578]],
+    '레저분과': [["ExP", 234, 463], ["HUHA", 433, 126], ["볼케이노", 232, 444], ["산악반", 276, 430], ["애륜", 944, 482], ["원플", 213, 578], ["유스호스텔", 213, 578], ["터사랑", 213, 578], ["팀사공일", 213, 578]],
+    '사회분과': [["AIESEC", 942, 486], ["KUSA", 922, 543], ["멍냥부리", 213, 578], ["영미", 213, 578], ["한울", 213, 578], ["호우회", 213, 578]],
+    '스포츠분과': [["COWBOYS", 922, 562], ["HTTC", 213, 578], ["검도반", 576, 271], ["사격동아리", 213, 578], ["수영동아리", 213, 578], ["스키반", 213, 578], ["위너스", 213, 578], ["일레븐킥스", 213, 578], ["점프", 213, 578]],
+    '전시분과': [["글샘문학회", 827, 511], ["모래알", 263, 543], ["미사랑", 527, 231], ["민화반", 213, 578], ["서우회", 213, 578]],
+    '종교분과': [["CCC", 827, 511], ["IVF", 263, 543], ["YWAM", 527, 231], ["가듐", 213, 578], ["바이블정기구독", 213, 578]],
+    '학술분과': [["hecc", 827, 511], ["HICC", 263, 543], ["TED", 527, 231], ["UCS", 213, 578], ["개밥바라기", 213, 578], ["아이시떼루", 213, 578], ["아톰", 213, 578], ["애뜨림", 213, 578], ["짜라투스트라", 213, 578]]
 }
 
 let amenitiesText = {
@@ -701,7 +708,6 @@ amenitiesInMap();
 //화면 크기 변할 때 편의시설 조정
 window.onresize = function () {
     amenitiesInMap();
-    clubExpoInMap();
     if (screen.width < 500){
         $('.sidebarScrollButton').css('display', 'flex');
     } else {
@@ -810,13 +816,7 @@ function clubExpoSidebarRemove(){
 
 //동아리 박람회 좌표
 let clubDic = {
-    '공연분과': [["hiuc", 193, 452], ["네페르", 443, 126], ["뚜라미", 271, 439], ["매직스", 260, 508], ["브레인스워즈", 916, 529], ["블랙테트라", 904, 296], ["비츠플러우", 1005, 230], ["빛의소리", 511, 188], ["소리얼", 213, 578], ["스놀", 213, 578], ["악반", 213, 578], ["알로하", 213, 578], ["오픈런", 213, 578], ["홍익극연구회", 213, 578], ["히아모", 213, 578]],
-    '레저분과': [["ExP", 234, 463], ["HUHA", 433, 126], ["볼케이노", 232, 444], ["산악반", 276, 430], ["애륜", 944, 482], ["원플", 213, 578], ["유스호스텔", 213, 578], ["터사랑", 213, 578], ["팀사공일", 213, 578]],
-    '사회분과': [["AIESEC", 942, 486], ["KUSA", 922, 543], ["멍냥부리", 213, 578], ["영미", 213, 578], ["한울", 213, 578], ["호우회", 213, 578]],
-    '스포츠분과': [["COWBOYS", 922, 562], ["HTTC", 213, 578], ["검도반", 576, 271], ["사격동아리", 213, 578], ["수영동아리", 213, 578], ["스키반", 213, 578], ["위너스", 213, 578], ["일레븐킥스", 213, 578], ["점프", 213, 578]],
-    '전시분과': [["글샘문학회", 827, 511], ["모래알", 263, 543], ["미사랑", 527, 231], ["민화반", 213, 578], ["서우회", 213, 578]],
-    '종교분과': [["CCC", 827, 511], ["IVF", 263, 543], ["YWAM", 527, 231], ["가듐", 213, 578], ["바이블정기구독", 213, 578]],
-    '학술분과': [["hecc", 827, 511], ["HICC", 263, 543], ["TED", 527, 231], ["UCS", 213, 578], ["개밥바라기", 213, 578], ["아이시떼루", 213, 578], ["아톰", 213, 578], ["애뜨림", 213, 578], ["짜라투스트라", 213, 578]]
+
 }
 
 //동아리 박람회 리스트
@@ -881,54 +881,31 @@ let clubText = {
     '짜라투스트라': ['짜라투스트라에서 여러분의 음악을 발견하세요']
 }
 
-function clubExpoInMap() {
-    //지도위 편의시설 전부 삭제
-    $('#clubExpoOnMap div').empty();
-    //위치조정
-    //위치조정은 기본 1300*700px의 지도 위치를 기준으로 한다.
-    //이 함수는 페이지 로드될 떄와 화면크기가 변할때 실행된다.
+// function clubExpoInMap() {
+//     //지도위 편의시설 전부 삭제
+//     $('#clubExpoOnMap div').empty();
+//     //위치조정
+//     //위치조정은 기본 1300*700px의 지도 위치를 기준으로 한다.
+//     //이 함수는 페이지 로드될 떄와 화면크기가 변할때 실행된다.
+//
+//     //화면비율
+//     let widthRatio = document.getElementById('background').getBoundingClientRect().width / 1300;
+//     let heightRatio = document.getElementById('background').getBoundingClientRect().height / 700;
+//     for (let key in clubDic) {
+//         for (let i = 0; i < clubDic[key].length; i++) {
+//             //제이쿼리를 통해 img의 속성와 css를 주고 div안에 넣어준다
+//             $('<img>').attr('src', '../../static/logo/clubExpo/' + key + '_' + clubDic[key][i][0] +'.png').attr('onclick', 'clubExpoTitle(event, this)').attr('title', key+'_'+clubDic[key][i][0]).css('width', 32 * widthRatio + 'px').css('height', 32 * heightRatio + 'px').css('left', widthRatio * clubDic[key][i][1]).css('top', heightRatio * clubDic[key][i][2]).css('position', 'absolute').css('z-index', '3').appendTo(document.getElementById(key));
+//
+//         }
+//     }
+// }
 
-    //화면비율
-    let widthRatio = document.getElementById('background').getBoundingClientRect().width / 1300;
-    let heightRatio = document.getElementById('background').getBoundingClientRect().height / 700;
-    for (let key in clubDic) {
-        for (let i = 0; i < clubDic[key].length; i++) {
-            //제이쿼리를 통해 img의 속성와 css를 주고 div안에 넣어준다
-            $('<img>').attr('src', '../../static/logo/clubExpo/' + key + '_' + clubDic[key][i][0] +'.png').attr('onclick', 'clubExpoTitle(event, this)').attr('title', key+'_'+clubDic[key][i][0]).css('width', 32 * widthRatio + 'px').css('height', 32 * heightRatio + 'px').css('left', widthRatio * clubDic[key][i][1]).css('top', heightRatio * clubDic[key][i][2]).css('position', 'absolute').css('z-index', '3').appendTo(document.getElementById(key));
+// clubExpoInMap();
 
-        }
-    }
-}
-
-clubExpoInMap();
-
-// 편의시설 카드띄우기
-function clubExpoTitle(e, img) {
-    let title1 = $(img).attr("title");
-    let title = title1.split('_')[1];
-
-    let titleWithoutSpace = title1.replace(/ /g, '_')
-    console.log(titleWithoutSpace);
-    // 카드 히든 제거
-    $('.card').css('display', 'flex').css('z-index','11');
-    // 이미지 넣어 주기
-    $('.card-img-top').attr('src', '../../static/logo/clubExpo/' + titleWithoutSpace + '.png');
-    // 타이틀
-    $('.card-title').html('<h3>' + title + '</h3>');
-    let textWithList = '';
-    // text 내용물 만드는 과정
-    for (let list in clubText[title]) {
-        console.log(list);
-        list = '<li>' + clubText[title][list] + '</li>';
-        textWithList += list;
-    }
-    textWithList = '<ul>' + textWithList + '</ul>';
-    $('.card-text').html(textWithList);
-
-}
 
 function clubExpoShow(name, e) {
     let clubListTag = document.getElementById('clubList');
+    alert('g');
     clubListTag.replaceChildren();
     for (let key in clubDic){
         if (key == name){
