@@ -734,10 +734,14 @@ window.onresize = function () {
         $('.sidebarScrollButton').css('display', 'flex');
     } else {
         $('.sidebarScrollButton').css('display', 'none');
+        if (!document.getElementById('navbarToggleExternalContent').classList.contains('show')){
+            $('#clubSidebar').css('display', 'none');
+            $('#roadFindSidebar').css('display', 'none');
+        }
     }
-    document.getElementById('navbarToggleExternalContent').classList.remove('show');
-    $('#clubExpoSidebar').css('display', 'none');
-    $('#roadFindSidebar').css('display', 'none');
+    // document.getElementById('navbarToggleExternalContent').classList.remove('show');
+    // $('#clubExpoSidebar').css('display', 'none');
+    // $('#roadFindSidebar').css('display', 'none');
 
 }
 
