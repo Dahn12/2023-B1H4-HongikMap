@@ -161,45 +161,40 @@
                 </svg></span></div>
 
                 <!-- 드롭다운 -->
-
-                <div class="btn-group-vertical" role="group" aria-label="Vertical button group" style="width: 50%">
-                    <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-                        <button id='performence' type="button" class="btn btn-dark" onclick="clubExpoShow('performence',event);">공연분과 <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-  <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
-</svg></span></button>
-                        <button id="leisure" type="button" class="btn btn-dark" onclick="clubExpoShow('leisure',event);">레저분과 <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-  <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
-</svg></span></button>
-                        <button id="society" type="button" class="btn btn-dark" onclick="clubExpoShow('society',event);">사회분과 <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-  <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
-</svg></span></button>
-                        <button id="sports" type="button" class="btn btn-dark" onclick="clubExpoShow('sports',event);">스포츠분과 <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-  <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
-</svg></span></button>
-                        <button id="display" type="button" class="btn btn-dark" onclick="clubExpoShow('display',event);">전시분과 <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-  <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
-</svg></span></button>
-                        <button id="religion" type="button" class="btn btn-dark" onclick="clubExpoShow('religion',event);">종교분과 <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-  <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
-</svg></span></button>
-                        <button id="academic" type="button" class="btn btn-dark" onclick="clubExpoShow('academic',event);">학술분과 <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-  <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
-</svg></span></button>
-                    </div>
-
-
-                </div>
-                <div style="position: absolute; left: 50%">클럽리스트</div>
-
-                {#카드#}
-                <div class="card brightnessFromButton" id="clubExpoCard">
-                    <img src="../../static/logo/schoolMap.jpg" class="card-img-top" alt="..." >
-                    <div class="card-body">
-                        <h5 class="card-title"></h5>
-                        <p class="card-text"></p>
+                <div class="d-flex">
+                    <div class="btn-group-vertical" role="group" aria-label="Vertical button group" style="width: 50%">
+                        <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                            <button id='performence' type="button" class="btn btn-dark" onclick="clubExpoShow('공연분과',event);">공연분과 <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+      <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+    </svg></span></button>
+                            <button id="leisure" type="button" class="btn btn-dark" onclick="clubExpoShow('레저분과',event);">레저분과 <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+      <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+    </svg></span></button>
+                            <button id="society" type="button" class="btn btn-dark" onclick="clubExpoShow('사회분과',event);">사회분과 <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+      <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+    </svg></span></button>
+                            <button id="sports" type="button" class="btn btn-dark" onclick="clubExpoShow('스포츠분과',event);">스포츠분과 <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+      <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+    </svg></span></button>
+                            <button id="display" type="button" class="btn btn-dark" onclick="clubExpoShow('전시분과',event);">전시분과 <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+      <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+    </svg></span></button>
+                            <button id="religion" type="button" class="btn btn-dark" onclick="clubExpoShow('종교분과',event);">종교분과 <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+      <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+    </svg></span></button>
+                            <button id="academic" type="button" class="btn btn-dark" onclick="clubExpoShow('학술분과',event);">학술분과 <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+      <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+    </svg></span></button>
+                        </div>
 
                     </div>
+                    <div style="height: 260px; width: 50%">
+                        <ul id="clubList" >
+                        </ul>
+                    </div>
                 </div>
+
+
             </div>
         </div>
 
