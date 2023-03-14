@@ -1,6 +1,3 @@
-
-
-
 //변수선언
 //##경로표시
 let boolDepartureCheck = false;
@@ -645,6 +642,10 @@ let amenitiesDic = {
     'restaurant': [["제2기숙사 학생식당", 942, 486], ["향차이", 922, 543], ['집가고싶다', 213, 578]],
     'medicalRoom': [["약국(원이 약국)", 922, 562], ["건강진료센터", 576, 271], ['집가고싶다', 213, 578]],
     'readingRoom': [["T동 3,4층 열람실", 827, 511], ["R동 8층 열람실", 263, 543], ["중앙도서관 열람실", 527, 231], ['집가고싶다', 213, 578]],
+
+}
+//동아리 박람회 좌표
+let clubExpoDic = {
     '공연분과': [["hiuc", 193, 452], ["네페르", 443, 126], ["뚜라미", 271, 439], ["매직스", 260, 508], ["브레인스워즈", 916, 529], ["블랙테트라", 904, 296], ["비츠플러우", 1005, 230], ["빛의소리", 511, 188], ["소리얼", 213, 578], ["스놀", 213, 578], ["악반", 213, 578], ["알로하", 213, 578], ["오픈런", 213, 578], ["홍익극연구회", 213, 578], ["히아모", 213, 578]],
     '레저분과': [["ExP", 234, 463], ["HUHA", 433, 126], ["볼케이노", 232, 444], ["산악반", 276, 430], ["애륜", 944, 482], ["원플", 213, 578], ["유스호스텔", 213, 578], ["터사랑", 213, 578], ["팀사공일", 213, 578]],
     '사회분과': [["AIESEC", 942, 486], ["KUSA", 922, 543], ["멍냥부리", 213, 578], ["영미", 213, 578], ["한울", 213, 578], ["호우회", 213, 578]],
@@ -702,13 +703,33 @@ function amenitiesInMap() {
     }
 }
 
+function clubExpoInMap() {
+    //지도위 편의시설 전부 삭제
+    //위치조정
+    //위치조정은 기본 1300*700px의 지도 위치를 기준으로 한다.
+    //이 함수는 페이지 로드될 떄와 화면크기가 변할때 실행된다.
+
+    //화면비율
+    let widthRatio = document.getElementById('background').getBoundingClientRect().width / 1300;
+    let heightRatio = document.getElementById('background').getBoundingClientRect().height / 700;
+    for (let key in clubExpoDic) {
+        for (let i = 0; i < clubExpoDic[key].length; i++) {
+            //제이쿼리를 통해 img의 속성와 css를 주고 div안에 넣어준다
+            $('<img>').attr('src', '../../static/logo/medicalRoom.svg').attr('title', clubExpoDic[key][i][0]).css('width', 32 * widthRatio + 'px').css('height', 32 * heightRatio + 'px').css('left', widthRatio * clubExpoDic[key][i][1]).css('top', heightRatio * clubExpoDic[key][i][2]).css('position', 'absolute').css('z-index', '3').appendTo(document.getElementById(key));
+
+        }
+    }
+}
+
 
 amenitiesInMap();
+clubExpoInMap();
 
 //화면 크기 변할 때 편의시설 조정
 window.onresize = function () {
     amenitiesInMap();
-    if (screen.width < 500){
+    clubExpoInMap();
+    if (screen.width < 500) {
         $('.sidebarScrollButton').css('display', 'flex');
     } else {
         $('.sidebarScrollButton').css('display', 'none');
@@ -727,7 +748,7 @@ function amenitiesTitle(e, img) {
     let titleWithoutSpace = title.replace(/ /g, '_')
     console.log(titleWithoutSpace);
     // 카드 히든 제거
-    $('.card').css('display', 'flex').css('z-index','11');
+    $('.card').css('display', 'flex').css('z-index', '11');
     // 이미지 넣어 주기
     $('.card-img-top').attr('src', '../../static/logo/amenitiespic/' + titleWithoutSpace + '.jpg');
     // 타이틀
@@ -760,7 +781,7 @@ $('#close').click(function () {
 // }
 
 window.onload = function () {
-    if (screen.width < 500){
+    if (screen.width < 500) {
         $('.sidebarScrollButton').css('display', 'flex');
     } else {
         $('.sidebarScrollButton').css('display', 'none');
@@ -772,14 +793,15 @@ window.onload = function () {
 // }
 
 function showRoadFindSidebar() {
-    if (screen.width < 500){
+    if (screen.width < 500) {
         document.getElementById('navbarToggleExternalContent').classList.remove('show');
     }
     $('#clubExpoSidebar').css('display', 'none');
     $('#roadFindSidebar').css('display', 'flex');
 }
+
 function showClubExpoSidebar() {
-    if (screen.width < 500){
+    if (screen.width < 500) {
         document.getElementById('navbarToggleExternalContent').classList.remove('show');
     }
     $('#roadFindSidebar').css('display', 'none');
@@ -791,11 +813,11 @@ let roadFindSidebarCheck = 0;
 let clubExpoSidebarCheck = 0;
 
 function sidebarButton() {
-    if (screen.width > 500){
+    if (screen.width > 500) {
         if (roadFindSidebarCheck % 2 != 0) {
             $('#roadFindSidebar').css('display', 'none');
         }
-        if(clubExpoSidebarCheck% 2 != 0){
+        if (clubExpoSidebarCheck % 2 != 0) {
             $('#clubExpoSidebar').css('display', 'none');
         }
 
@@ -805,19 +827,16 @@ function sidebarButton() {
 }
 
 //지도길찾기 제거
-function roadFindSidebarRemove(){
+function roadFindSidebarRemove() {
     $('#roadFindSidebar').css('display', 'none');
 }
 
 //클럽사이드바 제거
-function clubExpoSidebarRemove(){
+function clubExpoSidebarRemove() {
     $('#clubExpoSidebar').css('display', 'none');
 }
 
-//동아리 박람회 좌표
-let clubDic = {
 
-}
 
 //동아리 박람회 리스트
 let clubText = {
@@ -905,12 +924,12 @@ let clubText = {
 
 function clubExpoShow(name, e) {
     let clubListTag = document.getElementById('clubList');
-    alert('g');
+
     clubListTag.replaceChildren();
-    for (let key in clubDic){
-        if (key == name){
-            for(let clubDicList in clubDic[key]){
-                $('<li>').attr('id',clubDic[key][clubDicList][0]).attr('title',clubDic[key][clubDicList][0]).attr('onclick', 'showOneClub(this.id)').html(clubDic[key][clubDicList][0]).appendTo(clubListTag);
+    for (let key in clubExpoDic) {
+        if (key == name) {
+            for (let clubExpoDicList in clubExpoDic[key]) {
+                $('<li>').attr('id', clubExpoDic[key][clubExpoDicList][0]).attr('title', clubExpoDic[key][clubExpoDicList][0]).attr('onclick', 'showOneClub(this.id)').html(clubExpoDic[key][clubExpoDicList][0]).appendTo(clubListTag);
             }
         }
     }
@@ -920,7 +939,7 @@ function showOneClub(title) {
     let titleWithoutSpace = title.replace(/ /g, '_');
     console.log(titleWithoutSpace);
     // 카드 히든 제거
-    $('.card').css('display', 'flex').css('z-index','11');
+    $('.card').css('display', 'flex').css('z-index', '11');
     // 이미지 넣어 주기
     $('.card-img-top').attr('src', '../../static/logo/clubExpo/' + titleWithoutSpace + '.png');
     // 타이틀
