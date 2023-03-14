@@ -72,6 +72,8 @@
     position: fixed;
     bottom: 0;
     right:0;
+    max-height: 70%;
+    overflow: auto;
 }
 /*동아리카드*/
 #clubExpoCard {
@@ -433,7 +435,6 @@
     --bs-btn-disabled-border-color: #212529;
 }
 
-/* 마우스 오버(마우스 올렸을때) */
 li:hover{
     color: #0d6efd;
 }
@@ -443,7 +444,6 @@ li:hover{
     color: black;
 }
 
-
 #clubList{
     list-style: none;
     font-size: small;
@@ -451,24 +451,24 @@ li:hover{
 }
 
 /* 임의의 영역 생성 */
-.clublist { 
+.clublist {
     width: 200px;
     height: 200px;
     overflow-y: scroll;
   }
-  
+
   /* 아래의 모든 코드는 영역::코드로 사용 */
   .clublist::-webkit-scrollbar {
       width: 5px;  /* 스크롤바의 너비 */
   }
-  
+
   .clublist::-webkit-scrollbar-thumb {
       height:10%; /* 스크롤바의 길이 */
       background: lightgray; /* 스크롤바의 색상 */
-      
+
       border-radius: 10px;
   }
-  
+
   .clublist::-webkit-scrollbar-track {
       background: #fff  /*스크롤바 뒷 배경 색상*/
   }

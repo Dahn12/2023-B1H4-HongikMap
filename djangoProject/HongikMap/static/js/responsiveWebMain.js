@@ -180,7 +180,7 @@ function sendingData(inp) { //inp는 input객체
 //     console.log(e.clientY);
 //     const dy = e.clientY - y;
 //     console.log(dy);
-//   	// 크기 조절 중 마우스 커서를 변경함
+//      // 크기 조절 중 마우스 커서를 변경함
 //     // class="resizer"에 적용하면 위치가 변경되면서 커서가 해제되기 때문에 body에 적용
 //
 //     // 이동 중 양쪽 영역(왼쪽, 오른쪽)에서 마우스 이벤트와 텍스트 선택을 방지하기 위해 추가
@@ -629,6 +629,7 @@ function elevTimePlus(textList) {
 }
 
 function amenitiesShow(name, e) {
+    document.getElementById('onlyOne').style.visibility = 'hidden';
     if (e.target.checked) {
         document.getElementById(name).style.visibility = 'visible';
     } else {
@@ -646,13 +647,13 @@ let amenitiesDic = {
 }
 //동아리 박람회 좌표
 let clubExpoDic = {
-    '공연분과': [["hiuc", 193, 452], ["네페르", 443, 126], ["뚜라미", 271, 439], ["매직스", 260, 508], ["브레인스워즈", 916, 529], ["블랙테트라", 904, 296], ["비츠플로우", 1005, 230], ["빛의소리", 511, 188], ["소리얼", 213, 578], ["스놀", 213, 578], ["악반", 213, 578], ["알로하", 213, 578], ["오픈런", 213, 578], ["홍익극연구회", 213, 578], ["히아모", 213, 578]],
-    '레저분과': [["ExP", 234, 463], ["HUHA", 433, 126], ["볼케이노", 232, 444], ["산악부", 276, 430], ["애륜", 944, 482], ["원플", 213, 578], ["유스호스텔", 213, 578], ["터사랑", 213, 578], ["팀사공일", 213, 578]],
-    '사회분과': [["AIESEC", 942, 486], ["KUSA", 922, 543], ["멍냥부리", 213, 578], ["영미", 213, 578], ["한울", 213, 578], ["호우회", 213, 578]],
-    '스포츠분과': [["COWBOYS", 922, 562], ["HTTC", 213, 578], ["검도반", 576, 271], ["사격동아리", 213, 578], ["수영동아리", 213, 578], ["스키반", 213, 578], ["위너스", 213, 578], ["일레븐킥스", 213, 578], ["점프", 213, 578]],
-    '전시분과': [["글샘문학회", 827, 511], ["모래알", 263, 543], ["미사랑", 527, 231], ["민화반", 213, 578], ["서우회", 213, 578]],
-    '종교분과': [["CCC", 827, 511], ["IVF", 263, 543], ["YWAM", 527, 231], ["가듐", 213, 578], ["바이블정기구독", 213, 578]],
-    '학술분과': [["hecc", 827, 511], ["HICC", 263, 543], ["TED", 527, 231], ["UCS", 213, 578], ["개밥바라기", 213, 578], ["아이시떼루", 213, 578], ["아톰", 213, 578], ["애뜨림", 213, 578], ["짜라투스트라", 213, 578]]
+    '공연분과': [["hiuc", 674, 359], ["네페르", 650, 359], ["뚜라미", 692, 359], ["매직스", 680, 359], ["브레인스워즈", 620, 359], ["블랙테트라", 644, 359], ["비츠플러우", 632, 359], ["빛의소리", 638, 359], ["소리얼", 656, 359], ["스놀", 686, 359], ["악반", 704, 359], ["알로하", 662, 359], ["오픈런", 698, 359], ["홍익극연구회", 626, 359], ["히아모", 668, 359]],
+    '레저분과': [["ExP", 739, 359], ["HUHA", 749, 359], ["볼케이노", 734, 359], ["산악반", 759, 359], ["애륜", 729, 359], ["원플", 709, 359], ["유스호스텔", 719, 359], ["터사랑", 744, 359], ["팀사공일", 724, 359], ["스키반", 714, 359], ["하이러닝", 709, 359]],
+    '사회분과': [["AIESEC", 370, 291], ["KUSA", 365, 296], ["멍냥부리", 355, 320], ["영미", 355, 308], ["한울", 375, 285], ["호우회", 350, 314]],
+    '스포츠분과': [["홍익태권", 418, 240], ["COWBOYS", 446, 240], ["HITTC", 558, 295], ["검도반", 482, 268], ["사격동아리", 502, 275], ["수영동아리", 535, 287], ["위너스", 546, 292], ["일레븐킥스", 434, 248], ["점프", 523, 282], ["HISC", 518, 280]],
+    '전시분과': [["글샘문학회", 774, 359], ["모래알", 764, 359], ["민화반", 769, 359], ["서우회", 779, 359]],
+    '종교분과': [["CCC", 578, 297], ["IVF", 597, 306], ["YWAM", 561, 295], ["가듐", 565, 298], ["바이블정기구독", 578, 297]],
+    '학술분과': [["hecc", 325, 356], ["HICC", 315, 373], ["TED", 340, 338], ["UCS", 345, 332], ["개밥바라기", 320, 364], ["아이시떼루", 330, 350], ["아톰", 310, 379], ["애뜨림", 350, 326], ["짜라투스트라", 335, 344]]
 }
 
 let amenitiesText = {
@@ -715,7 +716,7 @@ function clubExpoInMap() {
     for (let key in clubExpoDic) {
         for (let i = 0; i < clubExpoDic[key].length; i++) {
             //제이쿼리를 통해 img의 속성와 css를 주고 div안에 넣어준다
-            $('<img>').attr('src', '../../static/logo/medicalRoom.svg').attr('title', clubExpoDic[key][i][0]).css('width', 32 * widthRatio + 'px').css('height', 32 * heightRatio + 'px').css('left', widthRatio * clubExpoDic[key][i][1]).css('top', heightRatio * clubExpoDic[key][i][2]).css('position', 'absolute').css('z-index', '3').appendTo(document.getElementById(key));
+            $('<img>').attr('src', '../../static/logo/medicalRoom.svg').attr('id', clubExpoDic[key][i][0]).attr('title', clubExpoDic[key][i][0]).css('width', 32 * widthRatio + 'px').css('height', 32 * heightRatio + 'px').css('left', widthRatio * clubExpoDic[key][i][1]).css('top', heightRatio * clubExpoDic[key][i][2]).css('position', 'absolute').css('z-index', '3').appendTo(document.getElementById(key));
 
         }
     }
@@ -881,7 +882,6 @@ let clubText = {
     '점프': ['홍익대학교 농구 동아리 점프에서 신입부원을 모집합니다.'],
     '글샘문학회': ['모든 활자가 숨 쉬는 문예창작 동아리, 글샘 문학회.'],
     '모래알': ['아름다운 출사지에서 사진과 함께 추억을 쌓는 동아리입니다'],
-    '미사랑': [''],
     '민화반': ['민족만화그림패의 약자로, 만화를 사랑하는 창작 동아리'],
     '서우회': ['홍익 서우회에서 서예와 캘리그라피로 마음의 평화 찾아요'],
     'CCC': ['홀로는 좋지만, 혼자는 싫을 때. 여기로와 ccc'],
@@ -924,7 +924,8 @@ let clubText = {
 
 function clubExpoShow(name, e) {
     let clubListTag = document.getElementById('clubList');
-
+    console.log(name);
+    // 모두비우기
     clubListTag.replaceChildren();
     for (let key in clubExpoDic) {
         if (key == name) {
@@ -936,7 +937,23 @@ function clubExpoShow(name, e) {
 }
 
 function showOneClub(title) {
+    // 지도위에 마커표시
+    $('#amenitiesOnMap #onlyOne').empty();
+    let widthRatio = document.getElementById('background').getBoundingClientRect().width / 1300;
+    let heightRatio = document.getElementById('background').getBoundingClientRect().height / 700;
+    for (let key in clubExpoDic) {
+        for (let i = 0; i < clubExpoDic[key].length; i++) {
+            if(title == clubExpoDic[key][i][0]){
+                $('<img>').attr('src', '../../static/logo/medicalRoom.svg').attr('id', clubExpoDic[key][i][0]).attr('title', clubExpoDic[key][i][0]).css('width', 32 * widthRatio + 'px').css('height', 32 * heightRatio + 'px').css('left', widthRatio * clubExpoDic[key][i][1]).css('top', heightRatio * clubExpoDic[key][i][2]).css('position', 'absolute').css('z-index', '3').appendTo(document.getElementById('onlyOne'));
+                document.getElementById('onlyOne').style.visibility = 'visible';
+            }
+
+        }
+    }
+
+
     let titleWithoutSpace = title.replace(/ /g, '_');
+    // document.getElementById(name).style.visibility = 'visible';
     console.log(titleWithoutSpace);
     // 카드 히든 제거
     $('.card').css('display', 'flex').css('z-index', '11');
