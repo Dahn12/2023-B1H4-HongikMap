@@ -433,6 +433,16 @@
     --bs-btn-disabled-border-color: #212529;
 }
 
+/* 마우스 오버(마우스 올렸을때) */
+li:hover{
+    color: #0d6efd;
+}
+
+/* 마우스 클릭하고있을때 */
+.clublist:active{
+    color: black;
+}
+
 
 #clubList{
     list-style: none;
