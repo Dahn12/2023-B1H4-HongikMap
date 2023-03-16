@@ -321,9 +321,19 @@ let autocomplete = (function () {
         } else if (keyCord == 13) {
             // enter
             if (_inp == document.getElementById('autoInput')) {
-                boolDepartureCheck = true;
+                for (let list in $('#autoInput1autocomplete-list div')) {
+                    if (list.html == _inp.innerHTML){
+                        boolDepartureCheck = true;
+                    }
+                }
+
             } else {
-                boolDestinationCheck = true;
+                for (let list in $('#autoInputautocomplete-list div')) {
+                    if (list.html == _inp.innerHTML){
+                        boolDestinationCheck = true;
+                    }
+                }
+
             }
             // keyCord.preventDefault();
             // 현재위치가 아이템 선택창내에 있는 경우
