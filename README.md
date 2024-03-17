@@ -20,7 +20,18 @@
     - 출발지, 경유지, 도착지를 입력할 수 있다.
     - 입력시 서버로부터 사용자의 입력을 바탕으로한 예상 입력을 추천 받는다. 
       - 카나 -> R동 B1층 카페나무 / L동 4층 카페나무
+## Used technique
+<div>
+    <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white">
+    <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white">
+    <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=white">
+    <br>
+    <img src="https://img.shields.io/badge/Django-092E20?style=flat-square&logo=django&logoColor=white">
+    <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white">
+    <br>
+    <img src="https://img.shields.io/badge/Sqlite-003B57?style=flat-square&logo=sqlite&logoColor=white">
 
+</div>
 ## Member
 
 | <a href="https://github.com/darkenergy814"><img alt="title" height="100" src="https://avatars.githubusercontent.com/u/79552567?v=4"  width="100"/> </a> | <a href="https://github.com/Lee-sh98"><img height="100" src="https://avatars.githubusercontent.com/u/55966515?v=4" width="100"/></a> | <a href="https://github.com/yooooonshine"><img height="100" src="https://avatars.githubusercontent.com/u/108210104?v=4" width="100"/></a> | <a href="https://github.com/Dahn12"><img height="100" src="https://avatars.githubusercontent.com/u/119108655?v=4" width="100"/></a> | <a href="https://github.com/7lpear"><img height="100" src="https://avatars.githubusercontent.com/u/122262237?v=4" width="100"/> </a> |
